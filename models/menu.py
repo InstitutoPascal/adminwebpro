@@ -29,7 +29,12 @@ response.google_analytics_id = None
 # ----------------------------------------------------------------------------------------------------------------------
 
 response.menu = [
-    (T('Home'), False, URL('default', 'index'), [])
+    (T('Home'), False, URL('default', 'index'), []),
+    (T('Prueba'), False, URL('prueba', 'index'), [
+        (T('ABM ejemplo'), False, URL('prueba', 'abm_ejemplo'), []),
+        (T('Reporte'), False, URL('prueba', 'reporte_ejemplo'), []),
+        (T('Registrar'), False, URL('prueba', 'registrar_comprobante'), []),
+        ]),
 ]
 
 DEVELOPMENT_MENU = False
