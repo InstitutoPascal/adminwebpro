@@ -35,6 +35,11 @@ response.menu = [
         (T('Reporte'), False, URL('prueba', 'reporte_ejemplo'), []),
         (T('Registrar'), False, URL('prueba', 'registrar_comprobante'), []),
         ]),
+    (T('Stock'), False, URL('stock', 'index'), [
+        (T('ABM productos'), False, URL('stock', 'ABM_producto'), []),
+        (T('ABM depositos'), False, URL('stock', 'ABM_deposito'), []),
+        (T('Remito de entrada'), False, URL('stock', 'remito_entrada'), []),
+        ]),
 ]
 
 DEVELOPMENT_MENU = False
