@@ -35,6 +35,12 @@ response.menu = [
         (T('Reporte'), False, URL('prueba', 'reporte_ejemplo'), []),
         (T('Registrar'), False, URL('prueba', 'registrar_comprobante'), []),
         ]),
+    (T('Pagos'), False, URL('ordenpagos', 'index'), [
+        (T('Autorizar Pago'), False, URL('ordenpagos', 'autorizar_pagos'), []),
+        (T('Cheques'), False, URL('ordenpagos', 'abm_chueques'), []),
+        (T('Generar Orden de Pago'), False, URL('ordenpagos', 'generar_orden_pagos'), []),
+        (T('Reporte Pagos'), False, URL('ordenpagos', 'reporte_pagos'), []),
+        ]),
 ]
 
 DEVELOPMENT_MENU = False
