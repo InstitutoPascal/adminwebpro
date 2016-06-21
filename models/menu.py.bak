@@ -27,7 +27,7 @@ response.google_analytics_id = None
 # ----------------------------------------------------------------------------------------------------------------------
 # this is the main application menu add/remove items as required
 # ----------------------------------------------------------------------------------------------------------------------
-#Agregando mi menu
+
 response.menu = [
     (T('Home'), False, URL('default', 'index'), []),
     (T('Prueba'), False, URL('prueba', 'index'), [
