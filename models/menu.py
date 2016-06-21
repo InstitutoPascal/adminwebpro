@@ -1,167 +1,132 @@
 # -*- coding: utf-8 -*-
-# this file is released under public domain and you can use without limitations
 
-# ----------------------------------------------------------------------------------------------------------------------
-# Customize your APP title, subtitle and menus here
-# ----------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------
+# This scaffolding model makes your app work on Google App Engine too
+# File is released under public domain and you can use without limitations
+# -------------------------------------------------------------------------
 
-response.logo = A(B('web', SPAN(2), 'py'), XML('&trade;&nbsp;'),
-                  _class="navbar-brand", _href="http://www.web2py.com/",
-                  _id="web2py-logo")
-response.title = request.application.replace('_', ' ').title()
-response.subtitle = ''
+if request.global_settings.web2py_version < "2.14.1":
+    raise HTTP(500, "Requires web2py 2.13.3 or newer")
 
-# ----------------------------------------------------------------------------------------------------------------------
-# read more at http://dev.w3.org/html5/markup/meta.name.html
-# ----------------------------------------------------------------------------------------------------------------------
-response.meta.author = myconf.get('app.author')
-response.meta.description = myconf.get('app.description')
-response.meta.keywords = myconf.get('app.keywords')
-response.meta.generator = myconf.get('app.generator')
+# -------------------------------------------------------------------------
+# if SSL/HTTPS is properly configured and you want all HTTP requests to
+# be redirected to HTTPS, uncomment the line below:
+# -------------------------------------------------------------------------
+# request.requires_https()
 
-# ----------------------------------------------------------------------------------------------------------------------
-# your http://google.com/analytics id
-# ----------------------------------------------------------------------------------------------------------------------
-response.google_analytics_id = None
+# -------------------------------------------------------------------------
+# app configuration made easy. Look inside private/appconfig.ini
+# -------------------------------------------------------------------------
+from gluon.contrib.appconfig import AppConfig
 
-# ----------------------------------------------------------------------------------------------------------------------
-# this is the main application menu add/remove items as required
-# ----------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------
+# once in production, remove reload=True to gain full speed
+# -------------------------------------------------------------------------
+myconf = AppConfig(reload=True)
 
-response.menu = [
-    (T('Home'), False, URL('default', 'index'), []),
-    (T('Prueba'), False, URL('prueba', 'index'), [
-        (T('ABM ejemplo'), False, URL('prueba', 'abm_ejemplo'), []),
-        (T('Reporte'), False, URL('prueba', 'reporte_ejemplo'), []),
-        (T('Registrar'), False, URL('prueba', 'registrar_comprobante'), []),
-        ]),
-    (T('Pagos'), False, URL('ordenpagos', 'index'), [
-        (T('Autorizar Pago'), False, URL('ordenpagos', 'autorizar_pagos'), []),
-        (T('Cheques'), False, URL('ordenpagos', 'abm_chueques'), []),
-        (T('Generar Orden de Pago'), False, URL('ordenpagos', 'generar_orden_pagos'), []),
-        (T('Reporte Pagos'), False, URL('ordenpagos', 'reporte_pagos'), []),
-        ]),
-    (T('Ventas'), False, URL('ventas', 'index'), [
-        (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
-        (T('Ventas'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Comprovantes'), False, URL('ventas', 'comprobantes'), []),
-        ]),
-]
+if not request.env.web2py_runtime_gae:
+    # ---------------------------------------------------------------------
+    # if NOT running on Google App Engine use SQLite or other DB
+    # ---------------------------------------------------------------------
+    db = DAL(myconf.get('db.uri'),
+             pool_size=myconf.get('db.pool_size'),
+             migrate_enabled=myconf.get('db.migrate'),
+             check_reserved=['all'])
+else:
+    # ---------------------------------------------------------------------
+    # connect to Google BigTable (optional 'google:datastore://namespace')
+    # ---------------------------------------------------------------------
+    db = DAL('google:datastore+ndb')
+    # ---------------------------------------------------------------------
+    # store sessions and tickets there
+    # ---------------------------------------------------------------------
+    session.connect(request, response, db=db)
+    # ---------------------------------------------------------------------
+    # or store session in Memcache, Redis, etc.
+    # from gluon.contrib.memdb import MEMDB
+    # from google.appengine.api.memcache import Client
+    # session.connect(request, response, db = MEMDB(Client()))
+    # ---------------------------------------------------------------------
 
-DEVELOPMENT_MENU = False
+# -------------------------------------------------------------------------
+# by default give a view/generic.extension to all actions from localhost
+# none otherwise. a pattern can be 'controller/function.extension'
+# -------------------------------------------------------------------------
+response.generic_patterns = ['*'] if request.is_local else []
+# -------------------------------------------------------------------------
+# choose a style for forms
+# -------------------------------------------------------------------------
+response.formstyle = myconf.get('forms.formstyle')  # or 'bootstrap3_stacked' or 'bootstrap2' or other
+response.form_label_separator = myconf.get('forms.separator') or ''
 
+# -------------------------------------------------------------------------
+# (optional) optimize handling of static files
+# -------------------------------------------------------------------------
+# response.optimize_css = 'concat,minify,inline'
+# response.optimize_js = 'concat,minify,inline'
 
-# ----------------------------------------------------------------------------------------------------------------------
-# provide shortcuts for development. remove in production
-# ----------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------
+# (optional) static assets folder versioning
+# -------------------------------------------------------------------------
+# response.static_version = '0.0.0'
 
-def _():
-    # ------------------------------------------------------------------------------------------------------------------
-    # shortcuts
-    # ------------------------------------------------------------------------------------------------------------------
-    app = request.application
-    ctr = request.controller
-    # ------------------------------------------------------------------------------------------------------------------
-    # useful links to internal and external resources
-    # ------------------------------------------------------------------------------------------------------------------
-    response.menu += [
-        (T('My Sites'), False, URL('admin', 'default', 'site')),
-        (T('This App'), False, '#', [
-            (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),
-            LI(_class="divider"),
-            (T('Controller'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/controllers/%s.py' % (app, ctr))),
-            (T('View'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/views/%s' % (app, response.view))),
-            (T('DB Model'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/models/db.py' % app)),
-            (T('Menu Model'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/models/menu.py' % app)),
-            (T('Config.ini'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/private/appconfig.ini' % app)),
-            (T('Layout'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/views/layout.html' % app)),
-            (T('Stylesheet'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/static/css/web2py-bootstrap3.css' % app)),
-            (T('Database'), False, URL(app, 'appadmin', 'index')),
-            (T('Errors'), False, URL(
-                'admin', 'default', 'errors/' + app)),
-            (T('About'), False, URL(
-                'admin', 'default', 'about/' + app)),
-        ]),
-        ('web2py.com', False, '#', [
-            (T('Download'), False,
-             'http://www.web2py.com/examples/default/download'),
-            (T('Support'), False,
-             'http://www.web2py.com/examples/default/support'),
-            (T('Demo'), False, 'http://web2py.com/demo_admin'),
-            (T('Quick Examples'), False,
-             'http://web2py.com/examples/default/examples'),
-            (T('FAQ'), False, 'http://web2py.com/AlterEgo'),
-            (T('Videos'), False,
-             'http://www.web2py.com/examples/default/videos/'),
-            (T('Free Applications'),
-             False, 'http://web2py.com/appliances'),
-            (T('Plugins'), False, 'http://web2py.com/plugins'),
-            (T('Recipes'), False, 'http://web2pyslices.com/'),
-        ]),
-        (T('Documentation'), False, '#', [
-            (T('Online book'), False, 'http://www.web2py.com/book'),
-            LI(_class="divider"),
-            (T('Preface'), False,
-             'http://www.web2py.com/book/default/chapter/00'),
-            (T('Introduction'), False,
-             'http://www.web2py.com/book/default/chapter/01'),
-            (T('Python'), False,
-             'http://www.web2py.com/book/default/chapter/02'),
-            (T('Overview'), False,
-             'http://www.web2py.com/book/default/chapter/03'),
-            (T('The Core'), False,
-             'http://www.web2py.com/book/default/chapter/04'),
-            (T('The Views'), False,
-             'http://www.web2py.com/book/default/chapter/05'),
-            (T('Database'), False,
-             'http://www.web2py.com/book/default/chapter/06'),
-            (T('Forms and Validators'), False,
-             'http://www.web2py.com/book/default/chapter/07'),
-            (T('Email and SMS'), False,
-             'http://www.web2py.com/book/default/chapter/08'),
-            (T('Access Control'), False,
-             'http://www.web2py.com/book/default/chapter/09'),
-            (T('Services'), False,
-             'http://www.web2py.com/book/default/chapter/10'),
-            (T('Ajax Recipes'), False,
-             'http://www.web2py.com/book/default/chapter/11'),
-            (T('Components and Plugins'), False,
-             'http://www.web2py.com/book/default/chapter/12'),
-            (T('Deployment Recipes'), False,
-             'http://www.web2py.com/book/default/chapter/13'),
-            (T('Other Recipes'), False,
-             'http://www.web2py.com/book/default/chapter/14'),
-            (T('Helping web2py'), False,
-             'http://www.web2py.com/book/default/chapter/15'),
-            (T("Buy web2py's book"), False,
-             'http://stores.lulu.com/web2py'),
-        ]),
-        (T('Community'), False, None, [
-            (T('Groups'), False,
-             'http://www.web2py.com/examples/default/usergroups'),
-            (T('Twitter'), False, 'http://twitter.com/web2py'),
-            (T('Live Chat'), False,
-             'http://webchat.freenode.net/?channels=web2py'),
-        ]),
-    ]
+# -------------------------------------------------------------------------
+# Here is sample code if you need for
+# - email capabilities
+# - authentication (registration, login, logout, ... )
+# - authorization (role based authorization)
+# - services (xml, csv, json, xmlrpc, jsonrpc, amf, rss)
+# - old style crud actions
+# (more options discussed in gluon/tools.py)
+# -------------------------------------------------------------------------
 
+from gluon.tools import Auth, Service, PluginManager
 
-if DEVELOPMENT_MENU:
-    _()
+# host names must be a list of allowed host names (glob syntax allowed)
+auth = Auth(db, host_names=myconf.get('host.names'))
+service = Service()
+plugins = PluginManager()
 
-if "auth" in locals():
-    auth.wikimenu()
+# -------------------------------------------------------------------------
+# create all tables needed by auth if not custom tables
+# -------------------------------------------------------------------------
+auth.define_tables(username=False, signature=False)
+
+# -------------------------------------------------------------------------
+# configure email
+# -------------------------------------------------------------------------
+mail = auth.settings.mailer
+mail.settings.server = 'logging' if request.is_local else myconf.get('smtp.server')
+mail.settings.sender = myconf.get('smtp.sender')
+mail.settings.login = myconf.get('smtp.login')
+mail.settings.tls = myconf.get('smtp.tls') or False
+mail.settings.ssl = myconf.get('smtp.ssl') or False
+
+# -------------------------------------------------------------------------
+# configure auth policy
+# -------------------------------------------------------------------------
+auth.settings.registration_requires_verification = False
+auth.settings.registration_requires_approval = False
+auth.settings.reset_password_requires_verification = True
+
+# -------------------------------------------------------------------------
+# Define your tables below (or better in another model file) for example
+#
+# >>> db.define_table('mytable', Field('myfield', 'string'))
+#
+# Fields can be 'string','text','password','integer','double','boolean'
+#       'date','time','datetime','blob','upload', 'reference TABLENAME'
+# There is an implicit 'id integer autoincrement' field
+# Consult manual for more options, validators, etc.
+#
+# More API examples for controllers:
+#
+# >>> db.mytable.insert(myfield='value')
+# >>> rows = db(db.mytable.myfield == 'value').select(db.mytable.ALL)
+# >>> for row in rows: print row.id, row.myfield
+# -------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------
+# after defining tables, uncomment below to enable auditing
+# -------------------------------------------------------------------------
+# auth.enable_record_versioning(db)
