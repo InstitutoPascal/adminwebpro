@@ -41,7 +41,7 @@ response.menu = [
         (T('Generar Orden de Pago'), False, URL('ordenpagos', 'generar_orden_pagos'), []),
         (T('Reporte Pagos'), False, URL('ordenpagos', 'reporte_pagos'), []),
         ]),
-	(T('Cobros	'), False, '#', [
+	(T('Cobros'), False, '#', [
         (T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
         (T('Cheques'), False, URL('ordencobro', 'abm_chueques'), []),
         (T('Generar Orden de Cobros'), False, URL('ordencobro', 'generar_orden_cobro'), []),
