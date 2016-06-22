@@ -52,6 +52,12 @@ response.menu = [
         (T('Ventas'), False, URL('ventas', 'abm_ventas'), []),
         (T('Comprobantes de Ventas'), False, URL('ventas', 'comprobantes'), []),
         ]),
+    (T('Sueldos'), False, URL('default', 'index'), [
+    (T('Reportes'), False, URL('reporte_legajos', 'reporte_legajos'), [(T('Reporte Legajos'), False, URL('Reportes Legajos', 'reporte_legajos'), []),]),
+    (T('ABM Legajos'), False, URL('sueldos', 'abm_legajos'), []),
+    (T('ABM Familiares'), False, URL('familiares', 'abm_familiares'), []),
+    (T('ABM Horas'), False, URL('horas', 'abm_horas'), []),
+       ]),
 ]
 
 DEVELOPMENT_MENU = False
