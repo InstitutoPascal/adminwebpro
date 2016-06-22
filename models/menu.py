@@ -35,29 +35,30 @@ response.menu = [
         (T('Reporte'), False, URL('prueba', 'reporte_ejemplo'), []),
         (T('Registrar'), False, URL('prueba', 'registrar_comprobante'), []),
         ]),
-    (T('Pagos'), False, URL('pagos', 'index'), [
-        (T('Autorizar Pago'), False, URL('pagos', 'autorizar_pagos'), []),
-        (T('Cheques'), False, URL('pagos', 'abm_chueques'), []),
-        (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
-        (T('Reporte Pagos'), False, URL('pagos', 'reporte_pagos'), []),
+    (T('Pagos'), False, URL('ordenpagos', 'index'), [
+        (T('Autorizar Pago'), False, URL('ordenpagos', 'autorizar_pagos'), []),
+        (T('Cheques'), False, URL('ordenpagos', 'abm_chueques'), []),
+        (T('Generar Orden de Pago'), False, URL('ordenpagos', 'generar_orden_pagos'), []),
+        (T('Reporte Pagos'), False, URL('ordenpagos', 'reporte_pagos'), []),
         ]),
 	(T('Cobros'), False, '#', [
         (T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
         (T('Cheques'), False, URL('ordencobro', 'abm_chueques'), []),
         (T('Generar Orden de Cobros'), False, URL('ordencobro', 'generar_orden_cobro'), []),
         (T('Reporte Cobros'), False, URL('ordencobro', 'reporte_cobros'), []),
-        ]),
+        ]),	
     (T('Ventas'), False, URL('ventas', 'index'), [
         (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
         (T('Ventas'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Comprobantes de Ventas'), False, URL('ventas', 'comprobantes'), []),
+        (T('Comprovantes'), False, URL('ventas', 'comprobantes'), []),
         ]),
-    (T('Sueldos'), False, URL('default', 'index'), [
-    (T('Reportes'), False, URL('reporte_legajos', 'reporte_legajos'), [(T('Reporte Legajos'), False, URL('Reportes Legajos', 'reporte_legajos'), []),]),
-    (T('ABM Legajos'), False, URL('sueldos', 'abm_legajos'), []),
-    (T('ABM Familiares'), False, URL('familiares', 'abm_familiares'), []),
-    (T('ABM Horas'), False, URL('horas', 'abm_horas'), []),
-       ]),
+     (T('Stock'), False, URL('stock', 'index'), [
+        (T('Productos'), False, URL('stock', 'abm_producto'), []),
+        (T('Inventario'), False, URL('stock', 'stock'), []),
+        (T('Depositos'), False, URL('stock', 'abm_deposito'), []),
+        (T('Remito salida'), False, URL('stock', 'remito_salida'), []),
+        (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
+        ]),
 ]
 
 DEVELOPMENT_MENU = False
