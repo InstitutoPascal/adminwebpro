@@ -46,11 +46,11 @@ response.menu = [
         (T('Cheques'), False, URL('ordencobro', 'abm_chueques'), []),
         (T('Generar Orden de Cobros'), False, URL('ordencobro', 'generar_orden_cobro'), []),
         (T('Reporte Cobros'), False, URL('ordencobro', 'reporte_cobros'), []),
-        ]),	
+        ]),
     (T('Ventas'), False, URL('ventas', 'index'), [
         (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
         (T('Ventas'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Comprovantes'), False, URL('ventas', 'comprobantes'), []),
+        (T('Comprobantes de Ventas'), False, URL('ventas', 'comprobantes'), []),
         ]),
 ]
 

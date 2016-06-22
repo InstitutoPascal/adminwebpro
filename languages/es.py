@@ -90,6 +90,7 @@
 'compile': 'compilar',
 'compiled application removed': 'aplicación compilada eliminada',
 'Components and Plugins': 'Componentes y Plugins',
+'Comprobantes de Ventas': 'Comprobantes de Ventas',
 'Comprovantes': 'Comprovantes',
 'contains': 'contiene',
 'Controller': 'Controlador',
