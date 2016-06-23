@@ -5,8 +5,11 @@
 db.define_table("cliente",
     )
 
-db.define_table("proveedores",
+db.define_table("proveedor",
+      Field("id"),
+      Field("razon_social", 'string'),
+      Field("cuit", 'integer'),
     )
 
-db.define_table("productos",
+db.define_table("producto",
     )

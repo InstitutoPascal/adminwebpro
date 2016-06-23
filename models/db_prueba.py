@@ -2,7 +2,7 @@
 
 db.define_table("categoria",
     #Field("id"),
-    Field("nombre"),
+    Field("nombre",'string'),
     )
 
 # validación para que no se repita el nombre de categoria:
