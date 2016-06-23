@@ -13,7 +13,7 @@ db.define_table("cliente",
     Field("numero","integer"),
     Field("localidad","string"),
     Field("telefono","integer"),
-    Field("e_mail","string"),
+    Field("email","string"),
 )
 
 db.define_table("proveedor",

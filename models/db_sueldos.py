@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+db.define_table("familiares",
+    Field("cuil","integer"),
+    Field("dni", "integer"),
+    Field("nombre", "text"),
+    Field("apellido", "text"),
+    Field("fe_nac","integer"),
+    Field("lu_nac","text"),
+    Field("est_civ","text"),
+    Field("edad","integer"),
+    Field("domicilio","string"),
+    Field("localidad","text"),
+    Field("email","integer"),
+    Field("telefono","integer"),
+    Field("celular","integer"),
+    Field("estudia","text"),
+    Field("parentezco","text"),
+    )
