@@ -48,6 +48,9 @@ response.menu = [
         (T('Reporte Cobros'), False, URL('ordencobro', 'reporte_cobros'), []),
         ]),	
     (T('Ventas'), False, URL('ventas', 'index'), [
+        (T('A.B.M. Cliente'), False, URL('ventas', 'abm_clientes'), []),
+        (T('Facturar'), False, URL('ventas', 'abm_ventas'), []),
+        (T('Consulta de Factura'), False, URL('ventas', 'comprobantes'), []),
         (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
         (T('Ventas'), False, URL('ventas', 'abm_ventas'), []),
         (T('Comprovantes'), False, URL('ventas', 'comprobantes'), []),
