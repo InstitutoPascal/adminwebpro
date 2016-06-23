@@ -59,6 +59,11 @@ response.menu = [
         (T('Remito salida'), False, URL('stock', 'remito_salida'), []),
         (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
         ]),
+    (T('Compra'), False, URL('compra', 'index'), [
+        (T('Alta Proveedor'), False, URL('compra', 'alta_proveedor'), []),
+        (T('Baja  Proveedor'), False, URL('compra', 'baja_proveedor'), []),
+        (T('Modificación Proveedor'), False, URL('compra', 'modificacion_proveedor'), []),
+        ]),
 ]
 
 DEVELOPMENT_MENU = False
