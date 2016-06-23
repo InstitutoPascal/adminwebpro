@@ -68,8 +68,13 @@ response.menu = [
             (T('Alta Proveedor'), False, URL('compra', 'alta_proveedor'), []),
             (T('Baja  Proveedor'), False, URL('compra', 'baja_proveedor'), []),
             (T('Modificación Proveedor'), False, URL('compra', 'modificacion_proveedor'), []),
-        
-        ]),
+            ]),      
+     (T('Sueldos'), False, URL('sueldos', 'index'), [
+         (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
+         (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
+         (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
+         (T('Reportes'), False, URL('sueldos', 'reportes'), []),
+         ]),
 ]
 
 DEVELOPMENT_MENU = False
