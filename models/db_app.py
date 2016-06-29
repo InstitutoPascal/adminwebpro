@@ -27,8 +27,11 @@ db.cliente.localidad.requires=IS_NOT_EMPTY()
 db.define_table("proveedor",
       Field("id"),
       Field("razon_social", 'string'),
+      Field("ingreso_bruto", 'string'),
+      Field("condicion_iva", 'string'),
       Field("cuit", 'integer'),
       Field("domicilio", 'string'),
+      Field("localidad", 'string'),
       Field("codigo_postal", 'integer'),
       Field("provincia", 'string'),
       Field("estado", 'boolean'),
@@ -38,6 +41,16 @@ db.define_table("proveedor",
       Field("email_proveedor", 'string'),
       Field("pagina_web", 'string'),
     )
+db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"])
+db.proveedor.estado.requires=IS_IN_SET(["Activo","Inactivo"])
+db.proveedor.cuit.requires=IS_NOT_EMPTY()
+db.proveedor.ingreso_bruto.requires=IS_NOT_EMPTY()
+db.proveedor.razon_social.requires=IS_NOT_EMPTY()
+db.proveedor.domicilio.requires=IS_NOT_EMPTY()
+db.proveedor.localidad.requires=IS_NOT_EMPTY()
+db.proveedor.codigo_postal.requires=IS_NOT_EMPTY()
+db.proveedor.provincia.requires=IS_NOT_EMPTY()
+
 
 db.define_table("producto",
     )
