@@ -6,7 +6,7 @@ def index():
 def autorizar_pagos(): 
     return dict(message="hello from ordenpagos.py")
 
-def abm_chueques(): 
+def abm_cheques(): 
     return dict(message="hello from ordenpagos.py")
 
 def generar_orden_pagos(): 

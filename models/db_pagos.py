@@ -5,6 +5,13 @@ db.define_table("pago",
     Field("fecha","date"),
     Field("importe","integer"),
 )
+db.define_table("banco",
+    Field("id_banco","id"),
+    Field("nombre_banco","string"),
+    Field("tipo","string"),
+    Field("moneda","string"),
+    Field("cbu","string"),
+)
 
 db.define_table("cheque",
     Field("id_cheques","id"),
