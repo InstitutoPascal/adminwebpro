@@ -32,7 +32,7 @@ db.define_table("legajos",
     Field("dni","integer",),
     Field("nombre", "string"),
     Field("apellido", "string"),
-    Field("fe_nac","integer"),
+    Field("fe_nac","date"),
     Field("lu_nac","string"),
     Field("est_civ","string"),
     Field("edad","integer"),
@@ -70,7 +70,7 @@ db.legajos.dni.requires=[IS_INT_IN_RANGE(5000000,100000000),
 db.legajos.nombre.lenght=20
 db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires=IS_DATE('%Y-%m-%d')
-db.legajos.fe_nac.requires=IS_DATE('%Año-%Mes-%Dia')
+#db.legajos.fe_nac.requires=IS_DATE('%Y-%M-%D')
 
 
 db.define_table("horas",
