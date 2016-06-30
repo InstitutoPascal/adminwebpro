@@ -53,4 +53,17 @@ db.proveedor.provincia.requires=IS_NOT_EMPTY()
 
 
 db.define_table("producto",
-    )
+    Field("id_producto","id"),
+    Field("detalle_producto","string"),
+    Field("precio_compra","float"),
+    Field("precio_venta","float"),
+    Field("tipo","string"),
+)
+
+db.producto.tipo.requires=IS_IN_SET(["Hardware","Servicio"])
+db.producto.id_producto.requires=IS_NOT_EMPTY()
+db.producto.id_producto.requires=IS_NOT_IN_DB(db,"producto.id_producto")
+db.producto.detalle_producto.requires=IS_NOT_EMPTY()
+db.producto.detalle_producto.requires=IS_NOT_IN_DB(db,"producto.detalle_producto")
+db.producto.precio_compra.requires=IS_NOT_EMPTY()
+db.producto.precio_venta.requires=IS_NOT_EMPTY()
