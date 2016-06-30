@@ -8,13 +8,6 @@ db.define_table("pago",
 db.define_table("banco",
     Field("id_banco","id"),
     Field("nombre_banco","string"),
-    Field("tipo","string"),
-    Field("moneda","string"),
-    Field("cbu","string"),
-)
-db.define_table("banco",
-    Field("id_banco","id"),
-    Field("nombre_banco","string"),
     Field("telefono","integer"),
 )
 
@@ -26,9 +19,9 @@ db.define_table("cheque",
     Field("importe","integer"),
     Field("id_banco",db.banco)
 )
-db.pago.num_orden_pago.requires=IS_NOT_IN_DB(db, "pagos.num_orden_pago")
+db.pago.num_orden_pago.requires=IS_NOT_IN_DB(db, "pago.num_orden_pago")
 db.pago.fecha.requires=IS_DATE('%Y-%m-%d')
 
-db.cheques.num_cheques.requires=IS_NOT_IN_DB(db, "cheques.num_cheques")
-db.cheques.emision.requires=IS_DATE('%Y-%m-%d')
-db.cheques.vencimiento.requires=IS_DATE('%Y-%m-%d')
+db.cheque.num_cheque.requires=IS_NOT_IN_DB(db, "cheque.num_cheque")
+db.cheque.emision.requires=IS_DATE('%Y-%m-%d')
+db.cheque.vencimiento.requires=IS_DATE('%Y-%m-%d')
