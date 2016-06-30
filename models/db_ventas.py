@@ -11,3 +11,4 @@ db.define_table("ventas",
     Field("iva","double"),
     Field("descuento","double"),
     )
+db.ventas.buscar_cliente.requires = IS_IN_DB(db, "cliente.id_cliente", "-- %(nombre_de_fantasia)s %(razon_social)s ..")

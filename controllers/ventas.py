@@ -3,10 +3,10 @@
 
 def index(): return dict(message="hello from ventas.py")
 
-
+@auth.requires_login()
 def abm_clientes():
-    return dict(message="abm clientes")
-
+    grid = SQLFORM.grid(db.cliente)
+    return {"grilla": grid}
 
 def abm_ventas():
     return dict(message="abm ventas")
