@@ -55,20 +55,18 @@ db.define_table("legajos",
 )
 
 # validación para que no se repita el nombre de categoria:
-db.legajos.num_legajo.requires = IS_NOT_IN_DB(db, "legajos.num_legajo")
+db.legajos.num_legajo.requires = [IS_NOT_IN_DB(db, "legajos.num_legajo"),
+                                 IS_NOT_EMPTY(error_message= "campo obligatorio")]
 db.legajos.est_civ.requires= IS_IN_SET(["soltero","casado","divorciado","viudo"])
 db.legajos.estudia.requires= IS_IN_SET(["si","no"])
-db.legajos.dni.requires=IS_NOT_IN_DB(db, "legajos.dni")
-db.legajos.num_legajo.requires=IS_NOT_IN_DB(db, "legajos.num_legajo")
-#db.legajos.dni.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
-db.legajos.cuil.requires=IS_NOT_IN_DB(db, "legajos.cuil")
+db.legajos.cuil.requires=[IS_NOT_IN_DB(db, "legajos.cuil"),
+                          IS_NOT_EMPTY(error_message= "campo obligatorio")]
 db.legajos.horas_extras.requires= IS_IN_SET(["si","no"])
-db.legajos.cuil.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
-db.legajos.num_legajo.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
 db.legajos.telefono.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
 db.legajos.fecha_ingreso.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
 db.legajos.dni.requires=[IS_INT_IN_RANGE(5000000,100000000),
-                         IS_NOT_EMPTY(error_message= "campo obligatorio")]
+                         IS_NOT_EMPTY(error_message= "campo obligatorio"),
+                         IS_NOT_IN_DB(db, "legajos.dni")]
 db.legajos.nombre.lenght=20
 db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires=IS_DATE('%Y-%m-%d')
