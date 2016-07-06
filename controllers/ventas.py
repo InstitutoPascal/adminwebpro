@@ -8,8 +8,10 @@ def abm_clientes():
     grid = SQLFORM.grid(db.cliente)
     return {"grilla": grid}
 
+@auth.requires_login()
 def abm_ventas():
-    return dict(message="abm ventas")
+    grid = SQLFORM.grid(db.ventas)
+    return {"grilla": grid}
 
 
 def comprobantes():
