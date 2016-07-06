@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 db.define_table("familiares",
+    Field("numero_legajo","integer"),
     Field("cuil","integer"),
     Field("dni", "integer",),
     Field("nombre", "string"),
@@ -23,8 +24,6 @@ db.define_table("familiares",
 
 db.familiares.estudia.requires= IS_IN_SET(["si","no"])
 db.familiares.parentezco.requires= IS_IN_SET(["conyuge","hijo","familiar"])
-#db.familiares.tipo_documento.requires= IS_IN_SET(["DNI","LC","LE"])
-
 
 
 db.define_table("legajos",
@@ -53,6 +52,7 @@ db.define_table("legajos",
     Field("categoria","string"),
     Field("fecha_egreso","date"),
 )
+db.familiares.numero_legajo.requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")
 
 # validación para que no se repita el nombre de categoria:
 db.legajos.num_legajo.requires = [IS_NOT_IN_DB(db, "legajos.num_legajo"),
