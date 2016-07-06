@@ -60,7 +60,7 @@ db.define_table("producto",
     Field("tipo","string"),
 )
 
-db.producto.tipo.requires=IS_IN_SET(["Hardware","Servicio"])
+db.producto.tipo.requires=IS_IN_SET(["Producto","Servicio"])
 db.producto.id_producto.requires=IS_NOT_EMPTY()
 db.producto.id_producto.requires=IS_NOT_IN_DB(db,"producto.id_producto")
 db.producto.detalle_producto.requires=IS_NOT_EMPTY()
