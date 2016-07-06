@@ -6,10 +6,17 @@ def index():
 def autorizar_pagos(): 
     return dict(message="hello from ordenpagos.py")
 
-def abm_cheques(): 
-    return dict(message="hello from ordenpagos.py")
+@auth.requires_login()
+def abm_bancos():
+    grid = SQLFORM.grid(db.banco)
+    return {"grilla": grid}
 
-def generar_orden_pagos(): 
+@auth.requires_login()
+def abm_cheques():
+    grid = SQLFORM.grid(db.cheque)
+    return {"grilla": grid}
+
+def generar_orden_pagos():
     return dict(message="hello from ordenpagos.py")
 
 def reporte_pagos():
