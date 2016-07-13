@@ -12,6 +12,11 @@ def abm_bancos():
     return {"grilla": grid}
 
 @auth.requires_login()
+def abm_cuenta_bancaria():
+    grid = SQLFORM.grid(db.cuenta_bancaria)
+    return {"grilla": grid}
+
+@auth.requires_login()
 def abm_cheques():
     grid = SQLFORM.grid(db.cheque)
     return {"grilla": grid}
