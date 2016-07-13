@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############ventas####################
 db.define_table("ventas",
-    Field("buscar_cliente","string"),
+    Field("buscar_cliente",db.cliente),
     Field("tipo_de_factura","string"),
     Field("numero_serie","double"),
     Field("numero_factura","double"),
@@ -21,6 +21,6 @@ db.ventas.numero_factura.requires=IS_INT_IN_RANGE("0","9999")
 db.ventas.tipo_de_pago.requires = IS_IN_SET(["Efectivo","Credito"])
 db.ventas.tipo_de_producto.requires = IS_IN_SET(["Hardware","Software"])
 db.ventas.detalle.requires=IS_IN_DB(db, "producto.id_producto", " %(detalle_producto)s")
-db.ventas.iva.requires = IS_IN_SET(["10.5%","21%","27%"])
+db.ventas.iva.requires = IS_IN_SET({10.5:"10.5%",21:"21%",27:"27%"})
 db.ventas.descuento.requires = IS_IN_SET(["0%","10%","15%","25%","40%"])
-db.ventas.precio_unitario.requires =IS_IN_DB(db,"producto.id_producto","%(precio_venta)s")
+db.ventas.precio_unitario.requires =IS_IN_DB(db,"producto.precio_venta","%(precio_venta)s")
