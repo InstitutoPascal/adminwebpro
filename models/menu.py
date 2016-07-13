@@ -40,6 +40,8 @@ response.menu = [
         (T('Cheques'), False, URL('pagos', 'abm_cheques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
         (T('Reporte Pagos'), False, URL('pagos', 'reporte_pagos'), []),
+        (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
+        (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
         ]),
     (T('Cobranza'), False, '#', [
         (T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
@@ -73,7 +75,7 @@ response.menu = [
          (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
          (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
-         (T('Reportes'), False, URL('sueldos', 'reportes'), []),
+        
          ]),
 ]
 

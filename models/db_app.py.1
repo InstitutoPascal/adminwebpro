@@ -13,7 +13,7 @@ db.define_table("cliente",
     Field("numero","integer"),
     Field("localidad","string"),
     Field("telefono","integer"),
-    Field("e_mail","string"),
+    Field("email","string"),
 )
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista","Consumidor Final"])
 db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")
@@ -28,6 +28,15 @@ db.define_table("proveedor",
       Field("id"),
       Field("razon_social", 'string'),
       Field("cuit", 'integer'),
+      Field("domicilio", 'string'),
+      Field("codigo_postal", 'integer'),
+      Field("provincia", 'string'),
+      Field("estado", 'boolean'),
+      Field("pais", 'string'),
+      Field("telefono", 'integer'),
+      Field("celular", 'integer'),
+      Field("email_proveedor", 'string'),
+      Field("pagina_web", 'string'),
     )
 
 db.define_table("producto",
