@@ -3,9 +3,6 @@
 def index(): 
     return dict(message="hello from ordenpagos.py")
 
-def autorizar_pagos(): 
-    return dict(message="hello from ordenpagos.py")
-
 @auth.requires_login()
 def abm_bancos():
     grid = SQLFORM.grid(db.banco)
