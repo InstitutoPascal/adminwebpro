@@ -65,12 +65,12 @@ response.menu = [
         (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
         ]),
     (T('Compra'), False, URL('compra', 'index'), [
-        (T('Proveedor'), False, URL('compra', 'index'), [
+        (T('Proveedor'), False, URL('compra','abm_proveedores'), [
             ]),
             (T('Alta Proveedor'), False, URL('compra', 'alta_proveedor'), []),
             (T('Baja  Proveedor'), False, URL('compra', 'baja_proveedor'), []),
             (T('Modificación Proveedor'), False, URL('compra', 'modificacion_proveedor'), []),
-            ]),      
+            ]),
      (T('Sueldos'), False, URL('sueldos', 'index'), [
          (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),

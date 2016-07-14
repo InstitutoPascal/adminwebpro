@@ -462,6 +462,7 @@
 'Ticket': 'Tiquete',
 'Time in Cache (h:m:s)': 'Tiempo en Caché (h:m:s)',
 'Timestamp': 'Marca de tiempo',
+'Tipo': 'Tipo',
 'Tipo De Factura': 'Tipo De Factura',
 'Tipo De Pago': 'Tipo De Pago',
 'Tipo De Producto': 'Tipo De Producto',

@@ -9,8 +9,9 @@ def abm_proveedor():
     return {"grilla": grid}
 @auth.requires_login()
 def abm_factura():
-    grid = SQLFORM.grid(db.factura_compra)
+    grid = SQLFORM.grid(db.compra)
     return {"grilla": grid}
 
 def comprobantes():
-    return dict(message="comprobante")
+    grid = SQLFORM.grid(db.detalle_factura)
+    return {"grilla": grid}
