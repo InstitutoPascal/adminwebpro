@@ -130,3 +130,59 @@ auth.settings.reset_password_requires_verification = True
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
+
+# Tabla "Clientes"
+db.define_table('Clientes', 
+                Field('ClienteId',length=25),
+                Field('RazonSocial',length=50,default='',label=T('Razon Social')),
+                Field('CUIT',length=13,default='9-99999999-99',label=T('CUIT')),
+                Field('Direccion',length=25,default='',label=T('Direccion')),
+                Field('PosIVAId',label=T('Posicion IVA')),
+               )
+# Validadores "Clientes"
+db.Clientes.ClienteId.requires=IS_NOT_IN_DB(db, 'Clientes.ClienteId')
+db.Clientes.CUIT.requires=IS_NOT_IN_DB(db, 'Clientes.CUIT')
+db.Clientes.ClienteId.requires=IS_NOT_EMPTY(error_message='Falta ingresar el Cod. de Cliente')
+db.Clientes.CUIT.requires=IS_NOT_EMPTY(error_message='Falta ingresar el CUIT')
+db.Clientes.RazonSocial.requires=IS_NOT_EMPTY(error_message='Falta ingresar la Razon Social')
+db.Clientes.PosIVAId.requires=IS_IN_SET(('Responsable Inscripto','Monotributo','Exento','Consumidor Final','Responsable No Inscripto'))
+
+# Tabla "DocumentosCabecera"
+db.define_table('DocumentosCabecera', 
+                Field('DocumentosId'),
+                Field('Sucursal',length=4,default='0001',label=T('Sucursal')),
+                Field('Numero',length=8,default='00000001',label=T('Numero')),
+                Field('TipoDocumento',length=3,default='REC',label=T('Tipo de Documento')),
+                Field('ClienteId',length=15,default='',label=T('Cliente')),
+                Field('SubTotal',default='0.00',label=T('SubTotal')),
+                Field('Total',default='0.00', label=T('Nombre')),
+                Field('Fecha',default='01/01/2016',label=T('Fecha')),
+                Field('PosIVAId',label=T('Posicion IVA')),
+               )
+# Validadores "DocumentosCabecera"
+db.DocumentosCabecera.DocumentosId.requires=IS_NOT_IN_DB(db, 'DocumentosCabecera.DocumentosId')
+db.DocumentosCabecera.ClienteId.requires=IS_IN_DB(db, 'Clientes.ClienteId')
+db.DocumentosCabecera.ClienteId.requires=IS_NOT_EMPTY(error_message='Falta ingresar el Cod. de Cliente')
+db.DocumentosCabecera.TipoDocumento.requires=IS_IN_SET(('FCA','FCB','REC','OPA','PAG')) # FCA=Factura A, FCB=Factura B, REC=Recibo, OPA=Orden de Pago, PAG=Pago Contrafactura
+db.DocumentosCabecera.Fecha.requires=IS_NOT_EMPTY(error_message='Falta ingresar la Fecha')
+db.DocumentosCabecera.PosIVAId.requires=IS_IN_SET(('Responsable Inscripto','Monotributo','Exento','Consumidor Final','Responsable No Inscripto'))
+
+# Tabla "DocumentosDetalle"
+db.define_table('DocumentosDetalle', 
+                Field('DocumentosDetalleId'),
+                Field('DocumentosId'),
+                Field('ProductoId',length=25,label=T('Cod. Producto')),
+                Field('Descripcion',label=T('Descripcion')),
+                Field('Cantidad',default='1',label=T('Cantidad')),
+                Field('Unitario',label=T('Precio Unitario')),
+                Field('Descuento',label=T('Descuento')),
+                Field('AlicuotaIVA',default='21',label=T('Alicuota IVA')),
+               )
+# Validadores "DocumentosDetalle"
+db.DocumentosDetalle.DocumentosDetalleId.requires=IS_NOT_IN_DB(db, 'DocumentosDetalle.DocumentosDetalleId')
+db.DocumentosDetalle.DocumentosId.requires=IS_IN_DB(db, 'DocumentosCabecera.DocumentosId')
+db.DocumentosDetalle.ProductoId.requires=IS_NOT_EMPTY(error_message='Falta ingresar el Cod. de Producto')
+db.DocumentosDetalle.Descripcion.requires=IS_NOT_EMPTY(error_message='Falta ingresar la Descripcion del Producto')
+db.DocumentosDetalle.Cantidad.requires=IS_NOT_EMPTY(error_message='Falta ingresar la Cantidad del Producto')
+db.DocumentosDetalle.Unitario.requires=IS_NOT_EMPTY(error_message='Falta ingresar el Precio Unitario')
+db.DocumentosDetalle.AlicuotaIVA.requires=IS_NOT_EMPTY(error_message='Falta ingresar la Alicuota IVA')
