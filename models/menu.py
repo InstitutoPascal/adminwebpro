@@ -37,13 +37,15 @@ response.menu = [
         ]),
     (T('Pagos'), False, URL('pagos', 'index'), [
         (T('Autorizar Pago'), False, URL('pagos', 'autorizar_pagos'), []),
-        (T('Cheques'), False, URL('pagos', 'abm_chueques'), []),
+        (T('Cheques'), False, URL('pagos', 'abm_cheques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
         (T('Reporte Pagos'), False, URL('pagos', 'reporte_pagos'), []),
+        (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
+        (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
         ]),
-	(T('Cobros'), False, '#', [
+    (T('Cobranza'), False, '#', [
         (T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
-        (T('Cheques'), False, URL('ordencobro', 'abm_chueques'), []),
+        (T('Cheques'), False, URL('ordencobro', 'abm_cheques'), []),
         (T('Generar Orden de Cobros'), False, URL('ordencobro', 'generar_orden_cobro'), []),
         (T('Reporte Cobros'), False, URL('ordencobro', 'reporte_cobros'), []),
         ]),	
@@ -63,18 +65,16 @@ response.menu = [
         (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
         ]),
     (T('Compra'), False, URL('compra', 'index'), [
-        (T('Proveedor'), False, URL('compra', 'index'), [
-            ]),
-            (T('Alta Proveedor'), False, URL('compra', 'alta_proveedor'), []),
-            (T('Baja  Proveedor'), False, URL('compra', 'baja_proveedor'), []),
-            (T('Modificación Proveedor'), False, URL('compra', 'modificacion_proveedor'), []),
-            ]),      
+        (T('Proveedor'), False, URL('compra','abm_proveedor'),
+        
+[]),
+        ]),
      (T('Sueldos'), False, URL('sueldos', 'index'), [
          (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
          (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
-         (T('Reportes'), False, URL('sueldos', 'reportes'), []),
-         ]),
+
+        ]),
 ]
 
 DEVELOPMENT_MENU = False
