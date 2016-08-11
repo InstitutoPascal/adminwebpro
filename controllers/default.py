@@ -17,7 +17,7 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    response.flash = T("Hello World")
+    response.flash = "Esto es una prueba!"
     return dict(message=T('Welcome to web2py!'))
 
 
@@ -57,5 +57,3 @@ def call():
     supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
     """
     return service()
-
-

@@ -16,3 +16,6 @@ def reporte_ejemplo():
 
 def registrar_comprobante():
     return dict(message="REGISTRAR COMPROBANTE")
+
+def reporte():
+    return dict()
