@@ -227,6 +227,7 @@
 'file saved on %s': 'archivo guardado %s',
 'First name': 'Nombre',
 'Forgot username?': '¿Olvidó el nombre de usuario?',
+'Formas de pago': 'Formas de pago',
 'Forms and Validators': 'Formularios y validadores',
 'Free Applications': 'Aplicaciones Libres',
 'Functions with no doctests will result in [passed] tests.': 'Funciones sin doctests equivalen a pruebas [aceptadas].',
