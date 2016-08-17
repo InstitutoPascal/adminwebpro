@@ -110,6 +110,10 @@
 'Clientes': 'Clientes',
 'Close': 'Cerrar',
 'Cobranza': 'Cobranza',
+<<<<<<< local
+=======
+'Cobranzas': 'Cobranzas',
+>>>>>>> other
 'Cobros': 'Cobros',
 'Codigo Postal': 'Codigo Postal',
 'Comma-separated export including columns not shown; fields from other tables are exported as raw values for faster export': 'Comma-separated export including columns not shown; fields from other tables are exported as raw values for faster export',

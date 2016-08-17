@@ -43,7 +43,7 @@ response.menu = [
         (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
         (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
         ]),
-    (T('Cobranza'), False, '#', [
+    (T('Cobranzas'), False, '#', [
         (T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
         (T('Cheques'), False, URL('ordencobro', 'abm_cheques'), []),
         (T('Generar Orden de Cobros'), False, URL('ordencobro', 'generar_orden_cobro'), []),
