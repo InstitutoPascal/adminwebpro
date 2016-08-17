@@ -39,16 +39,6 @@ db.detalle_ventas.descuento.requires = IS_IN_SET({0:"0%",10:"10%",15:"15%",25:"2
 db.detalle_ventas.precio_unitario.requires =IS_IN_DB(db,"producto.precio_venta","%(precio_venta)s")
 db.detalle_ventas.numero_de_factura.requires =IS_IN_DB(db,"ventas.numero_factura","%(numero_factura)s-%(tipo_de_factura)s")
 
-db.ventas.buscar_cliente.requires = IS_IN_DB(db, "cliente.id_cliente", " %(nombre_de_fantasia)s %(razon_social)s ..")
-db.ventas.tipo_de_factura.requires=IS_IN_SET(["Factura A","Factura B"])
-db.ventas.numero_serie.requires=IS_IN_SET(["0001","0002","0003","0004"])
-db.ventas.numero_factura.requires=IS_INT_IN_RANGE("0","9999")
-db.ventas.tipo_de_pago.requires = IS_IN_SET(["Efectivo","Credito"])
-db.ventas.tipo_de_producto.requires = IS_IN_SET(["Hardware","Software"])
-db.ventas.detalle.requires=IS_IN_DB(db, "producto.id_producto", " %(detalle_producto)s")
-db.ventas.iva.requires = IS_IN_SET({10.5:"10.5%",21:"21%",27:"27%"})
-db.ventas.descuento.requires = IS_IN_SET(["0%","10%","15%","25%","40%"])
-db.ventas.precio_unitario.requires =IS_IN_DB(db,"producto.precio_venta","%(precio_venta)s")
 
 db.define_table("cobros",
                 Field("venta_id",db.ventas),
