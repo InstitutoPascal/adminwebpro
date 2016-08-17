@@ -1,24 +1,19 @@
 {{extend 'layout.html'}}
 <h1>Registrar Factura</h1>
 
-<form class="form-inline">
+<form class="form-horizontal">
 
-    <div class="row">
-      <div class="col-md-4">
           <div class="form-group">
-            <label for="campo_cliente">Cliente</label>
-            <input type="text" class="form-control" id="campo_cliente" placeholder="Juan Perez">
-          </div>
-      </div>
-      <div class="col-md-4">
-          <div class="form-group">
-            <label for="campo_fecha">Fecha</label>
-            <input type="date" class="form-control" id="campo_fecha" placeholder="Juan Perez">
-          </div>
-      </div>
-      <div class="col-md-4">
-          <div class="form-group">
-            <label for="campo_tipo">Tipo Comprobante:</label>
+            <label for="campo_cliente" class="col-sm-1 control-label">Cliente</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="campo_cliente" placeholder="Juan Perez">
+            </div>
+            <label for="campo_fecha" class="col-sm-1 control-label">Fecha</label>
+            <div class="col-sm-1">
+                <input type="date" class="form-control" id="campo_fecha" placeholder="Juan Perez">
+            </div>
+            <label for="campo_tipo" class="col-sm-2 control-label">Tipo Comprobante:</label>
+            <div class="col-sm-3">
                <select class="form-control" id="campo_tipo">
                   <option>Factura A</option>
                   <option>Factura B</option>
@@ -27,26 +22,26 @@
                   <option>Remito</option>
                   <option>Recibo</option>
                 </select>
+            </div>
           </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-4">
           <div class="form-group">
+           <div class="col-sm-offset-1 col-sm-1">
             <label class="checkbox">
               <input type="checkbox" id="inlineCheckbox1" value="option1"> Retira Local
             </label>
+           </div>
+           <div class="col-sm-2">
             <label class="checkbox">
               <input type="checkbox" id="inlineCheckbox2" value="option2"> Envio Domicilio
             </label>
+           </div>
+           <div class="col-sm-2">
             <label class="checkbox">
               <input type="checkbox" id="inlineCheckbox3" value="option3"> Garantia Extendida
             </label>
-          </div>
-        </div>
-      <div class="col-md-4">
-          <div class="form-group">
+           </div>
+           <div class="col-sm-6">
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Efectivo
             </label>
@@ -57,20 +52,16 @@
               <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Cheque
             </label>
           </div>
-      </div>
-    </div>
-
-  <div class="col-md-4">
+         </div>
       <div class="form-group">
-        <label for="campo_obs">Observaciones:</label>
-        <textarea class="form-control" id="campo_obs" rows="3"></textarea>
+        <label for="campo_obs" class="col-sm-1 control-label">Observaciones:</label>
+        <div class="col-sm-11">
+           <textarea class="form-control" id="campo_obs" rows="3"></textarea>
+        </div>
       </div>
-    </div>
 
-   <div class="col-md-4">
       <div class="form-group">
         <button type="submit" class="btn btn-default">Siguiente</button>
       </div>
-    </div>
 
 </form>
