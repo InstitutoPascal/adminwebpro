@@ -51,12 +51,10 @@ response.menu = [
         (T('Formas de pago'), False, URL('ordencobro', 'forma_pago'), []),
         ]),	
     (T('Ventas'), False, URL('ventas', 'index'), [
-        (T('A.B.M. Cliente'), False, URL('ventas', 'abm_clientes'), []),
-        (T('Facturar'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Consulta de Factura'), False, URL('ventas', 'comprobantes'), []),
         (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
-        (T('Ventas'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Comprovantes'), False, URL('ventas', 'comprobantes'), []),
+        (T('Facturar'), False, URL('ventas', 'abm_ventas'), []),
+        (T('Detalle de Factura'), False, URL('ventas', 'detalle_ventas'), []),
+        (T('Consulta de Factura'), False, URL('ventas', 'comprobantes'), []),
         ]),
      (T('Stock'), False, URL('stock', 'index'), [
         (T('Productos'), False, URL('stock', 'abm_producto'), []),

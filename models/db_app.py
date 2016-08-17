@@ -14,7 +14,7 @@ db.define_table("cliente",
     Field("localidad","string"),
     Field("telefono","integer"),
     Field("email","string"),
-    format='%(nombre_de_fantasia)s ( %(id_cliente)s )',
+    format='%(nombre_de_fantasia)s %(razon_social)s ( %(id_cliente)s )',
 )
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista","Consumidor Final"])
 db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")

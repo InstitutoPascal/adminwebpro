@@ -13,6 +13,10 @@ def abm_ventas():
     grid = SQLFORM.grid(db.ventas)
     return {"grilla": grid}
 
+@auth.requires_login()
+def detalle_ventas():
+    grid = SQLFORM.grid(db.detalle_ventas)
+    return {"grilla": grid}
 
 def comprobantes():
     return dict(message="comprobante")
