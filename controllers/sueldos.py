@@ -21,3 +21,7 @@ def abm_familiares():
 def abm_horas():
     grid = SQLFORM.grid(db.horas)
     return {"grilla": grid}
+
+def legajos():
+    grid = SQLFORM.grid(db.legajos)
+    return {"grilla": grid}
