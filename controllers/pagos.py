@@ -18,8 +18,10 @@ def abm_cheques():
     grid = SQLFORM.grid(db.cheque)
     return {"grilla": grid}
 
+@auth.requires_login()
 def generar_orden_pagos():
-    return dict(message="hello from ordenpagos.py")
+    grid = SQLFORM.grid(db.pago)
+    return {"grilla": grid}
 
 def reporte_pagos():
     return dict(message="hello from ordenpagos.py")
