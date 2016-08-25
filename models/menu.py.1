@@ -36,24 +36,24 @@ response.menu = [
         (T('Registrar'), False, URL('prueba', 'registrar_comprobante'), []),
         ]),
     (T('Pagos'), False, URL('pagos', 'index'), [
-        (T('Cheques'), False, URL('pagos', 'abm_cheques'), []),
+        (T('Autorizar Pago'), False, URL('pagos', 'autorizar_pagos'), []),
+        (T('Cheques'), False, URL('pagos', 'abm_chueques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
         (T('Reporte Pagos'), False, URL('pagos', 'reporte_pagos'), []),
-        (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
-        (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
         ]),
-    (T('Cobranzas'), False, '#', [
-        #(T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
-        #(T('Cheques'), False, URL('ordencobro', 'abm_cheques'), []),
-        (T('Cobrar'), False, URL('ordencobro', 'generar_orden_cobro'), []),
+	(T('Cobros'), False, '#', [
+        (T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
+        (T('Cheques'), False, URL('ordencobro', 'abm_chueques'), []),
+        (T('Generar Orden de Cobros'), False, URL('ordencobro', 'generar_orden_cobro'), []),
         (T('Reporte Cobros'), False, URL('ordencobro', 'reporte_cobros'), []),
-        (T('Formas de pago'), False, URL('ordencobro', 'forma_pago'), []),
         ]),	
     (T('Ventas'), False, URL('ventas', 'index'), [
-        (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
+        (T('A.B.M. Cliente'), False, URL('ventas', 'abm_clientes'), []),
         (T('Facturar'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Detalle de Factura'), False, URL('ventas', 'detalle_ventas'), []),
         (T('Consulta de Factura'), False, URL('ventas', 'comprobantes'), []),
+        (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
+        (T('Ventas'), False, URL('ventas', 'abm_ventas'), []),
+        (T('Comprovantes'), False, URL('ventas', 'comprobantes'), []),
         ]),
      (T('Stock'), False, URL('stock', 'index'), [
         (T('Productos'), False, URL('stock', 'abm_producto'), []),
@@ -63,15 +63,15 @@ response.menu = [
         (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
         ]),
     (T('Compra'), False, URL('compra', 'index'), [
-        (T('Proveedor'), False, URL('compra','abm_proveedor'),
-        
-[]),
+        (T('Alta Proveedor'), False, URL('compra', 'alta_proveedor'), []),
+        (T('Baja  Proveedor'), False, URL('compra', 'baja_proveedor'), []),
+        (T('Modificación Proveedor'), False, URL('compra', 'modificacion_proveedor'), []),
         ]),
-     (T('Sueldos'), False, URL('sueldos', 'index'), [
-         (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
-         (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
-         (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
-         (T('Reporte Legajos'), False, URL('sueldos', 'reportes_empleados'), []),
+    (T('Sueldos'), False, URL('sueldos', 'index'), [
+        (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
+        (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
+        (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
+        (T('Reportes'), False, URL('sueldos', 'reportes'), []),
         ]),
 ]
 

@@ -25,3 +25,6 @@ def abm_horas():
 def legajos():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
+
+def reportes_empleados():
+    return dict()
