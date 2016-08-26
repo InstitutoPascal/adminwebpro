@@ -64,7 +64,6 @@ response.menu = [
         ]),
     (T('Compra'), False, URL('compra', 'index'), [
         (T('Proveedor'), False, URL('compra','abm_proveedor'),
-        
 []),
         ]),
      (T('Sueldos'), False, URL('sueldos', 'index'), [
@@ -72,6 +71,7 @@ response.menu = [
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
          (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
          (T('Reporte Legajos'), False, URL('sueldos', 'reportes_empleados'), []),
+         (T('Formulario Legajos'), False, URL('sueldos', 'legajos'), []),
         ]),
 ]
 
