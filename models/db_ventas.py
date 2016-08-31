@@ -42,6 +42,7 @@ db.detalle_ventas.numero_de_factura.requires =IS_IN_DB(db,"ventas.numero_factura
 
 db.define_table("cobros",
                 Field("venta_id",db.ventas),
+                Field("id_cliente",db.cliente,label='Cliente'),
                 Field('formas_pago',db.formas_pago),
                 Field('fecha_creacion','datetime',default=datetime.now()),
                 Field('importe','double',requires=IS_NOT_EMPTY(error_message='El importe no puede estar vacio'))
@@ -49,4 +50,4 @@ db.define_table("cobros",
 db.cobros.formas_pago.requires = IS_IN_DB(db, "formas_pago.id", " %(descripcion)s",zero='Seleccionar...')
 db.cobros.venta_id.readable = False
 db.cobros.venta_id.writable = False
-
+db.cobros.id_cliente.requires = IS_IN_DB(db, "cliente.id_cliente", " %(nombre_de_fantasia)s",zero='Seleccionar...')
