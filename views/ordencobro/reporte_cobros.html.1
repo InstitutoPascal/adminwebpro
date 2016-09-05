@@ -1,0 +1,20 @@
+{{extend 'layout.html'}}
+<table class="table" >
+   <tr style="background-color:black;color:white;">
+       <td>#</td>
+       <td>Fecha</td>
+       <td>Cuenta</td>
+       <td>Cliente</td>
+       <td>Importe</td>
+    </tr>
+    
+{{for r in repor:}}
+    <tr>
+       <td>{{=r.cobros.id}}</td>
+        <td>{{=r.cobros.fecha_creacion}}</td>
+       <td>{{=r.formas_pago.descripcion}}</td>
+       <td>{{=r.cliente.nombre_de_fantasia}}</td>
+       <td>$ {{=r.cobros.importe}}</td>
+    </tr>
+{{pass}}
+</table>
