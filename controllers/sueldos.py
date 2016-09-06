@@ -29,5 +29,8 @@ def legajos():
 def reportes_empleados():
     return dict()
 
+def reportes_empleados2():
+    return dict()
+
 def reportes_horas():
     return dict()

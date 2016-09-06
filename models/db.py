@@ -23,10 +23,14 @@ if not request.env.web2py_runtime_gae:
     # ---------------------------------------------------------------------
     # if NOT running on Google App Engine use SQLite or other DB
     # ---------------------------------------------------------------------
-    db = DAL(myconf.get('db.uri'),
-             pool_size=myconf.get('db.pool_size'),
-             migrate_enabled=myconf.get('db.migrate'),
-             check_reserved=['all'])
+    db = DAL("postgres://web2py:Curso2014@localhost:5432/adminwebpro",
+             migrate_enabled=True, pool_size=10)
+    migrate = True # you can control migration per define_table
+    # Comentado el 01 09 2016
+    # db = DAL(myconf.get('db.uri'),
+    #          pool_size=myconf.get('db.pool_size'),
+    #          migrate_enabled=myconf.get('db.migrate'),
+    #          check_reserved=['all'])
 else:
     # ---------------------------------------------------------------------
     # connect to Google BigTable (optional 'google:datastore://namespace')

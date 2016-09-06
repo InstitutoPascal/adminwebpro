@@ -33,3 +33,9 @@
 [2016-09-05 16:03:13] EDIT adminwebpro/views/ordencobro/reporte_cobros.html: 0
 [2016-09-05 16:03:47] EDIT adminwebpro/views/ordencobro/reporte_cobros.html: 0
 [2016-09-05 16:04:01] EDIT adminwebpro/views/ordencobro/reporte_cobros.html: 0
+[2016-09-05 21:29:03] CREATE sueldos/reportes_empleados2.html: 0
+[2016-09-05 21:39:18] EDIT adminwebpro/views/sueldos/reportes_empleados2.html: 27
+[2016-09-05 21:40:30] EDIT adminwebpro/controllers/sueldos.py: 2
+[2016-09-05 21:42:20] EDIT adminwebpro/views/sueldos/reportes_empleados2.html: 0
+[2016-09-05 21:44:31] EDIT adminwebpro/views/sueldos/reportes_empleados.html: 3
+[2016-09-05 21:51:27] EDIT adminwebpro/views/sueldos/reportes_empleados.html: 0
