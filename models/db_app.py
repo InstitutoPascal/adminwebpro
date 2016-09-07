@@ -1,7 +1,20 @@
 # -*- coding: utf-8 -*-
 
-# Archivo para definir las tablas comunes para todos
+#2.14.6-stable+timestamp.2016.05.10.00.21.47
+#(Ejecutando en Rocket 1.2.6, Python 2.7.3)
+"""
+buscar actualizaciones
 
+Pruebe la interfaz móvil
+
+Nueva aplicación
+
+Nombre de la aplicación:
+
+Crear
+Suba e instale una aplicación empaquetada
+# Archivo para definir las tablas comunes para todos
+"""
 db.define_table("cliente",
     Field("id_cliente","id"),
     Field("nombre_de_fantasia","string"),
@@ -30,7 +43,7 @@ db.define_table("proveedor",
       Field("razon_social", 'string'),
       Field("ingreso_bruto", 'string'),
       Field("condicion_iva", 'string'),
-      Field("cuit", 'integer'),
+      Field("cuit", 'string'),
       Field("domicilio", 'string'),
       Field("localidad", 'string'),
       Field("codigo_postal", 'integer'),
@@ -55,15 +68,16 @@ db.proveedor.provincia.requires=IS_NOT_EMPTY()
 db.define_table("producto",
     Field("id_producto","id"),
     Field("detalle_producto","string"),
-    Field("precio_compra","float"),
-    Field("precio_venta","float"),
-    Field("tipo","string"),
+    Field("precio_producto","float"),
+    Field("marca","float"),
+    Field("categoria","string"),
+    Field("proveedor","string"),
 )
 
-db.producto.tipo.requires=IS_IN_SET(["Hardware","Software"])
+db.producto.categoria.requires=IS_IN_SET(["Hardware","Software"])
 db.producto.id_producto.requires=IS_NOT_EMPTY()
 db.producto.id_producto.requires=IS_NOT_IN_DB(db,"producto.id_producto")
 db.producto.detalle_producto.requires=IS_NOT_EMPTY()
 db.producto.detalle_producto.requires=IS_NOT_IN_DB(db,"producto.detalle_producto")
-db.producto.precio_compra.requires=IS_NOT_EMPTY()
-db.producto.precio_venta.requires=IS_NOT_EMPTY()
+db.producto.precio_producto.requires=IS_NOT_EMPTY()
+db.producto.proveedor.requires=IS_NOT_EMPTY()

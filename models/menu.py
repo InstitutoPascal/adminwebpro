@@ -56,11 +56,11 @@ response.menu = [
         (T('Consulta de Factura'), False, URL('ventas', 'comprobantes'), []),
         ]),
      (T('Stock'), False, URL('stock', 'index'), [
-        (T('Productos'), False, URL('stock', 'abm_producto'), []),
-        (T('Inventario'), False, URL('stock', 'stock'), []),
-        (T('Depositos'), False, URL('stock', 'abm_deposito'), []),
-        (T('Remito salida'), False, URL('stock', 'remito_salida'), []),
-        (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
+        (T('Reporte'), False, URL('stock', 'reporte_stock'), []),
+        (T('Producto nuevo'), False, URL('stock', 'alta_producto'), []),
+        (T('Deposito nuevo'), False, URL('stock', 'alta_deposito'), []),
+        (T('Emision de remito'), False, URL('stock', 'emision_remito'), []),
+        (T('Recepcion de remito'), False, URL('stock', 'resepcion_remito'), []),
         ]),
 
 (T('Compras'), False, URL('compra', 'index'), [
