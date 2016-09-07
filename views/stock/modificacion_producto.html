@@ -1,0 +1,41 @@
+{{extend 'layout.html'}}
+<h1>Modificar Producto</h1>
+
+<form class="form-horizontal">
+
+
+          <div class="form-group">
+            <label for="precio_producto" class="col-sm-1 control-label">Precio del producto</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="precio_producto" step="00.01" placeholder="Precio nuevo">
+            </div>
+          </div>
+
+          
+
+
+           <div class="form-group">
+               <label for="proveedor" class="col-sm-1 control-label">Proveedor</label>
+                <div class="col-sm-3">
+                   <input type="number" class="form-control" id="proveedor"  placeholder="Proveedor">
+                </div>
+           </div>
+    
+    
+        <div class="form-group">
+            <label for="campo_obs" class="col-sm-1 control-label">Observaciones:</label>
+            <div class="col-sm-5">
+               <textarea class="form-control" id="campo_obs" rows="3"></textarea>
+            </div>
+          </div>
+
+        <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="reporte_stock",vars={"id":1,"nombre":"mark"})}}">Guardar</a>
+
+        <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="reporte_stock",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
+      </div>
+
+
+
+
+
+</form>

@@ -1,0 +1,18 @@
+{{extend 'layout.html'}}
+
+<h1>Listado de depositos</h1>
+<h3>
+<table class="table table-striped">
+    <caption></caption>
+    <thead>
+        <tr>
+            <th>Numero de deposito</th> <th>Ubicacion</th> <th>Habilitado</th> <th>Tipo de producto</th> <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr> <th scope="row">0001</th> <td>Arrotea 2364</td> <td>Si</td> <td>Hardware</td> <td><a class="btn btn-default" role="button" href="{{=URL(c="vistas",f="modificacion_producto",vars={"id":1,"nombre":"mark"})}}">Editar</a> <a class="btn btn-default" role="button" href="{{=URL(c="vistas",f="borrar",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td></tr>
+        <tr> <th scope="row">0002</th> <td>Vidal 4371</td> <td>Si</td> <td>Hardware</td><td><a class="btn btn-default" role="button" href="{{=URL(c="vistas",f="modificacion_producto",vars={"id":1,"nombre":"mark"})}}">Editar</a> <a class="btn btn-default" role="button" href="{{=URL(c="vistas",f="borrar",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td> </tr>
+        <tr class="danger"> <th scope="row">0003</th> <td>Puerto Argentino 5543</td> <td>No</td> <td>Software</td><td><a class="btn btn-default" role="button" href="{{=URL(c="vistas",f="modificacion_producto",vars={"id":1,"nombre":"mark"})}}">Editar</a> <a class="btn btn-default" role="button" href="{{=URL(c="vistas",f="borrar",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td> </tr>
+    </tbody>
+</table>
+</h3>
