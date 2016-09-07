@@ -70,7 +70,7 @@ response.menu = [
          (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
          (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
-         (T('Reporte Legajos'), False, URL('sueldos', 'reportes_empleados'), []),
+         (T('Reporte Legajos'), False, URL('sueldos', 'reportes_empleados2'), []),
          (T('Formulario Legajos'), False, URL('sueldos', 'legajos'), []),
           (T('Reporte Horas'), False, URL('sueldos', 'reportes_horas'), []),
            (T('Formulario Horas'), False, URL('sueldos', 'abm_horas'), []), 
