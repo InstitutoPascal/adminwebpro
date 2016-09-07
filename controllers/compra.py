@@ -12,6 +12,24 @@ def abm_factura():
     grid = SQLFORM.grid(db.compra)
     return {"grilla": grid}
 
-def comprobantes():
-    grid = SQLFORM.grid(db.detalle_factura)
-    return {"grilla": grid}
+def informe_subdiarioa():
+       # presentar formulario para criterios de busqueda
+    return dict(message="Informe Subdiarioa")
+
+def informe_subdiariob():
+       # presentar formulario para criterios de busqueda
+    return dict(message="Informe Subdiariob")
+
+def listado_proveedor():
+       # presentar formulario para criterios de busqueda
+    return dict(message="Listado Proveedor")
+
+
+def formulario_compras():
+       # presentar formulario para criterios de busqueda
+    return dict(message="Formulario Compras")
+
+
+def formulario_proveedores():
+           # presentar formulario para criterios de busqueda
+    return dict(message="Formulario Proveedores")

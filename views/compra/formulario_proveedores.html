@@ -1,0 +1,130 @@
+{{extend 'layout.html'}}
+<h1>Formulario Proveedor</h1>
+
+<body>
+    <br>
+    <form class="form-horizontal">
+
+        <div class="form-group">
+            <label for="id_proveedor" class="col-sm-2 control-label">ID Proveedor</label>
+            <div class="col-sm-3">
+                <input type="integer" class="form-control" id="id_proveedor" placeholder="ID_Proveedor">
+            </div>
+            <label for="id_proveedor" class="col-sm-2 control-label">Estado</label>
+            <div class="col-sm-3">
+                <select class="form-control">
+                    <option select value="0">Estado</option>
+                    <option>Activo</option>
+                    <option>Inactivo</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="razon_social" class="col-sm-2 control-label">Razón Social</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="razon_social" placeholder="Razón Social">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="cuit" class="col-sm-2 control-label">C.U.I.T.</label>
+            <div class="col-sm-3">
+                <input type="integer" class="form-control" id="cuit" placeholder="00-00000000-0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ingreso_bruto" class="col-sm-2 control-label">Ingresos Brutos</label>
+            <div class="col-sm-3">
+                <input type="integer" class="form-control" id="ingreso_bruto" placeholder="00-00000000-0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="condicion_iva" class="col-sm-2 control-label">Condición IVA</label>
+            <div class="col-sm-3">
+                <select class="form-control">
+                    <option select value="0">Condición IVA</option>
+                    <option>Responsable Inscripto</option>
+                    <option>Monotributista</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="domicilio" class="col-sm-2 control-label">Domicilio</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="domicilio" placeholder="Domicilio">
+            </div>
+            <label for="domicilio" class="col-sm-2 control-label">Número</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="domicilio" placeholder="00000">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="localidad" class="col-sm-2 control-label">Localidad</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="localidad" placeholder="Localidad">
+            </div>
+            <label for="codigo_postal" class="col-sm-2 control-label">Código Postal</label>
+            <div class="col-sm-3">
+                <input type="interger" class="form-control" id="codigo_postal" placeholder="00000">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="provincia" class="col-sm-2 control-label">Provincia</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="domicilio" placeholder="Provincia">
+            </div>
+            <label for="nacionalidad" class="col-sm-2 control-label">Nacionalidad</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="nacionalidad" placeholder="Nacionalidad">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="telefono" class="col-sm-2 control-label">N°: Teléfono</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="telefono" placeholder="Teléfono">
+            </div>
+            <label for="celular" class="col-sm-2 control-label">N°: Celular</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="celular" placeholder="Celular">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-3">
+                <input type="string" class="form-control" id="email" placeholder="Email">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="pagina_web" class="col-sm-2 control-label">Página Web</label>
+            <div class="col-sm-3">
+                <input type="integer" class="form-control" id="pagina_web" placeholder="Página Web">
+            </div>
+        </div>
+        <form class="form-horizontal" action="{{=URL(c="compra", f="informe_subdiariob")}}" enctype="multipart/form-data" method="POST">
+        </form>
+    </form>
+<center>
+    
+        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="abm_proveedor",vars={"id":1,"nombre":"mark"})}}">Guardar</a>
+        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_proveedores",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
+</center>
+
+    
+    <br>
+
+	<center>
+		<footer>
+			<small>Sistema Contable Módulo Compras Sector Formulario Proveedor</small>
+			<address>AdminWebPro</address>
+		</footer>
+	</center>
+</body>

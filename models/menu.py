@@ -62,10 +62,16 @@ response.menu = [
         (T('Remito salida'), False, URL('stock', 'remito_salida'), []),
         (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
         ]),
-    (T('Compra'), False, URL('compra', 'index'), [
-        (T('Proveedor'), False, URL('compra','abm_proveedor'),
-[]),
+
+(T('Compras'), False, URL('compra', 'index'), [
+        (T('ABM Proveedor'), False, URL('compra','abm_proveedor'),[]),
+        (T('ABM Compras'), False, URL('compra','abm_factura'),[]),
+        (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
+        (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
+        (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
+        (T('Formulario de Proveedores'), False, URL('compra','formulario_proveedores'),[]),
         ]),
+
      (T('Sueldos'), False, URL('sueldos', 'index'), [
          (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
