@@ -1,3 +1,38 @@
 {{extend 'layout.html'}}
-<h1>Alta de Ventas</h1>
-{{=grilla}}
+<h1>REGISTRAR FACTURA</h1>
+
+
+<form class="form-horizontal" action="{{=URL(c="ventas", f="detalle_ventas")}}" enctype="multipart/form-data" method="POST">
+<div class="form-group">
+            <label for="campo_cliente" class="col-sm-2 control-label">CLIENTE</label>
+            <div class="col-sm-2">
+               <select class="form-control" id="campo_cliente">
+                  <option>Zia-Ivan Zavala</option>
+                  <option>Leyendo Vinos despertando Sentidos- Francisco Rodriguez</option>
+                   <option>Jose Perez</option>
+                </select>
+            </div>
+            <label for="campo_fecha" class="col-sm-1 control-label">FECHA</label>
+            <div class="col-sm-2">
+                <input type="date" class="form-control" id="campo_fecha" placeholder="Data input">
+            </div>
+            <label for="campo_tipo" class="col-sm-2 control-label">TIPO DE PAGO</label>
+            <div class="col-sm-2">
+               <select class="form-control" id="campo_tipo">
+                  <option>Efectivo</option>
+                  <option>Credito</option>
+                </select>
+            </div>
+            </div>
+    <div class="form-group">
+        <label for="campo_obs" class="col-sm-2 control-label">OBSERVACIONES</label>
+        <div class="col-sm-6">
+           <textarea class="form-control" id="campo_obs" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-default">AGREGAR PRODUCTO</button>
+        </div>
+  </div>
+</form>
