@@ -52,8 +52,8 @@ response.menu = [
     (T('Ventas'), False, URL('ventas', 'index'), [
         (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
         (T('Facturar'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Detalle de Factura'), False, URL('ventas', 'detalle_ventas'), []),
-        (T('Consulta de Factura'), False, URL('ventas', 'comprobantes'), []),
+        (T('Reporte de Ventas'), False, URL('ventas', 'reporte_ventas'), []),
+        (T('Consulta de Factura'), False, URL('ventas', 'vista_previa'), []),
         ]),
      (T('Stock'), False, URL('stock', 'index'), [
         (T('Productos'), False, URL('stock', 'abm_producto'), []),
