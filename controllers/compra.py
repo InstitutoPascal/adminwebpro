@@ -29,6 +29,9 @@ def formulario_compras():
        # presentar formulario para criterios de busqueda
     return dict(message="Formulario Compras")
 
+def detalle_compras():
+    grid = SQLFORM.grid(db.detalle_compra)
+    return {"grilla": grid}
 
 def formulario_proveedores():
            # presentar formulario para criterios de busqueda

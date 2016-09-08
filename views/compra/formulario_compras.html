@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 <h1>Formulario de Compras</h1>
-{{=BEAUTIFY(response._vars)}}
+
 
 <body>
     <br>
@@ -103,15 +103,11 @@
         </div>
 
         <div class="form-group">
+
             <label for="telefono" class="col-sm-2 control-label">N°: Teléfono</label>
             <div class="col-sm-3">
                 <input type="string" class="form-control" id="telefono" placeholder="Teléfono">
             </div>
-        </div>
-
-        <div>
-            <label for="telefono" class="col-sm-2 control-label">Detalle</label>
-            <textarea placeholder="Detalle y Precio" rows="8" cols="100"></textarea>
         </div>
 
         <form class="form-horizontal" action="{{=URL(c="compra", f="informe_subdiariob")}}" enctype="multipart/form-data" method="POST">
@@ -119,7 +115,7 @@
     </form>
 
     <center>
-        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="abm_factura",vars={"id":1,"nombre":"mark"})}}">Guardar</a>
+        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"id":1,"nombre":"mark"})}}">DETALLE COMPRA</a>
         <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
     </center>
 

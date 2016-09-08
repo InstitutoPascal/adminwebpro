@@ -1,11 +1,28 @@
+{{extend 'layout.html'}}
+<br>
+<br>
 <h1>Listado de Proveedores</h1>
 
-<table class="table">
+<table class="table table-hover ">
+<style> table td:nth-child(1) {text-align: center;}
+         </style>
     <caption>Listado Proveedor</caption>
     <thead>
+         <style>
+            th {
+                    color: blak;
+                    font-size: 10pt;
+                    margin-top:12px;
+            }
+            td {
+                    color: blak;
+                    font-size: 8pt;
+                    margin-top:12px;
+            }
+        </style>
         <tr>
             <th>#</th>
-            <th>ID Prov.</th>
+            <th>ID Prov</th>
             <th>Estado</th>
             <th>Razón Social</th>
             <th>CUIT</th>
@@ -96,4 +113,5 @@
                 <td>-</td>
         </tr>
        </tbody>
+<input type="button" name="imprimir" value="Imprimir listado" onclick="window.print();">
 </table>

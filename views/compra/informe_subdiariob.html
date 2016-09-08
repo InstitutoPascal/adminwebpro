@@ -1,4 +1,5 @@
 {{extend 'layout.html'}}
+<br><br>
 <h1>Informe Subdiario</h1>
 
 <form class="form-horizontal" action="{{=URL(c="compra", f="informe_subdiarioa")}}" enctype="multipart/form-data" method="POST">
@@ -8,9 +9,20 @@
     </div>
   </div>
 </form>
+<input type="button" name="imprimir" value="Imprimir" onclick="window.print();">
 
 
-<table class="table">
+<table class="table" >
+<style> table  td:nth-child(7){text-align: center;}
+               td:nth-child(8){text-align: center;}
+               td:nth-child(9){text-align: center;}
+               td:nth-child(10){text-align: center;}
+               th:nth-child(7){text-align: center;}
+               th:nth-child(8){text-align: center;}
+               th:nth-child(9){text-align: center;}
+               th:nth-child(10){text-align: center;}
+         </style>
+
     <caption>Lista del Subdiario</caption>
     <thead>
         <tr>

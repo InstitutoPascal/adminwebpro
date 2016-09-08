@@ -10,9 +10,9 @@ db.define_table("compra",
       Field("ingresos_brutos", 'integer'),
       Field("domicilio", 'string'),
       Field("localidad", 'string'),
-      Field("codigo_postal", 'integer'),
+      Field("codigo_postal", 'string'),
       Field("provincia", 'string'),
-      Field("telefono", 'integer'),
+      Field("telefono", 'string'),
     )
 db.compra.tipo_factura.requires=IS_IN_SET(["Factua A","Factura B"])
 db.compra.tipo_iva.requires=IS_IN_SET({27:"Servicios 27%", 21:"Tasa General 21%", 10.5:"Tasa Reducida 10,5%"})
