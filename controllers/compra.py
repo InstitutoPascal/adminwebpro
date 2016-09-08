@@ -33,6 +33,10 @@ def detalle_compras():
     grid = SQLFORM.grid(db.detalle_compra)
     return {"grilla": grid}
 
+def lista_detalles():
+           # presentar formulario para criterios de busqueda
+    return dict(message="Lista de Detalles")
+
 def formulario_proveedores():
            # presentar formulario para criterios de busqueda
     return dict(message="Formulario Proveedores")

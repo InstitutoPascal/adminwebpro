@@ -1,3 +1,37 @@
 {{extend 'layout.html'}}
 <h1>Detalle de Compras</h1>
-{{=grilla}}
+        
+<form class="form-horizontal" action="{{=URL(c="compra", f="lista_detalles")}}" enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label for="produc" class="col-sm-1 control-label">PRODUCTO</label>
+           <div class="col-sm-3">
+                <select class="form-control" id="campo_tipo">
+                  <option>Memoria Ram 2Gb</option>
+                  <option>Disco Rigido 500Gb</option>
+                  <option>Mouse Asus XL-50bs</option>
+                </select>
+           </div>
+        <label for="cant" class="col-sm-1 control-label">CANTIDAD</label>
+           <div class="col-sm-1">
+               <input type="number" class="form-control" id="cant" placeholder="Cantidad">
+            </div>
+               <label for="precunit" class="col-sm-2 control-label">PRECIO UNITARIO</label>
+            <div class="col-sm-2">
+               <input type="number" class="form-control" id="precunit" step="0.01" placeholder="Precio Unitario">
+            </div>
+    </div>
+   
+                <label for="campo_tipo" class="col-sm-2 control-label">DESCUENTO</label>
+             <div class="col-sm-2">
+                 <select class="form-control" id="campo_tipo">
+                    <option>%0</option>
+                    <option>%10</option>
+                    <option>%15</option>
+                    <option>%25</option>
+                 </select>
+             </div>
+    <div class="form-group">
+        <div class="col-md-3">
+             <button type="submit" class="btn btn-default">MOSTRAR LISTA</button>
+        </div>
+    </div>

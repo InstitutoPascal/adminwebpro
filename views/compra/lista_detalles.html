@@ -1,0 +1,16 @@
+{{extend 'layout.html'}}
+<h1>Lista de Detalles</h1>
+
+<table class="table table-hover">
+    <caption>Lista de Detalles </caption>
+    <thead>
+        <tr>
+            <th>#</th> <th>Producto</th> <th>Cantidad</th> <th>Precio Unitario</th> <th>Descuento</th> <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr> <th scope="row">1</th> <td>Memoria Ram 2Gb</td> <td>2</td> <td>$350</td> <td>10%</td> <td><a class="btn btn-default" role="button" href="{{=URL(c="compra",f="abm_factura",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td> </tr>
+        <tr> <th scope="row">2</th> <td>Disco Rigido 500Gb</td> <td>1</td> <td>$1000</td> <td>10%</td> <td><a class="btn btn-default" role="button" href="{{=URL(c="compra",f="abm_factura",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td> </tr>
+        <tr class="danger"> <th scope="row">3</th> <td>Mouse</td> <td>20</td> <td>$100</td> <td>10%</td>  <td><a class="btn btn-default" role="button" href="{{=URL(c="compra",f="abm_factura",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td> </tr>
+    </tbody>
+</table>
