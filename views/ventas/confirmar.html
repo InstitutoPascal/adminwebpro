@@ -1,0 +1,12 @@
+{{extend 'layout.html'}}
+<h1 align="center">CONFIRMAR</h1>
+<h4 align="center"> ¿Desea confirmar la venta?</h4>
+<div class="form-group">
+    <div class="col-sm-5"></div>
+     <div class="col-sm-1">
+         <a href="{{=URL(c="ventas",f="guardado")}}" class="btn btn-default" role="button">SI</a>
+     </div>
+    <div class="col-sm-6">
+         <a href="{{=URL(c="ventas",f="detalle_ventas")}}" class="btn btn-default" role="button">NO</a>
+    </div>
+</div>
