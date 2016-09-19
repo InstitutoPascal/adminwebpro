@@ -1,0 +1,63 @@
+{{extend 'layout.html'}}
+<h1>LISTADO DE VENTAS</h1>
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-8">
+              <table class="table table-hover">
+              <caption>{{=titulo}}</caption>
+          <thead>
+            <tr>
+                <th>Fecha</th>
+                <th class="">Cliente</th>
+                <th>Numero de Comprobante</th>
+                <th>Importe</th>
+                <th>Tipo de Pago</th>
+            </tr>
+          </thead>
+        <tbody>
+            <tr>
+                <th scope="row">01/08/2016</th>
+                <td>Zia</td>
+                <td>0001</td>
+                <td>1600</td>
+                <td>Credito</td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="vista_previa",vars={"id":1})}}">Vista Del Comprobante</a>
+            </tr>
+            <tr>
+                <th>03/08/2016</th>
+                <td>Leyendo Vinos</td> 
+                <td>0002</td>
+                <td>1000</td>
+                <td>Credito</td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="vista_previa",vars={"id":1})}}">Vista Del Comprobante</a>
+            </tr>
+            <tr>
+                <th scope="row">05/08/2016</th>
+                <td>Zia</td>
+                <td>0003</td>
+                <td>1200</td>
+                <td>Credito</td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="vista_previa",vars={"id":1})}}">Vista Del Comprobante</a>
+            </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="form-group" class="col-sm-2">
+    <div class="col-md-3">
+       <table class="table table-bordered">
+           <tbody>
+               <tr> <th scope="row">Cantidad de Ventas</th>
+                    <td>3</td>
+               </tr>
+               <tr> <th scope="row">Valor total del Periodo</th>
+                    <td>3800</td>
+               </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="form-group" class="col-sm-2">
+         <a href="{{=URL(c="ventas",f="reporte_ventas")}}" class="btn btn-default" role="button">Volver</a>
+    </div>
+</form>

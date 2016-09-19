@@ -29,12 +29,11 @@ response.google_analytics_id = None
 # ----------------------------------------------------------------------------------------------------------------------
 #Agregando mi menu
 response.menu = [
-    (T('Home'), False, URL('default', 'index'), []),
-    (T('Prueba'), False, URL('prueba', 'index'), [
-        (T('ABM ejemplo'), False, URL('prueba', 'abm_ejemplo'), []),
-        (T('Reporte'), False, URL('prueba', 'reporte_ejemplo'), []),
-        (T('Registrar'), False, URL('prueba', 'registrar_comprobante'), []),
-        ]),
+    #(T('Home'), False, URL('default', 'index'), []),
+    #(T('Prueba'), False, URL('prueba', 'index'), [
+     #   (T('ABM ejemplo'), False, URL('prueba', 'abm_ejemplo'), []),
+      #  (T('Reporte'), False, URL('prueba', 'reporte_ejemplo'), []),
+       #]),
     (T('Pagos'), False, URL('pagos', 'index'), [
         (T('Cheques'), False, URL('pagos', 'abm_cheques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
@@ -53,7 +52,6 @@ response.menu = [
         (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
         (T('Facturar'), False, URL('ventas', 'abm_ventas'), []),
         (T('Reporte de Ventas'), False, URL('ventas', 'reporte_ventas'), []),
-        (T('Consulta de Factura'), False, URL('ventas', 'vista_previa'), []),
         ]),
      (T('Stock'), False, URL('stock', 'index'), [
         (T('Productos'), False, URL('stock', 'abm_producto'), []),

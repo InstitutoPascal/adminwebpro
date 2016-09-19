@@ -17,8 +17,8 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    response.flash = "Esto es una prueba!"
-    return dict(message=T('Welcome to web2py!'))
+    response.flash = "C.V. Technical Service"
+    return dict(message=T('Bienvenido a su Sistema Contable'))
 
 
 def user():

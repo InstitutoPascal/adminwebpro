@@ -1,160 +1,108 @@
 {{extend 'layout.html'}}
-<h1>VISTA PREVIA DE LA FACTURA</h1>
+<h1>VISTA PREVIA DEL COMPROBANTE</h1>
 <form class="form-horizontal">
-<div class="form-group">
-            <label for="campo_tipo" class="col-sm-2 control-label">TIPO DE FACTURA</label>
-            <div class="col-sm-1">
-               <select class="form-control" id="campo_tipo">
-                  <option>A</option>
-                  <option>B</option>
-                </select>
-            </div>
-            <label for="campo_cliente" class="col-sm-1 control-label">CLIENTE</label>
-            <div class="col-sm-2">
-               <select class="form-control" id="campo_cliente">
-                  <option>Zia-Ivan Zavala</option>
-                  <option>Leyendo Vinos despertando Sentidos- Francisco Rodriguez</option>
-                  <option>Jorge Benitez</option>
-                </select>
-            </div>
-            <label for="campo_numero" class="col-sm-2 control-label">NUMERO DE FACTURA</label>
-            <div class="col-sm-2">
-               <select class="form-control" id="campo_numero">
-                  <option>0001</option>
-                  <option>0002</option>
-                  <option>0003</option>
-                </select>
-            </div>
-</pre>
-    <div class="col-xs-6">
-        <h1><IMG SRC="http://www.hersis.cl/servicios/servicio_tecnico.png" WIDTH=178 HEIGHT=180 /> C.V Technical Service</a></h1>
+    <div class="form-group">
+        <div class="col-xs-6">
+        <h2><IMG SRC="http://www.hersis.cl/servicios/servicio_tecnico.png" WIDTH=178 HEIGHT=180 /> C.V Technical Service</h2>
+        </div>
+        <div class="col-xs-6 text-right">
+            <h1>FACTURA Tipo: A</h1>
+            <h1><small>N° 0001</small></h1>
+            <h1><small>Fecha: 15/09/2016</small></h1>
+        </div>
     </div>
-    <div class="col-xs-6 text-right">
-        <h1>FACTURA Tipo: A</h1>
-        <h1><small>N° 0001</small></h1>
-    </div>
-<pre>
-    </div>
-</pre>
-    <div class="row">
-        <div class="col-xs-5">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>De: <a href="#">Claudia Vargas</a></h4>
-</div>
-<div class="panel-body">Dirección
-detalles
-más detalles</div>
-</div>
-</div>
-<div class="col-xs-5 col-xs-offset-2 text-right">
-<div class="panel panel-default">
-<div class="panel-heading">
-<h4>Para : <a href="#">ZIA- Ivan Zavala</a></h4>
-</div>
-<div class="panel-body">Dirección
-detalles
-más detalles</div>
-</div>
-</div>
-</div>
-<pre><!-- / fin de sección de datos del Cliente  -->
-Detalles de la factura aquí
-</pre>
-<table class="table table-bordered">
-<thead>
-<tr>
-<th>
-<h4>Servicio</h4>
-</th>
-<th>
-<h4>Descripción</h4>
-</th>
-<th>
-<h4>Hrs / Cantidad</h4>
-</th>
-<th>
-<h4>Tarifa / Precio</h4>
-</th>
-<th>
-<h4>Sub-Total</h4>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Artículo</td>
-<td><a href="#"> Título de su artículo aquí </a></td>
-<td class=" text-right ">-</td>
-<td class=" text-right ">200.00 €</td>
-<td class=" text-right ">200.00 €</td>
-</tr>
-<tr>
-<td>Plantilla de diseño</td>
-<td><a href="#"> Detalles del proyecto aquí </a></td>
-<td class="text-right">10</td>
-<td class="text-right ">75.00 €</td>
-<td class="text-right ">750.00 €</td>
-</tr>
-<tr>
-<td>Desarrollo</td>
-<td><a href="#"> Plugin WordPress </a></td>
-<td class="text-right ">5</td>
-<td class="text-right">50.00 €</td>
-<td class="text-right">250.00 €</td>
-</tr>
-</tbody>
-</table>
-<pre>Sección Totales
-</pre>
-<div class="row text-right">
-<div class="col-xs-3 col-xs-offset-7"><strong>
-Sub Total:
-Impuestos (IVA 21%):
-Total:
-</strong></div>
-<div class="col-xs-2"><strong>
-1,200.00 €
-252.00 €
-1,452.00 €
-</strong></div>
-</div>
-<pre>Sección detalles de pago
+                <h4>De: <a href="#">Claudia Vargas</a></h4></div>
+            <div class="panel-body">Dirección detalles más detalles</div>
+            </div>
+            </div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-5">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Para : <a href="#">ZIA- Ivan Zavala</a></h4></div>
+            <div class="panel-body">DOMICILIO: Alsina 1175</div>
+            <div class="panel-body">LOCALIDAD: Pontevedra</div>
+            <div class="panel-body">COND. I.V.A: Responsable Inscripto</div>
+            <div class="panel-body">CUIT o DNI: 20-33465017-1</div>
+            </div>
+        </div>
+        </div>
+    </div>
+<div class="form-group">
 <div class="row">
-<div class = "col-xs-5">
-datos bancarios
-</ div>
-<div class="col-xs-7">
-datos de contacto
+<div class="col-xs-12">
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th><h4>Codigo de Articulo</h4></th>
+            <th><h4>Detalle</h4></th>
+            <th><h4>Cantidad</h4></th>
+            <th><h4>Precio Unitario</h4></th>
+            <th><h4>Descuento</h4></th>
+            <th><h4>Total</h4></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td> Memoria Ram 16Gb</td>
+            <td class=" text-center ">2</td>
+            <td class=" text-right ">$800</td>
+            <td class=" text-right ">10%</td>
+            <td class=" text-right ">$1600</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Disco Rigido 1 Tb</td>
+            <td class=" text-center ">1</td>
+            <td class=" text-right ">$1000</td>
+            <td class=" text-right ">0%</td>
+            <td class=" text-right ">$1000</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Mother Asus XL-50bs</td>
+            <td class=" text-center ">1</td>
+            <td class=" text-right ">$1200</td>
+            <td class=" text-right ">15%</td>
+            <td class=" text-right ">$1200</td>
+        </tr>
+    </tbody>
+</table>
 </div>
 </div>
-<div class="panel panel-info">
-<div class="panel-heading">
-<h4>Datos bancarios</h4>
 </div>
-<div class="panel-body">
- Su nombre
- Nombre del banco
- SWIFT: -------
- Número de cuenta: 12345678
- IBAN: ------</div>
+<div class="form-group">
+<div class="row">
+<div class="col-xs-5">
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th><h5>Sub Total</h5></th>
+            <th><h5>Impuesto IVA "(10.5%)" </h5></th>
+            <th><h5>Impuesto IVA "(21%)" </h5></th>
+            <th><h5><B>TOTAL</B></h5></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class=" text-right ">$3800</td>
+            <td class=" text-right ">$399</td>
+            <td class=" text-right ">$0</td>
+            <td class=" text-right "><B>$4199</B></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+    <div class="col-xs-1"></div>
+<div class="col-xs-5">
+       <h2><IMG SRC="http://www.codigodebarras.com/UserFiles/Image/JPG/CB.jpg" WIDTH=500 HEIGHT=100 /> </h2>
 </div>
 </div>
-<div class="span7">
-<div class="panel panel-info">
-<div class="panel-heading">
-<h4> Datos de contacto </h4>
-<div class=" panel-body ">
- Email: usted@ejemplo.com
- Móvil: +92123456789
- Twitter: <a href="https://twitter.com/suTwitter">@suTwitter</a> |Suweb: <a href="http://www.suweb.com/author/usted"> http: //www. suweb.com/author/usted / </a>
-<h4><small> El pago debe ser por transferencia bancaria </h4>
 </div>
-</div>
-</div>
-<style>@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
-  body, h1, h2, h3, h4, h5, h6{
-    font-family: 'Bree Serif', serif;
-  }
-  </style>
 </form>

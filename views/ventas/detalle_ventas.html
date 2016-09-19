@@ -2,7 +2,7 @@
 <h1>DETALLE DE VENTA</h1>
 
 
-<form class="form-horizontal" action="{{=URL(c="ventas", f="vista_previa")}}" enctype="multipart/form-data" method="POST">
+<form class="form-horizontal" action="{{=URL(c="ventas", f="confirmar")}}" enctype="multipart/form-data" method="POST">
     <div class="form-group">
         <label for="produc" class="col-sm-1 control-label">PRODUCTO</label>
            <div class="col-sm-3">
@@ -22,33 +22,21 @@
             </div>
     </div>
     <div class="form-group">
-            <div class="col-sm-3">
-               <label class="radio-inline">
-                 <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Iva %10.5
-               </label>
-               <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Iva %21
-               </label>
-               <label class="radio-inline">
-                 <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Iva %27
-               </label>
-             </div>
-                <label for="campo_tipo" class="col-sm-2 control-label">DESCUENTO</label>
+                <label for="campo_tipo" class="col-sm-1 control-label">DESCUENTO</label>
              <div class="col-sm-2">
                  <select class="form-control" id="campo_tipo">
-                    <option>%0</option>
-                    <option>%10</option>
-                    <option>%15</option>
-                    <option>%25</option>
+                    <option>0%</option>
+                    <option>10%</option>
+                    <option>15%</option>
+                    <option>25%</option>
                  </select>
              </div>
-    <div class="form-group">
         <div class="col-md-3">
              <button type="submit" class="btn btn-default">AGREGAR ITEM</button>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-8">
+        <div class="col-md-10">
           <table class="table table-hover">
           <caption>Items de Venta</caption>
           <thead>
@@ -57,38 +45,63 @@
                 <th class="">Producto</th>
                 <th>Cantidad</th>
                 <th>Precio Unitario</th>
+                <th>Descuento</th>
+                <th>Sub-Total</th>
+                <th>IVA</th>
+                <th>Sub-Total + IVA</th>
+                <th>Opciones</th>
             </tr>
           </thead>
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>Memoria Ram 16Gb</td>
-                <td>2</td>
-                <td>800</td>
+                <td >Memoria Ram 16Gb</td>
+                <td align="center">2</td>
+                <td align="center">$800</td>
+                <td align="center">10%</td>
+                <td align="center">$1440</td>
+                <td align="center">10.5%</td>
+                <td align="center">$1591</td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
             </tr>
             <tr>
                 <th>2</th>
                 <td>Disco Rigido 1 Tb</td> 
-                <td>1</td>
-                <td>1000</td>
+                <td align="center">1</td>
+                <td align="center">$1000</td>
+                <td align="center">0%</td>
+                <td align="center">$1000</td>
+                <td align="center">10.5%</td>
+                <td align="center">$1105</td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
                 <td>Mother Asus XL-50bs</td>
-                <td>1</td>
-                <td>1200</td>
+                <td align="center">1</td>
+                <td align="center">$1200</td>
+                <td align="center">10%</td>
+                <td align="center">$1080</td>
+                <td align="center">10.5%</td>
+                <td align="center">$1090.5</td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
             </tr>
         </tbody>
         </table>
-      </div>
-    </div>
+        </div>
+        </div>
     <div class="form-group">
-        <div class="col-md-1">
-           <button type="submit" class="btn btn-default">MODIFICAR</button>
+        <div class="col-md-3">
+        <table class="table table-bordered">
+        <tbody>
+            <tr> <th scope="row">Total</th>
+                 <td>$3786.5</td>
+            </tr>
+        </tbody>
+        </table>
         </div>
-        <div class="col-md-6">
-           <button type="submit" class="btn btn-default">ELIMINAR</button>
         </div>
+    <div class="form-group">
         <div class="col-md-1">
            <button type="submit" class="btn btn-default">FINALIZAR</button>
         </div>
