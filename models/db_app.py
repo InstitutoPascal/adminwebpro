@@ -19,8 +19,8 @@ db.define_table("cliente",
     Field("id_cliente","id"),
     Field("nombre_de_fantasia","string"),
     Field("razon_social","string"),
-    Field("cuit","integer"),
-    Field("dni","integer"),
+    Field("cuit","string"),
+    Field("dni","bigint"),
     Field("condicion_frente_al_iva","string"),
     Field("direccion","string"),
     Field("numero","integer"),
@@ -56,7 +56,7 @@ db.define_table("proveedor",
       Field("pagina_web", 'string'),
     )
 db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"])
-db.proveedor.cuit.requires=IS_NOT_EMPTY()
+db.proveedor.cuit.requires=[IS_NOT_EMPTY(),IS_CUIT()]
 db.proveedor.ingreso_bruto.requires=IS_NOT_EMPTY()
 db.proveedor.razon_social.requires=IS_NOT_EMPTY()
 db.proveedor.domicilio.requires=IS_NOT_EMPTY()
