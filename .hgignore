@@ -4,6 +4,9 @@ syntax: glob
 *.pyo
 *.bak
 *.log
+*.1
+*.2
+*.orig
 cache/*
 databases/*
 sessions/*
