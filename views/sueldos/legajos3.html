@@ -1,0 +1,108 @@
+{{extend 'layout.html'}}
+
+<h1>Registrar Legajo</h1>
+
+<form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos2")}}" enctype="multipart/form-data" method="POST">
+<div class="form-group">
+            <label for="campo_fdnih" class="col-sm-4 control-label">Fotoc. DNI Hijos</label>
+            <div class="col-sm-3">
+                       <select class="form-control">
+                          <option>Corresponde</option>
+                          <option>No corresponde</option>
+                       </select>
+            </div>
+              <div class="col-sm-2">
+              <label>
+                <input type="checkbox"> Presentado
+              </label>
+            </div>
+    </div>
+<div class="form-group">
+            <label for="campo_fdnic" class="col-sm-4 control-label">Fotoc. DNI Cónyuge</label>
+            <div class="col-sm-3">
+                       <select class="form-control">
+                          <option>Corresponde</option>
+                          <option>No corresponde</option>
+                       </select>
+            </div>
+              <div class="col-sm-2">
+              <label>
+                <input type="checkbox"> Presentado
+              </label>
+            </div>
+    </div>
+    <div class="form-group">
+            <label for="campo_ccuilh" class="col-sm-4 control-label">Constancia CUIL Hijos</label>
+            <div class="col-sm-3">
+                       <select class="form-control">
+                          <option>Corresponde</option>
+                          <option>No corresponde</option>
+                       </select>
+            </div>
+              <div class="col-sm-2">
+              <label>
+                <input type="checkbox"> Presentado
+              </label>
+            </div>
+    </div>
+    <div class="form-group">
+            <label for="campo_ccuilh" class="col-sm-4 control-label">Constancia CUIL Cónyuge</label>
+            <div class="col-sm-3">
+                       <select class="form-control">
+                          <option>Corresponde</option>
+                          <option>No corresponde</option>
+                       </select>
+            </div>
+              <div class="col-sm-2">
+              <label>
+                <input type="checkbox"> Presentado
+              </label>
+            </div>
+    </div>
+    <div class="form-group">
+            <label for="campo_caregh" class="col-sm-4 control-label">Constancia Alumno Regular Hijo</label>
+            <div class="col-sm-3">
+                       <select class="form-control">
+                          <option>Corresponde</option>
+                          <option>No corresponde</option>
+                       </select>
+            </div>
+              <div class="col-sm-2">
+              <label>
+                <input type="checkbox"> Presentado
+              </label>
+            </div>
+    </div>
+    <div class="form-group">
+            <label for="campo_careg" class="col-sm-4 control-label">Constancia Alumno Regular Empleado</label>
+            <div class="col-sm-3">
+                       <select class="form-control">
+                          <option>Corresponde</option>
+                          <option>No corresponde</option>
+                       </select>
+            </div>
+              <div class="col-sm-2">
+              <label>
+                <input type="checkbox"> Presentado
+              </label>
+            </div>
+    </div>
+<div class="form-group">
+            <label for="campo_cve" class="col-sm-4 control-label">Currículum Empleado</label>
+            <div class="col-sm-3">
+                       <select class="form-control">
+                          <option>Corresponde</option>
+                          <option>No corresponde</option>
+                       </select>
+            </div>
+              <div class="col-sm-2">
+              <label>
+                <input type="checkbox"> Presentado
+              </label>
+            </div>
+    </div>
+
+</table>
+<form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos2")}}" enctype="multipart/form-data" method="POST">
+      <button type="submit" class="btn btn-default">volver</button>
+</form>
