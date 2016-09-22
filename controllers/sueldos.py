@@ -59,3 +59,7 @@ def legajos2():
 def legajos3():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
+
+def familiar2():
+    grid = SQLFORM.grid(db.familiares)
+    return {"grilla": grid}
