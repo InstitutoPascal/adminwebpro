@@ -51,3 +51,11 @@ def reportes_familiares():
 
 def reportes_familiares2():
     return dict()
+
+def legajos2():
+    grid = SQLFORM.grid(db.legajos)
+    return {"grilla": grid}
+
+def legajos3():
+    grid = SQLFORM.grid(db.legajos)
+    return {"grilla": grid}
