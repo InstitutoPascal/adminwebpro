@@ -30,7 +30,7 @@ def horas():
     grid = SQLFORM.grid(db.horas)
     return {"grilla": grid}
 
-def familiar():
+def familiares():
     grid = SQLFORM.grid(db.familiares)
     return {"grilla": grid}
 
@@ -51,15 +51,3 @@ def reportes_familiares():
 
 def reportes_familiares2():
     return dict()
-
-def legajos2():
-    grid = SQLFORM.grid(db.legajos)
-    return {"grilla": grid}
-
-def legajos3():
-    grid = SQLFORM.grid(db.legajos)
-    return {"grilla": grid}
-
-def familiar2():
-    grid = SQLFORM.grid(db.familiares)
-    return {"grilla": grid}

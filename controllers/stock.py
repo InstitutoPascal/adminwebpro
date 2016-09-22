@@ -44,6 +44,9 @@ def reporte_stock():
 def emision_remito():
     return dict()
 
+def emision_remito2():
+    return dict()
+
 def resepcion_remito():
     return dict()
 
