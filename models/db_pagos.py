@@ -17,7 +17,7 @@ db.define_table("pago",
     Field("num_orden_pago","integer"),
     Field("fecha","date"),
     Field("importe","integer"),
-    Field("id_proveedor", db.proveedor),
+    Field("id_proveedor", db.proveedor, label="Nombre de Banco"),
 )
 
 db.define_table("cheque",
