@@ -17,7 +17,8 @@ db.define_table("pago",
     Field("num_orden_pago","integer"),
     Field("fecha","date"),
     Field("importe","integer"),
-    Field("id_proveedor", db.proveedor, label="Nombre de Banco"),
+    Field("id_compras",db.compra, label="Numero Factura de Compra"),
+    Field("id_proveedor", db.proveedor, label="Nombre de Proveedor"),
 )
 
 db.define_table("cheque",
@@ -26,7 +27,7 @@ db.define_table("cheque",
     Field("emision","date"),
     Field("vencimiento","date"),
     Field("importe","integer"),
-    Field("id_cuenta_bancaria",db.cuenta_bancaria),
+    Field("id_cuenta_bancaria",db.cuenta_bancaria, label="Numero de Cuenta Bancaria"),
     Field("id_pagos", db.pago),
 )
 
@@ -41,3 +42,4 @@ db.cheque.num_cheque.requires=IS_NOT_IN_DB(db, "cheque.num_cheque")
 db.cheque.emision.requires=IS_DATE('%Y-%m-%d')
 db.cheque.vencimiento.requires=IS_DATE('%Y-%m-%d')
 db.cheque.id_pagos.requires = IS_IN_DB(db, "pago.id_pagos", "-- %(num_orden_pago)s ..")
+db.pago.id_compras.requires = IS_IN_DB(db, "compra.id", "-- %(numero_factura)s ..")

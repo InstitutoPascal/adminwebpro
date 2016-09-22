@@ -31,11 +31,11 @@ response.google_analytics_id = None
 response.menu = [
    
     (T('Pagos'), False, URL('pagos', 'index'), [
+        (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
+        (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
         (T('Cheques'), False, URL('pagos', 'abm_cheques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
         (T('Generar Reporte'), False, URL('pagos', 'generar_reporte'), []),
-        (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
-        (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
         ]),
     (T('Cobranzas'), False, '#', [
         #(T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
