@@ -16,7 +16,10 @@ def abm_ventas():
 
 @auth.requires_login()
 def detalle_ventas():
-    return dict(message="detalle_ventas")
+    cliente = request.vars["id_cliente"]
+    fecha = request.vars["fecha"]
+    comprobante = request.vars["comprobante"]
+    return dict(titulo="Para el Cliente: %s, Fecha: %s, N°Comprobante:%s" % (cliente, fecha, comprobante))
     #grid = SQLFORM.grid(db.detalle_ventas)
     #return {"grilla": grid}
 @auth.requires_login()

@@ -1,7 +1,8 @@
 {{extend 'layout.html'}}
 <h1>DETALLE DE VENTA</h1>
-
-
+<div class="form-group">
+    <h4><caption>{{=titulo}}</caption></h4>
+</div>
 <form class="form-horizontal" action="{{=URL(c="ventas", f="confirmar")}}" enctype="multipart/form-data" method="POST">
     <div class="form-group">
         <label for="produc" class="col-sm-1 control-label">PRODUCTO</label>
