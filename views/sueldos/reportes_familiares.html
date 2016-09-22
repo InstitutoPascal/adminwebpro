@@ -1,0 +1,15 @@
+{{extend 'layout.html'}}
+<h1>Reporte Familiares</h1>
+<table class="table"> 
+    <caption>Optional table caption.
+    </caption>
+    <thead> 
+        <tr> <th>#</th> <th>Nro Legajo</th> <th>Apellido y Nombre</th> <th>Estudia</th> </tr> 
+    </thead> 
+        <tbody> <tr> <th scope="row">1</th> <td>1</td> <td>Rodriguez Javier</td> <td>si</td> </tr> <tr> <th scope="row">2</th> <td>2</td> <td>Daruich Leonel</td> <td>si</td> </tr> <tr> <th scope="row">3</th> <td>3</td> <td>Reingart Mariano</td> <td>si</td> 
+        </tr> 
+       </tbody> 
+</table>
+<form class="form-horizontal" action="{{=URL(c="sueldos", f="reportes_familiares2")}}" enctype="multipart/form-data" method="POST">
+      <button type="submit" class="btn btn-default">Regresar a Criterio de búsqueda</button>
+</form>

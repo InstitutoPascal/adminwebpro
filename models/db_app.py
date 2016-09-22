@@ -32,7 +32,7 @@ db.define_table("cliente",
 #################Validaciones de Cliente##################
 
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"])
-db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")
+db.cliente.cuit.requires=[IS_NOT_IN_DB(db, "cliente.cuit"),IS_CUIT()]
 db.cliente.dni.requires=IS_NOT_IN_DB(db, "cliente.dni")
 #db.cliente.condicion_frente_al_iva.requires=IS_NOT_EMPTY(error_message='Selecione un campo')
 db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Ingresar el numero Telefonico')
@@ -46,7 +46,7 @@ db.define_table("proveedor",
       Field("razon_social", 'string'),
       Field("ingreso_bruto", 'string'),
       Field("condicion_iva", 'string'),
-      Field("cuit", 'integer'),
+      Field("cuit", 'string'),
       Field("domicilio", 'string'),
       Field("localidad", 'string'),
       Field("codigo_postal", 'integer'),
@@ -59,7 +59,7 @@ db.define_table("proveedor",
       Field("pagina_web", 'string'),
     )
 db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"])
-db.proveedor.cuit.requires=IS_NOT_EMPTY()
+db.proveedor.cuit.requires=[IS_NOT_EMPTY(),IS_CUIT()]
 db.proveedor.ingreso_bruto.requires=IS_NOT_EMPTY()
 db.proveedor.razon_social.requires=IS_NOT_EMPTY()
 db.proveedor.domicilio.requires=IS_NOT_EMPTY()

@@ -1,0 +1,162 @@
+{{extend 'layout.html'}}
+<br><br>
+<h1>Informe Subdiario</h1>
+
+<form class="form-horizontal" action="{{=URL(c="compra", f="informe_subdiarioa")}}" enctype="multipart/form-data" method="POST">
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">volver a la Busqueda</button>
+    </div>
+  </div>
+</form>
+<input type="button" name="imprimir" value="Imprimir" onclick="window.print();">
+
+
+<table class="table" >
+<style> table  td:nth-child(7){text-align: center;}
+               td:nth-child(8){text-align: center;}
+               td:nth-child(9){text-align: center;}
+               td:nth-child(10){text-align: center;}
+               th:nth-child(7){text-align: center;}
+               th:nth-child(8){text-align: center;}
+               th:nth-child(9){text-align: center;}
+               th:nth-child(10){text-align: center;}
+         </style>
+
+    <caption>Lista del Subdiario</caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>ID Proveedor</th>
+            <th>N°Factura</th>
+            <th>Cantidad</th>
+            <th>Insumo</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+            <th>IVA</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>1/9/2016</td>
+                <td>1</td>
+                <td>00001</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 30</td>
+                <td>$ 330</td>
+            </tr>
+            <th scope="row">2</th> 
+                <td>1/9/2016</td>
+                <td>05</td> 
+                <td>00002</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+        </tr>
+                <tr> 
+            <th scope="row">3</th> 
+                <td>1/9/2016</td>
+                <td>34</td> 
+                <td>00003</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+        </tr>
+                <tr> 
+            <th scope="row">4</th> 
+                <td>1/9/2016</td>
+                <td>45</td> 
+                <td>00004</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+        </tr>
+                <tr> 
+            <th scope="row">5</th> 
+                <td>1/9/2016</td>
+                <td>86</td> 
+                <td>00005</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+        </tr>
+                <tr> 
+            <th scope="row">6</th> 
+                <td>1/9/2016</td>
+                <td>98</td> 
+                <td>00006</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+        </tr>
+                <tr> 
+            <th scope="row">7</th> 
+                <td>1/9/2016</td>
+                <td>83</td> 
+                <td>00007</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+        </tr>
+                <tr> 
+            <th scope="row">8</th> 
+                <td>1/9/2016</td>
+                <td>38</td> 
+                <td>00008</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+            </tr>
+                <tr> 
+            <th scope="row">9</th> 
+                <td>1/9/2016</td>
+                <td>75</td> 
+                <td>00009</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+            </tr>
+                <tr> 
+            <th scope="row">10</th> 
+                <td>1/9/2016</td>
+                <td>87</td> 
+                <td>00010</td>
+                <td>10 u.</td>
+                <td>Producto</td>
+                <td>$ 30</td>
+                <td>$ 300</td>
+                <td>$ 63</td>
+                <td>$ 363</td>
+        </tr>
+       </tbody>
+</table>

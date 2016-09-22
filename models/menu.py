@@ -54,24 +54,33 @@ response.menu = [
         (T('Reporte de Ventas'), False, URL('ventas', 'reporte_ventas'), []),
         ]),
      (T('Stock'), False, URL('stock', 'index'), [
-        (T('Productos'), False, URL('stock', 'abm_producto'), []),
-        (T('Inventario'), False, URL('stock', 'stock'), []),
-        (T('Depositos'), False, URL('stock', 'abm_deposito'), []),
-        (T('Remito salida'), False, URL('stock', 'remito_salida'), []),
-        (T('Remito entrada'), False, URL('stock', 'remito_entrada'), []),
+        (T('Reporte'), False, URL('stock', 'reporte_stock'), []),
+        (T('Producto nuevo'), False, URL('stock', 'alta_producto'), []),
+        (T('Deposito nuevo'), False, URL('stock', 'alta_deposito'), []),
+        (T('Emision de remito'), False, URL('stock', 'emision_remito'), []),
+        (T('Recepcion de remito'), False, URL('stock', 'resepcion_remito'), []),
         ]),
-    (T('Compra'), False, URL('compra', 'index'), [
-        (T('Proveedor'), False, URL('compra','abm_proveedor'),
-[]),
+
+(T('Compras'), False, URL('compra', 'index'), [
+        (T('ABM Proveedor'), False, URL('compra','abm_proveedor'),[]),
+        (T('ABM Compras'), False, URL('compra','abm_factura'),[]),
+        (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
+        (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
+        (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
+        (T('Formulario de Proveedores'), False, URL('compra','formulario_proveedores'),[]),
         ]),
-     (T('Sueldos'), False, URL('sueldos', 'index'), [
+
+      (T('Sueldos'), False, URL('sueldos', 'index'), [
          (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
          (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
          (T('Reporte Legajos'), False, URL('sueldos', 'reportes_empleados2'), []),
+          (T('Reporte Horas'), False, URL('sueldos', 'reportes_horas2'), []),
+          (T('Reporte Familiares'), False, URL('sueldos', 'reportes_familiares2'), []),
          (T('Formulario Legajos'), False, URL('sueldos', 'legajos'), []),
-          (T('Reporte Horas'), False, URL('sueldos', 'reportes_horas'), []),
-           (T('Formulario Horas'), False, URL('sueldos', 'abm_horas'), []), 
+         (T('Formulario Familiares'), False, URL('sueldos', 'familiar'), []),
+         # (T('Reporte Horas'), False, URL('sueldos', 'reportes_horas'), []),
+           (T('Formulario Horas'), False, URL('sueldos', 'horas'), []), 
         ]),
 ]
 
