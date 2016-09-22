@@ -26,6 +26,15 @@ def legajos():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
 
+def legajos2():
+    grid = SQLFORM.grid(db.legajos)
+    return {"grilla": grid}
+
+def legajos3():
+    grid = SQLFORM.grid(db.legajos)
+    return {"grilla": grid}
+
+
 def horas():
     grid = SQLFORM.grid(db.horas)
     return {"grilla": grid}
