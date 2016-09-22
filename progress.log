@@ -263,3 +263,6 @@
 [2016-09-21 16:26:26] EDIT adminwebpro/models/IS_CUIT.py: 0
 [2016-09-21 16:28:30] EDIT adminwebpro/models/IS_CUIT.py: 0
 [2016-09-21 16:35:04] EDIT adminwebpro/controllers/ordencobro.py: 0
+[2016-09-22 00:49:04] EDIT adminwebpro/views/sueldos/familiar.html: 0
+[2016-09-22 00:52:19] EDIT adminwebpro/controllers/sueldos.py: 0
+[2016-09-22 00:53:13] EDIT adminwebpro/models/menu.py: 0
