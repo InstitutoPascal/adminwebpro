@@ -75,7 +75,7 @@ response.menu = [
           (T('Reporte Horas'), False, URL('sueldos', 'reportes_horas2'), []),
           (T('Reporte Familiares'), False, URL('sueldos', 'reportes_familiares2'), []),
          (T('Formulario Legajos'), False, URL('sueldos', 'legajos'), []),
-         (T('Formulario Familiares'), False, URL('sueldos', 'familiares'), []),
+         (T('Formulario Familiares'), False, URL('sueldos', 'familiar'), []),
          # (T('Reporte Horas'), False, URL('sueldos', 'reportes_horas'), []),
            (T('Formulario Horas'), False, URL('sueldos', 'horas'), []), 
         ]),
