@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-10">
+        <div class="col-md-12">
           <table class="table table-hover">
           <caption>Items de Venta</caption>
           <thead>
@@ -46,10 +46,11 @@
                 <th class="">Producto</th>
                 <th>Cantidad</th>
                 <th>Precio Unitario</th>
+                <th>SubTotal</th>
                 <th>Descuento</th>
-                <th>Sub-Total</th>
+                <th>SubTotal - Descuento</th>
                 <th>IVA</th>
-                <th>Sub-Total + IVA</th>
+                <th>Total + IVA</th>
                 <th>Opciones</th>
             </tr>
           </thead>
@@ -59,16 +60,18 @@
                 <td >Memoria Ram 16Gb</td>
                 <td align="center">2</td>
                 <td align="center">$800</td>
+                <td align="center">$1600</td>
                 <td align="center">10%</td>
                 <td align="center">$1440</td>
                 <td align="center">10.5%</td>
-                <td align="center">$1591</td>
+                <td align="center">$1591.2</td>
                 <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
             </tr>
             <tr>
                 <th>2</th>
                 <td>Disco Rigido 1 Tb</td> 
                 <td align="center">1</td>
+                <td align="center">$1000</td>
                 <td align="center">$1000</td>
                 <td align="center">0%</td>
                 <td align="center">$1000</td>
@@ -80,6 +83,7 @@
                 <th scope="row">3</th>
                 <td>Mother Asus XL-50bs</td>
                 <td align="center">1</td>
+                <td align="center">$1200</td>
                 <td align="center">$1200</td>
                 <td align="center">10%</td>
                 <td align="center">$1080</td>
@@ -95,8 +99,8 @@
         <div class="col-md-3">
         <table class="table table-bordered">
         <tbody>
-            <tr> <th scope="row">Total</th>
-                 <td>$3786.5</td>
+            <tr> <th scope="row">Total de la Compra</th>
+                 <td>$3786.7</td>
             </tr>
         </tbody>
         </table>

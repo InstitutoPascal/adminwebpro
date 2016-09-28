@@ -11,8 +11,6 @@ def abm_clientes():
 @auth.requires_login()
 def abm_ventas():
     return dict(message="abm_ventas")
-    #grid = SQLFORM.grid(db.ventas)
-    #return {"grilla": grid}
 
 @auth.requires_login()
 def detalle_ventas():
