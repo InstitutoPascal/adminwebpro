@@ -131,6 +131,7 @@ auth.settings.reset_password_requires_verification = True
 # auth.enable_record_versioning(db)
 
 # Tabla "Clientes"
+"""
 db.define_table('Clientes', 
                 Field('ClienteId',length=25),
                 Field('RazonSocial',length=50,default='',label=T('Razon Social')),
@@ -185,3 +186,4 @@ db.DocumentosDetalle.Descripcion.requires=IS_NOT_EMPTY(error_message='Falta ingr
 db.DocumentosDetalle.Cantidad.requires=IS_NOT_EMPTY(error_message='Falta ingresar la Cantidad del Producto')
 db.DocumentosDetalle.Unitario.requires=IS_NOT_EMPTY(error_message='Falta ingresar el Precio Unitario')
 db.DocumentosDetalle.AlicuotaIVA.requires=IS_NOT_EMPTY(error_message='Falta ingresar la Alicuota IVA')
+"""

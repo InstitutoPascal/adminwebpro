@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 def reporte_cobros():
-    repor = db((db.ventas.buscar_cliente == db.Clientes.ClienteId)&(db.cobros.venta_id == db.ventas.id) & (db.cobros.formas_pago==db.formas_pago.id)).select()
+    repor = db((db.ventas.buscar_cliente == db.cliente.id_cliente)&(db.cobros.venta_id == db.ventas.id) & (db.cobros.formas_pago==db.formas_pago.id)).select()
     return dict(repor=repor)
 def index():
 	pass
