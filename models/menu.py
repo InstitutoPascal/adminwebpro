@@ -59,12 +59,10 @@ response.menu = [
         ]),
 
 (T('Compras'), False, URL('compra', 'index'), [
-        (T('ABM Proveedor'), False, URL('compra','abm_proveedor'),[]),
-        (T('ABM Compras'), False, URL('compra','abm_factura'),[]),
+        (T('ABM Proveedor'), False, URL('compra','abm_proveedor'),[]),        
         (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
         (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
         (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
-        (T('Formulario de Proveedores'), False, URL('compra','formulario_proveedores'),[]),
         ]),
 
       (T('Sueldos'), False, URL('sueldos', 'index'), [

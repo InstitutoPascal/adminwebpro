@@ -18,16 +18,9 @@
         </div>
 
         <div class="form-group">
-            <label for="razon_social" class="col-sm-2 control-label">Razón Social</label>
+            <label for="razon_social" class="col-sm-2 control-label">Proveedor</label>
             <div class="col-sm-3">
                 <input type="integer" class="form-control" id="razon_social" placeholder="Razón Social">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="cuit" class="col-sm-2 control-label">C.U.I.T.</label>
-            <div class="col-sm-3">
-                <input type="integer" class="form-control" id="cuit" placeholder="00-00000000-0">
             </div>
         </div>
 
@@ -40,6 +33,18 @@
                         <option>Factura B</option>
                     </select>
                 </div>
+	<div class="form-group">
+            <label for="forma_pago" class="col-sm-2 control-label">Forma de Pago</label>
+                <div class="col-sm-3">
+                    <select class="form-control">
+                        <option select value="0">Forma de Pago</option>
+                        <option>Efectivo</option>
+                        <option>Cheques</option>
+                    </select>
+                </div>
+	</div>
+
+ 	   <div class="form-group">
             <label for="tipo_iva" class="col-sm-2 control-label">Tipo de IVA</label>
                 <div class="col-sm-3">
                     <select class="form-control">
@@ -59,57 +64,17 @@
         </div>
 
         <div class="form-group">
-            <label for="tipo_insumo" class="col-sm-2 control-label">Tipo de Insumo</label>
+            <label for="tipo_insumo" class="col-sm-2 control-label">Prestaciones</label>
             <div class="col-sm-3">
                 <select class="form-control">
-                    <option select value="0">Elije Tipo de Insumo</option>
+                    <option select value="0">Elije Prestaciones</option>
                     <option>Producto</option>
                     <option>Servicio</option>
                 </select>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="domicilio" class="col-sm-2 control-label">Domicilio</label>
-            <div class="col-sm-3">
-                <input type="string" class="form-control" id="domicilio" placeholder="Domicilio">
-            </div>
-            <label for="domicilio" class="col-sm-2 control-label">Número</label>
-            <div class="col-sm-3">
-                <input type="interger" class="form-control" id="domicilio" placeholder="00000">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="localidad" class="col-sm-2 control-label">Localidad</label>
-            <div class="col-sm-3">
-                <input type="string" class="form-control" id="localidad" placeholder="Localidad">
-            </div>
-            <label for="codigo_postal" class="col-sm-2 control-label">Código Postal</label>
-            <div class="col-sm-3">
-                <input type="interger" class="form-control" id="codigo_postal" placeholder="00000">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="provincia" class="col-sm-2 control-label">Provincia</label>
-            <div class="col-sm-3">
-                <input type="string" class="form-control" id="domicilio" placeholder="Provincia">
-            </div>
-            <label for="nacionalidad" class="col-sm-2 control-label">Nacionalidad</label>
-            <div class="col-sm-3">
-                <input type="string" class="form-control" id="nacionalidad" placeholder="Nacionalidad">
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            <label for="telefono" class="col-sm-2 control-label">N°: Teléfono</label>
-            <div class="col-sm-3">
-                <input type="string" class="form-control" id="telefono" placeholder="Teléfono">
-            </div>
-        </div>
-
+      
         <form class="form-horizontal" action="{{=URL(c="compra", f="informe_subdiariob")}}" enctype="multipart/form-data" method="POST">
         </form>
     </form>
@@ -128,3 +93,4 @@
 		</footer>
 	</center>
 </body>
+</form>

@@ -47,9 +47,26 @@ def emision_remito():
 def emision_remito2():
     return dict()
 
+def emision_remito3():
+    return dict()
+
+def emision_remito4():
+    return dict()
+
 def resepcion_remito():
     return dict()
 
+def resepcion_remito2():
+    return dict()
+
+def resepcion_remito3():
+    return dict()
+
+def resepcion_remito4():
+    return dict()
+
+def ficha_stock():
+    return dict()
 
 
 def borrar():

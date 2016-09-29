@@ -1,5 +1,55 @@
 {{extend 'layout.html'}}
-<h1>ABM de Cheques</h1>
-{{=grilla }}
-
-<p>NOTA: debe ingresar al sistema...</p>
+<h1>{{=grilla}}</h1>
+<form class="form-horizontal" action="{{=URL(c="pagos", f="abm_cheques_guardar")}}" method="POST">
+  <div class="form-group ">
+    <label for="num_cheque" class="col-sm-2 control-label">Numero de Cheque</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="num_cheque" name="num_cheque" placeholder="Numero de Cheque">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="emision" class="col-sm-2 control-label">Emision</label>
+    <div class="col-sm-3">
+      <input type="date" class="form-control" id="emision" name="emision" placeholder="Fecha de emision del cheque">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="vencimiento" class="col-sm-2 control-label">Vencimiento</label>
+    <div class="col-sm-3">
+      <input type="date" class="form-control" id="vencimiento" name="vencimiento" placeholder="Fecha de vencimiento del cheque">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="importe" class="col-sm-2 control-label">Importe</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="importe" name="importe" placeholder="Importe">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="id_cuenta_bancaria" class="col-sm-2 control-label">Numero de Cuenta Bancaria</label>
+    <div class="col-sm-3">
+      <select class="form-control" id="id_cuenta_bancaria" name="id_cuenta_bancaria">
+            <option value="">Seleccione una Opcion</option>
+            {{for query in q:}}
+            <option value="{{=query.numero_cuenta}}">{{=query.numero_cuenta}}</option>
+            {{pass}}
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="num_orden_pago" class="col-sm-2 control-label">Numero de Orden de Pago</label>
+    <div class="col-sm-3">
+      <select class="form-control" id="num_orden_pago" name="num_orden_pago">
+            <option value="">Seleccione una Opcion</option>
+            {{for querydos in qdos:}}
+            <option value="{{=querydos.num_orden_pago}}">{{=querydos.num_orden_pago}}</option>
+            {{pass}}
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Guardar</button>
+    </div>
+  </div>
+</form>
