@@ -1,21 +1,23 @@
 {{extend 'layout.html'}}
 <h1>DETALLE DE VENTA</h1>
 <div class="form-group">
-    <h4><caption>{{=titulo}}</caption></h4>
+    <h4><caption>Nro. Comprobante {{=nro_cbte}} Fecha {{=fecha}} 
+                 Cliente {{=reg_cliente.razon_social}} CUIT {{=reg_cliente.cuit}}
+        </caption></h4>
 </div>
-<form class="form-horizontal" action="{{=URL(c="ventas", f="agregar_descuento")}}" enctype="multipart/form-data" method="POST">
+<form class="form-horizontal" action="{{=URL(c="ventas", f="detalle_ventas")}}" enctype="multipart/form-data" method="POST">
     <div class="form-group">
         <label for="produc" class="col-sm-1 control-label">PRODUCTO</label>
            <div class="col-sm-3">
-                <select class="form-control" id="campo_tipo">
-                  <option>Memoria Ram 16Gb</option>
-                  <option>Disco Rigido 1Tb</option>
-                  <option>Mother Asus XL-50bs</option>
+                <select class="form-control" id="campo_tipo" name="id_producto">
+                    {{for reg_producto in lista_productos:}}
+                  <option value="{{=reg_producto.id_producto}}">{{=reg_producto.detalle_producto}}</option>
+                  {{pass}}
                 </select>
            </div>
         <label for="cant" class="col-sm-1 control-label">CANTIDAD</label>
            <div class="col-sm-1">
-               <input type="number" class="form-control" id="cant" placeholder="Cantidad">
+               <input type="number" name="cantidad" class="form-control" id="cant" placeholder="Cantidad">
             </div>
                <label for="precunit" class="col-sm-2 control-label">PRECIO UNITARIO</label>
             <div class="col-sm-2">
@@ -24,7 +26,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-             <button type="submit" class="btn btn-default">AGREGAR ITEM</button>
+             <input type="submit" name="agregar_item" class="btn btn-default" value="AGREGAR ITEM">
         </div>
     </div>
     <div class="form-group">
@@ -44,36 +46,18 @@
             </tr>
           </thead>
         <tbody>
+            {{for item in items_venta:}}
             <tr>
-                <th scope="row">1</th>
-                <td >Memoria Ram 16Gb</td>
-                <td align="center">2</td>
-                <td align="center">$800</td>
-                <td align="center">$1600</td>
+                <th scope="row">{{=item["id_producto"]}}</th>
+                <td >{{=item["detalle_producto"]}}</td>
+                <td align="center">{{=item["cantidad"]}}</td>
+                <td align="center">{{=item["precio_producto"]}}</td>
+                <td align="center">{{=item["precio_producto"] * item["cantidad"]}}</td>
                 <td align="center">10.5%</td>
                 <td align="center">$1591.2</td>
                 <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
             </tr>
-            <tr>
-                <th>2</th>
-                <td>Disco Rigido 1 Tb</td> 
-                <td align="center">1</td>
-                <td align="center">$1000</td>
-                <td align="center">$1000</td>
-                <td align="center">10.5%</td>
-                <td align="center">$1105</td>
-                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Mother Asus XL-50bs</td>
-                <td align="center">1</td>
-                <td align="center">$1200</td>
-                <td align="center">$1200</td>
-                <td align="center">10.5%</td>
-                <td align="center">$1090.5</td>
-                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
-            </tr>
+            {{pass}}
         </tbody>
         </table>
         </div>

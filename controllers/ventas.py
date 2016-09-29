@@ -10,16 +10,55 @@ def abm_clientes():
 
 @auth.requires_login()
 def abm_ventas():
-    return dict(message="abm_ventas")
+    # definir los campos a obtener desde la base de datos:
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia
+    # definir la condición que deben cumplir los registros:
+    criterio = db.cliente.id_cliente>0
+    ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
+    # ejecutar la consulta:
+    lista_clientes = db(criterio).select(*campos)
+    # revisar si la consulta devolvio registros:
+    if not lista_clientes:
+        mensaje = "No ha cargado clientes"
+    else:
+        mensaje = "Seleccione un cliente"
+        ##primer_cliente = lista_clientes[0]
+    return dict(message=mensaje, lista_clientes=lista_clientes)
 
 @auth.requires_login()
 def detalle_ventas():
-    cliente = request.vars["id_cliente"]
-    fecha = request.vars["fecha"]
-    comprobante = request.vars["comprobante"]
-    return dict(titulo="Para el Cliente: %s, Fecha: %s, N°Comprobante:%s" % (cliente, fecha, comprobante))
-    #grid = SQLFORM.grid(db.detalle_ventas)
-    #return {"grilla": grid}
+    # si el usuario completo el formulario, extraigo los valores de los campos:
+    if request.vars["boton_enviar"]:
+        # obtengo los valores completados en el formulario
+        id_cliente = request.vars["id_cliente"]
+        fecha = request.vars["fecha"]
+        nro_comprobante = request.vars["numero_comprobante"]
+        # guardo los datos elegidos en la sesión
+        session["id_cliente"] = id_cliente
+        session["fecha"] = fecha
+        session["nro_comprobante"] = nro_comprobante
+        session["items_venta"] = []
+    if request.vars["agregar_item"]:
+        # obtengo los valores del formulario
+        id_producto = request.vars["id_producto"]
+        cantidad = request.vars["cantidad"]
+        item = {"id_producto": id_producto, "cantidad": int(cantidad)}
+        # busco en la base de datos el registro del producto seleccionado
+        reg_producto = db(db.producto.id_producto==id_producto).select().first()
+        item["detalle_producto"] = reg_producto.detalle_producto
+        item["precio_producto"] = reg_producto.precio_producto
+        # guardo el item en la sesión
+        session["items_venta"].append(item)
+    # busco en la base de datos al cliente para mostrar su info
+    registros = db(db.cliente.id_cliente==session["id_cliente"]).select()
+    reg_cliente = registros[0]
+    lista_productos = db(db.producto.id_producto>0).select()
+    # le pasamos las variables a la vista para armar el html
+    return dict(id_cliente=session["id_cliente"], fecha=session["fecha"], 
+                nro_cbte=session["nro_comprobante"], 
+                reg_cliente=reg_cliente, lista_productos=lista_productos,
+                items_venta=session["items_venta"])
+
 @auth.requires_login()
 def reporte_ventas():
     return dict(message="reporte_ventas")

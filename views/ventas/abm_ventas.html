@@ -6,32 +6,32 @@
 <div class="form-group">
             <label for="campo_cliente" class="col-sm-1 control-label">CLIENTE</label>
             <div class="col-sm-2">
-               <select class="form-control" id="campo_cliente">
-                  <option>Zia-Ivan Zavala</option>
-                  <option>Leyendo Vinos despertando Sentidos- Francisco Rodriguez</option>
-                   <option>Jorge Benitez</option>
+               <select class="form-control" id="campo_cliente" name="id_cliente">
+                  {{for reg_cliente in lista_clientes:}}
+                  <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.nombre_de_fantasia}}</option>
+                  {{pass}}
                 </select>
             </div>
             <label for="factura" class="col-sm-1 control-label">FACTURA</label>
             <div class="col-sm-1">
-               <select class="form-control" id="factura">
+               <select class="form-control" id="factura" name="tipo_factura">
                   <option>A</option>
                   <option>B</option>
                </select>
             </div>
             <label for="campo_numero_comprobante" class="col-sm-2 control-label">N° DE COMPROBANTE</label>
             <div class="col-sm-2">
-                <input type="number" class="form-control" id="campo_numero_comprobante">
+                <input type="number" class="form-control" name="numero_comprobante" id="campo_numero_comprobante">
             </div>
     </div>
     <div class="form-group">
             <label for="campo_fecha" class="col-sm-1 control-label">FECHA</label>
             <div class="col-sm-2">
-                <input type="date" class="form-control" id="campo_fecha" placeholder="Data input">
+                <input type="date" class="form-control" name="fecha" id="campo_fecha" placeholder="Data input">
             </div>
             <label for="campo_tipo" class="col-sm-2 control-label">TIPO DE PAGO</label>
             <div class="col-sm-2">
-               <select class="form-control" id="campo_tipo">
+               <select class="form-control" name="forma_pago" id="campo_tipo">
                   <option>Efectivo</option>
                   <option>Credito</option>
                 </select>
@@ -47,7 +47,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-          <button type="submit" class="btn btn-default">AGREGAR PRODUCTO</button>
+          <input type="submit" name="boton_enviar" class="btn btn-default" value="AGREGAR PRODUCTOS">
         </div>
     </div>
 </form>
