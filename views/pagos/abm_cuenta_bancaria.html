@@ -1,5 +1,37 @@
 {{extend 'layout.html'}}
-<h1>ABM de Cuentas bancaria</h1>
-{{=grilla }}
-
-<p>NOTA: debe ingresar al sistema...</p>
+<h1>{{=grilla}}</h1>
+<form class="form-horizontal" action="{{=URL(c="pagos", f="abm_cuenta_bancaria_guardar")}}" method="POST">
+  <div class="form-group ">
+    <label for="cuenta_bancaria" class="col-sm-2 control-label">Numero de cuenta bancaria</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="cuenta_bancaria" name="cuenta_bancaria" placeholder="Numero de Cuenta Bancaria">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="tipo_moneda" class="col-sm-2 control-label">Tipo de moneda</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="tipo_moneda" name="tipo_moneda" placeholder="Tipo de moneda">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="cbu" class="col-sm-2 control-label">CBU</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="cbu" name="cbu" placeholder="Numero de CBU">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nombre_banco" class="col-sm-2 control-label">Nombre de Banco</label>
+    <div class="col-sm-3">
+        <select class="form-control" id="nombre_banco" name="nombre_banco">
+            {{for query in q:}}
+            <option value="{{=query.nombre_banco}}">{{=query.nombre_banco}}</option>
+            {{pass}}
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Guardar</button>
+    </div>
+  </div>
+</form>
