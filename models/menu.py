@@ -48,7 +48,7 @@ response.menu = [
         (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
         (T('Factura'), False, URL('ventas', 'abm_ventas'), []),
         (T('Reporte de ventas'), False, URL('ventas', 'reporte_ventas'), []),
-        
+        (T('Reporte de ventas por Cliente'), False, URL('ventas', 'reporte_por_cliente'), []),
         ]),
      (T('Stock'), False, URL('stock', 'index'), [
         (T('Reporte'), False, URL('stock', 'reporte_stock'), []),

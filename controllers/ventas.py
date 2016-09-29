@@ -48,3 +48,12 @@ def confirmar():
 
 def agregar_descuento():
     return dict (mensaje= "Seleccione un Descuento a la Venta ")
+
+def reporte_por_cliente():
+    return dict(message="Reporde de las ventas segun Cliente")
+
+def lista_ventas_por_cliente():
+    # obtenemos los criterios de busqueda y generamos el reporte
+    desde = request.vars["fecha_desde"]
+    hasta = request.vars["fecha_hasta"]
+    return dict(titulo="Listando Desde: %s Hasta: %s" % (desde, hasta))
