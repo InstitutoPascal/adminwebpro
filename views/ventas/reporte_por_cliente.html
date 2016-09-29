@@ -1,0 +1,49 @@
+{{extend 'layout.html'}}
+<h1>REPORTE DE VENTAS</h1>
+
+<form class="form-horizontal" action="{{=URL(c="ventas", f="lista_ventas_por_cliente")}}" enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+        <label for="desde" class="col-sm-2 control-label">FECHA DESDE</label>
+        <div class="col-sm-3">
+          <input type="date" class="form-control" id="desde" name="fecha_desde" placeholder="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">FECHA HASTA</label>
+        <div class="col-sm-3">
+          <input type="date" class="form-control" id="hasta" name="fecha_hasta" placeholder="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="cant" class="col-sm-2 control-label">TIPO CLIENTE</label>
+        <div class="col-sm-3">
+                <select class="form-control" id="cant">
+                  <option>Consumidor Final</option>
+                  <option>Responzable Inscripto</option>
+                </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="cant" class="col-sm-2 control-label">CLIENTE</label>
+        <div class="col-sm-3">
+                <select class="form-control" id="cant">
+                  <option>ZIA- Ivan Zavala</option>
+                  <option>Leyendo Vinos Despertando Sentidos</option>
+                </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="ordenar"> Ordenar alfabeticamente
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Generar Reporte</button>
+        </div>
+    </div>
+</form>
