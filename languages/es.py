@@ -211,6 +211,7 @@
 'Reporte': 'Reporte',
 'Reporte Cobros': 'Reporte Cobros',
 'Reporte de ventas': 'Reporte de ventas',
+'Reporte de ventas por Cliente': 'Reporte de ventas por Cliente',
 'Reporte Familiares': 'Reporte Familiares',
 'Reporte Horas': 'Reporte Horas',
 'Reporte Legajos': 'Reporte Legajos',

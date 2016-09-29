@@ -7,6 +7,7 @@
        <td>Cuenta</td>
        <td>Cliente</td>
        <td>Importe</td>
+       <td></td>
     </tr>
     
 {{for r in repor:}}
@@ -16,6 +17,7 @@
        <td>{{=r.formas_pago.descripcion}}</td>
        <td>{{=r.cliente.nombre_de_fantasia}}</td>
        <td>$ {{=r.cobros.importe}}</td>
+       <td><a target="_blank" href="/adminwebpro/ordencobro/pdf/{{=r.ventas.id}}">Exportar</a></td>
     </tr>
 {{pass}}
 </table>
