@@ -14,9 +14,9 @@ db.define_table("cuenta_bancaria",
 
 db.define_table("pago",
     Field("id_pagos","id"),
-    Field("num_orden_pago","integer"),
+    Field("num_orden_pago","string"),
     Field("fecha","date"),
-    Field("importe","integer"),
+    Field("importe","string"),
     Field("id_compras",db.compra, label="Numero Factura de Compra"),
     Field("id_proveedor", db.proveedor, label="Nombre de Proveedor"),
 )
