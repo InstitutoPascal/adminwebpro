@@ -45,3 +45,6 @@ def guardado():
 
 def confirmar():
     return dict (mensaje= "Finalizar venta")
+
+def agregar_descuento():
+    return dict (mensaje= "Seleccione un Descuento a la Venta ")
