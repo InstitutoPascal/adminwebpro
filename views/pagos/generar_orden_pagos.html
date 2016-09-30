@@ -1,5 +1,49 @@
 {{extend 'layout.html'}}
-<h1>Generar Orden de pago</h1>
-{{=grilla }}
-
-<p>NOTA: debe ingresar al sistema...</p>
+<h1>{{=grilla}}</h1>
+<form class="form-horizontal" action="{{=URL(c="pagos", f="generar_orden_pagos_guardar")}}" method="POST">
+  <div class="form-group ">
+    <label for="num_orden_pago" class="col-sm-2 control-label">Numero de Orden de Pago</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="num_orden_pago" name="num_orden_pago" placeholder="Numero de Orden de Pago">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fecha" class="col-sm-2 control-label">Fecha</label>
+    <div class="col-sm-3">
+      <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha...">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="importe" class="col-sm-2 control-label">Importe</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="importe" name="importe" placeholder="Importe">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="id_compras" class="col-sm-2 control-label">Numero de Factura</label>
+    <div class="col-sm-3">
+      <select class="form-control" id="id_compras" name="id_compras">
+            <option value="">Seleccione una Opcion</option>
+            {{for query in q:}}
+            <option value="{{=query.id}}">{{=query.numero_factura}}</option>
+            {{pass}}
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="razon_social" class="col-sm-2 control-label">Numero de Orden de Pago</label>
+    <div class="col-sm-3">
+      <select class="form-control" id="razon_social" name="razon_social">
+            <option value="">Seleccione una Opcion</option>
+            {{for querydos in qdos:}}
+            <option value="{{=querydos.id}}">{{=querydos.razon_social}}</option>
+            {{pass}}
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Guardar</button>
+    </div>
+  </div>
+</form>

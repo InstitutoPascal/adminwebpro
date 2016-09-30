@@ -42,8 +42,14 @@ def abm_cheques_guardar():
 
 @auth.requires_login()
 def generar_orden_pagos():
-    grid = SQLFORM.grid(db.pago)
-    return {"grilla": grid}
+    q = db(db.compra).select()
+    qdos = db(db.proveedor).select()
+    return {"grilla": "Generar Orden pagos", 'q':q, 'qdos':qdos}
+
+@auth.requires_login()
+def generar_orden_pagos_guardar():
+    db.pago.insert(num_orden_pago=request.vars["num_orden_pago"], fecha=request.vars["fecha"], importe=request.vars["importe"], id_compras=request.vars["id_compras"], id_proveedor=request.vars["razon_social"])
+    return {"grilla": "Datos Guardados"}
 
 @auth.requires_login()
 def generar_reporte():
