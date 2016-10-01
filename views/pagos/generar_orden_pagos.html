@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 <h1>{{=grilla}}</h1>
-<form class="form-horizontal" action="{{=URL(c="pagos", f="generar_orden_pagos_guardar")}}" method="POST">
+<form class="form-horizontal" action="{{=URL(c="pagos", f="generar_orden_pagos")}}" method="POST">
   <div class="form-group ">
     <label for="num_orden_pago" class="col-sm-2 control-label">Numero de Orden de Pago</label>
     <div class="col-sm-3">
@@ -43,7 +43,7 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Guardar</button>
+      <input type="submit" class="btn btn-default" name="boton_guardar">Guardar</input>
     </div>
   </div>
 </form>

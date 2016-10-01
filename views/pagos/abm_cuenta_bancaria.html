@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 <h1>{{=grilla}}</h1>
-<form class="form-horizontal" action="{{=URL(c="pagos", f="abm_cuenta_bancaria_guardar")}}" method="POST">
+<form class="form-horizontal" action="{{=URL(c="pagos", f="abm_cuenta_bancaria")}}" method="POST">
   <div class="form-group ">
     <label for="cuenta_bancaria" class="col-sm-2 control-label">Numero de cuenta bancaria</label>
     <div class="col-sm-3">
@@ -24,14 +24,14 @@
     <div class="col-sm-3">
         <select class="form-control" id="nombre_banco" name="nombre_banco">
             {{for query in q:}}
-            <option value="{{=query.nombre_banco}}">{{=query.nombre_banco}}</option>
+            <option value="{{=query.id_banco}}">{{=query.nombre_banco}}</option>
             {{pass}}
         </select>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Guardar</button>
+      <input type="submit" class="btn btn-default" value="Guardar" name="boton_guardar">
     </div>
   </div>
 </form>

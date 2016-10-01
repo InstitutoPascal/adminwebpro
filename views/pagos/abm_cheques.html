@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 <h1>{{=grilla}}</h1>
-<form class="form-horizontal" action="{{=URL(c="pagos", f="abm_cheques_guardar")}}" method="POST">
+<form class="form-horizontal" action="{{=URL(c="pagos", f="abm_cheques")}}" method="POST">
   <div class="form-group ">
     <label for="num_cheque" class="col-sm-2 control-label">Numero de Cheque</label>
     <div class="col-sm-3">
@@ -31,7 +31,7 @@
       <select class="form-control" id="id_cuenta_bancaria" name="id_cuenta_bancaria">
             <option value="">Seleccione una Opcion</option>
             {{for query in q:}}
-            <option value="{{=query.numero_cuenta}}">{{=query.numero_cuenta}}</option>
+            <option value="{{=query.id_cuenta_bancaria}}">{{=query.numero_cuenta}}</option>
             {{pass}}
         </select>
     </div>
@@ -42,14 +42,14 @@
       <select class="form-control" id="num_orden_pago" name="num_orden_pago">
             <option value="">Seleccione una Opcion</option>
             {{for querydos in qdos:}}
-            <option value="{{=querydos.num_orden_pago}}">{{=querydos.num_orden_pago}}</option>
+            <option value="{{=querydos.id_pagos}}">{{=querydos.num_orden_pago}}</option>
             {{pass}}
         </select>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Guardar</button>
+      <input type="submit" class="btn btn-default" name="boton_guardar" value="Guardar">
     </div>
   </div>
 </form>

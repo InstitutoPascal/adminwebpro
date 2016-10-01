@@ -2,7 +2,7 @@
 db.define_table("banco",
     Field("id_banco","id"),
     Field("nombre_banco","string"),
-    Field("telefono","integer"),
+    Field("telefono","string"),
 )
 db.define_table("cuenta_bancaria",
     Field("id_cuenta_bancaria","id"),
