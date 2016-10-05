@@ -64,7 +64,17 @@ def reporte_ventas():
     return dict(message="reporte_ventas")
 
 def vista_previa():
-    return dict(message="vista_previa")
+    id_venta = request.args[0]
+    reg_venta = db(db.ventas.id == id_venta).select().first()
+    reg_cliente = db(db.cliente.id_cliente == reg_venta.id_cliente).select().first()
+    # busco los datos de cada item vendido (id, cantidad, etc.) y del producto
+    q = db.detalle_ventas.id_venta == id_venta
+    q &= db.producto.id_producto == db.detalle_ventas.id_producto 
+    reg_detalle_ventas = db(q).select()
+    return dict(message="vista_previa", 
+                venta=reg_venta, 
+                cliente=reg_cliente, 
+                items=reg_detalle_ventas)
 
 def borrar_item():
     # eliminar algo
@@ -80,11 +90,33 @@ def lista_ventas():
     return dict(titulo="Listando Desde: %s Hasta: %s" % (desde, hasta))
 
 def guardado():
-    return dict (mensaje= "Se guardo con exito el comprobante")
+    # Agregar los registros a la base de datos:
+    # encabezado:
+    nuevo_id_venta = db.ventas.insert(
+        id_cliente=session["id_cliente"],
+        numero_factura=session["nro_comprobante"],
+        fecha=session["fecha"],
+        )
+    # detalle (productos)
+    for item in session["items_venta"]:
+        db.detalle_ventas.insert(
+            id_venta=nuevo_id_venta,
+            id_producto=item["id_producto"],
+            cantidad=item["cantidad"]
+            )
+    return dict (mensaje= "Se guardo con exito el comprobante id=%s" % nuevo_id_venta,
+                 id_venta=nuevo_id_venta)
 
 def confirmar():
-    return dict (mensaje= "Finalizar venta")
-
+    reg_cliente = db(db.cliente.id_cliente==session["id_cliente"]).select().first()
+    total = 0
+    for item in session["items_venta"]:
+        total += item["precio_producto"] * item["cantidad"]
+    return dict (mensaje= "Finalizar venta", 
+                id_cliente=session["id_cliente"], fecha=session["fecha"], 
+                nro_cbte=session["nro_comprobante"], 
+                reg_cliente=reg_cliente, total=total)
+                
 def agregar_descuento():
     return dict (mensaje= "Seleccione un Descuento a la Venta ")
 

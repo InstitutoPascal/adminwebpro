@@ -7,8 +7,8 @@
         </div>
         <div class="col-xs-6 text-right">
             <h1>Factura Tipo: A</h1>
-            <h1><small>N° 0001</small></h1>
-            <h1><small>Fecha: 15/09/2016</small></h1>
+            <h1><small>N° {{=venta.numero_factura}}</small></h1>
+            <h1><small>Fecha: {{=venta.fecha}}</small></h1>
         </div>
     </div>
     <div class="form-group">
@@ -24,8 +24,8 @@
             <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Para : <a href="#">ZIA- Ivan Zavala</a></h4></div>
-            <div class="panel-body">DOMICILIO: Alsina 1175</div>
+                <h4>Para : <a href="#">{{=cliente.razon_social}}</a></h4></div>
+            <div class="panel-body">DOMICILIO: {{=cliente.direccion}} {{=cliente.numero}}</div>
             <div class="panel-body">LOCALIDAD: Pontevedra</div>
             <div class="panel-body">COND. I.V.A: Responsable Inscripto</div>
             <div class="panel-body">CUIT o DNI: 20-33465017-1</div>
@@ -47,27 +47,15 @@
         </tr>
     </thead>
     <tbody>
+        {{for item in items:}}
         <tr>
-            <td>1</td>
-            <td> Memoria Ram 16Gb</td>
-            <td class=" text-center ">2</td>
-            <td class=" text-right ">$800</td>
-            <td class=" text-right ">$1600</td>
+            <td>{{=item.detalle_ventas.id_producto}}</td>
+            <td>{{=item.producto.detalle_producto}}</td>
+            <td class=" text-center ">{{=item.detalle_ventas.cantidad}}</td>
+            <td class=" text-right ">${{=item.producto.precio_producto}}</td>
+            <td class=" text-right ">${{=item.producto.precio_producto * item.detalle_ventas.cantidad}}</td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>Disco Rigido 1 Tb</td>
-            <td class=" text-center ">1</td>
-            <td class=" text-right ">$1000</td>
-            <td class=" text-right ">$1000</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Mother Asus XL-50bs</td>
-            <td class=" text-center ">1</td>
-            <td class=" text-right ">$1200</td>
-            <td class=" text-right ">$1200</td>
-        </tr>
+        {{pass}}
     </tbody>
 </table>
 </div>
