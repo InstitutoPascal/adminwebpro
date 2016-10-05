@@ -29,13 +29,32 @@ response.google_analytics_id = None
 # ----------------------------------------------------------------------------------------------------------------------
 #Agregando mi menu
 response.menu = [
-   
+    
+    (T('Compras'), False, URL('compra', 'index'), [
+        (T('ABM Proveedor'), False, URL('compra','abm_proveedor'),[]),        
+        (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
+        (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
+        (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
+        ]),
+    (T('Stock'), False, URL('stock', 'index'), [
+        (T('Reporte'), False, URL('stock', 'reporte_stock'), []),
+        (T('Producto nuevo'), False, URL('stock', 'alta_producto'), []),
+        (T('Deposito nuevo'), False, URL('stock', 'alta_deposito'), []),
+        (T('Emision de remito'), False, URL('stock', 'emision_remito'), []),
+        (T('Recepcion de remito'), False, URL('stock', 'resepcion_remito'), []),
+        ]),
     (T('Pagos'), False, URL('pagos', 'index'), [
         (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
         (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
         (T('Cheques'), False, URL('pagos', 'abm_cheques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
         (T('Generar Reporte'), False, URL('pagos', 'generar_reporte'), []),
+        ]),
+    (T('Ventas'), False, URL('ventas', 'index'), [
+        (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
+        (T('Factura'), False, URL('ventas', 'abm_ventas'), []),
+        (T('Reporte de ventas'), False, URL('ventas', 'reporte_ventas'), []),
+        (T('Reporte de ventas por Cliente'), False, URL('ventas', 'reporte_por_cliente'), []),
         ]),
     (T('Cobranzas'), False, '#', [
         #(T('Autorizar Cobro'), False, URL('ordencobro', 'autorizar_cobro'), []),
@@ -44,28 +63,7 @@ response.menu = [
         (T('Reporte Cobros'), False, URL('ordencobro', 'reporte_cobros'), []),
         (T('Formas de pago'), False, URL('ordencobro', 'forma_pago'), []),
         ]),	
-    (T('Ventas'), False, URL('ventas', 'index'), [
-        (T('Clientes'), False, URL('ventas', 'abm_clientes'), []),
-        (T('Factura'), False, URL('ventas', 'abm_ventas'), []),
-        (T('Reporte de ventas'), False, URL('ventas', 'reporte_ventas'), []),
-        (T('Reporte de ventas por Cliente'), False, URL('ventas', 'reporte_por_cliente'), []),
-        ]),
-     (T('Stock'), False, URL('stock', 'index'), [
-        (T('Reporte'), False, URL('stock', 'reporte_stock'), []),
-        (T('Producto nuevo'), False, URL('stock', 'alta_producto'), []),
-        (T('Deposito nuevo'), False, URL('stock', 'alta_deposito'), []),
-        (T('Emision de remito'), False, URL('stock', 'emision_remito'), []),
-        (T('Recepcion de remito'), False, URL('stock', 'resepcion_remito'), []),
-        ]),
-
-(T('Compras'), False, URL('compra', 'index'), [
-        (T('ABM Proveedor'), False, URL('compra','abm_proveedor'),[]),        
-        (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
-        (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
-        (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
-        ]),
-
-      (T('Sueldos'), False, URL('sueldos', 'index'), [
+    (T('Sueldos'), False, URL('sueldos', 'index'), [
          (T('ABM Empleados'), False, URL('sueldos', 'abm_empleados'), []),
          (T('ABM Familiares'), False, URL('sueldos', 'abm_familiares'), []),
          (T('ABM Horas'), False, URL('sueldos', 'abm_horas'), []),
