@@ -5,45 +5,46 @@
 <body>
     <br>
     <form class="form-horizontal">
-
+   
         <div class="form-group">
+            <label for="razon_social" class="col-sm-2 control-label">Proveedor</label>
+            <div class="col-sm-3">
+               <select class="form-control" id="campo_proveedor" name="id_proveedor">
+                  {{for registro_proveedor in lista_proveedores:}}
+                  <option value="{{=registro_proveedor.id_proveedor}}">{{=registro_proveedor.razon_social}}</option>
+                  {{pass}}
+                </select>
+            </div>
+
+
             <label for="numero_factura" class="col-sm-2 control-label">N°: Factura</label>
             <div class="col-sm-3">
                 <input type="integer" class="form-control" id="numero_factura" placeholder="000000000000">
             </div>
-            <label for="id" class="col-sm-2 control-label">ID Factura</label>
-            <div class="col-sm-3">
-                <input type="integer" class="form-control" id="id" placeholder="000000000000">
-            </div>
         </div>
-
-        <div class="form-group">
-            <label for="razon_social" class="col-sm-2 control-label">Proveedor</label>
-            <div class="col-sm-3">
-                <input type="integer" class="form-control" id="razon_social" placeholder="Razón Social">
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <label for="tipo_factura" class="col-sm-2 control-label">Tipo de Factura</label>
-                <div class="col-sm-3">
-                    <select class="form-control">
-                        <option select value="0">Tipo de Factura</option>
-                        <option>Factura A</option>
-                        <option>Factura B</option>
-                    </select>
-                </div>
+            <div class="col-sm-3">
+                <select class="form-control">
+                    <option select value="0">Tipo de Factura</option>
+                    <option>Factura A</option>
+                    <option>Factura B</option>
+                </select>
+            </div>
+	
 	<div class="form-group">
             <label for="forma_pago" class="col-sm-2 control-label">Forma de Pago</label>
-                <div class="col-sm-3">
-                    <select class="form-control">
-                        <option select value="0">Forma de Pago</option>
-                        <option>Efectivo</option>
-                        <option>Cheques</option>
-                    </select>
-                </div>
+            <div class="col-sm-3">
+                <select class="form-control">
+                    <option select value="0">Forma de Pago</option>
+                    <option>Efectivo</option>
+                    <option>Cheques</option>
+                </select>
+            </div>
 	</div>
-
+	</div>
  	   <div class="form-group">
             <label for="tipo_iva" class="col-sm-2 control-label">Tipo de IVA</label>
                 <div class="col-sm-3">
@@ -64,10 +65,10 @@
         </div>
 
         <div class="form-group">
-            <label for="tipo_insumo" class="col-sm-2 control-label">Prestaciones</label>
+            <label for="tipo_insumo" class="col-sm-2 control-label">Tipo de Compra</label>
             <div class="col-sm-3">
                 <select class="form-control">
-                    <option select value="0">Elije Prestaciones</option>
+                    <option select value="0">Elije Tipo de Compra</option>
                     <option>Producto</option>
                     <option>Servicio</option>
                 </select>
@@ -78,7 +79,7 @@
         <form class="form-horizontal" action="{{=URL(c="compra", f="informe_subdiariob")}}" enctype="multipart/form-data" method="POST">
         </form>
     </form>
-
+    
     <center>
         <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"id":1,"nombre":"mark"})}}">DETALLE COMPRA</a>
         <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>

@@ -22,8 +22,22 @@ def listado_proveedor():
 
 
 def formulario_compras():
-       # presentar formulario para criterios de busqueda
-    return dict(message="Formulario Compras")
+     
+# definir los campos a obtener desde la base de datos:
+    campos = db.proveedor.id_proveedor, db.proveedor.razon_social
+    # definir la condición que deben cumplir los registros:
+    criterio = db.proveedor.id_proveedor>0
+    ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
+    # ejecutar la consulta:
+    lista_proveedores = db(criterio).select(*campos)
+    # revisar si la consulta devolvio registros:
+    if not lista_proveedores:
+        mensaje = "No ha cargado clientes"
+    else:
+        mensaje = "Seleccione un cliente"
+        ##primer_cliente = lista_clientes[0]
+    return dict(message=mensaje, lista_proveedores=lista_proveedores)
+
 
 def detalle_compras():
     grid = SQLFORM.grid(db.detalle_compra)
