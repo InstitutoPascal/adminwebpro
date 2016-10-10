@@ -22,6 +22,7 @@ db.define_table("cliente",
     Field("cuit","string"),
     Field("dni","string"),
     Field("condicion_frente_al_iva","string"),
+    Field("tipo_factura","string"),
     Field("direccion","string"),
     Field("numero","string"),
     Field("localidad","string"),
@@ -32,6 +33,7 @@ db.define_table("cliente",
 #################Validaciones de Cliente##################
 
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"])
+db.cliente.tipo_factura.requires=IS_IN_SET(["A","B"])
 db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")
 db.cliente.dni.requires=IS_NOT_IN_DB(db, "cliente.dni")
 #db.cliente.condicion_frente_al_iva.requires=IS_NOT_EMPTY(error_message='Selecione un campo')

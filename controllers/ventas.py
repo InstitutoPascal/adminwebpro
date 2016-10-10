@@ -11,7 +11,7 @@ def abm_clientes():
 @auth.requires_login()
 def abm_ventas():
     # definir los campos a obtener desde la base de datos:
-    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social, db.cliente.tipo_factura
     # definir la condición que deben cumplir los registros:
     criterio = db.cliente.id_cliente>0
     ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
