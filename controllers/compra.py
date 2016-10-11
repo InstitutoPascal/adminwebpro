@@ -46,5 +46,3 @@ def detalle_compras():
 def lista_detalles():
            # presentar formulario para criterios de busqueda
     return dict(message="Lista de Detalles")
-
-

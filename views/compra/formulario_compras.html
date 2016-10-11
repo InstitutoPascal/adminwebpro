@@ -11,7 +11,11 @@
             <div class="col-sm-3">
                <select class="form-control" id="campo_proveedor" name="id_proveedor">
                   {{for registro_proveedor in lista_proveedores:}}
-                  <option value="{{=registro_proveedor.id_proveedor}}">{{=registro_proveedor.razon_social}}</option>
+
+                  <option value="{{=registro_proveedor.id_proveedor}}">		 
+		  {{=registro_proveedor.razon_social}}
+		  </option>
+
                   {{pass}}
                 </select>
             </div>
@@ -19,7 +23,7 @@
 
             <label for="numero_factura" class="col-sm-2 control-label">N°: Factura</label>
             <div class="col-sm-3">
-                <input type="integer" class="form-control" id="numero_factura" placeholder="000000000000">
+                <input type="integer" class="form-control" id="numero_factura" name= "numero_factura" placeholder="000000000000">
             </div>
         </div>
         
@@ -27,7 +31,7 @@
         <div class="form-group">
             <label for="tipo_factura" class="col-sm-2 control-label">Tipo de Factura</label>
             <div class="col-sm-3">
-                <select class="form-control">
+                <select class="form-control" id= "factura" name= "tipo_factura">
                     <option select value="0">Tipo de Factura</option>
                     <option>Factura A</option>
                     <option>Factura B</option>
@@ -36,8 +40,8 @@
 	
 	<div class="form-group">
             <label for="forma_pago" class="col-sm-2 control-label">Forma de Pago</label>
-            <div class="col-sm-3">
-                <select class="form-control">
+            <div class="col-sm-3" id= "pago" name= "forma_pago"> 
+                <select class="form-control" id= pago name= "forma_pago"> 
                     <option select value="0">Forma de Pago</option>
                     <option>Efectivo</option>
                     <option>Cheques</option>
@@ -48,7 +52,7 @@
  	   <div class="form-group">
             <label for="tipo_iva" class="col-sm-2 control-label">Tipo de IVA</label>
                 <div class="col-sm-3">
-                    <select class="form-control">
+                    <select class="form-control" id= "iva" name= topo_iva"
                         <option select value="0">Elije Tipo de IVA</option>
                         <option>10.5%</option>
                         <option>21%</option>
@@ -60,14 +64,14 @@
         <div class="form-group">
             <label for="fecha_factura" class="col-sm-2 control-label">Fecha Factura</label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" id="fecha?factura" placeholder="">
+                <input type="date" class="form-control" id="fecha_factura" name= "fecha_factura" placeholder="">
             </div>
         </div>
 
         <div class="form-group">
             <label for="tipo_insumo" class="col-sm-2 control-label">Tipo de Compra</label>
             <div class="col-sm-3">
-                <select class="form-control">
+                <select class="form-control" id= "tipo_compra" name= "tipo_compra">
                     <option select value="0">Elije Tipo de Compra</option>
                     <option>Producto</option>
                     <option>Servicio</option>
