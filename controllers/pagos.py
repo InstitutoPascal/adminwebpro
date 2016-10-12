@@ -49,3 +49,10 @@ def reporte_pagos():
     hasta = request.vars["fecha_hasta"]
     registros = db((db.pago.fecha>=desde)&(db.pago.fecha<=hasta)).select()
     return dict({'titulo':"Listando desde fecha %s hasta fecha %s" % (desde, hasta), 'registros':registros})
+
+def ver_orden_pago():
+    num_orden_pago = request.vars["id"]
+    orden_pago = db.pago((db.pago.num_orden_pago == num_orden_pago))
+    cheque = db.cheque((db.cheque.id_pagos == orden_pago.id_pagos))
+    print cheque
+    return dict({'orden_pago':orden_pago, 'cheque':cheque})

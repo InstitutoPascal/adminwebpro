@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 db.define_table("banco",
     Field("id_banco","id"),
+    Field("sucursal","string"),
     Field("nombre_banco","string"),
     Field("telefono","string"),
 )
 db.define_table("cuenta_bancaria",
     Field("id_cuenta_bancaria","id"),
     Field("numero_cuenta","string"),
+    Field("tipo_de_cuenta", "string"),
     Field("tipo_de_moneda","string"),
     Field("cbu","string"),
     Field("id_banco",db.banco),

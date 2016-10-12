@@ -44,9 +44,9 @@ response.menu = [
         (T('Recepcion de remito'), False, URL('stock', 'resepcion_remito'), []),
         ]),
     (T('Pagos'), False, URL('pagos', 'index'), [
-        (T('ABM Bancos'), False, URL('pagos', 'abm_bancos'), []),
-        (T('ABM Cuentabancaria'), False, URL('pagos', 'abm_cuenta_bancaria'), []),
-        (T('Cheques'), False, URL('pagos', 'abm_cheques'), []),
+        (T('ABM Bancos'), False, URL('pagos', 'alta_bancos'), []),
+        (T('ABM Cuentabancaria'), False, URL('pagos', 'alta_bancaria'), []),
+        (T('Cheques'), False, URL('pagos', 'alta_cheques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
         (T('Generar Reporte'), False, URL('pagos', 'generar_reporte'), []),
         ]),

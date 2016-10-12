@@ -1,0 +1,70 @@
+{{extend 'layout.html'}}
+<div class="page-header">
+  <h1>Orden de Pago</h1>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Fecha</div>
+          <div class="panel-body">
+                {{=orden_pago.fecha}}
+          </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Numero de Orden de Pago</div>
+          <div class="panel-body">
+                {{=orden_pago.num_orden_pago}}
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Importe</div>
+              <div class="panel-body">
+                {{=orden_pago.importe}}
+              </div>
+          </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Numero de Cheque</div>
+          <div class="panel-body">
+            {{=cheque.num_cheque}}
+          </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Importe</div>
+          <div class="panel-body">
+            {{=cheque.importe}}
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Numero de Factura</div>
+          <div class="panel-body">
+            {{=orden_pago.id_compras.numero_factura}}
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Razon Social</div>
+          <div class="panel-body">
+            {{=orden_pago.id_proveedor.razon_social}}
+          </div>
+        </div>
+    </div>
+</div>
