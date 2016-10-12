@@ -4,56 +4,40 @@ def index():
     return dict(message="hello from ordenpagos.py")
 
 @auth.requires_login()
-def abm_bancos():
-    if request.vars["boton_guardar"]:
-        banco = request.vars["banco"]
-        telefono = request.vars["telefono"]
-        db.banco.insert(nombre_banco=banco, telefono=telefono)
+def alta_bancos():
+    form = SQLFORM(db.banco, submit_button="Guardar")
+    if form.accepts(request.vars, session):
         response.flash = "Datos Guardados"
-        return dict({"grilla":"ABM Bancos"})
+        return dict({"grilla":"ABM Bancos", 'form':form})
     else :
-        return {"grilla":"ABM Bancos"}
+        return {"grilla":"ABM Bancos", 'form':form}
 
 @auth.requires_login()
-def abm_cuenta_bancaria():
-    if request.vars["boton_guardar"]:
-        numero_cuenta = request.vars["cuenta_bancaria"]
-        tipo_de_moneda = request.vars["tipo_moneda"]
-        cbu = request.vars["cbu"]
-        id_banco = request.vars["nombre_banco"]
-        db.cuenta_bancaria.insert(numero_cuenta=numero_cuenta, tipo_de_moneda=tipo_de_moneda, cbu=cbu, id_banco=id_banco)
+def alta_cuenta_bancaria():
+    form = SQLFORM(db.cuenta_bancaria, submit_button="Guardar")
+    if form.accepts(request.vars, session):
         response.flash = "Datos Guardados"
-    q = db(db.banco).select()
-    return {"grilla": "ABM Cuenta Bancaria", 'q':q}
+        return dict({"grilla":"ABM Cuenta Bancaria", 'form':form})
+    else :
+        return {"grilla":"ABM Cuenta Bancaria", 'form':form}
 
 @auth.requires_login()
-def abm_cheques():
-    if request.vars["boton_guardar"]:
-        num_cheque = request.vars["num_cheque"]
-        emision = request.vars["emision"]
-        vencimiento = request.vars["vencimiento"]
-        importe = request.vars["importe"]
-        id_cuenta_bancaria = request.vars["id_cuenta_bancaria"]
-        id_pagos = request.vars["id_pagos"]
-        db.cheque.insert(num_cheque=num_cheque, emision=emision, vencimiento=vencimiento, importe=importe, id_cuenta_bancaria=id_cuenta_bancaria, id_pagos=id_pagos)
+def alta_cheques():
+    form = SQLFORM(db.cheque, submit_button="Guardar")
+    if form.accepts(request.vars, session):
         response.flash = "Datos Guardados"
-    q = db(db.cuenta_bancaria).select()
-    qdos = db(db.pago).select()
-    return {"grilla": "ABM Cheques", 'q':q, 'qdos':qdos}
+        return dict({"grilla":"ABM Cheques", 'form':form})
+    else :
+        return {"grilla":"ABM Cheques", 'form':form}
 
 @auth.requires_login()
 def generar_orden_pagos():
-    if request.vars["boton_guardar"]:
-        num_orden_pago = request.vars["num_orden_pago"]
-        fecha = request.vars["fecha"]
-        importe = request.vars["importe"]
-        id_compras = request.vars["id_compras"]
-        id_proveedor = request.vars["razon_social"]
-        db.pago.insert(num_orden_pago=num_orden_pago, fecha=fecha, importe=importe, id_compras=id_compras, id_proveedor=id_proveedor)
+    form = SQLFORM(db.pago, submit_button="Guardar")
+    if form.accepts(request.vars, session):
         response.flash = "Datos Guardados"
-    q = db(db.compra).select()
-    qdos = db(db.proveedor).select()
-    return {"grilla": "Generar Orden pagos", 'q':q, 'qdos':qdos}
+        return dict({"grilla":"ABM Pagos", 'form':form})
+    else :
+        return {"grilla":"ABM Pagos", 'form':form}
 
 @auth.requires_login()
 def generar_reporte():
