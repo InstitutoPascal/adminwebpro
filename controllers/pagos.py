@@ -26,7 +26,7 @@ def alta_cheques():
     form = SQLFORM(db.cheque, submit_button="Guardar")
     if form.accepts(request.vars, session):
         response.flash = "Datos Guardados"
-        return dict({"grilla":"ABM Cheques", 'form':form})
+        return {"grilla":"ABM Cheques", 'form':form}
     else :
         return {"grilla":"ABM Cheques", 'form':form}
 
@@ -35,7 +35,7 @@ def generar_orden_pagos():
     form = SQLFORM(db.pago, submit_button="Guardar")
     if form.accepts(request.vars, session):
         response.flash = "Datos Guardados"
-        return dict({"grilla":"ABM Pagos", 'form':form})
+        redirect(URL('pagos', 'alta_cheques'))
     else :
         return {"grilla":"ABM Pagos", 'form':form}
 
