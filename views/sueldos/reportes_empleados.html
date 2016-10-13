@@ -6,8 +6,10 @@
     <thead> 
         <tr> <th>#</th> <th>Nro Legajo</th> <th>Apellido y Nombre</th> <th>FE Ingreso</th> </tr> 
     </thead> 
-        <tbody> <tr> <th scope="row">1</th> <td>1</td> <td>Rodriguez Javier</td> <td>25/08/2016</td> </tr> <tr> <th scope="row">2</th> <td>2</td> <td>Daurich Leonel</td> <td>22/07/2016</td> </tr> <tr> <th scope="row">3</th> <td>3</td> <td>Reingart Mariano</td> <td>19/01/2014</td> 
-        </tr> 
+        <tbody> 
+            {{for i, reg_empleado in enumerate(lista_empleados):}}
+            <tr> <th scope="row">{{=i}}</th> <td>{{=reg_empleado.num_legajo}}</td> <td>{{=reg_empleado.nombre}} {{=reg_empleado.apellido}}</td> <td>25/08/2016</td> </tr>  
+            {{pass}}
        </tbody> 
 </table>
 <form class="form-horizontal" action="{{=URL(c="sueldos", f="reportes_empleados2")}}" enctype="multipart/form-data" method="POST">

@@ -48,7 +48,21 @@ def familiar2():
     return {"grilla": grid}
 
 def reportes_empleados():
-    return dict()
+    fecha_desde = request.vars["fecha_desde"]
+    fecha_hasta = request.vars["fecha_hasta"]
+    ordenar = request.vars["ordenar"]
+    
+    campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido,
+    criterio = db.legajos.fecha_ingreso >= fecha_desde
+    criterio &= db.legajos.fecha_ingreso <= fecha_hasta
+    
+    if ordenar:
+        orden = db.legajos.apellido, db.legajos.nombre, 
+    else:
+        orden = db.legajos.num_legajo
+
+    registros = db(criterio).select(*campos, orderby=orden)
+    return dict(lista_empleados=registros)
 
 def reportes_empleados2():
     return dict()
