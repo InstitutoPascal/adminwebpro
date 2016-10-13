@@ -1,12 +1,17 @@
 {{extend 'layout.html'}}
 
-<h1>Datos de clientes</h1>
+<h1>Datos del remito</h1>
 <br>
 </br>
 <h3>
 <div class="row">
-  <div class="col-xs-3 col-md-2">Cliente: Elio Coro</div> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito",vars={"id":1,"nombre":"mark"})}}">Editar</a>
-  
+  <div class="col-xs-3 col-md-2">Cliente: {{=reg_cliente.nombre_de_fantasia}}</div> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito",vars={"id":1,"nombre":"mark"})}}">Editar</a>
+
+</div>
+<br>
+</br>    
+<div class="row">
+  <div class="col-xs-3 col-md-5">Fecha: {{ =fecha}}</div>
 </div>
 </h3>
 <br>

@@ -42,11 +42,37 @@ def reporte_stock():
     return dict()
 
 def emision_remito():
-    return dict()
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia
+    criterio = db.cliente.id_cliente>0
+    ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
+    # ejecutar la consulta:
+    lista_clientes = db(criterio).select(*campos)
+    # revisar si la consulta devolvio registros:
+    if not lista_clientes:
+        mensaje = "No ha cargado clientes"
+    else:
+        mensaje = "Seleccione un cliente"
+        ##primer_cliente = lista_clientes[0]
+        
+    return dict(message=mensaje, lista_clientes=lista_clientes)
+    
 
 def emision_remito2():
-    return dict()
-
+     # si el usuario completo el formulario, extraigo los valores de los campos:
+    if request.vars["boton_enviar"]:
+        # obtengo los valores completados en el formulario
+        id_cliente = request.vars["id_cliente"]
+        print id_cliente
+        fecha = request.vars["fecha"]
+        # guardo los datos elegidos en la sesión
+        session["id_cliente"] = id_cliente
+        session["fecha"] = fecha
+    
+    registros = db(db.cliente.id_cliente==session["id_cliente"]).select()
+    reg_cliente = registros[0]
+    
+    return dict(id_cliente=session["id_cliente"], fecha=session["fecha"] , reg_cliente=reg_cliente)
+   
 def emision_remito3():
     return dict()
 

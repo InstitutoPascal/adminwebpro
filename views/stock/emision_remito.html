@@ -3,18 +3,19 @@
 <br>
 </br>
 
+<form class="form-horizontal" action="{{=URL(c="stock", f="emision_remito2")}}" enctype="multipart/form-data" method="POST">
 <form class="form-horizontal">
 
           <div class="form-group">
             <label for="numero_remito" class="col-sm-2 control-label">Numero de remito</label>
             <div class="col-sm-3">
-                <input type="integer" class="form-control" id="numero_remito" placeholder="0000">
+                <input type="integer" class="form-control"  id="numero_remito" placeholder="0000">
             </div>
 
 
               <label for="fecha" class="col-sm-2 control-label">Fecha de emision</label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" id="fecha" placeholder="1/09/2016">
+                <input type="date" class="form-control" name="fecha" id="campo_fecha" placeholder="Data input">
             </div>
           </div>
      <br>
@@ -24,13 +25,10 @@
          <div class="form-group">
             <label for="cliente" class="col-sm-2 control-label">Cliente</label>
             <div class="col-sm-3">
-                <select class="form-control">
-                          <option>Nombre cliente</option>
-                          <option>Nicolas Cugliari</option>
-                          <option>Elio Coro</option>
-                          <option>Francisco Rodriguez</option>
-                          <option>Julian Aquino</option>
-                          <option>Javier Rodriguez</option>
+                <select class="form-control" id="campo_cliente" name="id_cliente">
+                       {{for reg_cliente in lista_clientes:}}
+                <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.nombre_de_fantasia}}</option>
+                  {{pass}}
                 </select>
              </div>
              
@@ -43,6 +41,14 @@
          <br>
 </br>
 
-            <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito2",vars={"id":1,"nombre":"mark"})}}">Siguiente</a> <a class="btn btn-default" role="button" href="{{=URL(c="default",f="index",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
+<div class="form-group">
+        <div class="col-md-3">
+          <input type="submit" name="boton_enviar" class="btn btn-default" value="Siguiente">
+        </div>
+    </div>
+
+<br>
+</br>
+ <a class="btn btn-default" role="button" href="{{=URL(c="default",f="index",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
 <br>
 </br>

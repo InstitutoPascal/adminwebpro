@@ -8,15 +8,15 @@
             <div class="col-sm-2">
                <select class="form-control" id="campo_cliente" name="id_cliente">
                   {{for reg_cliente in lista_clientes:}}
-                  <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.nombre_de_fantasia}}{{=reg_cliente.razon_social}}</option>
+                  <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.nombre_de_fantasia}}</option>
                   {{pass}}
                 </select>
             </div>
             <label for="factura" class="col-sm-1 control-label">FACTURA</label>
             <div class="col-sm-1">
                <select class="form-control" id="factura" name="tipo_factura">
-                  <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.tipo_factura}}</option>
-                  {{pass}}
+                  <option>A</option>
+                  <option>B</option>
                </select>
             </div>
             <label for="campo_numero_comprobante" class="col-sm-2 control-label">N° DE COMPROBANTE</label>

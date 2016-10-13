@@ -38,7 +38,7 @@ response.menu = [
         ]),
     (T('Stock'), False, URL('stock', 'index'), [
         (T('Reporte'), False, URL('stock', 'reporte_stock'), []),
-        (T('Producto nuevo'), False, URL('stock', 'alta_producto'), []),
+        (T('ABM Producto'), False, URL('stock', 'abm_producto'), []),
         (T('Deposito nuevo'), False, URL('stock', 'alta_deposito'), []),
         (T('Emision de remito'), False, URL('stock', 'emision_remito'), []),
         (T('Recepcion de remito'), False, URL('stock', 'resepcion_remito'), []),
