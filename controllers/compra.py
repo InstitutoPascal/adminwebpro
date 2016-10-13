@@ -18,9 +18,22 @@ def informe_subdiariob():
 
 def listado_proveedor():
        # presentar formulario para criterios de busqueda
-    return dict(message="Listado Proveedor")
+    # definir los campos a obtener desde la base de datos:
+    campos = db.proveedor.id_proveedor, db.proveedor.cuit, db.proveedor.razon_social, db.proveedor.ingreso_bruto, db.proveedor.condicion_iva, db.proveedor.domicilio, db.proveedor.localidad, db.proveedor.codigo_postal, db.proveedor.provincia, db.proveedor.pais, db.proveedor.telefono, db.proveedor.celular, db.proveedor.email_proveedor, db.proveedor.pagina_web   
+    # definir la condición que deben cumplir los registros:
+    criterio = db.proveedor.id_proveedor>0
+    ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
+    # ejecutar la consulta:
+    lista_proveedor = db(criterio).select(*campos)
+     # revisar si la consulta devolvio registros:
+    if not lista_proveedor:
+        mensaje = "No ha cargado proveedor"
+    else:
+        mensaje = "Seleccione un proveedor"
+        ##primer_cliente = lista_clientes[0]
+    return dict(message=mensaje, lista_proveedor=lista_proveedor)
 
-
+    
 def formulario_compras():
      
 # definir los campos a obtener desde la base de datos:

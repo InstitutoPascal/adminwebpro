@@ -58,7 +58,7 @@ db.define_table("proveedor",
       Field("celular", 'string'),
       Field("email_proveedor", 'string'),
       Field("pagina_web", 'string'),
-      format='%(razon_social)s %(id-proveedor)s )',
+      format='%(razon_social)s %(id_proveedor)s )',
     )
 db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"])
 db.proveedor.cuit.requires=IS_NOT_EMPTY()

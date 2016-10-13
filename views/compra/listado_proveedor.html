@@ -21,18 +21,16 @@
             }
         </style>
         <tr>
-            <th>#</th>
-            <th>ID Prov</th>
-            <th>Estado</th>
+            <th>ID Proveedor</th>
+            <th>Cuit</th>
             <th>Razón Social</th>
-            <th>CUIT</th>
-            <th>Ing. Brutos</th>
+            <th>Ingresos Brutos</th>
             <th>Cond. IVA</th>
             <th>Domicilio</th>
             <th>Localidad</th>
             <th>C.P.</th>
             <th>Prov.</th>
-            <th>Nac.</th>
+            <th>Pais</th>
             <th>N°Tel</th>
             <th>N°Cel</th>
             <th>Email</th>
@@ -40,78 +38,26 @@
         </tr>
     </thead>
     <tbody>
+	{{for i, reg_proveedor in enumerate (lista_proveedor):}}
         </tr>
-            <th scope="row">1</th>
-                <td>0001</td>
-                <td>Activo</td>
-                <td>REX</td>
-                <td>30-38939586-9</td>
-                <td>30-38939586-9</td>
-                <td>Resposable Incripto</td>
-                <td>Caxaraville 1175</td>
-                <td>Gonzalez Catan</td>
-                <td>1759</td>
-                <td>Buenos Aires</td>
-                <td>Argentina</td>
-                <td>02202-428427</td>
-                <td>+549-11-23101914</td>
-                <td>nicolasdanielcugliari@gmail.com</td>
-                <td>REX.com.ar</td>
+            <th scope="row">{{=i}}</th>
+                <td>{{=reg_proveedor.id_proveedor}}</td>
+                <td>{{=reg_proveedor.cuit}}</td>
+                <td>{{=reg_proveedor.razon_social}}</td>
+                <td>{{=reg_proveedor.ingreso_bruto}}</td>
+                <td>{{=reg_proveedor.condicion_iva}}</td>
+                <td>{{=reg_proveedor.domicilio}}</td>
+                <td>{{=reg_proveedor.localidad}}</td>
+                <td>{{=reg_proveedor.codigo_postal}}</td>
+                <td>{{=reg_proveedor.provincia}}</td>
+                <td>{{=reg_proveedor.pais}}</td>
+                <td>{{=reg_proveedor.telefono}}</td>
+                <td>{{=reg_proveedor.celular}}</td>
+                <td>{{=reg_proveedor.email_proveedor}}</td>
+                <td>{{=reg_proveedor.pagina_web}}</td>
+                
         </tr>
-        <tr>
-            <th scope="row">2</th>
-                <td>0002</td>
-                <td>Activo</td>
-                <td>Leyendo Software</td>
-                <td>30-37995982-8</td>
-                <td>30-37995982-8</td>
-                <td>Resposable Incripto</td>
-                <td>Vidal 123</td>
-                <td>Laferrere</td>
-                <td>1757</td>
-                <td>Buenos Aires</td>
-                <td>Argentina</td>
-                <td>-</td>
-                <td>-</td>
-                <td>julian.aquino@gmail.com</td>
-                <td>-</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-                <td>0003</td>
-                <td>Activo</td>
-                <td>Leyendo Vinos</td>
-                <td>30-30724444-8</td>
-                <td>30-30724444-8</td>
-                <td>Monotributista</td>
-                <td>Padre Mario Pantaleo 758</td>
-                <td>Gonzalez Catan</td>
-                <td>1759</td>
-                <td>Buenos Aires</td>
-                <td>Argentina</td>
-                <td>-</td>
-                <td>-</td>
-                <td>leyendov@gmail.com</td>
-                <td>leyendov.com.ar</td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-                <td>0004</td>
-                <td>Activo</td>
-                <td>El Señor X</td>
-                <td>30-33756123-0</td>
-                <td>30-33756123-0</td>
-                <td>Monotributista</td>
-                <td>Posamai 8756</td>
-                <td>Gonzalez Catan</td>
-                <td>1759</td>
-                <td>Buenos Aires</td>
-                <td>Argentina</td>
-                <td>02202/456738</td>
-                <td>549-1137456319</td>
-                <td>lordnking@gmail.com</td>
-                <td>-</td>
-        </tr>
-       </tbody>
+	{{pass}}
+    </tbody>
 <input type="button" name="imprimir" value="Imprimir listado" onclick="window.print();">
 </table>
