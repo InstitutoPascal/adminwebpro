@@ -22,7 +22,6 @@ db.define_table("cliente",
     Field("cuit","string"),
     Field("dni","string"),
     Field("condicion_frente_al_iva","string"),
-    Field("tipo_factura","string"),
     Field("direccion","string"),
     Field("numero","string"),
     Field("localidad","string"),
@@ -33,7 +32,6 @@ db.define_table("cliente",
 #################Validaciones de Cliente##################
 
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"])
-db.cliente.tipo_factura.requires=IS_IN_SET(["A","B"])
 db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")
 db.cliente.dni.requires=IS_NOT_IN_DB(db, "cliente.dni")
 #db.cliente.condicion_frente_al_iva.requires=IS_NOT_EMPTY(error_message='Selecione un campo')
@@ -44,7 +42,7 @@ db.cliente.localidad.requires=IS_NOT_EMPTY(error_message='Ingresar Lalocalidad')
 
 
 db.define_table("proveedor",
-      Field("id_proveedor",),
+      Field("id_proveedor", "id"),
       Field("razon_social", 'string'),
       Field("ingreso_bruto", 'string'),
       Field("condicion_iva", 'string'),
@@ -61,7 +59,7 @@ db.define_table("proveedor",
       format='%(razon_social)s %(id_proveedor)s )',
     )
 db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"])
-db.proveedor.cuit.requires=IS_NOT_EMPTY()
+db.proveedor.cuit.requires=[IS_NOT_EMPTY(),IS_CUIT()]
 db.proveedor.ingreso_bruto.requires=IS_NOT_EMPTY()
 db.proveedor.razon_social.requires=IS_NOT_EMPTY()
 db.proveedor.domicilio.requires=IS_NOT_EMPTY()
@@ -73,16 +71,16 @@ db.proveedor.provincia.requires=IS_NOT_EMPTY()
 db.define_table("producto",
     Field("id_producto","id"),
     Field("detalle_producto","string"),
-    Field("precio_producto","float"),
-    Field("marca","float"),
+    Field("precio_compra","float"),
+    Field("precio_venta","float"),
+    Field("alicuota_iva","float"),
+    Field("marca","string"),
     Field("categoria","string"),
-    Field("proveedor","string"),
 )
 
 db.producto.categoria.requires=IS_IN_SET(["Hardware","Software"])
+db.producto.alicuota_iva.requires=IS_IN_SET({10.5: "10.5%",21: "21%"})
 db.producto.id_producto.requires=IS_NOT_EMPTY()
 db.producto.id_producto.requires=IS_NOT_IN_DB(db,"producto.id_producto")
 db.producto.detalle_producto.requires=IS_NOT_EMPTY()
-db.producto.detalle_producto.requires=IS_NOT_IN_DB(db,"producto.detalle_producto")
-db.producto.precio_producto.requires=IS_NOT_EMPTY()
-db.producto.proveedor.requires=IS_NOT_EMPTY()
+db.producto.precio_venta.requires=IS_NOT_EMPTY()
