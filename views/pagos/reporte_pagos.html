@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         {{for registro in registros:}}
-        <tr> <td>{{=registro.num_orden_pago}}</td> <td>{{=registro.fecha}}</td> <td>{{=registro.importe}}</td> <td>{{=registro.id_proveedor.razon_social}}</td> <td><a class="btn btn-default" role="button" href="{{=URL(c="pagos",f="ver_orden_pago",vars={"id":registro.num_orden_pago})}}">Ver</a></td></tr>
+        <tr> <td>{{=registro.num_orden_pago}}</td> <td>{{=registro.fecha}}</td> <td>{{=registro.importe}}</td> <td>{{=registro.id_proveedor.razon_social}}</td> <td><a class="btn btn-default" role="button" href="{{=URL(c="pagos",f="ver_orden_pago",vars={"id":registro.id_pagos})}}">Ver</a></td></tr>
         {{pass}}
     </tbody>
 </table>
