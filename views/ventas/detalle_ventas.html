@@ -1,8 +1,8 @@
 {{extend 'layout.html'}}
 <h1>DETALLE DE VENTA</h1>
 <div class="form-group">
-    <h4><caption>Nro. Comprobante {{=nro_cbte}} Fecha {{=fecha}} 
-                 Cliente {{=reg_cliente.razon_social}} CUIT {{=reg_cliente.cuit}}
+    <h4><caption>Nro. Comprobante: {{=nro_cbte}}, Fecha: {{=fecha}},
+                 Cliente: {{=reg_cliente.razon_social}}, Tipo de Comprobante:{{=reg_cliente.tipo_factura}}
         </caption></h4>
 </div>
 <form class="form-horizontal" action="{{=URL(c="ventas", f="detalle_ventas")}}" enctype="multipart/form-data" method="POST">
@@ -19,10 +19,6 @@
            <div class="col-sm-1">
                <input type="number" name="cantidad" class="form-control" id="cant" placeholder="Cantidad">
             </div>
-               <label for="precunit" class="col-sm-2 control-label">PRECIO UNITARIO</label>
-            <div class="col-sm-2">
-               <input type="number" class="form-control" id="precunit" step="0.01" placeholder="Precio Unitario">
-            </div>
     </div>
     <div class="form-group">
         <div class="col-md-3">
@@ -34,7 +30,7 @@
     <div class="form-group">
         <div class="col-md-10">
           <table class="table table-hover">
-          <caption>Items de Venta</caption>
+          <caption>ITEMS DE VENTA</caption>
           <thead>
             <tr>
                 <th>#</th>
@@ -53,11 +49,12 @@
                 <th scope="row">{{=item["id_producto"]}}</th>
                 <td >{{=item["detalle_producto"]}}</td>
                 <td align="center">{{=item["cantidad"]}}</td>
-                <td align="center">{{=item["precio_producto"]}}</td>
-                <td align="center">{{=item["precio_producto"] * item["cantidad"]}}</td>
-                <td align="center">10.5%</td>
-                <td align="center">$1591.2</td>
-                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
+                <td align="center">{{=item["precio_venta"]}}</td>
+                <td align="center">{{=item["precio_venta"] * item["cantidad"]}}</td>
+                <td align="center">{{=item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
+                <td align="center">{{=item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
+                <td>
+                    </td>
             </tr>
             {{pass}}
         </tbody>

@@ -17,11 +17,12 @@ Suba e instale una aplicación empaquetada
 """
 db.define_table("cliente",
     Field("id_cliente","id"),
+    Field("condicion_frente_al_iva","string"),
     Field("nombre_de_fantasia","string"),
     Field("razon_social","string"),
     Field("cuit","string"),
     Field("dni","string"),
-    Field("condicion_frente_al_iva","string"),
+    Field("tipo_factura","string"),
     Field("direccion","string"),
     Field("numero","string"),
     Field("localidad","string"),

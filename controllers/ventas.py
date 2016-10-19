@@ -11,7 +11,7 @@ def abm_clientes():
 @auth.requires_login()
 def abm_ventas():
     # definir los campos a obtener desde la base de datos:
-    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social
     # definir la condición que deben cumplir los registros:
     criterio = db.cliente.id_cliente>0
     ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
@@ -46,7 +46,8 @@ def detalle_ventas():
         # busco en la base de datos el registro del producto seleccionado
         reg_producto = db(db.producto.id_producto==id_producto).select().first()
         item["detalle_producto"] = reg_producto.detalle_producto
-        item["precio_producto"] = reg_producto.precio_producto
+        item["precio_venta"] = reg_producto.precio_venta
+        item["alicuota_iva"] = reg_producto.alicuota_iva
         # guardo el item en la sesión
         session["items_venta"].append(item)
     # busco en la base de datos al cliente para mostrar su info

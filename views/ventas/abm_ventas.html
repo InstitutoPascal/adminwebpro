@@ -8,7 +8,7 @@
             <div class="col-sm-2">
                <select class="form-control" id="campo_cliente" name="id_cliente">
                   {{for reg_cliente in lista_clientes:}}
-                  <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.nombre_de_fantasia}}</option>
+                  <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.nombre_de_fantasia}} - {{=reg_cliente.razon_social}}</option>
                   {{pass}}
                 </select>
             </div>
@@ -36,14 +36,6 @@
                   <option>Credito</option>
                 </select>
             </div>
-    </div>
-    <div class="form-group">
-        <label for="campo_obs" class="col-sm-1 control-label">OBSERVACIONES</label>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-6">
-           <textarea class="form-control" id="campo_obs" rows="3"></textarea>
-        </div>
     </div>
     <div class="form-group">
         <div class="col-md-3">

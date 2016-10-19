@@ -15,6 +15,7 @@ db.define_table("ventas",
 db.ventas.id_cliente.requires = IS_IN_DB(db, "cliente.id_cliente"," %(nombre_de_fantasia)s-%(razon_social)s .")
 db.ventas.tipo_de_factura.requires=IS_IN_SET(["Factura A","Factura B"])
 db.ventas.numero_factura.requires=IS_INT_IN_RANGE("0","99999999")
+db.ventas.numero_factura.requires=IS_NOT_IN_DB(db, "ventas.numero_factura")
 db.ventas.tipo_de_pago.requires = IS_IN_SET(["Efectivo","Credito"])
 
 ###########################DETALLE VENTAS#######################
