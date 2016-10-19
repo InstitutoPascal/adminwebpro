@@ -1,12 +1,15 @@
 {{extend 'layout.html'}}
 <h1>Reporte Horas</h1>
 <table class="table"> 
-    <caption>Mes Trabajado : Agosto
+    <caption>Mes Trabajado : db.mes_trabajado
     </caption>
     <thead> 
         <tr> <th>#</th> <th>Nro Legajo</th> <th>Apellido y Nombre</th> <th>Horas Trabajadas</th> </tr> 
     </thead> 
-        <tbody> <tr> <th scope="row">1</th> <td>1</td> <td>Rodriguez Javier</td> <td>160</td> </tr> <tr> <th scope="row">2</th> <td>2</td> <td>Daurich Leonel</td> <td>160</td> </tr> <tr> <th scope="row">3</th> <td>3</td> <td>Reingart Mariano</td> <td>160</td> 
+        <tbody>
+            {{for i, reg_empleado in enumerate(informe_horas):}}
+            <tr> <th scope="row">{{=i}}</th> <td>{{=reg_empleado.num_legajo}}</td> <td>{{=reg_empleado.nombre}} {{=reg_empleado.apellido}}</td> <td>{{=reg_horas.hs_trab}}</td> </tr>
         </tr> 
+           {{pass}}  
        </tbody> 
 </table>

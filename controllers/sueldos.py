@@ -69,6 +69,22 @@ def reportes_empleados2():
     return dict()
 
 def reportes_horas():
+    Legajo = request.vars["Legajo"]
+    Mes = request.vars["Mes"]
+    ordenar = request.vars["ordenar"]
+    
+    campos = db.horas.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab,
+    criterio = db.horas.num_legajo >= Legajo
+    criterio &= db.horas.mes_trabajado <= Mes
+    
+    if ordenar:
+        orden = db.legajos.apellido, db.legajos.nombre,db.horas.hs_trab, db.horas.mes_trabajado, 
+    else:
+        orden = db.legajos.num_legajo
+
+    registros = db(criterio).select(*campos, orderby=orden)
+    return dict(lista_horas=registros)
+
     return dict()
 
 def reportes_horas2():
