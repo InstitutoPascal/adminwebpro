@@ -22,7 +22,7 @@ def reporte():
     # obtenemos los criterios de busqueda y generamos el reporte
     desde = request.vars["fecha_desde"]
     hasta = request.vars["fecha_hasta"]
-    return dict(titulo="Listando desde fecha %s hasta fecha %s" % (desde, hasta))
+    return dict(titulo="Listando desde fecha %s hasta fecha %s" % (fecha_desde, fecha_hasta))
 
 def borrar():
     # eliminar algo

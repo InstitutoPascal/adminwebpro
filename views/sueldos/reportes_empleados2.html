@@ -1,24 +1,25 @@
 {{extend 'layout.html'}}
 <h1>Criterios de busqueda</h1>
-
+    <caption>Reporte Legajos
+    </caption>
 <form class="form-horizontal" action="{{=URL(c="sueldos", f="reportes_empleados")}}" enctype="multipart/form-data" method="POST">
   <div class="form-group">
     <label for="desde" class="col-sm-2 control-label">Fecha Desde</label>
     <div class="col-sm-10">
-      <input type="date" class="form-control" id="desde" name="fecha_desde" placeholder="">
+      <input type="date" class="form-control" id="Fecha" name="fecha_desde" placeholder="00001">
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Fecha Hasta</label>
     <div class="col-sm-10">
-      <input type="date" class="form-control" id="hasta" name="fecha_hasta" placeholder="">
+      <input type="date" class="form-control" id="Fecha" name="fecha_hasta" placeholder="Enero">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="ordenar"> Ordenar alfabeticamente
+          <input type="checkbox" name="ordenar"> Incluir Horas Extras
         </label>
       </div>
     </div>

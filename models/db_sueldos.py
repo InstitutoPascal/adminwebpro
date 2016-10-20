@@ -43,8 +43,8 @@ db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires = IS_DATE(format=T('%Y-%m-%d'),
                    error_message='Debe cumplir con el siguiente formato YYYY-MM-DD!')
 #db.legajos.fecha_ingreso.requires=IS_DATE('%Y-%M-%D')
-db.legajos.requires = IS_DATE(format=T('%Y-%m-%d'),
-                   error_message='Debe cumplir con el siguiente formato YYYY-MM-DD!')
+db.legajos.fe_nac.requires = IS_DATE(format=T('%Y-%m-%d'),
+                  error_message='Debe cumplir con el siguiente formato YYYY-MM-DD!')
 
 #db.legajos.fe_nac.requires=IS_DATE('%Y-%M-%D')
 
@@ -82,7 +82,8 @@ db.familiares.dni.requires=[IS_INT_IN_RANGE(5000000,100000000),
                          IS_NOT_IN_DB(db, "legajos.dni")]
 db.familiares.nombre.lenght=20
 db.familiares.apellido.lenght=25
-db.familiares.fe_nac.requires=IS_DATE('%Y-%M-%D')
+db.legajos.fe_nac.requires = IS_DATE(format=T('%Y-%m-%d'),
+                  error_message='Debe cumplir con el siguiente formato YYYY-MM-DD!')
 db.familiares.num_legajo.requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")
 
 db.define_table("horas",

@@ -10,6 +10,7 @@ def abm_clientes():
 
 @auth.requires_login()
 def abm_ventas():
+    #return dict(message="abm_ventas")
     # definir los campos a obtener desde la base de datos:
     campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social
     # definir la condición que deben cumplir los registros:
@@ -24,6 +25,7 @@ def abm_ventas():
         mensaje = "Seleccione un cliente"
         ##primer_cliente = lista_clientes[0]
     return dict(message=mensaje, lista_clientes=lista_clientes)
+
 
 @auth.requires_login()
 def detalle_ventas():

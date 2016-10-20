@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
+
 def index():
     return dict(message="Index en sueldos.py")
 
 
 @auth.requires_login()
 
+
 def abm_empleados():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
-
 @auth.requires_login()
 
 def abm_familiares():
@@ -51,6 +53,12 @@ def familiar2():
 def reportes_empleados():
     fecha_desde = request.vars["fecha_desde"]
     fecha_hasta = request.vars["fecha_hasta"]
+    dt_str = fecha_desde
+    dt_obj = datetime.strptime(dt_str, '%Y-%m-%d')
+    fecha_desde = dt_obj
+    dt_str2 = fecha_hasta
+    dt_obj2 = datetime.strptime(dt_str2, '%Y-%m-%d')
+    fecha_hasta = dt_obj2
     ordenar = request.vars["ordenar"]
     
     campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido,
@@ -63,7 +71,12 @@ def reportes_empleados():
         orden = db.legajos.num_legajo
 
     registros = db(criterio).select(*campos, orderby=orden)
-    return dict(lista_empleados=registros)
+    return dict(lista_empleados=registros,fecha_desde=fecha_desde,fecha_hasta=fecha_hasta,titulo="Listando desde fecha %s hasta fecha %s" % (fecha_desde.date(), fecha_hasta.date()))
+
+# obtenemos los criterios de busqueda y generamos el reporte
+# desde = request.vars["fecha_desde"]
+# hasta = request.vars["fecha_hasta"]
+# return dict(titulo="Listando desde fecha %s hasta fecha %s" % (fecha_desde, fecha_hasta))
 
 def reportes_empleados2():
     return dict()
