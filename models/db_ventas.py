@@ -44,4 +44,4 @@ db.define_table("cobros",
                 Field('importe','double',requires=IS_NOT_EMPTY(error_message='El importe no puede estar vacio'))
                 )
 db.cobros.formas_pago.requires = IS_IN_DB(db, "formas_pago.id", " %(descripcion)s",zero='Seleccionar...')
-db.cobros.venta_id.requires = IS_IN_DB(db, "ventas.id", " %(id)s",zero='Seleccionar...')
+db.cobros.venta_id.requires = IS_IN_DB(db, db.ventas.id,db.ventas._format,zero='Seleccionar...')

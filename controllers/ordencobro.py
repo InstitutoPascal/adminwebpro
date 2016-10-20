@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def reporte_cobros():
-    repor = db((db.ventas.buscar_cliente == db.cliente.id_cliente)&(db.cobros.venta_id == db.ventas.id) & (db.cobros.formas_pago==db.formas_pago.id)).select()
+    repor = db((db.ventas.id_cliente == db.cliente.id_cliente)&(db.cobros.venta_id == db.ventas.id) & (db.cobros.formas_pago==db.formas_pago.id)).select()
     return locals()
 def index():
 	pass
@@ -23,7 +23,7 @@ def pdf():
     response.title = "Recibo pago "
     cobro = request.args(0) or redirect(URL('/'))
     
-    cobro = db((db.cobros.formas_pago==db.formas_pago.id)&(db.cobros.id==cobro)&(db.cobros.venta_id==db.ventas.id)&(db.ventas.buscar_cliente==db.cliente.id_cliente)).select()
+    cobro = db((db.cobros.formas_pago==db.formas_pago.id)&(db.cobros.id==cobro)&(db.cobros.venta_id==db.ventas.id)&(db.ventas.id_cliente==db.cliente.id_cliente)).select()
     print cobro
     cobro = cobro.first().as_dict()
    

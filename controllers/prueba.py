@@ -3,7 +3,7 @@
 def index():
     return dict(message="pagina predeterminada")
 
-@auth.requires_login()
+@auth.requires_membership(role="Gerente")
 def abm_categoria():
     grid = SQLFORM.grid(db.categoria)
     return {"grilla": grid}
