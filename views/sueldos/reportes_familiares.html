@@ -1,13 +1,12 @@
 {{extend 'layout.html'}}
 <h1>Reporte Familiares</h1>
 <table class="table"> 
-    <caption>Optional table caption.
-    </caption>
+    <caption>Reporte Familiares por fecha</caption>
     <thead> 
         <tr> <th>#</th> <th>Nro Legajo</th> <th>Apellido y Nombre</th> <th>Estudia</th> </tr> 
     </thead> 
-        <tbody> {{for i, reg_familiar in enumerate(lista_familiar):}}
-            <tr> <th scope="row">{{=i}}</th> <td>{{=reg_familiar.num_legajo}}</td> <td>{{=reg_familiar.nombre}} {{=reg_familiar.apellido}}</td>
+        <tbody> {{for i, reg_familiar in enumerate(lista_familiares):}}
+            <tr> <th scope="row">{{=i}}</th> <td>{{=reg_familiar.num_legajo}}</td> <td>{{=reg_familiar.nombre}} {{=reg_familiar.apellido}}</td> <td>{{=reg_familiar.edad}}</td>
                 {{pass}}
        </tbody> 
 </table>

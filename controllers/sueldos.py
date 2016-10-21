@@ -104,7 +104,25 @@ def reportes_horas2():
     return dict()
 
 def reportes_familiares():
-    return dict()
+    familia_menor21 = request.vars["familia_menor21"]
+    familia_estudian = request.vars["familia_estudian"]
+    familiar_distdom = request.vars["familiar_distdom"]
+    
+    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia,db.familiares.edad,
+    criterio = db.familiares.num_legajo == db.legajos.num_legajo
+    
+    if familia_menor21:
+        criterio &=  db.familiares.edad < 21
+        subtitulo = "Familiares menores de 21 años"
+    if familia_estudian:
+        criterio &=  db.familiares.estudia == True
+        subtitulo = "Familiares que estudian"
+    if familiar_distdom:
+        criterio &=  db.familiares.domicilio_calle == db.legajos.dom_calle
+        subtitulo = "Familiares con distinto domicilio"
+    registros = db(criterio).select(*campos)
+    return dict(lista_familiares=registros,titulo="Listando %s" % subtitulo)
+
 
 def reportes_familiares2():
     return dict()
