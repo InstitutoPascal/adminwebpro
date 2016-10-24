@@ -60,7 +60,7 @@ db.define_table("proveedor",
       format='%(razon_social)s %(id_proveedor)s )',
     )
 db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"])
-db.proveedor.cuit.requires=[IS_NOT_EMPTY(),IS_CUIT()]
+db.proveedor.cuit.requires=IS_NOT_EMPTY(),
 db.proveedor.ingreso_bruto.requires=IS_NOT_EMPTY()
 db.proveedor.razon_social.requires=IS_NOT_EMPTY()
 db.proveedor.domicilio.requires=IS_NOT_EMPTY()
