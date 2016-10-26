@@ -6,7 +6,7 @@
         <h2><IMG SRC="http://www.hersis.cl/servicios/servicio_tecnico.png" WIDTH=178 HEIGHT=180 /> C.V Technical Service</h2>
         </div>
         <div class="col-xs-6 text-right">
-            <h1>Factura Tipo: A</h1>
+            <h1>Factura Tipo: {{=venta.tipo_factura}}</h1>
             <h1><small>N° {{=venta.numero_factura}}</small></h1>
             <h1><small>Fecha: {{=venta.fecha}}</small></h1>
         </div>
@@ -52,8 +52,8 @@
             <td>{{=item.detalle_ventas.id_producto}}</td>
             <td>{{=item.producto.detalle_producto}}</td>
             <td class=" text-center ">{{=item.detalle_ventas.cantidad}}</td>
-            <td class=" text-right ">${{=item.producto.precio_producto}}</td>
-            <td class=" text-right ">${{=item.producto.precio_producto * item.detalle_ventas.cantidad}}</td>
+            <td class=" text-right ">${{=item.producto.precio_vente}}</td>
+            <td class=" text-right ">${{=item.producto.precio_venta * item.detalle_ventas.cantidad}}</td>
         </tr>
         {{pass}}
     </tbody>

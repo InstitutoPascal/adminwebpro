@@ -44,6 +44,7 @@
             </tr>
           </thead>
         <tbody>
+            {{subtotal = 0}}
             {{for item in items_venta:}}
             <tr>
                 <th scope="row">{{=item["id_producto"]}}</th>
@@ -53,8 +54,9 @@
                 <td align="center">{{=item["precio_venta"] * item["cantidad"]}}</td>
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
-                <td>
-                    </td>
+                {{subtotal = subtotal + (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00) }}
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"id":1})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
+                </td>
             </tr>
             {{pass}}
         </tbody>
@@ -65,8 +67,8 @@
         <div class="col-md-3">
         <table class="table table-bordered">
         <tbody>
-            <tr> <th scope="row">Total:</th>
-                 <td>$3786.7</td>
+            <tr> <th scope="row">Total $:</th>
+                 <td>{{=subtotal}}</td>
             </tr>
         </tbody>
         </table>
