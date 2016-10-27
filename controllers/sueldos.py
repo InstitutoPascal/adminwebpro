@@ -24,11 +24,22 @@ def abm_horas():
     grid = SQLFORM.grid(db.horas)
     return {"grilla": grid}
 
-def legajos():
+def legajos2():
+    if request.vars["boton_siguiente"]:
+        # obtengo los valores completados en el formulario
+        nro_legajo = request.vars["nro_legajo"]
+        fecha_egreso = request.vars["fecha_egreso"]
+        cuil = request.vars["cuil"]
+        
+        # guardo los datos elegidos en la sesión
+        session["nro_legajo"] = nro_legajo
+        session["fecha_egreso"] = fecha_egreso
+        session["nro_comprobante"] = nro_comprobante
+        session["cuil"] = cuil
+        print session["cuil"]
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
-
-def legajos2():
+def legajos():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
 
@@ -61,7 +72,7 @@ def reportes_empleados():
     fecha_hasta = dt_obj2
     ordenar = request.vars["ordenar"]
     
-    campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido,
+    campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.legajos.fecha_ingreso
     criterio = db.legajos.fecha_ingreso >= fecha_desde
     criterio &= db.legajos.fecha_ingreso <= fecha_hasta
     
