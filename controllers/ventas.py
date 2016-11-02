@@ -83,9 +83,9 @@ def vista_previa():
 def borrar_item():
     # eliminar algo
     # request.vars tiene un diccionario con todos los parametros de la URL (luego del ?)
-    id_a_borrar = request.vars["id"]
-    #producto_a_borrar = request.vars["producto"]
-    return dict(mensaje="Borrado registro del Item = %s" % (id_a_borrar))
+    pos_a_borrar = int(request.vars["pos"])
+    session["items_venta"].pop(pos_a_borrar)
+    redirect(URL(f="detalle_ventas"))
 
 def lista_ventas():
     # obtenemos los criterios de busqueda y generamos el reporte

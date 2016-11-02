@@ -45,7 +45,7 @@
           </thead>
         <tbody>
             {{subtotal = 0}}
-            {{for item in items_venta:}}
+            {{for i, item in enumerate(items_venta):}}
             <tr>
                 <th scope="row">{{=item["id_producto"]}}</th>
                 <td >{{=item["detalle_producto"]}}</td>
@@ -55,9 +55,7 @@
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
                 {{subtotal = subtotal + (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00) }}
-                <td><form name="limpiar" method="post" action="#">
-<input type="text" name="campo" size="40" maxlength="40" Value="Pulsa para limpiar" onclick="this.value=''";>
-</form></td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"pos":i})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
             </tr>
             {{pass}}
         </tbody>
