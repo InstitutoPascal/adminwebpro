@@ -35,7 +35,7 @@ db.define_table("cliente",
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"])
 db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")
 db.cliente.dni.requires=IS_NOT_IN_DB(db, "cliente.dni")
-#db.cliente.condicion_frente_al_iva.requires=IS_NOT_EMPTY(error_message='Selecione un campo')
+#db.cliente.condicion_frente_al_iva.requires=IS_NOT_EMPTY()
 db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Ingresar el numero Telefonico')
 db.cliente.direccion.requires=IS_NOT_EMPTY(error_message='Ingresar la Direccion')
 db.cliente.numero.requires=IS_NOT_EMPTY(error_message='Ingresar el Numero')

@@ -12,7 +12,7 @@ def abm_clientes():
 def abm_ventas():
     #return dict(message="abm_ventas")
     # definir los campos a obtener desde la base de datos:
-    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social, #db.ventas.numero_factura
     # definir la condición que deben cumplir los registros:
     criterio = db.cliente.id_cliente>0
     ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
