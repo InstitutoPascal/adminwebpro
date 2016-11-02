@@ -14,14 +14,14 @@
 
 {{if 'message' in globals():}}
 <h2>{{=message}}</h2>
-<p class="lead">{{=T('Usted Podra....')}}</p>
-<ol>
+<p class="lead">{{=T('Usted podrá, desde el Menú en la parte superior...')}}</p>
+<ul>
   <li>{{=T('Cargar datos de un Cliente.')}}</li>
   <li>{{=T('Cargar datos de sus Empleados y Familiares.')}}</li>
   <li>{{=T('Cargar datos de Proveedores.')}}</li>
   <li>{{=T('Realizar Ventas, Cobros y Pagos de su Empresa.')}}</li>
   <li>{{=T('Tambien llevar el Stock de sus Productos y Depocitos')}}</li>
-</ol>
+</ul>
 {{elif 'content' in globals():}}
 {{=content}}
 {{else:}}
