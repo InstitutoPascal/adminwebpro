@@ -1,5 +1,8 @@
 @auth.requires_login()
+@auth.requires_login()
 def abm_producto():
+    db.producto.precio_compra.writable=False
+    db.producto.precio_compra.readable=False
     grid = SQLFORM.grid(db.producto)
     return {"grilla": grid}
 
@@ -58,7 +61,9 @@ def emision_remito():
     
 
 def emision_remito2():
-     # si el usuario completo el formulario, extraigo los valores de los campos:
+     # datos predeterminados para completar el formulario
+    item = {"id_producto": -1, "cantidad": 1}
+    # si el usuario completo el formulario, extraigo los valores de los campos:
     if request.vars["boton_enviar"]:
         # obtengo los valores completados en el formulario
         id_cliente = request.vars["id_cliente"]
@@ -67,17 +72,53 @@ def emision_remito2():
         # guardo los datos elegidos en la sesión
         session["id_cliente"] = id_cliente
         session["fecha"] = fecha
+        session["items_agregados"] = []
+    if request.vars["agregar_item"]:
+        # obtengo los valores del formulario
+        id_producto = request.vars["id_producto"]
+        cantidad = request.vars["cantidad"]
+        item = {"id_producto": id_producto, "cantidad": int(cantidad)}
+        session["item"] = item
+        # busco en la base de datos el registro del producto seleccionado
+        reg_producto = db(db.producto.id_producto==id_producto).select().first()
+        item["detalle_producto"] = reg_producto.detalle_producto
+        item["precio_producto"] = reg_producto.precio_compra
+        # guardo el item en la sesión
+        session["items_agregados"].append(item)
+    if request.vars["accion"] == "eliminar":
+        # elimino el elemento de la lista
+        i = int(request.vars["indice"])
+        session["items_agregados"].pop(i)
+    if request.vars["accion"] == "modificar":
+        # elimino el elemento de la lista
+        i = int(request.vars["indice"])
+        item = session["items_agregados"].pop(i)
+    # busco en la base de datos al cliente para mostrar su info
+    registros = db(db.cliente.id_cliente==session["id_cliente"]).select()
+    reg_cliente = registros[0]
+    lista_productos = db(db.producto.id_producto>0).select()
+    # le pasamos las variables a la vista para armar el html
     
+    total_bruto = 0
+    return dict(id_cliente=session["id_cliente"], fecha=session["fecha"] , reg_cliente=reg_cliente , lista_productos=lista_productos,
+                items_agregados=session["items_agregados"] , item_modificar=item )
+   
+def emision_remito3():
+    registros = db(db.cliente.id_cliente==session["id_cliente"]).select()
+    reg_cliente = registros[0]
+    return dict(id_cliente=session["id_cliente"], reg_cliente=reg_cliente , items_agregados=session["items_agregados"]  )
+
+
+def emision_remito4():
+    if request.vars["boton_enviar"]:
+        id_cliente = request.vars["id_cliente"]
+        session["fecha"] = fecha
+        session["id_cliente"] = id_cliente
     registros = db(db.cliente.id_cliente==session["id_cliente"]).select()
     reg_cliente = registros[0]
     
-    return dict(id_cliente=session["id_cliente"], fecha=session["fecha"] , reg_cliente=reg_cliente)
-   
-def emision_remito3():
-    return dict()
-
-def emision_remito4():
-    return dict()
+    return dict(fecha=session["fecha"] , id_cliente=session["id_cliente"] , reg_cliente=reg_cliente , items_agregados=session["items_agregados"])
+    
 
 def resepcion_remito():
     return dict()

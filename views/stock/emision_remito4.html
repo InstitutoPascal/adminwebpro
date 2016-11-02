@@ -8,7 +8,7 @@
         <div class="col-xs-6 text-right">
             <h1>Remito</h1>
             <h1><small>N° 0001</small></h1>
-            <h1><small>Fecha: 15/09/2016</small></h1>
+            <h1><small>Fecha: {{ =fecha}}</small></h1>
         </div>
     </div>
     <div class="form-group">
@@ -24,12 +24,12 @@
             <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Para : <a href="#">Elio Coro</a></h4></div>
-            <div class="panel-body">DOMICILIO: Arrotea 2347</div>
-            <div class="panel-body">LOCALIDAD: Gonzalez Catan</div>
-            <div class="panel-body">TELEFONO: 999-999</div>
-            <div class="panel-body">CUIT o DNI: 20-38361037-1</div>
-            <div class="panel-body">COND. I.V.A: Responsable Inscripto</div>
+                <h4>Para : <a href="#">{{=reg_cliente.nombre_de_fantasia}}</a></h4></div>
+            <div class="panel-body">DOMICILIO: {{=reg_cliente.direccion}} {{=reg_cliente.numero}}</div>
+            <div class="panel-body">LOCALIDAD: {{=reg_cliente.localidad}}</div>
+            <div class="panel-body">TELEFONO: {{=reg_cliente.telefono}}</div>
+            <div class="panel-body">CUIT o DNI: {{=reg_cliente.dni}}</div>
+            <div class="panel-body">COND. I.V.A: {{=reg_cliente.condicion_frente_al_iva}}</div>
             </div>
         </div>
         </div>
@@ -40,36 +40,24 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th><h4>Cantidad</h4></th>
+            <th><h4>Codigo</h4></th>
             <th><h4>Detalle</h4></th>
-            <th><h4>Precio unitario</h4></th>
-            <th><h4>Precio Total</h4></th>
+            <th><h4>Cantidad</h4></th>
+            
             
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>2</td>
-            <td> Memoria Ram 16Gb</td>
-            <td class=" text-right ">$800</td>
-            <td class=" text-right ">$1600</td>
-            
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Disco Rigido 1 Tb</td>
-            <td class=" text-right ">$1000</td>
-            <td class=" text-right ">$1000</td>
-            
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Mother</td>
-            <td class=" text-right ">$1500</td>
-            <td class=" text-right ">$4500</td>
-            
-        </tr>
-    </tbody>
+            {{for i, item in enumerate(items_agregados):}}
+            <tr>
+                <th scope="row">{{=item["id_producto"]}}</th>
+                <td >{{=item["detalle_producto"]}}</td>
+                <td align="center">{{=item["cantidad"]}}</td>
+                
+                
+            </tr>
+             {{pass}}
+        </tbody>
 </table>
 </div>
 </div>
