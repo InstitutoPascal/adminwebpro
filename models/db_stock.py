@@ -32,5 +32,5 @@ db.remito_salida.producto.requires = IS_IN_DB(db, "producto.id_producto","%(deta
 
 db.define_table("stock",
                 Field("id_producto",db.producto,requires=IS_NOT_EMPTY("No hay producto")),
-                Field("cantidad", integer)
+                Field("cantidad", "integer")
                )
