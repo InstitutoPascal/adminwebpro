@@ -32,14 +32,15 @@ db.define_table("cliente",
 )
 #################Validaciones de Cliente##################
 
-db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"])
-db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")
-db.cliente.dni.requires=IS_NOT_IN_DB(db, "cliente.dni")
-#db.cliente.condicion_frente_al_iva.requires=IS_NOT_EMPTY()
-db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Ingresar el numero Telefonico')
-db.cliente.direccion.requires=IS_NOT_EMPTY(error_message='Ingresar la Direccion')
-db.cliente.numero.requires=IS_NOT_EMPTY(error_message='Ingresar el Numero')
-db.cliente.localidad.requires=IS_NOT_EMPTY(error_message='Ingresar Lalocalidad')
+db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"],error_message='Seleccione una opción' )
+db.cliente.cuit.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
+			IS_NOT_IN_DB(db,"cliente.cuit",error_message='CUIT ya existe')]
+db.cliente.dni.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
+			IS_NOT_IN_DB(db,"cliente.dni",error_message='DNI ya existe')]
+db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.cliente.direccion.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.cliente.numero.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.cliente.localidad.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 
 
 db.define_table("proveedor",
