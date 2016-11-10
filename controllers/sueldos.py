@@ -24,28 +24,43 @@ def abm_horas():
     grid = SQLFORM.grid(db.horas)
     return {"grilla": grid}
 
-def legajos2():
+def legajos():
     if request.vars["boton_siguiente"]:
         # obtengo los valores completados en el formulario
         nro_legajo = request.vars["nro_legajo"]
         fecha_egreso = request.vars["fecha_egreso"]
         cuil = request.vars["cuil"]
-        
+        dni = request.vars["dni"]
+        horas_extras = request.vars["horas_extras"]
+        nombre = request.vars["nombre"]
+        apellido = request.vars["apellido"]
         # guardo los datos elegidos en la sesión
         session["nro_legajo"] = nro_legajo
         session["fecha_egreso"] = fecha_egreso
-        session["nro_comprobante"] = nro_comprobante
         session["cuil"] = cuil
-        print session["cuil"]
+        session["dni"] = dni
+        session["horas_extras"] = horas_extras
+        session["nombre"] = nombre
+        session["apellido"] = apellido
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
 def legajos():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
-
-def legajos3():
+def legajos2():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
+def legajos3():
+    id = db.legajos.insert(
+            num_legajo = session["nro_legajo"],
+            fecha_egreso = session["fecha_egreso"],
+            cuil = session["cuil"],
+            dni = dni ["dni"],
+            horas_extras = session["horas_extras"],
+            nombre = session["nombre"],
+            apellido = session["apellido"],
+        )
+    return {"msg": "se agrego id = %s" % id}
 
 
 def horas():
@@ -94,12 +109,12 @@ def reportes_empleados2():
 
 def reportes_horas():
     Legajo = request.vars["Legajo"]
-    Mes = request.vars["Mes"]
+    mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
     
-    campos = db.horas.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab,
+    campos = db.horas.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
     criterio = db.horas.num_legajo >= Legajo
-    criterio &= db.horas.mes_trabajado <= Mes
+    criterio &= db.horas.mes_trabajado == mes
     
     if ordenar:
         orden = db.legajos.apellido, db.legajos.nombre,db.horas.hs_trab, db.horas.mes_trabajado, 
@@ -107,7 +122,7 @@ def reportes_horas():
         orden = db.legajos.num_legajo
 
     registros = db(criterio).select(*campos, orderby=orden)
-    return dict(lista_horas=registros)
+    return dict(lista_horas=registros, mes=mes, titulo="Listando desde Mes %s" % (mes))
 
     return dict()
 
