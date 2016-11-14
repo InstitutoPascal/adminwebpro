@@ -44,12 +44,15 @@ def legajos():
         session["apellido"] = apellido
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
+
 def legajos():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
+
 def legajos2():
     grid = SQLFORM.grid(db.legajos)
     return {"grilla": grid}
+
 def legajos3():
     id = db.legajos.insert(
             num_legajo = session["nro_legajo"],
@@ -134,17 +137,19 @@ def reportes_familiares():
     familia_estudian = request.vars["familia_estudian"]
     familiar_distdom = request.vars["familiar_distdom"]
     
-    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia,db.familiares.edad,
+    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.legajos.dom_calle, db.familiares.domicilio_numero 
     criterio = db.familiares.num_legajo == db.legajos.num_legajo
     
     if familia_menor21:
         criterio &=  db.familiares.edad < 21
         subtitulo = "Familiares menores de 21 años"
     if familia_estudian:
-        criterio &=  db.familiares.estudia == True
+        criterio &=  db.familiares.estudia == "Si"
         subtitulo = "Familiares que estudian"
     if familiar_distdom:
-        criterio &=  db.familiares.domicilio_calle == db.legajos.dom_calle
+        criterio = db.familiares.num_legajo == db.legajos.num_legajo
+        criterio &=  db.familiares.domicilio_calle != db.legajos.dom_calle
+        criterio |=  db.familiares.domicilio_numero != db.legajos.dom_numero
         subtitulo = "Familiares con distinto domicilio"
     registros = db(criterio).select(*campos)
     return dict(lista_familiares=registros,titulo="Listando %s" % subtitulo)
