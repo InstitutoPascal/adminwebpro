@@ -1,5 +1,14 @@
 {{extend 'layout.html'}}
 <h1>Registrar Legajo</h1>
+<form class="form-horizontal"
+enctype= "multipart/form-data">
+    <div class="form-group">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">imagen</label>
+            <div class="col-sm-4">
+                <input type="file" class="form-control" name = "imagen" id="campo_imagen" placeholder="">
+            </div>
+    </div>
+</form>
 
 <form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos2")}}" enctype="multipart/form-data" method="POST">
 
