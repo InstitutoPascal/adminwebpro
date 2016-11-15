@@ -4,6 +4,17 @@
 <form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos3")}}" enctype="multipart/form-data" method="POST">
 <form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos")}}" enctype="multipart/form-data" method="POST">
 
+    <div class="form-group">
+            <label for="campo_nombre" class="col-sm-2 control-label">Obra Social</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name = "obra social" id="obra_social" placeholder="UTA">
+            </div>
+            <label for="campo_nombre" class="col-sm-2 control-label">Codigo Postal</label>
+            <div class="col-sm-4">
+                <input type="integer" class="form-control" name = "codigo postal" id="c_postal" placeholder="1234">
+            </div>
+          </div>
+    
 <div class="form-group">
             <label for="campo_localidad" class="col-sm-2 control-label">Localidad</label>
             <div class="col-sm-2">
