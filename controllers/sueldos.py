@@ -58,7 +58,7 @@ def legajos3():
             num_legajo = session["nro_legajo"],
             fecha_egreso = session["fecha_egreso"],
             cuil = session["cuil"],
-            dni = dni ["dni"],
+            dni = session ["dni"],
             horas_extras = session["horas_extras"],
             nombre = session["nombre"],
             apellido = session["apellido"],
