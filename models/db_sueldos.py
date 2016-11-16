@@ -36,6 +36,7 @@ db.define_table("legajos",
     Field("constancia_Alumno_Regular_Hijo","string"),
     Field("constancia_Alumno_Regular_empleado","string"),
     Field("curriculum_empleado","string"),
+    Field ("image","upload"),
 )
 
 db.legajos.num_legajo.requires = [IS_NOT_IN_DB(db,"legajos.num_legajo"),
