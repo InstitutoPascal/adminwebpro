@@ -54,7 +54,7 @@ def legajos2():
         num_domicilio = request.vars["num_domicilio"]
         piso = request.vars["piso"]
         depto = request.vars["depto"]
-        
+
         # guardo los datos elegidos en la sesión
         session["imagen"] = image
         session["nro_legajo"] = nro_legajo
@@ -76,9 +76,10 @@ def legajos2():
         grid = SQLFORM.grid(db.legajos)
         return {"grilla": grid}
 
-    
-    
-    
+def legajos2():
+    grid = SQLFORM.grid(db.legajos)
+    return {"grilla": grid}
+
 def legajos3():
     print session ["imagen"]
     id = db.legajos.insert(
@@ -86,7 +87,7 @@ def legajos3():
             num_legajo = session["nro_legajo"],
             fecha_egreso = session["fecha_egreso"],
             cuil = session["cuil"],
-            dni = session ["dni"],
+            dni = session["dni"],
             horas_extras = session["horas_extras"],
             nombre = session["nombre"],
             apellido = session["apellido"],
@@ -99,8 +100,8 @@ def legajos3():
             dom_numero= session ["num_domicilio"],
             piso = session ["piso"],
             depto = session ["depto"],
-            
-        )
+
+    )
     return {"msg": "se agrego id = %s" % id}
 
 
@@ -129,13 +130,13 @@ def reportes_empleados():
     dt_obj2 = datetime.strptime(dt_str2, '%Y-%m-%d')
     fecha_hasta = dt_obj2
     ordenar = request.vars["ordenar"]
-    
+
     campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.legajos.fecha_ingreso
     criterio = db.legajos.fecha_ingreso >= fecha_desde
     criterio &= db.legajos.fecha_ingreso <= fecha_hasta
-    
+
     if ordenar:
-        orden = db.legajos.apellido, db.legajos.nombre, 
+        orden = db.legajos.apellido, db.legajos.nombre,
     else:
         orden = db.legajos.num_legajo
 
@@ -154,13 +155,13 @@ def reportes_horas():
     Legajo = request.vars["Legajo"]
     mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
-    
+
     campos = db.horas.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
     criterio = db.horas.num_legajo >= Legajo
     criterio &= db.horas.mes_trabajado == mes
-    
+
     if ordenar:
-        orden = db.legajos.apellido, db.legajos.nombre,db.horas.hs_trab, db.horas.mes_trabajado, 
+        orden = db.legajos.apellido, db.legajos.nombre,db.horas.hs_trab, db.horas.mes_trabajado,
     else:
         orden = db.legajos.num_legajo
 
@@ -176,10 +177,10 @@ def reportes_familiares():
     familia_menor21 = request.vars["familia_menor21"]
     familia_estudian = request.vars["familia_estudian"]
     familiar_distdom = request.vars["familiar_distdom"]
-    
-    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.legajos.dom_calle, db.familiares.domicilio_numero 
+
+    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.legajos.dom_calle, db.familiares.domicilio_numero
     criterio = db.familiares.num_legajo == db.legajos.num_legajo
-    
+
     if familia_menor21:
         criterio &=  db.familiares.edad < 21
         subtitulo = "Familiares menores de 21 años"
@@ -188,8 +189,7 @@ def reportes_familiares():
         subtitulo = "Familiares que estudian"
     if familiar_distdom:
         criterio = db.familiares.num_legajo == db.legajos.num_legajo
-        criterio &=  db.familiares.domicilio_calle != db.legajos.dom_calle
-        criterio |=  db.familiares.domicilio_numero != db.legajos.dom_numero
+        criterio &=  ((db.familiares.domicilio_calle != db.legajos.dom_calle) |  (db.familiares.domicilio_numero != db.legajos.dom_numero))
         subtitulo = "Familiares con distinto domicilio"
     registros = db(criterio).select(*campos)
     return dict(lista_familiares=registros,titulo="Listando %s" % subtitulo)
