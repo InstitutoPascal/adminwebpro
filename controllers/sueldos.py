@@ -37,7 +37,7 @@ def legajos():
 def legajos2():
      if request.vars["buton_siguiente"]:
         # obtengo los valores completados en el formulario
-        #image = db.legajos.image.store(request.vars["imagen"].file, request.vars["imagen"].filename)
+        image = db.legajos.image.store(request.vars["imagen"].file, request.vars["imagen"].filename)
         nro_legajo = request.vars["nro_legajo"]
         fecha_egreso = request.vars["fecha_egreso"]
         cuil = request.vars["cuil"]
@@ -56,7 +56,7 @@ def legajos2():
         depto = request.vars["depto"]
         
         # guardo los datos elegidos en la sesión
-        #session["imagen"] = image
+        session["imagen"] = image
         session["nro_legajo"] = nro_legajo
         session["fecha_egreso"] = fecha_egreso
         session["cuil"] = cuil
@@ -82,7 +82,7 @@ def legajos2():
 def legajos3():
     print session ["imagen"]
     id = db.legajos.insert(
-         #   image = session ["imagen"],
+            image = session ["imagen"],
             num_legajo = session["nro_legajo"],
             fecha_egreso = session["fecha_egreso"],
             cuil = session["cuil"],
