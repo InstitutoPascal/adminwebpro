@@ -4,29 +4,41 @@
 </br>
 <h3>
 <div class="row">
-  <div class="col-xs-3 col-md-3">Cliente: Elio Coro</div>
-  <div class="col-xs-3 col-md-3">Direccion: Arrotea 2347</div>
-  <div class="col-xs-3 col-md-3">Localidad: Gonzalez Catan</div>
-  <div class="col-xs-3 col-md-3">Telefono: 999-999</div>
+  <div class="col-xs-3 col-md-3">Cliente: {{=reg_cliente.nombre_de_fantasia}}</div>
+  <div class="col-xs-3 col-md-3">Direccion: {{=reg_cliente.direccion}} {{=reg_cliente.numero}}</div>
+  <div class="col-xs-3 col-md-3">Localidad: {{=reg_cliente.localidad}}</div>
+  <div class="col-xs-3 col-md-3">Telefono: {{=reg_cliente.telefono}}</div>
 </div>
 </h3>
 <br>
 </br>
 <h2>Prodcutos</h2>
 
-             <table class="table">
-    <caption></caption>
-    <thead>
-        <tr>
-            <th>Codigo</th> <th>Producto</th> <th>Cantidad</th> 
-        </tr>
-    </thead>
-    <tbody>
-        <tr> <th scope="row">0001</th> <td>Monitor</td>  <td>1</td> </tr>
-        <tr> <th scope="row">0002</th> <td>Mouse</td><td>3</td> </tr>
-        <tr> <th scope="row">0003</th> <td>Memorias</td>  <td>5</td> </tr>
-    </tbody>
-</table>
+           <table class="table table-hover">
+        <caption></caption>
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th class="">Producto</th>
+                    <th>Cantidad</th>
+                    
+                    
+                </tr>
+            </thead>
+
+        <tbody>
+            {{for i, item in enumerate(items_agregados):}}
+            <tr>
+                <th scope="row">{{=item["id_producto"]}}</th>
+                <td >{{=item["detalle_producto"]}}</td>
+                <td align="center">{{=item["cantidad"]}}</td>
+                
+                
+            </tr>
+             {{pass}}
+        </tbody>
+     
+    </table>
 <br>
 </br>
 <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito4",vars={"id":1,"nombre":"mark"})}}">Imprimir</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito2",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>

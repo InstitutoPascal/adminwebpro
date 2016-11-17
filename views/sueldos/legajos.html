@@ -1,71 +1,99 @@
 {{extend 'layout.html'}}
 <h1>Registrar Legajo</h1>
 
-<form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos2")}}" enctype="multipart/form-data" method="POST">
 
-          <div class="form-group">
+    
+
+
+{{=form.custom.begin}}
+
+
+          <div class="form-group row">
             <label for="campo_nrolegajo" class="col-sm-2 control-label">Nro Legajo</label>
             <div class="col-sm-3">
-                <input type="integer" class="form-control" id="campo_nrolegajo" placeholder="0001">
+                {{=form.custom.widget.nro_legajo}}
             </div>
             <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Egreso</label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" id="campo_fechaegr" placeholder="17/08/2016">
+                {{=form.custom.widget.fecha_egreso}}
             </div>
           </div>
 
-              <div class="form-group">
+              <div class="form-group row">
             <label for="campo_cuil" class="col-sm-2 control-label">CUIL</label>
             <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_cuil" placeholder="20235554442">
+                {{=form.custom.widget.cuil}}
             </div>
             <label for="campo_dni" class="col-sm-2 control-label">DNI</label>
             <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_dni" placeholder="23555444">
+                {{=form.custom.widget.dni}}
             </div>
            <label for="campo_cextra" class="col-sm-2 control-label">Corresponde Hs Extras</label>
             <div class="col-sm-2">
-                <select class="form-control">
-                          <option>Si</option>
-                          <option>No</option>
-               </select>
+                {{=form.custom.widget.corresponde_hs_extra}}
             </div>
           </div>
-
-<div class="form-group">
-            <label for="campo_nya" class="col-sm-2 control-label">Nombres y Apellidos</label>
-            <div class="col-sm-8">
-                <input type="integer" class="form-control" id="campo_nya" placeholder="Francisco Angel Perez Ghik">
+<div class="form-group row">
+            <label for="campo_nombre" class="col-sm-2 control-label">Nombres</label>
+            <div class="col-sm-4">
+                {{=form.custom.widget.nombres}}
+            </div>
+            <label for="campo_nombre" class="col-sm-2 control-label">Apellidos</label>
+            <div class="col-sm-4">
+                {{=form.custom.widget.apellido}}
             </div>
           </div>
-
- <div class="form-group">
+ <div class="form-group row">
             <label for="campo_fenac1" class="col-sm-2 control-label">Fecha Nacimiento</label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" id="campo_fenac1" placeholder="01/01/1980">
+                {{=form.custom.widget.fecha_nacimiento}}
             </div>
             <label for="campo_lugnac" class="col-sm-2 control-label">Lugar Nacimiento</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="campo_lugnac" placeholder="Buenos Aires">
+                {{=form.custom.widget.lugar_nacimiento}}
             </div>
           </div>
 
-<div class="form-group">
+<div class="form-group row">
             <label for="campo_estciv" class="col-sm-2 control-label">Estado Civil</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="campo_estciv" placeholder="Soltero">
+                {{=form.custom.widget.estado_civil}}
             </div>
             <label for="campo_edad" class="col-sm-2 control-label">Edad</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="campo_edad" placeholder="30">
+                {{=form.custom.widget.edad}}
             </div>
     <label for="campo_cat" class="col-sm-2 control-label">Categoría</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="campo_cat" placeholder="Maestranza">
+                {{=form.custom.widget.categoria}}
             </div>
     </div>
 
-</table>
-<form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos")}}" enctype="multipart/form-data" method="POST">
-      <button type="submit" class="btn btn-default">Siguiente</button>
-</form>
+<div class="form-group row">
+            <label for="campo_estciv" class="col-sm-2 control-label">Domicilio calle</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.domicilio_calle}}
+            </div>
+            <label for="campo_edad" class="col-sm-2 control-label"> Domicilio numero</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.numero_calle}}
+            </div>
+    <label for="campo_cat" class="col-sm-1 control-label">piso</label>
+            <div class="col-sm-1">
+                {{=form.custom.widget.piso}}
+            </div>
+    <label for="campo_cat" class="col-sm-1 control-label">depto</label>
+            <div class="col-sm-1">
+                {{=form.custom.widget.depto}}
+    </div>
+    <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">imagen</label>
+            <div class="col-sm-4">
+                {{=form.custom.widget.imagen}}
+            </div>
+    </div>
+
+      
+      {{=form.custom.submit}}
+</div>
+{{=form.custom.end}}

@@ -7,8 +7,8 @@
         </div>
         <div class="col-xs-6 text-right">
             <h1>Factura Tipo: A</h1>
-            <h1><small>N° {{=venta.numero_factura}}</small></h1>
-            <h1><small>Fecha: {{=venta.fecha}}</small></h1>
+            <h1><small>N° 00001</small></h1>
+            <h1><small>Fecha: 30/10/2016</small></h1>
         </div>
     </div>
     <div class="form-group">
@@ -17,15 +17,18 @@
             <div class="panel panel-default">
             <div class="panel-heading">
                 <h4>De: <a href="#">Claudia Vargas</a></h4></div>
-            <div class="panel-body">Dirección detalles más detalles</div>
+            <div class="panel-body">DOMICILIO: Equiza 1234</div>
+            <div class="panel-body">LOCALIDAD: Gonzalez Catan</div>
+            <div class="panel-body">CUIT: 24-29-951753-5</div>
+            <div class="panel-body">Inicio Actividades: 03/04/2016</div>
             </div>
             </div>
             <div class="col-xs-2"></div>
             <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Para : <a href="#">{{=cliente.razon_social}}</a></h4></div>
-            <div class="panel-body">DOMICILIO: {{=cliente.direccion}} {{=cliente.numero}}</div>
+                <h4>Para : <a href="#">ZIA0- Technical Service</a></h4></div>
+            <div class="panel-body">DOMICILIO: Alsina 1175</div>
             <div class="panel-body">LOCALIDAD: Pontevedra</div>
             <div class="panel-body">COND. I.V.A: Responsable Inscripto</div>
             <div class="panel-body">CUIT o DNI: 20-33465017-1</div>
@@ -43,58 +46,51 @@
             <th><h4>Detalle</h4></th>
             <th><h4>Cantidad</h4></th>
             <th><h4>Precio Unitario</h4></th>
-            <th><h4>Total</h4></th>
+            <th><h4>Sub-Total</h4></th>
         </tr>
     </thead>
     <tbody>
-        {{for item in items:}}
+       
         <tr>
-            <td>{{=item.detalle_ventas.id_producto}}</td>
-            <td>{{=item.producto.detalle_producto}}</td>
-            <td class=" text-center ">{{=item.detalle_ventas.cantidad}}</td>
-            <td class=" text-right ">${{=item.producto.precio_producto}}</td>
-            <td class=" text-right ">${{=item.producto.precio_producto * item.detalle_ventas.cantidad}}</td>
+            <td>1</td>
+            <td>Memoria Ram 16Gb</td>
+            <td class=" text-center ">2</td>
+            <td class=" text-right ">$900</td>
+            <td class=" text-right ">$1800</td>
         </tr>
-        {{pass}}
+        
     </tbody>
 </table>
 </div>
 </div>
 </div>
 <div class="form-group">
-<div class="row">
-<div class="col-xs-12">
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th><h5><B>TOTAL BRUTO</B></h5></th>
-            <th><h5>Descuento "(10%)" </h5></th>
-            <th><h5>Descuento "(15%)" </h5></th>
-            <th><h5>Descuento "(20%)" </h5></th>
-            <th><h5><B>SUB TOTAL</B></h5></th>
-            <th><h5>Impuesto IVA "(10.5%)" </h5></th>
-            <th><h5>Impuesto IVA "(21%)" </h5></th>
-            <th><h5><B>TOTAL</B></h5></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class=" text-right "><B>$3800</B></td>
-            <td class=" text-right ">$800</td>
-            <td class=" text-right ">$0</td>
-            <td class=" text-right ">$0</td>
-            <td class=" text-right "><B>$3000</B></td>
-            <td class=" text-right ">$390</td>
-            <td class=" text-right ">$0</td>
-            <td class=" text-right "><B>$3390</B></td>
-        </tr>
-    </tbody>
-</table>
-</div>
-</div>
-<div class="form-group">
-<div class="col-xs-5">
-       <h2><IMG SRC="http://www.codigodebarras.com/UserFiles/Image/JPG/CB.jpg" WIDTH=500 HEIGHT=100 /> </h2>
-</div>
+    <div class="row">
+        <div class="col-xs-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th><h5><B> SUB-TOTAL</B></h5></th>
+                        <th><h5>Impuesto IVA "(10.5%)" </h5></th>
+                        <th><h5>Impuesto IVA "(21%)" </h5></th>
+                        <th><h5><B>TOTAL</B></h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class=" text-right "><B>$1800</B></td>
+                        <td class=" text-right ">$189.0</td>
+                        <td class=" text-right ">$0</td>
+                        <td class=" text-right "><B>$1989.0</B></td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+            <div class="col-xs-4">
+               <h2>
+                   <IMG SRC="http://www.equipospro.com.ar/como_pagar/codigo_barras_pago_facil_archivos/codigo_barras.gif" WIDTH=400 HEIGHT=100 /> 
+               </h2>
+            </div>
 </div>
 </form>

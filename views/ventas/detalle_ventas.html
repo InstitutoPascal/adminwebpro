@@ -26,7 +26,7 @@
         </div>
     </div>
 </form>
-<form class="form-horizontal" action="{{=URL(c="ventas", f="agregar_descuento")}}" enctype="multipart/form-data" method="POST">
+<form class="form-horizontal" action="{{=URL(c="ventas", f="confirmar")}}" enctype="multipart/form-data" method="POST">
     <div class="form-group">
         <div class="col-md-10">
           <table class="table table-hover">
@@ -44,7 +44,8 @@
             </tr>
           </thead>
         <tbody>
-            {{for item in items_venta:}}
+            {{subtotal = 0}}
+            {{for i, item in enumerate(items_venta):}}
             <tr>
                 <th scope="row">{{=item["id_producto"]}}</th>
                 <td >{{=item["detalle_producto"]}}</td>
@@ -53,8 +54,8 @@
                 <td align="center">{{=item["precio_venta"] * item["cantidad"]}}</td>
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
-                <td>
-                    </td>
+                {{subtotal = subtotal + (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00) }}
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"pos":i})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
             </tr>
             {{pass}}
         </tbody>
@@ -65,8 +66,8 @@
         <div class="col-md-3">
         <table class="table table-bordered">
         <tbody>
-            <tr> <th scope="row">Total:</th>
-                 <td>$3786.7</td>
+            <tr> <th scope="row">Total $:</th>
+                 <td>{{=subtotal}}</td>
             </tr>
         </tbody>
         </table>
@@ -74,7 +75,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-1">
-           <input type="submit" class="btn btn-default" value="Confirmar">
+           <input type="submit" class="btn btn-default" value="Finalizar Venta">
         </div>
      </div>
 </form>

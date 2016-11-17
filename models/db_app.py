@@ -32,14 +32,15 @@ db.define_table("cliente",
 )
 #################Validaciones de Cliente##################
 
-db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"])
-db.cliente.cuit.requires=IS_NOT_IN_DB(db, "cliente.cuit")
-db.cliente.dni.requires=IS_NOT_IN_DB(db, "cliente.dni")
-#db.cliente.condicion_frente_al_iva.requires=IS_NOT_EMPTY(error_message='Selecione un campo')
-db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Ingresar el numero Telefonico')
-db.cliente.direccion.requires=IS_NOT_EMPTY(error_message='Ingresar la Direccion')
-db.cliente.numero.requires=IS_NOT_EMPTY(error_message='Ingresar el Numero')
-db.cliente.localidad.requires=IS_NOT_EMPTY(error_message='Ingresar Lalocalidad')
+db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"],error_message='Seleccione una opción' )
+db.cliente.cuit.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
+			IS_NOT_IN_DB(db,"cliente.cuit",error_message='CUIT ya existe')]
+db.cliente.dni.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
+			IS_NOT_IN_DB(db,"cliente.dni",error_message='DNI ya existe')]
+db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.cliente.direccion.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.cliente.numero.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.cliente.localidad.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 
 
 db.define_table("proveedor",
@@ -59,14 +60,22 @@ db.define_table("proveedor",
       Field("pagina_web", 'string'),
       format='%(razon_social)s %(id_proveedor)s )',
     )
-db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"])
-db.proveedor.cuit.requires=[IS_NOT_EMPTY(),IS_CUIT()]
-db.proveedor.ingreso_bruto.requires=IS_NOT_EMPTY()
-db.proveedor.razon_social.requires=IS_NOT_EMPTY()
-db.proveedor.domicilio.requires=IS_NOT_EMPTY()
-db.proveedor.localidad.requires=IS_NOT_EMPTY()
-db.proveedor.codigo_postal.requires=IS_NOT_EMPTY()
-db.proveedor.provincia.requires=IS_NOT_EMPTY()
+db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"],error_message='Seleccione una opción' )
+db.proveedor.cuit.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
+			IS_NOT_IN_DB(db,"proveedor.cuit",error_message='CUIT ya existe')]
+db.proveedor.ingreso_bruto.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
+						IS_NOT_IN_DB(db,"proveedor.ingreso_bruto",error_message='Ingresos Brutos ya existe')]
+db.proveedor.razon_social.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
+				    IS_NOT_IN_DB(db,"proveedor.razon_social",error_message='Razón Social ya existe')]
+db.proveedor.domicilio.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.localidad.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.codigo_postal.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.provincia.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.pais.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.telefono.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.celular.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.email_proveedor.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.proveedor.pagina_web.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 
 
 db.define_table("producto",

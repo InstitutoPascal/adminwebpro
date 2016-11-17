@@ -10,8 +10,9 @@ def abm_clientes():
 
 @auth.requires_login()
 def abm_ventas():
+    #return dict(message="abm_ventas")
     # definir los campos a obtener desde la base de datos:
-    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social, #db.ventas.numero_factura
     # definir la condición que deben cumplir los registros:
     criterio = db.cliente.id_cliente>0
     ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
@@ -24,6 +25,7 @@ def abm_ventas():
         mensaje = "Seleccione un cliente"
         ##primer_cliente = lista_clientes[0]
     return dict(message=mensaje, lista_clientes=lista_clientes)
+
 
 @auth.requires_login()
 def detalle_ventas():
@@ -66,13 +68,24 @@ def reporte_ventas():
 
 def vista_previa():
     return dict(message="vista_previa")
+    id_venta = request.args[0]
+    reg_venta = db(db.ventas.id == id_venta).select().first()
+    reg_cliente = db(db.cliente.id_cliente == reg_venta.id_cliente).select().first()
+    # busco los datos de cada item vendido (id, cantidad, etc.) y del producto
+    q = db.detalle_ventas.id_venta == id_venta
+    q &= db.producto.id_producto == db.detalle_ventas.id_producto
+    reg_detalle_ventas = db(q).select()
+    return dict(message="vista_previa", 
+                venta=reg_venta, 
+                cliente=reg_cliente, 
+                items=reg_detalle_ventas)
 
 def borrar_item():
     # eliminar algo
     # request.vars tiene un diccionario con todos los parametros de la URL (luego del ?)
-    id_a_borrar = request.vars["id"]
-    #producto_a_borrar = request.vars["producto"]
-    return dict(mensaje="Borrado registro del Item = %s" % (id_a_borrar))
+    pos_a_borrar = int(request.vars["pos"])
+    session["items_venta"].pop(pos_a_borrar)
+    redirect(URL(f="detalle_ventas"))
 
 def lista_ventas():
     # obtenemos los criterios de busqueda y generamos el reporte
@@ -81,10 +94,33 @@ def lista_ventas():
     return dict(titulo="Listando Desde: %s Hasta: %s" % (desde, hasta))
 
 def guardado():
+    # Agregar los registros a la base de datos:
+    # encabezado:
+    nuevo_id_venta = db.ventas.insert(
+         id_cliente=session["id_cliente"],
+         numero_factura=session["nro_comprobante"],
+         fecha=session["fecha"],
+         )
+     # detalle (productos)
+    for item in session["items_venta"]:
+         db.detalle_ventas.insert(
+            id_venta=nuevo_id_venta,
+             id_producto=item["id_producto"],
+             cantidad=item["cantidad"]
+             )
+    return dict (mensaje= "Se guardo con exito el comprobante id=%s" % nuevo_id_venta,
+                 id_venta=nuevo_id_venta)
     return dict (mensaje= "Se guardo con exito el comprobante")
 
 def confirmar():
-    return dict (mensaje= "Finalizar venta")
+    reg_cliente = db(db.cliente.id_cliente==session["id_cliente"]).select().first()
+    total = 0
+    for item in session["items_venta"]:
+        total += (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00)
+    return dict (mensaje= "Finalizar venta", 
+                 id_cliente=session["id_cliente"], fecha=session["fecha"], 
+                 nro_cbte=session["nro_comprobante"], 
+                 reg_cliente=reg_cliente, total=total)
 
 def agregar_descuento():
     return dict (mensaje= "Seleccione un Descuento a la Venta ")

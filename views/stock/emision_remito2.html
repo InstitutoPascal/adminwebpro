@@ -10,58 +10,76 @@
 </div>
 <br>
 </br>    
+
+
 <div class="row">
   <div class="col-xs-3 col-md-5">Fecha: {{ =fecha}}</div>
 </div>
 </h3>
 <br>
 </br>
+<form class="form-horizontal" action="{{=URL(c="stock", f="emision_remito2")}}" enctype="multipart/form-data" method="POST">
 <h1>Agregar productos</h1>
 <br>
 </br>
 <div class="form-group">
-            <label for="cliente" class="col-sm-2 control-label">Seleccione producto</label>
-            <div class="col-sm-3">
-                                <select class="form-control">
-                          <option>Detalle de producto</option>
-                          <option>Mouse</option>
-                          <option>Teclado</option>
-                          <option>Monitor</option>
-                          <option>Fuente</option>
-                          <option>Placa de red</option>
+        <label for="produc" class="col-sm-1 control-label">Seleccione producto:</label>
+           <div class="col-sm-3">
+
+                <select class="form-control" id="campo_tipo" name="id_producto">
+                   {{for reg_producto in lista_productos:}}
+                  <option value="{{=reg_producto.id_producto}}" {{="SELECTED" if int(item_modificar["id_producto"]) == reg_producto.id_producto else ""}}>{{=reg_producto.detalle_producto}}</option>
+                  {{pass}}
                 </select>
-             </div>
-             <label for="cantidad" class="col-sm-1 control-label">Cantidad</label>
-            <div class="col-sm-1">
-                <input type="number" class="form-control" id="cantidad" step="1" placeholder="">
-            </div>
-             <button type="button" class="btn btn-primary">Agregar</button>
            </div>
-<br>
-</br>
-  <br>
-</br>
 
-             <table class="table">
-    <caption></caption>
-    <thead>
-        <tr>
-            <th>Codigo</th> <th>Producto</th> <th>Cantidad</th> <th>Opciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr> <th scope="row">0001</th> <td>Monitor</td>  <td>1</td> <td> <a class="btn btn-default" role="button" >Eliminar</a></td></tr>
-        <tr> <th scope="row">0002</th> <td>Mouse</td><td>3</td><td> <a class="btn btn-default" role="button" >Eliminar</a></td> </tr>
-        <tr> <th scope="row">0003</th> <td>Memorias</td>  <td>5</td><td> <a class="btn btn-default" role="button" >Eliminar</a></td> </tr>
-    </tbody>
-</table>
-</h3>
+     <label for="cant" class="col-sm-1 control-label">CANTIDAD</label>
+            <div class="col-sm-1">
+               <input type="number" name="cantidad" class="form-control" id="cant" value="{{=item_modificar["cantidad"]}}">
+            </div>
+    
+    <div class="form-group">
+        <div class="col-md-3">
+             <input type="submit" name="agregar_item" class="btn btn-default" value="AGREGAR ITEM">
+        </div>
+    </div>
 
-<br>
-</br>  
-<br>
-</br>
+<form class="form-horizontal" action="{{=URL(c="compra", f="confirmar")}}" enctype="multipart/form-data" method="POST">
+  <div class="form-group">
+  <div class="col-md-10">
+    <table class="table table-hover">
+        <caption></caption>
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th class="">Producto</th>
+                    <th>Cantidad</th>
+                    
+                    <th>Opciones</th>
+                </tr>
+            </thead>
 
+        <tbody>
+            {{for i, item in enumerate(items_agregados):}}
+            <tr>
+                <th scope="row">{{=item["id_producto"]}}</th>
+                <td >{{=item["detalle_producto"]}}</td>
+                <td align="center">{{=item["cantidad"]}}</td>
+                
+                <td>
+                    <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito2",vars={"indice": i,"accion":"eliminar"})}}">ELIMINAR</a>
+                    <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito2",vars={"indice": i,"accion":"modificar"})}}">MODIFICAR</a>
+                </td>
+            </tr>
+             {{pass}}
+        </tbody>
+     
+    </table>
+   </div>
+      </div>
+    
+   
+    
             <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito3",vars={"id":1,"nombre":"mark"})}}">Siguiente</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="emision_remito",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
 <br>
 </br>     

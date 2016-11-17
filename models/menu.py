@@ -5,8 +5,8 @@
 # Customize your APP title, subtitle and menus here
 # ----------------------------------------------------------------------------------------------------------------------
 
-response.logo = A(B('web', SPAN(2), 'py'), XML('&trade;&nbsp;'),
-                  _class="navbar-brand", _href="http://www.web2py.com/",
+response.logo = A(B('Adminwebpro'), XML('&trade;&nbsp;'),
+                  _class="navbar-brand", _href="/adminwebpro/default/index",
                   _id="web2py-logo")
 response.title = request.application.replace('_', ' ').title()
 response.subtitle = ''
@@ -46,7 +46,6 @@ response.menu = [
     (T('Pagos'), False, URL('pagos', 'index'), [
         (T('ABM Bancos'), False, URL('pagos', 'alta_bancos'), []),
         (T('ABM Cuentabancaria'), False, URL('pagos', 'alta_cuenta_bancaria'), []),
-        (T('Cheques'), False, URL('pagos', 'alta_cheques'), []),
         (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
         (T('Generar Reporte'), False, URL('pagos', 'generar_reporte'), []),
         ]),
