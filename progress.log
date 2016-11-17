@@ -59,3 +59,8 @@
 [2016-10-11 16:09:32] EDIT adminwebpro/models/db_ventas.py: 0
 [2016-11-17 16:54:36] EDIT adminwebpro/views/ordencobro/reporte_cobros.html: 0
 [2016-11-17 19:30:06] EDIT adminwebpro/views/ordencobro/reporte_cobros.html: 0
+[2016-11-17 20:26:11] CREATE compra/formulario_orden_compra.html: 0
+[2016-11-17 20:27:33] DELETE adminwebpro/views/compra/formulario_orden_compra.html: -3
+[2016-11-17 20:28:01] CREATE compra/formulario_orden_compras.html: 0
+[2016-11-17 20:28:35] EDIT adminwebpro/views/compra/formulario_orden_compras.html: 106
+[2016-11-17 20:29:41] EDIT adminwebpro/models/menu.py: 1
