@@ -27,8 +27,10 @@ def legajos():
     import os
     form = SQLFORM.factory(Field('nro_legajo',requires=IS_NOT_EMPTY(error_message='Ingrese el número de legajo')),
                            Field('fecha_egreso','date',requires=IS_NOT_EMPTY(error_message='Ingrese la fecha')),
-                          Field('cuil',requires=IS_NOT_EMPTY(error_message='Ingrese el cuil')),
+                           Field('cuil',requires=IS_NOT_EMPTY(error_message= 'Ingrese el cuil')),
+                                                                      
                            Field('dni',requires=IS_NOT_EMPTY(error_message='Ingrese el dni')),
+                           
                            Field('corresponde_hs_extra',requires=IS_IN_SET({1:'si',2:'no'},error_message='Ingrese una opción',zero='Seleccionar...')),
                            Field('nombres',requires=IS_NOT_EMPTY(error_message='Ingrese el nombre')),
                            Field('apellido',requires=IS_NOT_EMPTY(error_message='Ingrese el apellido')),
