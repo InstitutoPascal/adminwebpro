@@ -3,99 +3,95 @@
 
 
 
-<form class="form-horizontal" action="{{=URL(c="sueldos", f="legajos2")}}" enctype="multipart/form-data" method="POST">
+{{=form.custom.begin}}
 
-          <div class="form-group">
+          <div class="form-group row">
             <label for="campo_nrolegajo" class="col-sm-2 control-label">Nro Legajo</label>
-            <div class="col-sm-3">
-                <input type="integer" class="form-control" name = "nro_legajo" id="campo_nrolegajo" placeholder="0001">
-            </div>
-            <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Egreso</label>
-            <div class="col-sm-3">
-                <input type="date" class="form-control" name = "fecha_egreso" id="campo_fechaegr" placeholder="17/08/2016">
-            </div>
+          <div class="col-sm-3">
+               {{=form.custom.widget.nro_legajo}}
           </div>
-    
-    <form class="form-horizontal"
-enctype= "multipart/form-data">
-    <div class="form-group">
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Egreso</label>
+          <div class="col-sm-3">
+                {{=form.custom.widget.fecha_egreso}}
+          </div>
+          </div>
+
+    <div class="form-group row">
             <label for="campo_nrolegajo" class="col-sm-2 control-label">imagen</label>
             <div class="col-sm-4">
-                <input type="file" class="form-control" name = "imagen" id="filename" placeholder="">
+                 {{=form.custom.widget.imagen}}
             </div>
     </div>
     
 
-              <div class="form-group">
+      <div class="form-group row">
             <label for="campo_cuil" class="col-sm-2 control-label">CUIL</label>
             <div class="col-sm-2">
-                <input type="string" class="form-control" name = "cuil" id="campo_cuil" placeholder="20235554442">
+                {{=form.custom.widget.cuil}}
             </div>
             <label for="campo_dni" class="col-sm-2 control-label">DNI</label>
             <div class="col-sm-2">
-                <input type="string" class="form-control" name = "dni" id="campo_dni" placeholder="23555444">
+                {{=form.custom.widget.dni}}
             </div>
            <label for="campo_cextra" class="col-sm-2 control-label">Corresponde Hs Extras</label>
             <div class="col-sm-2">
-                <select class="form-control" name = "hs_extras">
-                          <option>Si</option>
-                          <option>No</option>
-               </select>
+                {{=form.custom.widget.corresponde_hs_extra}}
             </div>
-          </div>
-<div class="form-group">
+
+            </div>
+<div class="form-group row">
             <label for="campo_nombre" class="col-sm-2 control-label">Nombres</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name = "nombre" id="campo_nombre" placeholder="Francisco Angel">
+                {{=form.custom.widget.nombres}}
             </div>
             <label for="campo_nombre" class="col-sm-2 control-label">Apellidos</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name = "nombre" id="campo_nombre" placeholder="Francisco Angel">
+                {{=form.custom.widget.nro_legajo}}
             </div>
-          </div>
- <div class="form-group">
+</div>
+ <div class="form-group row">
             <label for="campo_fenac1" class="col-sm-2 control-label">Fecha Nacimiento</label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" name = "fecha_nacimiento" id="campo_fenac1" placeholder="01/01/1980">
+                {{=form.custom.widget.fecha_nacimiento}}
             </div>
             <label for="campo_lugnac" class="col-sm-2 control-label">Lugar Nacimiento</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name = "lugar_nacimiento" id="campo_lugnac" placeholder="Buenos Aires">
+                 {{=form.custom.widget.lugar_nacimiento}}
             </div>
-          </div>
+</div>
 
-<div class="form-group">
+<div class="form-group row">
             <label for="campo_estciv" class="col-sm-2 control-label">Estado Civil</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" name = "estado_civil" id="campo_estciv" placeholder="Soltero">
+                {{=form.custom.widget.estado_civil}}
             </div>
             <label for="campo_edad" class="col-sm-2 control-label">Edad</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" name = "edad" id="campo_edad" placeholder="30">
+                {{=form.custom.widget.edad}}
             </div>
     <label for="campo_cat" class="col-sm-2 control-label">Categoría</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" name = "categoria" id="campo_cat" placeholder="Maestranza">
-            </div>
+                {{=form.custom.widget.categoria}}
+</div>
     </div>
 
-<div class="form-group">
+<div class="form-group row">
             <label for="campo_estciv" class="col-sm-2 control-label">Domicilio calle</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" name = "domicilio" id="dom" placeholder="Puerto Argentino">
+                {{=form.custom.widget.domicilio_calle}}
             </div>
             <label for="campo_edad" class="col-sm-2 control-label"> Domicilio numero</label>
             <div class="col-sm-2">
-                <input type="integer" class="form-control" name = "dom_numero" id="numero" placeholder="30008">
+               {{=form.custom.widget.domicilio_numero}}
             </div>
     <label for="campo_cat" class="col-sm-1 control-label">piso</label>
             <div class="col-sm-1">
-                <input type="integer" class="form-control" name = "categoria" id="campo_cat" placeholder="12">
-            </div>
+               {{=form.custom.widget.piso}}
+</div>
     <label for="campo_cat" class="col-sm-1 control-label">depto</label>
             <div class="col-sm-1">
-                <input type="string" class="form-control" name = "depto" id="dto" placeholder="1-b">
+                 {{=form.custom.widget.depto}}
     </div>
-</table>
-      <input type="submit" class="btn btn-default" name="buton_siguiente" value="Siguiente">
-</form>
+      {{=form.custom.submit}}
+</div>
+{{=form.custom.end}}
