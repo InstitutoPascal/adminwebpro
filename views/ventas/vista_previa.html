@@ -50,14 +50,15 @@
         </tr>
     </thead>
     <tbody>
-       
+       {{for item in items_venta:}}
         <tr>
-            <td>1</td>
-            <td>Memoria Ram 16Gb</td>
+            <td>{{=item["id_producto"]}}</td>
+            <td>{{=item["detalle_producto"]}}</td>
             <td class=" text-center ">2</td>
             <td class=" text-right ">$900</td>
             <td class=" text-right ">$1800</td>
         </tr>
+        {{pass}}
         
     </tbody>
 </table>

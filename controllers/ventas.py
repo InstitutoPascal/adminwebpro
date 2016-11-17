@@ -78,7 +78,8 @@ def vista_previa():
     return dict(message="vista_previa", 
                 venta=reg_venta, 
                 cliente=reg_cliente, 
-                items=reg_detalle_ventas)
+                items=reg_detalle_ventas,
+               items_venta=session["items_venta"])
 
 def borrar_item():
     # eliminar algo
