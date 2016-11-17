@@ -2,29 +2,24 @@
 <h1>Registrar Legajo</h1>
 
 
+    
+
 
 {{=form.custom.begin}}
 
+
           <div class="form-group row">
             <label for="campo_nrolegajo" class="col-sm-2 control-label">Nro Legajo</label>
-          <div class="col-sm-3">
-               {{=form.custom.widget.nro_legajo}}
-          </div>
-            <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Egreso</label>
-          <div class="col-sm-3">
-                {{=form.custom.widget.fecha_egreso}}
-          </div>
-          </div>
-
-    <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-2 control-label">imagen</label>
-            <div class="col-sm-4">
-                 {{=form.custom.widget.imagen}}
+            <div class="col-sm-3">
+                {{=form.custom.widget.nro_legajo}}
             </div>
-    </div>
-    
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Egreso</label>
+            <div class="col-sm-3">
+                {{=form.custom.widget.fecha_egreso}}
+            </div>
+          </div>
 
-      <div class="form-group row">
+              <div class="form-group row">
             <label for="campo_cuil" class="col-sm-2 control-label">CUIL</label>
             <div class="col-sm-2">
                 {{=form.custom.widget.cuil}}
@@ -37,8 +32,7 @@
             <div class="col-sm-2">
                 {{=form.custom.widget.corresponde_hs_extra}}
             </div>
-
-            </div>
+          </div>
 <div class="form-group row">
             <label for="campo_nombre" class="col-sm-2 control-label">Nombres</label>
             <div class="col-sm-4">
@@ -46,9 +40,9 @@
             </div>
             <label for="campo_nombre" class="col-sm-2 control-label">Apellidos</label>
             <div class="col-sm-4">
-                {{=form.custom.widget.nro_legajo}}
+                {{=form.custom.widget.apellido}}
             </div>
-</div>
+          </div>
  <div class="form-group row">
             <label for="campo_fenac1" class="col-sm-2 control-label">Fecha Nacimiento</label>
             <div class="col-sm-3">
@@ -56,9 +50,9 @@
             </div>
             <label for="campo_lugnac" class="col-sm-2 control-label">Lugar Nacimiento</label>
             <div class="col-sm-3">
-                 {{=form.custom.widget.lugar_nacimiento}}
+                {{=form.custom.widget.lugar_nacimiento}}
             </div>
-</div>
+          </div>
 
 <div class="form-group row">
             <label for="campo_estciv" class="col-sm-2 control-label">Estado Civil</label>
@@ -72,7 +66,7 @@
     <label for="campo_cat" class="col-sm-2 control-label">Categoría</label>
             <div class="col-sm-2">
                 {{=form.custom.widget.categoria}}
-</div>
+            </div>
     </div>
 
 <div class="form-group row">
@@ -92,7 +86,14 @@
             <div class="col-sm-1">
                 {{=form.custom.widget.depto}}
     </div>
+    <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">imagen</label>
+            <div class="col-sm-4">
+                {{=form.custom.widget.imagen}}
+            </div>
     </div>
+
+      
       {{=form.custom.submit}}
 </div>
 {{=form.custom.end}}
