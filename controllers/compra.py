@@ -6,6 +6,12 @@ def abm_proveedor():
     grid = SQLFORM.grid(db.proveedor)
     return {"grilla": grid}
 
+def formulario_orden_compras():
+    return dict (message="Formulario Orden de Compras")
+
+def detalle_orden_compras():
+    return dict(message="Detalle Orden de Compras")
+
 def informe_subdiarioa():
        # presentar formulario para criterios de busqueda
     return dict(message="Informe Subdiarioa")

@@ -1,0 +1,79 @@
+{{extend 'layout.html'}}
+<h1>Detalle Orden Compras</h1>
+<div class="row">
+    <div class="col-sm-4">
+
+    </div>
+</div>
+<form method="POST" >
+    <div class="form-group">
+        <div class="col-sm-12">
+            <table class="table table-hover">
+                <caption>Lista de Detalles </caption>
+                    <thead>
+                        <tr>
+                            <th>CANTIDAD</th>
+                            <th>DETALLE</th>
+                            <th>P. UNITARIO</th>
+                            <th>P. TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr id="">
+                            <th scope="row"></th>
+                                <!--<<td></td>
+                                <td align="center">..........</td>
+                                <td align="center">..........</td>
+                                <td>
+                                    <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"accion":"eliminar_item"})}}">ELIMINAR</a>-->
+                                </td>
+                        </tr>
+                            
+                    </tbody>
+            </table>
+            <div>
+                <input type="submit" value="GUARDAR" name="modificar" class="btn btn-default" role="button">
+            </div>
+            <br>
+        </div>
+    </div>
+    <br>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Totales:</th>
+                                <th scope="row">Total Neto:</th>
+                                <th scope="row">IVA:</th>
+                                <th scope="row">Total Bruto:</th>
+                            </tr>
+                            <tr>
+                                <td align="center">$</td>
+                                <td align="center">$ </td>
+                                <td align="center">$ </td>
+                                <td align="center">$ </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <br>
+    <div>
+        <center>
+            <input type="submit" name="confirmar" value="CONFIRMAR" class="btn btn-default">
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_orden_compras",vars={"id":1,"nombre":"mark"})}}">CANCELAR</a>
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_orden_compras",vars={"id":1,"nombre":"mark"})}}">ATRAS</a>
+        </center>
+    </div>
+</form>
+<br>
+<center>
+	<footer>
+		<small>Sistema Contable Módulo Compras Sector Detalle Orden Compra</small>
+		<address>AdminWebPro</address>
+	</footer>
+</center>
