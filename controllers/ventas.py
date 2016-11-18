@@ -79,6 +79,7 @@ def vista_previa():
                 ventas=reg_venta, 
                 cliente=reg_cliente, 
                 items=reg_detalle_ventas,
+
                 items_venta=session["items_venta"])
 
 def borrar_item():
