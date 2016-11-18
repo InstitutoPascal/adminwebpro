@@ -7,7 +7,7 @@ db.define_table("ventas",
     Field("id_cliente",db.cliente),
     Field("tipo_de_factura","string"),
     Field("numero_factura","integer"),
-    Field("fecha","datetime",default=datetime.now()),
+    Field("fecha","date"),
     Field("tipo_de_pago","string"),
     format='%(numero_factura)s %(tipo_de_factura)s',
 )

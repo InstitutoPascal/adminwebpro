@@ -6,9 +6,9 @@
         <h2><IMG SRC="http://www.hersis.cl/servicios/servicio_tecnico.png" WIDTH=178 HEIGHT=180 /> C.V Technical Service</h2>
         </div>
         <div class="col-xs-6 text-right">
-            <h1>Factura Tipo: A</h1>
-            <h1><small>N° 00001</small></h1>
-            <h1><small>Fecha: 30/10/2016</small></h1>
+            <h1>Factura Tipo:{{=cliente.tipo_factura}} </h1>
+            <h1><small>N° {{=ventas.numero_factura}}</small></h1>
+            <h1><small>Fecha: {{=ventas.fecha}}</small></h1>
         </div>
     </div>
     <div class="form-group">
@@ -27,11 +27,11 @@
             <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Para : <a href="#">ZIA0- Technical Service</a></h4></div>
-            <div class="panel-body">DOMICILIO: Alsina 1175</div>
-            <div class="panel-body">LOCALIDAD: Pontevedra</div>
-            <div class="panel-body">COND. I.V.A: Responsable Inscripto</div>
-            <div class="panel-body">CUIT o DNI: 20-33465017-1</div>
+                <h4>Para : <a href="#">{{=cliente.nombre_de_fantasia}}{{=cliente.razon_social}}</a></h4></div>
+            <div class="panel-body">DOMICILIO: {{=cliente.direccion}}  {{=cliente.numero}}</div>
+            <div class="panel-body">LOCALIDAD: {{=cliente.localidad}}</div>
+            <div class="panel-body">COND. I.V.A: {{=cliente.condicion_frente_al_iva}}</div>
+            <div class="panel-body">CUIT: {{=cliente.cuit}} &nbsp &nbsp DNI: {{=cliente.dni}}</div>
             </div>
         </div>
         </div>
@@ -50,15 +50,15 @@
         </tr>
     </thead>
     <tbody>
-       
+        {{for item in items_venta:}}
         <tr>
-            <td>1</td>
-            <td>Memoria Ram 16Gb</td>
-            <td class=" text-center ">2</td>
-            <td class=" text-right ">$900</td>
-            <td class=" text-right ">$1800</td>
+            <td>{{=item["id_producto"]}}</td>
+            <td>{{=item["detalle_producto"]}}</td>
+            <td class=" text-center ">{{=item["cantidad"]}}</td>
+            <td class=" text-right ">{{=item["precio_venta"]}}</td>
+            <td class=" text-right ">{{=item["precio_venta"] * item["cantidad"]}}</td>
         </tr>
-        
+        {{pass}}
     </tbody>
 </table>
 </div>
@@ -77,12 +77,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{for item in items_venta:}}
                     <tr>
-                        <td class=" text-right "><B>$1800</B></td>
-                        <td class=" text-right ">$189.0</td>
+                        <td class=" text-right "><B>{{=item["precio_venta"] * item["cantidad"]}}</B></td>
+                        <td class=" text-right ">${{=item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
                         <td class=" text-right ">$0</td>
-                        <td class=" text-right "><B>$1989.0</B></td>
+                        <td class=" text-right "><B>${{=item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</B></td>
                     </tr>
+                    {{pass}}
                 </tbody>
                 </table>
             </div>

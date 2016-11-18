@@ -67,7 +67,7 @@ def reporte_ventas():
     return dict(message="reporte_ventas")
 
 def vista_previa():
-    return dict(message="vista_previa")
+    #return dict(message="vista_previa")
     id_venta = request.args[0]
     reg_venta = db(db.ventas.id == id_venta).select().first()
     reg_cliente = db(db.cliente.id_cliente == reg_venta.id_cliente).select().first()
@@ -76,9 +76,10 @@ def vista_previa():
     q &= db.producto.id_producto == db.detalle_ventas.id_producto
     reg_detalle_ventas = db(q).select()
     return dict(message="vista_previa", 
-                venta=reg_venta, 
+                ventas=reg_venta, 
                 cliente=reg_cliente, 
-                items=reg_detalle_ventas)
+                items=reg_detalle_ventas,
+                items_venta=session["items_venta"])
 
 def borrar_item():
     # eliminar algo
@@ -118,7 +119,8 @@ def confirmar():
     for item in session["items_venta"]:
         total += (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00)
     return dict (mensaje= "Finalizar venta", 
-                 id_cliente=session["id_cliente"], fecha=session["fecha"], 
+                 id_cliente=session["id_cliente"], 
+                 fecha=session["fecha"], 
                  nro_cbte=session["nro_comprobante"], 
                  reg_cliente=reg_cliente, total=total)
 
