@@ -125,7 +125,7 @@ db.familiares.dni.requires=[IS_INT_IN_RANGE(5000000,100000000),
 db.familiares.nombre.lenght=20
 db.familiares.apellido.lenght=25
 db.legajos.fe_nac.requires = IS_DATE(format=T('%Y-%m-%d'),
-                  error_message='Debe cumplir con el siguiente formato YYYY-MM-DD!')
+                  error_message='Debe cumplir el siguiente formato YYYY-MM-DD!')
 db.familiares.num_legajo.requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")
 
 db.define_table("horas",
