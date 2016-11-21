@@ -109,15 +109,15 @@ def emision_remito3():
 
 
 def emision_remito4():
-    if request.vars["boton_enviar"]:
+    """if request.vars["boton_enviar"]:
         id_cliente = request.vars["id_cliente"]
         session["fecha"] = fecha
         session["id_cliente"] = id_cliente
     registros = db(db.cliente.id_cliente==session["id_cliente"]).select()
     reg_cliente = registros[0]
-    
-    return dict(fecha=session["fecha"] , id_cliente=session["id_cliente"] , reg_cliente=reg_cliente , items_agregados=session["items_agregados"])
-    
+    """
+    #return dict(fecha=session["fecha"] , id_cliente=session["id_cliente"] , reg_cliente=reg_cliente , items_agregados=session["items_agregados"])
+    return locals()
 
 def resepcion_remito():
     campos = db.proveedor.id_proveedor, db.proveedor.razon_social
@@ -189,3 +189,13 @@ def borrar():
     id_a_borrar = request.vars["id"]
     nombre_a_borrar = request.vars["nombre"]
     return dict(mensaje="borrado producto con id = %s y nombre = %s!" % (id_a_borrar, nombre_a_borrar))
+def ingreso_mercaderia():
+    id_compra=request.args(0) or redirect(URL(c='default',f='index'))
+    detalle=db(db.detalle_compra.id_compra==id_compra).select()
+    id_remito_entrada=db.remito_entrada.insert(id_compra=id_compra)
+    for d in detalle:
+        for q in range(d.cantidad):
+            db.stock.insert(remito_entrada=id_remito_entrada,id_producto=d.id_producto)
+    
+    #redirect(URL(c='stock', f='emision_remito4',args=id_remito_entrada))
+    return locals()

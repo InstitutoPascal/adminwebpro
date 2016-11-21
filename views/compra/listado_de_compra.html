@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+<table class="table table-bordered table table-hover">
+    <thead>
+    <tr style="background-color:black;color:white;">
+        <td>#</td>
+        <td>fecha</td>
+        <td>proveedor</td>
+        <td>factura</td>
+        <td>forma de pago</td>
+        <td>
+            
+        </td>
+    </tr></thead>
+    <tbody>
+        {{for r in rs:}}
+        <tr>
+        <td><a target="_blank" href="{{=URL(c='compra',f='compra_guardada', args=r.compra.id_compra)}}">{{=r.compra.id_compra}}</a></td>
+        <td>{{=r.compra.fecha_factura}}</td>
+        <td>{{=r.proveedor.razon_social}}</td>
+        <td>{{=r.compra.tipo_factura}}</td>
+        <td>{{=r.compra.forma_pago}}</td>
+            <td> <a class="btn btn-danger" href="{{=URL(c='stock',f='ingreso_mercaderia',args=r.compra.id_compra)}}">Ingresar mercaderia</a></td>
+    </tr>
+        {{pass}}
+    </tbody>
+</table>

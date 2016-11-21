@@ -8,7 +8,7 @@
         <div class="col-xs-6 text-right">
             <h1>Remito</h1>
             <h1><small>N° 0001</small></h1>
-            <h1><small>Fecha: {{ =fecha}}</small></h1>
+            <h1><small>Fecha:</small></h1>
         </div>
     </div>
     <div class="form-group">
@@ -24,12 +24,12 @@
             <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Para : <a href="#">{{=reg_cliente.nombre_de_fantasia}}</a></h4></div>
-            <div class="panel-body">DOMICILIO: {{=reg_cliente.direccion}} {{=reg_cliente.numero}}</div>
-            <div class="panel-body">LOCALIDAD: {{=reg_cliente.localidad}}</div>
-            <div class="panel-body">TELEFONO: {{=reg_cliente.telefono}}</div>
-            <div class="panel-body">CUIT o DNI: {{=reg_cliente.dni}}</div>
-            <div class="panel-body">COND. I.V.A: {{=reg_cliente.condicion_frente_al_iva}}</div>
+                <h4>Para : <a href="#"></a></h4></div>
+            <div class="panel-body">DOMICILIO: </div>
+            <div class="panel-body">LOCALIDAD: </div>
+            <div class="panel-body">TELEFONO: </div>
+            <div class="panel-body">CUIT o DNI: </div>
+            <div class="panel-body">COND. I.V.A: </div>
             </div>
         </div>
         </div>
@@ -48,15 +48,7 @@
         </tr>
     </thead>
     <tbody>
-            {{for i, item in enumerate(items_agregados):}}
-            <tr>
-                <th scope="row">{{=item["id_producto"]}}</th>
-                <td >{{=item["detalle_producto"]}}</td>
-                <td align="center">{{=item["cantidad"]}}</td>
-                
-                
-            </tr>
-             {{pass}}
+          
         </tbody>
 </table>
 </div>

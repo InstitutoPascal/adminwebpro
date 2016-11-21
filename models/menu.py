@@ -34,8 +34,10 @@ response.menu = [
         (T('Proveedor'), False, URL('compra','abm_proveedor'),[]),        
         (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
         (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
+        (T('Lista de compras'), False, URL('compra','listado_de_compra'),[]),
         (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
         (T('Formulario Orden Compra'), False, URL('compra','formulario_orden_compras'),[]),
+            
         ]),
     (T('Stock'), False, URL('stock', 'index'), [
         (T('Reporte'), False, URL('stock', 'reporte_stock'), []),

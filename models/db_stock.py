@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import datetime
 db.define_table("deposito",
     Field("numero_deposito",'integer'),
     Field("ubicacion" ,"string"),
@@ -9,15 +9,16 @@ db.define_table("deposito",
 db.deposito.numero_deposito.requires = IS_NOT_IN_DB(db, "deposito.numero_deposito")
 
 db.define_table("remito_entrada",
-    Field("numero_remito_e","integer"),
-    Field("fecha","date"),
-    Field("id_proveedor",db.proveedor ),
-    Field("id_producto",db.producto ),
-    Field("cantidad","integer" ),
+    #Field("numero_remito_e","integer"),
+    Field("fecha","date",default=datetime.date.today()),
+    #Field("id_proveedor",db.proveedor ),
+    #Field("id_producto",db.producto ),
+    #Field("cantidad","integer" ),
+    Field("id_compra", db.compra),
     )
-db.remito_entrada.numero_remito_e.requires = IS_NOT_IN_DB(db, "remito_entrada.numero_remito_e")
-db.remito_entrada.id_proveedor.requires = IS_IN_DB(db, "proveedor.razon_social","%(razon_social)s")
-db.remito_entrada.id_producto.requires = IS_IN_DB(db, "producto.id_producto","%(detalle_producto)s")
+#db.remito_entrada.numero_remito_e.requires = IS_NOT_IN_DB(db, "remito_entrada.numero_remito_e")
+#db.remito_entrada.id_proveedor.requires = IS_IN_DB(db, "proveedor.razon_social","%(razon_social)s")
+#db.remito_entrada.id_producto.requires = IS_IN_DB(db, "producto.id_producto","%(detalle_producto)s")
 
 db.define_table("remito_salida",
     Field("numero_remito_s","integer"),
@@ -32,5 +33,7 @@ db.remito_salida.producto.requires = IS_IN_DB(db, "producto.id_producto","%(deta
 
 db.define_table("stock",
                 Field("id_producto",db.producto,requires=IS_NOT_EMPTY("No hay producto")),
-                Field("cantidad", "integer")
+                Field("remito_entrada", db.remito_entrada),
+                Field("remito_salida", db.remito_salida),
+                Field("fecha_creacion", "date"),
                )
