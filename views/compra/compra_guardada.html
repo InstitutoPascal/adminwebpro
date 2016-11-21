@@ -1,0 +1,109 @@
+{{extend 'layout.html'}}
+<h1>VISTA FACTURA COMPRA GUARDADA</h1>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-xs-12 text-center">
+            <h2>{{ =compra.tipo_factura}}</h2>
+            <h2><small>N°{{ =compra.numero_factura}} </small></h2>
+            <h2><small>Fecha: {{ =compra.fecha_factura}} </small></h2>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Para: <a href="#">C.V. Technical Server</a></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    <h4>De: <a href="#">{{ =proveedor.razon_social}}</a></h4></div>
+                        <div class="panel-body"><B>INGRESOS BRUTOS:</B>  {{ =proveedor.ingreso_bruto}}</div>
+                        <div class="panel-body"><B>CONDICICIÓN I.V.A:</B>  {{ =proveedor.condicion_iva}} </div>
+                        <div class="panel-body"><B>CUIT:</B>  {{ =proveedor.cuit}}</div>
+                        <div class="panel-body"><B>DOMICILIO:</B>  {{ =proveedor.domicilio}} </div>
+                        <div class="panel-body"><B>LOCALIDAD:</B>  {{ =proveedor.localidad}}   /   <B>CP:</B>  {{ =proveedor.codigo_postal}}</div>
+                        <div class="panel-body"><B>PROVINCIA:</B>  {{ =proveedor.provincia}}   /   <B>PAÍS:</B>  {{ =proveedor.pais}}</div>
+                        <div class="panel-body"><B>N° TEL:</B>  {{ =proveedor.telefono}}   /   <B>N° CEL:</B>  {{ =proveedor.celular}}</div>
+                        <div class="panel-body"><B>EMAIL:</B>  {{ =proveedor.email_proveedor}}</div>
+                        <div class="panel-body"><B>PÁGINA WEB:</B>  {{ =proveedor.pagina_web}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><h4><center><B>ID</B></h4></th>
+                            <th><h4><center><B>PRODUCTO</B></h4></th>
+                            <th><h4><center><B>CANTIDAD</B></h4></th>
+                            <th><h4><center><B>PRECIO UNITARIO</B></h4></th>
+                            <th><h4><center><B>SUB-TOTAL</B></h4></th>
+                            <th><h4><center><B>IVA</B></h4></th>
+                            <th><h4><center><B>TOTAL</B></h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{for item in items:}}
+                        <tr>
+                            <td>{{=item.detalle_compra.id_producto}}</td>
+                            <td>{{=item.producto.detalle_producto}}</td>
+                            <td class="text-center">{{=item.detalle_compra.cantidad}}</td>
+                            <td class="text-right">{{=item.detalle_compra.precio}}</td>
+                            <td class="text-right">{{= item.detalle_compra.cantidad*item.detalle_compra.precio}}</td>
+                            <td class="text-right">{{= item.detalle_compra.cantidad*item.detalle_compra.precio*0.105}}</td>
+                            <td class="text-right">{{= item.detalle_compra.cantidad*item.detalle_compra.precio*1.105}}</td>
+                        </tr>
+                        {{pass}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><h4><center><B>TOTALES</B></h4></th>
+                            <th><h4><center><B>TOTAL NETO</B></h4></th>
+                            <th><h4><center><B>TOTAL IVA</B></h4></th>
+                            <th><h4><center><B>TOTAL BRUTO</B></h4></th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">$</td>
+                            <td class="text-right">$...</td>
+                            <td class="text-right">$...</td>
+                            <td class="text-right">$...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+    <br>
+    <div>
+        <center>
+            <a class="btn btn-default" role="button" href="{{=URL(c="default",f="index",vars={"id":1,"nombre":"mark"})}}">MENU PRINCIPAL</a>
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">CARGAR NUEVA COMPRA</a>
+        </center>
+    </div>
+</form>
+<br>
+<center>
+    <footer>
+        <small>Sistema Contable Módulo Compras Sector Vista Factura Compra Guardada</small>
+        <address>AdminWebPro</address>
+    </footer>
+</center>

@@ -1,8 +1,7 @@
 @auth.requires_login()
 @auth.requires_login()
 def abm_producto():
-    db.producto.precio_compra.writable=False
-    db.producto.precio_compra.readable=False
+    
     grid = SQLFORM.grid(db.producto)
     return {"grilla": grid}
 

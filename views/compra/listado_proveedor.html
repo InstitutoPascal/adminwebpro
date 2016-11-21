@@ -3,10 +3,27 @@
 <br>
 <h1>Listado de Proveedores</h1>
 
+<form method="POST" action="{{=URL(c="compra", f="listado_proveedor")}}" name=" " autocomplete="on">
+<div class="row">
+    <div class="col-sm-4">
+        <input type="text" class="form-control" name="razon_social" placeholder="razon social">
+    </div>
+        <div class="col-sm-2">
+            <select name="condicion_iva" class="form-control">
+                <option value>Seleccionar...</option>
+                <option value="Responsable Inscripto">Responsable Incripto</option>
+                <option value="Monotributista">Monotributista</option>
+            </select>
+        </div>
+    <div class="col-sm-2">
+        <input type="submit" name="boton" value="buscar" class="btn btn-primary">
+    </div>
+</div>
+
+
+
 <table class="table table-hover ">
-<style> table td:nth-child(1) {text-align: center;}
-         </style>
-    <caption>Listado Proveedor</caption>
+
     <thead>
          <style>
             th {
@@ -38,26 +55,27 @@
         </tr>
     </thead>
     <tbody>
-	{{for i, reg_proveedor in enumerate (lista_proveedor):}}
+	{{for i, reg_proveedor in enumerate (proveedores):}}
         </tr>
             <th scope="row">{{=i}}</th>
-                <td>{{=reg_proveedor.id_proveedor}}</td>
-                <td>{{=reg_proveedor.cuit}}</td>
-                <td>{{=reg_proveedor.razon_social}}</td>
-                <td>{{=reg_proveedor.ingreso_bruto}}</td>
-                <td>{{=reg_proveedor.condicion_iva}}</td>
-                <td>{{=reg_proveedor.domicilio}}</td>
-                <td>{{=reg_proveedor.localidad}}</td>
-                <td>{{=reg_proveedor.codigo_postal}}</td>
-                <td>{{=reg_proveedor.provincia}}</td>
-                <td>{{=reg_proveedor.pais}}</td>
-                <td>{{=reg_proveedor.telefono}}</td>
-                <td>{{=reg_proveedor.celular}}</td>
-                <td>{{=reg_proveedor.email_proveedor}}</td>
-                <td>{{=reg_proveedor.pagina_web}}</td>
-                
+                <td>{{=reg_proveedor["id_proveedor"]}}</td>
+                <td>{{=reg_proveedor["cuit"]}}</td>
+                <td>{{=reg_proveedor["razon_social"]}}</td>
+                <td>{{=reg_proveedor["ingreso_bruto"]}}</td>
+                <td>{{=reg_proveedor["condicion_iva"]}}</td>
+                <td>{{=reg_proveedor["domicilio"]}}</td>
+                <td>{{=reg_proveedor["localidad"]}}</td>
+                <td>{{=reg_proveedor["codigo_postal"]}}</td>
+                <td>{{=reg_proveedor["provincia"]}}</td>
+                <td>{{=reg_proveedor["pais"]}}</td>
+                <td>{{=reg_proveedor["telefono"]}}</td>
+                <td>{{=reg_proveedor["celular"]}}</td>
+                <td>{{=reg_proveedor["email_proveedor"]}}</td>
+                <td>{{=reg_proveedor["pagina_web"]}}</td>
         </tr>
 	{{pass}}
     </tbody>
-<input type="button" name="imprimir" value="Imprimir listado" onclick="window.print();">
+
 </table>
+<input type="button" name="imprimir" value="Imprimir listado" onclick="window.print();">
+</form>

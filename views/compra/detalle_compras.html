@@ -1,5 +1,4 @@
 {{extend 'layout.html'}}
-
 <h1>Detalle de Compras</h1>
 <div class="form-group">
     <h4>
@@ -7,26 +6,25 @@
             N° Factura: {{ =numero_factura}}  /  
             Fecha: {{ =fecha_factura}}  /  
             Proveedor: {{ =registro_proveedor.razon_social}}  /  
-            CUIT: {{ =registro_proveedor.cuit}}  /
+            CUIT: {{ =registro_proveedor.cuit}}  /  
+            Tipo Factura: {{ =session.tipo_factura}}  /  
+            Forma Pago: {{ =session.forma_pago}}
         </caption>
     </h4>
 </div>
-
 <div class="row">
     <div class="col-sm-4">
-    {{=producto_temporal}}
+        {{=producto_temporal}}
     </div>
 </div>
-
-
-<div class="form-group">
-    <div class="col-md-12">
-        <form method="POST" action="{{=URL(c="compra", f="detalle_compras")}}" name=" ">
+<form method="POST" action="{{=URL(c="compra", f="detalle_compras")}}">
+    <div class="form-group">
+        <div class="col-sm-12">
             <table class="table table-hover">
                 <caption>Lista de Detalles </caption>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th class="">Producto</th>
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
@@ -36,64 +34,70 @@
                             <th>Opciones</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {{for i, item in enumerate(items_compra):}}
                         <tr id="{{=i}}">
                             <th scope="row">{{=item["id_producto"]}}</th>
-                            <td >{{=item["detalle_producto"]}}</td>
-                            <td align="center">
-                                <input type="text" style="width:60px; text-align:center;" class="integer" value="{{=item['cantidad']}}" name="cantidad[]">
-                                <input type="hidden" value="{{=item['id_producto']}}" name="item[]">
-                            </td>
-                            <td align="center">{{=item["precio_producto"]}}</td>
-                            <td align="center">{{=item["precio_producto"] * item["cantidad"]}}</td>
-                            <td align="center">{{=item["precio_producto"] * item["cantidad"] * 0.105}}</td>
-                            <td align="center">{{=item["precio_producto"] * item["cantidad"]  * 1.105}}</td>
-                            <td>
-                                <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"indice": i,"accion":"eliminar_item"})}}">ELIMINAR</a>
-                            </td>
+                                <td >{{=item["detalle_producto"]}}</td>
+                                <td align="center">
+                                    <input type="text" style="width:60px; text-align:center;" class="integer" value="{{=item['cantidad']}}" name="cantidad[]">
+                                    <input type="hidden" value="{{=item['id_producto']}}" name="item[]">
+                                </td>
+                                <td align="center">
+                                    <input type="text" style="width:60px; text-align:center;" class="integer" value="{{=item['precio_producto']}}" name="precio_producto[]">
+                                </td>
+                                <td align="center">{{=item["precio_producto"] * item["cantidad"]}}</td>
+                                <td align="center">{{=item["precio_producto"] * item["cantidad"] * 0.105}}</td>
+                                <td align="center">{{=item["precio_producto"] * item["cantidad"]  * 1.105}}</td>
+                                <td>
+                                    <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"indice": i,"accion":"eliminar_item"})}}">ELIMINAR</a>
+                                </td>
                         </tr>
-                         {{pass}}
+                            {{pass}}
                     </tbody>
             </table>
-            <input type="submit" value="GUARDAR" name="modificar" class="btn btn-default" role="button">
-        </form>
-    </div>
-</div>
-
-    <div class="form-group">
-        <div class="col-md-3">
-            <table class="table table-bordered">
-                <tbody>
-                    <tr>
-                        <th scope="row">Totales:</th>
-                        <th scope="row">Total Neto:</th>
-                        <th scope="row">IVA:</th>
-                        <th scope="row">Total Bruto:</th>
-                    </tr>
-                    <tr>
-                        <td align="center">$</td>
-                        <td align="center">$ {{=total_neto}}</td>
-                        <td align="center">$ {{=iva}}</td>
-                        <td align="center">$ {{=total_bruto}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div>
+                <input type="submit" value="GUARDAR" name="modificar" class="btn btn-default" role="button">
+            </div>
+            <br>
         </div>
     </div>
-<br><br><br>
-    <center>
-        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="compra_guardada",vars={"id":1,"nombre":"mark"})}}">CONFIRMAR</a>
-        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"id":1,"nombre":"mark"})}}">CANCELAR</a>
-        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">ATRAS</a>
-    </center>
-
-<br><br><br>
-    
-    <center>
-		<footer>
-			<small>Sistema Contable Módulo Compras Sector Detalle Compras</small>
-			<address>AdminWebPro</address>
-		</footer>
-	</center>
+    <br>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Totales:</th>
+                                <th scope="row">Total Neto:</th>
+                                <th scope="row">IVA:</th>
+                                <th scope="row">Total Bruto:</th>
+                            </tr>
+                            <tr>
+                                <td align="center">$</td>
+                                <td align="center">$ {{=total_neto}}</td>
+                                <td align="center">$ {{=iva}}</td>
+                                <td align="center">$ {{=total_bruto}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <br>
+    <div>
+        <center>
+            <input type="submit" name="confirmar" value="CONFIRMAR" class="btn btn-default">
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"id":1,"nombre":"mark"})}}">CANCELAR</a>
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">ATRAS</a>
+        </center>
+    </div>
+</form>
+<br>
+<center>
+	<footer>
+		<small>Sistema Contable Módulo Compras Sector Detalle Compras</small>
+		<address>AdminWebPro</address>
+	</footer>
+</center>

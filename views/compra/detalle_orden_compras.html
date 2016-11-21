@@ -64,7 +64,7 @@
     <br>
     <div>
         <center>
-            <input type="submit" name="confirmar" value="CONFIRMAR" class="btn btn-default">
+            <input type="submit" value="CONFIRMAR" class="btn btn-default" href="{{=URL(c="compra",f="orden_compras",vars={"id":1,"nombre":"mark"})}}" value="ORDEN COMPRAs" name="boton_enviar">
             <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_orden_compras",vars={"id":1,"nombre":"mark"})}}">CANCELAR</a>
             <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_orden_compras",vars={"id":1,"nombre":"mark"})}}">ATRAS</a>
         </center>
