@@ -2,86 +2,103 @@
 <h1>Registrar Legajo</h1>
 
 {{=form.custom.begin}}
-
     <div class="form-group row">
             <label for="campo_nombre" class="col-sm-2 control-label">Obra Social</label>
-            <div class="col-sm-4">
-                {{=form.custom.widget.obra_social}}
+            <div class="col-sm-2">
+                                {{=form.custom.widget.obra_social}}
+
             </div>
+                    <label for="campo_est" class="col-sm-2 control-label" name = "estudia">alta temprana</label>
+        <div class="col-sm-2">
+                                      {{=form.custom.widget.alt_tem}}
+
+
+           
+         </div>
+        
             <label for="campo_nombre" class="col-sm-2 control-label">Codigo Postal</label>
-            <div class="col-sm-4">
-                {{=form.custom.widget.codigo_postal}}
+            <div class="col-sm-1">
+             
+                          {{=form.custom.widget.codigo_postal}}
             </div>
-    </div>
+          </div>
     
 <div class="form-group row">
             <label for="campo_localidad" class="col-sm-2 control-label">Localidad</label>
             <div class="col-sm-2">
-               {{=form.custom.widget.localidad}}
+                                {{=form.custom.widget.localidad}}
+
             </div>
             <label for="campo_email" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-2">
-                {{=form.custom.widget.email}}
+                                {{=form.custom.widget.email}}
+
             </div>
-            <label for="campo_feing" class="col-sm-2 control-label">Fecha Ingreso</label>
+            <label for="campo_feing" class="col-sm-1 control-label">Fecha Ingreso</label>
             <div class="col-sm-2">
-                {{=form.custom.widget.fecha_ingreso}}
+                                {{=form.custom.widget.fecha_ingreso}}
+
             </div>
-</div>
+    </div>
 <div class="form-group row">
             <label for="campo_tel" class="col-sm-2 control-label">Teléfono</label>
             <div class="col-sm-2">
-                {{=form.custom.widget.telefono}}
+                                {{=form.custom.widget.telefono}}
+
             </div>
             <label for="campo_telcel" class="col-sm-2 control-label">Teléfono Celular</label>
             <div class="col-sm-2">
-              {{=form.custom.widget.telefono_celular}}
+                                {{=form.custom.widget.telefono_celular}}
+
             </div>
-            <label for="campo_est" class="col-sm-2 control-label" name = "estudia">Estudia</label>
+            <label for="campo_est" class="col-sm-1 control-label" name = "estudia">Estudia</label>
             <div class="col-sm-2">
-                       {{=form.custom.widget.estudia}}
+                                      {{=form.custom.widget.estudia}}
+
             </div>
 </div>
+
 <div class="form-group row">
-            <label for="campo_ccuil" class="col-sm-2 control-label" name = "constancia_cuil">Constancia de CUIL</label>
-            <div class="col-sm-1">
-                        {{=form.custom.widget.constancia_de_cuil}}
+            <label for="campo_tel" class="col-sm-2 control-label">constancia de cuil</label>
+            <div class="col-sm-3">
+                                {{=form.custom.widget.cons_cuil}}
+
             </div>
-            <label for="campo_cdni" class="col-sm-2 control-label" name = "fotocopia_dni">Fotocopia DNI</label>
-            <div class="col-sm-1">
-                       {{=form.custom.widget.foto_dni}}
-            </div>
-            <label for="campo_atemp" class="col-sm-2 control-label" name = "alta_temprana">Alta Temprana</label>
-            <div class="col-sm-1">
-                        {{=form.custom.widget.alt_temp}}
-            </div>
+                    <label for="campo_telcel" class="col-sm-2 control-label">fotocopia dni</label>
+            <div class="col-sm-3">
+                                {{=form.custom.widget.foto_dni}}
+           
+</div>
+    
+
+
+
 </div>
  <div class="form-group row">
-            <label for="campo_lfam" class="col-sm-4 control-label" name = "libreta_de_familia">Libreta de Familia</label>
+            <label for="campo_lfam" class="col-sm-2 control-label" name = "libreta_de_familia">Libreta de Familia</label>
             <div class="col-sm-3">
-                       {{=form.custom.widget.libreta}}
-            </div>
-              <div class="col-sm-2">
-              <label>
-                <input type="checkbox"> Presentado
-              </label>
-            </div>
+                                       {{=form.custom.widget.libreta}}
+
+           
 </div>
  <div class="form-group row">
-            <label for="campo_pnach" class="col-sm-4 control-label" name = "partida_nac_hijos">Partida Nac. Hijos</label>
-            <div class="col-sm-3">
+            <label for="campo_pnach" class="col-sm-2 control-label" name = "partida_nac_hijos">Partida Nac. Hijos</label>
+            <div class="col-sm-1">
                        {{=form.custom.widget.partida}}
-            </div>
-              <div class="col-sm-2">
-              <label>
-                <input type="checkbox"> Presentado
-              </label>
-            </div>
+
+ 
+      
+            </div>         
  </div>
+
+
+
+
+
 <div class="form-group row">
     <div class=" col-sm-offset-1  col-sm-2">
     
-        <a href="{{=URL(c="sueldos", f="legajos")}}" class="btn btn-default">Volver</a>
+      <a href="{{=URL(c="sueldos", f="legajos")}}" class="btn btn-default">Volver</a>
     
     </div>
      <div class="col-sm-2">
