@@ -82,7 +82,7 @@ def legajos2():
                            Field('fecha_ingreso','date'),
                            Field('telefono',label='Teléfono'),
                            Field('telefono_celular',label='Teléfono Celular'),
-                           Field('estudia',label='Estudia?',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field('estudia',label='Estudia?',requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
                            Field('cons_cuil',label='Constancia de cuil',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
                            Field('alt_tem',label='Alta temprana',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
                            Field('foto_dni',label='Fotocopia de DNI',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
@@ -120,6 +120,7 @@ def legajos2():
 
 def legajos3():
     print session ["imagen"]
+    
     
     return {"msg": "se agrego id = %s" % id}
 
