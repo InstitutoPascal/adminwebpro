@@ -27,7 +27,7 @@
             <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Para : <a href="#">{{=cliente.nombre_de_fantasia}}{{=cliente.razon_social}}</a></h4></div>
+                <h4>Para : <a href="#">{{=cliente.nombre_de_fantasia}}&nbsp - &nbsp  {{=cliente.razon_social}}</a></h4></div>
             <div class="panel-body">DOMICILIO: {{=cliente.direccion}}  {{=cliente.numero}}</div>
             <div class="panel-body">LOCALIDAD: {{=cliente.localidad}}</div>
             <div class="panel-body">COND. I.V.A: {{=cliente.condicion_frente_al_iva}}</div>
@@ -50,17 +50,16 @@
         </tr>
     </thead>
     <tbody>
+        {{subtotal=0}}
         {{for item in items_venta:}}
 
         <tr>
             <td>{{=item["id_producto"]}}</td>
             <td>{{=item["detalle_producto"]}}</td>
             <td class=" text-center ">{{=item["cantidad"]}}</td>
-            <td class=" text-right ">{{=item["precio_venta"]}}</td>
-            <td class=" text-right ">{{=item["precio_venta"] * item["cantidad"]}}</td>
-            <td class=" text-center">{{=item["cantidad"]}}</td>
-            <td class=" text-right ">{{=item["precio_venta"]}}</td>
-            <td class=" text-right ">{{=item["precio_venta"] * item["cantidad"]}}</td>
+            <td class=" text-right ">${{=item["precio_venta"]}}</td>
+            <td class=" text-right ">${{=item["precio_venta"] * item["cantidad"]}}</td>
+            {{subtotal=subtotal + item["precio_venta"] * item["cantidad"]}}
         </tr>
         {{pass}}
     </tbody>
@@ -81,12 +80,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{for item in items_venta:}}
                     <tr>
-                        <td class=" text-right "><B>{{=item["precio_venta"] * item["cantidad"]}}</B></td>
-                        <td class=" text-right ">${{=item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
+                        <td class=" text-right "><B>${{=subtotal}}</B></td>
+                        <td class=" text-right ">${{=subtotal * item["alicuota_iva"]/100.00}}</td>
                         <td class=" text-right ">$0</td>
-                        <td class=" text-right "><B>${{=item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</B></td>
+                        {{total= subtotal + subtotal * item["alicuota_iva"]/100.00}}
+                        <td class=" text-right "><B>${{=total}}</B></td>
                     </tr>
                     {{pass}}
                 </tbody>

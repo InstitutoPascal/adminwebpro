@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 <h1 align="center">CONFIRMAR</h1>
-<h4 align="center"> Confirmar venta para {{=reg_cliente.razon_social}}, N° Comprobante {{=nro_cbte}}, Por el importe de $ {{=total}}</h4>
+<h4 align="center"> Confirmar venta para:<b>" {{=reg_cliente.nombre_de_fantasia}} - {{=reg_cliente.razon_social}}"</b>, N° Comprobante: <b> "{{=nro_cbte}}"</b>, Por el importe de:<b> "${{=total}}"</b></h4>
 <form class="form-horizontal" action="{{=URL(c="ventas", f="guardado")}}" enctype="multipart/form-data" method="POST">
     <div class="form-group">
         <div align="center">
