@@ -10,7 +10,7 @@ def alta_bancos():
         response.flash = "Datos Guardados"
         return dict({"grilla":"ABM Bancos", 'form':form})
     else :
-        return {"grilla":"ABM Bancos", 'form':form}
+        return {"grilla":"Alta Bancos", 'form':form}
 
 @auth.requires_login()
 def alta_cuenta_bancaria():
@@ -19,16 +19,16 @@ def alta_cuenta_bancaria():
         response.flash = "Datos Guardados"
         return dict({"grilla":"ABM Cuenta Bancaria", 'form':form})
     else :
-        return {"grilla":"ABM Cuenta Bancaria", 'form':form}
+        return {"grilla":"Alta Cuenta Bancaria", 'form':form}
 
 @auth.requires_login()
 def alta_cheques():
     form = SQLFORM(db.cheque, submit_button="Guardar")
     if form.accepts(request.vars, session):
         response.flash = "Datos Guardados"
-        return {"grilla":"ABM Cheques", 'form':form}
+        return {"grilla":"Alta Cheques", 'form':form}
     else :
-        return {"grilla":"ABM Cheques", 'form':form}
+        return {"grilla":"Alta Cheques", 'form':form}
 
 @auth.requires_login()
 def generar_orden_pagos():
@@ -37,7 +37,7 @@ def generar_orden_pagos():
         response.flash = "Datos Guardados"
         redirect(URL('pagos', 'alta_cheques'))
     else :
-        return {"grilla":"ABM Pagos", 'form':form}
+        return {"grilla":"Generar Orden de Pagos", 'form':form}
 
 @auth.requires_login()
 def generar_reporte():
@@ -59,6 +59,7 @@ def reporte_pagos():
 
 def ver_orden_pago():
     num_orden_pago = request.vars["id"]
-    orden_pago = db.pago((db.pago.num_orden_pago == num_orden_pago))
-    cheque = db.cheque((db.cheque.id_pagos == orden_pago.id_pagos))
+    orden_pago = db.pago((db.pago.id_pagos == num_orden_pago))
+    cheque = db.cheque((db.cheque.id_pagos == num_orden_pago))
+    print orden_pago
     return dict({'orden_pago':orden_pago, 'cheque':cheque})
