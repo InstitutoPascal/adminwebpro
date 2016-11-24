@@ -92,8 +92,38 @@ def legajos2():
                            Field('part_pre','boolean'),
                           )
     if form.process().accepted:
-        print session['depto']
-        id = db.legajos.insert(
+        #la sesion no hace falta que se llame como el vars
+        session["obrasocial"] = request.vars["obra_social"]
+        session["codigopostal"] = request.vars["codigo_postal"]
+        session["localidad"] = request.vars["localidad"]
+        session["email"] = request.vars["email"]
+        session["fechaingreso"] = request.vars["fecha_ingreso"]
+        session["telefono"] = request.vars["telefono"]
+        session["celular"] = request.vars["telefono_celular"]
+        session["estudia"] = request.vars["estudia"]
+        session["constancia_cuil"] = request.vars["cons_cuil"]
+        session["alta_temprana"] = request.vars["alt_tem"]
+        session["fotodni"] = request.vars["foto_dni"]
+        session["libreta"] = request.vars["libreta"]
+        session["lib_pre"] = request.vars["lib_pre"]
+        session["partida"] = request.vars["partida"]
+        session["part"] = request.vars["part_pre"]
+        
+        redirect(URL(c='sueldos',f='legajos3'))
+    
+    return locals()
+
+def legajos3():
+    form = SQLFORM.factory(Field("fotocopia_dni_hijos","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field("fotocopia_dni_conyuge","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field("constancia_cuil_hijos","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field("constancia_cuil_conyuge","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field("constancia_Alumno_Regular_Hijo","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                          )
+    if form.process().accepted:
+         id = db.legajos.insert(
             image = session["imagen"],
             num_legajo = session["nro_legajo"],
             fecha_egreso = session["fecha_egreso"],
@@ -110,27 +140,54 @@ def legajos2():
             dom_calle = session["domicilio"],
             dom_numero= session["num_domicilio"],
             piso = session["piso"],
-            depto = session['depto']
+            depto = session['depto'],
+            obra_social = session["obrasocial"], 
+            codigo_postal = session["codigopostal"] ,
+             localidad = session["localidad"] ,
+            email = session["email"] ,
+           fecha_ingreso = session["fechaingreso"], 
+             telefono = session["telefono"] ,
+           celular = session["celular"] ,
+               estudia = session["estudia"] ,
+            constancia_de_cuil = session["constancia_cuil"], 
+            alta_temprana = session["alta_temprana"],
+              fotocopia_dni = session["fotodni"] ,
+            libreta_familia = session["libreta"] ,
+                   partida_nacimiento_hijos = session["partida"] ,
+               fotocopia_dni_hijos= request.vars["fotocopia_dni_hijos"],
+                fotocopia_dni_conyuge=  request.vars["fotocopia_dni_conyuge"],
+                   constancia_cuil_hijos =       request.vars["constancia_cuil_hijos"],
+                 constancia_cuil_conyuge =   request.vars["constancia_cuil_conyuge"],
+                    constancia_Alumno_Regular_Hijo = request.vars["constancia_Alumno_Regular_Hijo"],
+              constancia_Alumno_Regular_empleado =     request.vars["constancia_Alumno_Regular_empleado"],
+                   curriculum_empleado = request.vars["curriculum_empleado"],
         )
-        #EN el insert faltan agregar los datos que estan en este form 
-        
-        redirect(URL(c='sueldos',f='legajos3'))
-    
-    return locals()
+        #EN el insert faltan agregar los datos que estan en este form  
 
-def legajos3():
-    print session ["imagen"]
-    
-    
-    return {"msg": "se agrego id = %s" % id}
+    return locals()
 
 
 def horas():
-    grid = SQLFORM.grid(db.horas)
-    return {"grilla": grid}
+    import os
+    form = SQLFORM.factory( Field("num_legajo",requires = IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
+    Field("mes_trabajado",requires = IS_IN_SET(["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],zero='Mes',error_message='Indique una opción')),
+    Field("semana",requires = IS_IN_SET(["1","2","3","4","5"])),
+    Field("hs_trab",requires = IS_NOT_EMPTY(error_message = "rellene el campo")),
+    Field("hs_ext",requires = IS_NOT_EMPTY(error_message = "rellene el campo")),
+     )
+    if form.process().accepted:
+        id = db.horas.insert(
+            num_legajo = request.vars["num_legajo"],
+            mes_trabajado = request.vars["mes_trabajado"],
+            semana = request.vars["semana"],
+            hs_trab = request.vars["hs_trab"],
+            hs_ext = request.vars["hs_ext"]
+            )
+    
+    return locals()
 
 
-def familiar():
+def familhs_extiar():
     grid = SQLFORM.grid(db.familiares)
     return {"grilla": grid}
 
