@@ -121,3 +121,14 @@
 [2016-11-24 01:14:47] EDIT adminwebpro/controllers/stock.py: 2
 [2016-11-24 01:17:05] EDIT adminwebpro/views/stock/entradas_pendientes.html: 3
 [2016-11-24 01:19:18] EDIT adminwebpro/views/stock/entradas_pendientes.html: 3
+[2016-11-24 01:39:11] EDIT adminwebpro/models/IS_CUIT.py: 11
+[2016-11-24 01:40:38] EDIT adminwebpro/models/db_app.py: 1
+[2016-11-24 01:42:52] EDIT adminwebpro/models/db_app.py: 1
+[2016-11-24 01:44:59] EDIT adminwebpro/models/db_app.py: -1
+[2016-11-24 01:45:45] EDIT adminwebpro/models/db_app.py: -1
+[2016-11-24 01:51:34] EDIT adminwebpro/models/db_app.py: 0
+[2016-11-24 01:52:32] EDIT adminwebpro/models/db_app.py: 0
+[2016-11-24 01:52:48] EDIT adminwebpro/models/db_app.py: 0
+[2016-11-24 01:53:25] EDIT adminwebpro/models/db_app.py: 0
+[2016-11-24 01:55:31] EDIT adminwebpro/models/db_app.py: 0
+[2016-11-24 01:58:52] EDIT adminwebpro/models/db_app.py: 1

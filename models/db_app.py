@@ -81,6 +81,7 @@ db.proveedor.pagina_web.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 db.define_table("producto",
     Field("id_producto","id"),
     Field("detalle_producto","string"),
+   
     Field("precio_compra","float"),
     Field("precio_venta","float"),
     Field("alicuota_iva","float"),
@@ -88,9 +89,11 @@ db.define_table("producto",
     Field("categoria","string"),
 )
 
+
 db.producto.categoria.requires=IS_IN_SET(["Hardware","Software"])
 db.producto.alicuota_iva.requires=IS_IN_SET({10.5: "10.5%",21: "21%"})
 db.producto.id_producto.requires=IS_NOT_EMPTY()
 db.producto.id_producto.requires=IS_NOT_IN_DB(db,"producto.id_producto")
 db.producto.detalle_producto.requires=IS_NOT_EMPTY()
-db.producto.precio_venta.requires=IS_NOT_EMPTY()
+db.producto.precio_venta.requires=IS_NOT_COMA(error_message="No ingresar con coma")
+db.producto.precio_compra.requires=IS_NOT_COMA(error_message="No ingresar con coma")

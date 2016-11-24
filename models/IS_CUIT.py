@@ -22,3 +22,17 @@ class IS_CUIT(object):
         return (value,self.error_message)
     def formatter(self, value):
         return value
+
+class IS_NOT_COMA(object):
+    def __init__(self, error_message='Error'):
+        self.error_message = error_message
+    def __call__(self, value):
+        # validaciones mínimas
+        print value
+        if ',' in str(value):
+            return (value,self.error_message)
+            
+        return (value, None)
+        
+    def formatter(self, value):
+        return value
