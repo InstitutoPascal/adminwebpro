@@ -1,10 +1,8 @@
 {{extend 'layout.html'}}
 <h1>Formulario de Compras</h1>
-
 <body>
     <br>
     <form class="form-horizontal"  action="{{=URL(c="compra", f="detalle_compras")}}" enctype="multipart/form-data" method="POST">
-
         <div class="form-group">
             <label for="razon_social" class="col-sm-2 control-label">Proveedor</label>
             <div class="col-sm-3">
@@ -14,13 +12,13 @@
                   {{pass}}
                 </select>
             </div>
-
-            <label for="numero_factura" class="col-sm-2 control-label">N°: Factura</label>
-            <div class="col-sm-3">
-                <input type="integer" class="form-control" id="numero_factura" name="numero_factura" placeholder="000000000000">
+            <div class="form-group">
+                <label for="numero_factura" class="col-sm-2 control-label">N°: Factura</label>
+                <div class="col-sm-3">
+                    <input type="integer" class="form-control" id="numero_factura" name="numero_factura" placeholder="000000000000">
+                </div>
             </div>
         </div>
-
         <div class="form-group">
             <label for="tipo_factura" class="col-sm-2 control-label">Tipo de Factura</label>
             <div class="col-sm-3">
@@ -30,38 +28,33 @@
                     <option>Factura B</option>
                 </select>
             </div>
-
-	<div class="form-group">
-            <label for="forma_pago" class="col-sm-2 control-label">Forma de Pago</label>
-            <div class="col-sm-3">
-                <select class="form-control" id="pago" name="forma_pago">
-                    <option select value="0">Forma de Pago</option>
-                    <option>Efectivo</option>
-                    <option>Cheques</option>
-                </select>
-            </div>
-	</div>
-	</div>
-
+	        <div class="form-group">
+                <label for="forma_pago" class="col-sm-2 control-label">Forma de Pago</label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="pago" name="forma_pago">
+                        <option select value="0">Forma de Pago</option>
+                        <option>Efectivo</option>
+                        <option>Cheques</option>
+                    </select>
+                </div>
+	       </div>
+	   </div>
         <div class="form-group">
             <label for="fecha_factura" class="col-sm-2 control-label">Fecha Factura</label>
             <div class="col-sm-3">
                 <input type="date" value="{{=fecha}}" class="form-control" id="fecha_factura" name="fecha_factura" placeholder="">
             </div>
         </div>
-
-    <center>
-        <input type="submit" class="btn btn-default" value="DETALLE COMPRA" name="boton_enviar"></a>
-        <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
-    </center>
-
-    <br>
-
-	<center>
-		<footer>
-			<small>Sistema Contable Módulo Compras Sector Formulario Compras</small>
-			<address>AdminWebPro</address>
-		</footer>
-	</center>
+        <center>
+            <input type="submit" class="btn btn-default" value="DETALLE COMPRA" name="boton_enviar"></a>
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
+        </center>
+        <br>
+	    <center>
+		    <footer>
+			    <small>Sistema Contable Módulo Compras Sector Formulario Compras</small>
+			    <address>AdminWebPro</address>
+		    </footer>
+	    </center>
+    </form>
 </body>
-</form>

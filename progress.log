@@ -89,6 +89,16 @@
 [2016-11-21 18:06:49] EDIT adminwebpro/views/stock/emision_remito4.html: 0
 [2016-11-21 18:08:34] EDIT adminwebpro/views/stock/emision_remito4.html: -7
 [2016-11-21 18:08:43] EDIT adminwebpro/views/stock/emision_remito4.html: 0
+<<<<<<< working copy
+[2016-11-24 00:37:24] EDIT adminwebpro/controllers/compra.py: -7
+[2016-11-24 00:48:59] EDIT adminwebpro/models/menu.py: 0
+[2016-11-24 00:55:24] DELETE adminwebpro/views/compra/abm_factura.html: -3
+[2016-11-24 01:19:28] EDIT adminwebpro/views/compra/formulario_compras.html: 2
+[2016-11-24 01:25:58] EDIT adminwebpro/views/compra/formulario_compras.html: -2
+[2016-11-24 01:26:17] EDIT adminwebpro/views/compra/formulario_compras.html: 2
+[2016-11-24 01:39:16] EDIT adminwebpro/views/compra/detalle_compras.html: 0
+[2016-11-24 01:48:49] EDIT adminwebpro/controllers/compra.py: -3
+=======
 [2016-11-22 18:46:27] EDIT adminwebpro/controllers/stock.py: 0
 [2016-11-22 18:50:02] EDIT adminwebpro/controllers/stock.py: 1
 [2016-11-22 18:50:37] EDIT adminwebpro/views/stock/emision_remito4.html: 7
@@ -121,6 +131,9 @@
 [2016-11-24 01:14:47] EDIT adminwebpro/controllers/stock.py: 2
 [2016-11-24 01:17:05] EDIT adminwebpro/views/stock/entradas_pendientes.html: 3
 [2016-11-24 01:19:18] EDIT adminwebpro/views/stock/entradas_pendientes.html: 3
+<<<<<<< local
+>>>>>>> destination
+=======
 [2016-11-24 01:39:11] EDIT adminwebpro/models/IS_CUIT.py: 11
 [2016-11-24 01:40:38] EDIT adminwebpro/models/db_app.py: 1
 [2016-11-24 01:42:52] EDIT adminwebpro/models/db_app.py: 1
@@ -132,3 +145,4 @@
 [2016-11-24 01:53:25] EDIT adminwebpro/models/db_app.py: 0
 [2016-11-24 01:55:31] EDIT adminwebpro/models/db_app.py: 0
 [2016-11-24 01:58:52] EDIT adminwebpro/models/db_app.py: 1
+>>>>>>> other
