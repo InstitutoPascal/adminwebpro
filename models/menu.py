@@ -29,15 +29,13 @@ response.google_analytics_id = None
 # ----------------------------------------------------------------------------------------------------------------------
 #Agregando mi menu
 response.menu = [
-    
+
     (T('Compras'), False, URL('compra', 'index'), [
-        (T('Proveedor'), False, URL('compra','abm_proveedor'),[]),        
-        (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
-        (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
-        
-        (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
+        (T('Proveedor'), False, URL('compra','abm_proveedor'),[]),
         (T('Formulario Orden Compra'), False, URL('compra','formulario_orden_compras'),[]),
-            
+        (T('Formulario Compras'), False, URL('compra','formulario_compras'),[]),
+        (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
+        (T('Reporte Proveedor'), False, URL('compra','listado_proveedor'),[]),
         ]),
     (T('Stock'), False, URL('stock', 'index'), [
         (T('Reporte'), False, URL('stock', 'reporte_stock'), []),

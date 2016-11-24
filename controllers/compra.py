@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 from datetime import date
-def index():
-    #args es una abrebiacion de elementos nos trae
-    a=db(db.compra.id_compra == request.args(0)).select()
-    print a
-    return dict(message="hello from proveedor.py")
 
 @auth.requires_login()
 def abm_proveedor():
@@ -23,10 +18,45 @@ def orden_compras():
 
 def informe_subdiarioa():
        # presentar formulario para criterios de busqueda
-    return dict(message="Informe Subdiarioa")
+    desde = date.today()
+    hasta = date.today()
+    
+    if request.vars['desde']:
+        desde = datetime.strptime(request.vars['desde'], '%Y-%m-%d').date()
+    if request.vars['hasta']:
+        hasta = datetime.strptime(request.vars['hasta'], '%Y-%m-%d').date()
+    form  = SQLFORM.factory(
+        Field('desde','date',requires=IS_DATE(),default=desde),
+        Field('hasta','date',requires=IS_DATE(),default=hasta),
+        Field('proveedor',requires=IS_EMPTY_OR(IS_IN_DB(db,db.proveedor.id_proveedor,'%(razon_social)s',zero='Seleccionar'))),
+        Field('condicion_iva',requires=IS_EMPTY_OR(IS_IN_SET(["Responsable Inscripto","Monotributista"],error_message='Seleccione una opción',zero='Seleccionar' ))),
+        Field('ordenar_alfabeticamente','boolean'),submit_button='Filtrar')
+    resultante = None
+    if form.process().accepted:
+        compras = db((db.compra.fecha_factura>=request.vars['desde'])&(db.compra.fecha_factura<=request.vars['hasta'])&(db.compra.id_proveedor==db.proveedor.id_proveedor)).select()
+    else:
+        dt = request.now
+        compras = db((db.compra.fecha_factura>=date.today().strftime("%Y/%m/%d"))&(db.compra.fecha_factura<=date.today().strftime("%Y/%m/%d"))&(db.compra.id_proveedor==db.proveedor.id_proveedor)).select()
+    if len(compras)> 0:
+        option = TR(TD("#"),TD("Fecha"),TD("Proveedor"),TD("N°Factura"),TD("CUIT"),TD("Subtotal"),TD("IVA"),TD("Total"))
+        totales = 0
+        for c in compras:
+            rs = db.executesql('SELECT sum(d.cantidad*d.precio) as subtotal,sum(((d.precio*d.cantidad)*p.alicuota_iva)/100) as iva FROM detalle_compra d join producto p on p.id_producto=d.id_producto where id_compra= %s group by id_compra' %(c.compra.id_compra),as_dict=True)
+            total = rs[0]['subtotal']+rs[0]['iva']
+            totales += total
+            option += TR(TD(c.compra.id_compra),TD(c.compra.fecha_factura),TD(c.proveedor.razon_social),TD(c.compra.numero_factura),TD(c.proveedor.cuit),TD(rs[0]['subtotal']),TD(rs[0]['iva']),TD(total))
+        table = TABLE(*option,_class='table')
+        resultante = TABLE(TR(TD(B('Cantidad de compras')),TD(len(compras))),TR(TD(B('Valor total')),TD(totales)),_class='table')
+    else:
+        table = None
+    return locals()
 
 def informe_subdiariob():
        # presentar formulario para criterios de busqueda
+    print request.post_vars
+    if request.post_vars["enviar"]:
+        print request.vars["fecha_desde"]
+        print request.vars["fecha_hasta"]
     return dict(message="Informe Subdiariob")
 
 def listado_proveedor():
@@ -51,13 +81,8 @@ def listado_proveedor():
 def formulario_compras():
     from datetime import datetime
     fecha=datetime.now()
-    # definir los campos a obtener desde la base de datos:
-    campos = db.proveedor.id_proveedor, db.proveedor.razon_social
-    # definir la condición que deben cumplir los registros:
-    criterio = db.proveedor.id_proveedor>0
-    ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
     # ejecutar la consulta:
-    lista_proveedores = db(criterio).select(*campos)
+    lista_proveedores = db().select(db.proveedor.id_proveedor, db.proveedor.razon_social)
     # revisar si la consulta devolvio registros:
     if not lista_proveedores:
         mensaje = "No ha cargado clientes"
@@ -189,7 +214,38 @@ def compra_guardada():
     q = db.detalle_compra.id_compra == id_compra
     q &= db.producto.id_producto == db.detalle_compra.id_producto
     reg_detalle_compra = db(q).select()
-    return dict(message="vista_previa", 
-                compra=reg_producto, 
-                proveedor=reg_proveedor, 
-                items=reg_detalle_compra)
+    option = TR(TD("ID"),
+             TD("PRODUCTO"),
+             TD("CANTIDAD"),
+             TD("PRECIO UNITARIO"),
+             TD("SUB-TOTAL"),
+             TD("IVA"),
+             TD("TOTAL"))
+    #instanciamos las variables en numérico
+    ivas = 0
+    bruto = 0
+    neto = 0
+    for d in reg_detalle_compra:
+        iva = float(d.producto.alicuota_iva)
+        impuesto = ((d.detalle_compra.cantidad*d.detalle_compra.precio)*iva)/100
+        subtotal = d.detalle_compra.cantidad*d.detalle_compra.precio
+        neto += subtotal
+        ivas += impuesto
+        total = subtotal+impuesto
+        bruto += total
+        option += TR(TD(d.detalle_compra.id_producto),
+             TD(d.producto.detalle_producto),
+             TD(d.detalle_compra.cantidad),
+             TD(d.detalle_compra.precio),
+             TD(subtotal),
+             TD(impuesto),
+             TD(total))
+    table = TABLE(*option,_class="table")
+    return dict(message="vista_previa",
+                compra=reg_producto,
+                proveedor=reg_proveedor,
+                items=reg_detalle_compra,
+                table=table,
+                ivas=ivas,
+                bruto=bruto,
+                neto=neto)
