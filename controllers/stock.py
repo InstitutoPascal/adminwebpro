@@ -41,8 +41,10 @@ def modificacion_deposito():
 
 
 def reporte_stock():
-    return dict()
-
+    reporte = db.executesql('SELECT producto.precio_compra as costo ,producto.detalle_producto,producto.id_producto,count(stock.id_producto) as cantidad FROM producto join stock on stock.id_producto=producto.id_producto where stock.remito_salida is null group by stock.id_producto ',as_dict=True)
+    
+    return locals()
+"""
 def emision_remito():
     campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia
     criterio = db.cliente.id_cliente>0
@@ -106,7 +108,7 @@ def emision_remito3():
     registros = db(db.cliente.id_cliente==session["id_cliente"]).select()
     reg_cliente = registros[0]
     return dict(id_cliente=session["id_cliente"], reg_cliente=reg_cliente , items_agregados=session["items_agregados"]  )
-
+"""
 
 def emision_remito4():
     """if request.vars["boton_enviar"]:
@@ -117,6 +119,14 @@ def emision_remito4():
     reg_cliente = registros[0]
     """
     #return dict(fecha=session["fecha"] , id_cliente=session["id_cliente"] , reg_cliente=reg_cliente , items_agregados=session["items_agregados"])
+    id_remito = request.args(0) or redirect(URL(c='default',f='index'))
+    remito = db(db.remito_entrada.id==id_remito).select().first()
+    id_remito = str(remito.id).zfill(4)
+    fecha = remito.fecha.strftime("%d/%m/%Y") 
+    detalle_proveedor = db((db.compra.id_compra==remito.id_compra)&(db.proveedor.id_proveedor==db.compra.id_proveedor)).select().first()
+    count = db.stock.id_producto.count()
+    detalle_producto = db((db.stock.remito_entrada==remito.id)&(db.stock.id_producto==db.producto.id_producto)).select(db.stock.id_producto,db.producto.detalle_producto.max().with_alias("detalle_producto"),count.with_alias('cantidad'),groupby=db.stock.id_producto)
+    #select stock.id_producto,max(producto.detalle_producto) as detalle_producto, count(stock.id_producto) as catidad
     return locals()
 
 def resepcion_remito():
@@ -189,13 +199,20 @@ def borrar():
     id_a_borrar = request.vars["id"]
     nombre_a_borrar = request.vars["nombre"]
     return dict(mensaje="borrado producto con id = %s y nombre = %s!" % (id_a_borrar, nombre_a_borrar))
+
 def ingreso_mercaderia():
-    id_compra=request.args(0) or redirect(URL(c='default',f='index'))
-    detalle=db(db.detalle_compra.id_compra==id_compra).select()
-    id_remito_entrada=db.remito_entrada.insert(id_compra=id_compra)
+    id_compra=request.args(0) or redirect(URL(c='default',f='index'))#se fija si hay un id por cabecera, si no hay vuelve al inicio del sistema
+    detalle=db(db.detalle_compra.id_compra==id_compra).select()#hace un select y trae un registro por cada producto que este en la compra
+    id_remito_entrada=db.remito_entrada.insert(id_compra=id_compra)#hace un insert tipo secuencia para poder generar el numero del remito
     for d in detalle:
         for q in range(d.cantidad):
-            db.stock.insert(remito_entrada=id_remito_entrada,id_producto=d.id_producto)
+            db.stock.insert(remito_entrada=id_remito_entrada,id_producto=d.id_producto)#inserta los productos
     
-    #redirect(URL(c='stock', f='emision_remito4',args=id_remito_entrada))
+    redirect(URL(c='stock', f='emision_remito4',args=id_remito_entrada))
+    return locals()
+
+def entradas_pendientes():
+    rs=db.executesql("SELECT compra.id_compra,proveedor.razon_social,compra.fecha_factura,compra.forma_pago,compra.tipo_factura FROM PROVEEDOR  join COMPRA using(id_proveedor) where compra.id_compra not in (select id_compra from remito_entrada)",as_dict=True)#si hay entradas pendientes muestra si no los hay no los muestra
+    cantidad = len(rs)
+    print cantidad
     return locals()

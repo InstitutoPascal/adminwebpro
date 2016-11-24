@@ -1,20 +1,23 @@
 {{extend 'layout.html'}}
 <h1>Reporte de existencia</h1>
 <h3>
-<table  class="table table-bordered" >
-
-
-    <caption></caption>
+<table  class="table table-bordered table-hover" >
     <thead>
         <tr>
-            <th>Codigo</th> <th>Producto</th> <th>Precio</th> <th P align="center">Precio Total</th> <th P align="center">Cantidad</th> <th>Opciones</th>
+            <th>Codigo</th> <th>Producto</th> <th>Costo</th> <th P align="center">Disponibles</th> 
         </tr>
     </thead>
     <tbody>
-        <tr> <th scope="row">0001</th> <td>Monitor</td> <td P align="right">$1500</td> <td P align="right">$7500</td> <td P align="center">5</td>  <td> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="borrar",vars={"id":1,"nombre":"mark"})}}">Ver</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="modificacion_producto",vars={"id":1,"nombre":"mark"})}}">Editar</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="borrar",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td></tr>
-        <tr> <th scope="row">0002</th> <td>Mouse</td> <td P align="right">$110</td> <td P align="right">$1650</td> <td P align="center">15</td> <td> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="borrar",vars={"id":1,"nombre":"mark"})}}">Ver</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="modificacion_producto",vars={"id":1,"nombre":"mark"})}}">Editar</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="borrar",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td> </tr>
-        <tr> <th scope="row">0003</th> <td>Memorias Ram</td> <td P align="right">$300</td> <td P align="right">$3000</td> <td P align="center">10</td> <td> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="borrar",vars={"id":1,"nombre":"mark"})}}">Ver</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="modificacion_producto",vars={"id":1,"nombre":"mark"})}}">Editar</a> <a class="btn btn-default" role="button" href="{{=URL(c="stock",f="borrar",vars={"id":1,"nombre":"mark"})}}">Eliminar</a></td> </tr>
-        <tr> <th scope="row"></th> <td></td> <td ></td> <td P align="right">$12.150</td> <td P align="center">30</td>  <td></td></tr>
+        {{for s in reporte:}}
+        <tr>
+               <td>{{=s["id_producto"]}}</td> 
+               <td>{{=s["detalle_producto"]}}</td> 
+               <td>$ {{=s["costo"]}}</td>
+               <td>{{=s["cantidad"]}}</td> 
+                
+            
+        </tr>
+        {{pass}}
     </tbody>
 </table>
 </h3>

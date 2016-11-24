@@ -34,7 +34,7 @@ response.menu = [
         (T('Proveedor'), False, URL('compra','abm_proveedor'),[]),        
         (T('Reporte Subdiario'), False, URL('compra','informe_subdiarioa'),[]),
         (T('Lista de Proveedor'), False, URL('compra','listado_proveedor'),[]),
-        (T('Lista de compras'), False, URL('compra','listado_de_compra'),[]),
+        
         (T('Formulario de Compras'), False, URL('compra','formulario_compras'),[]),
         (T('Formulario Orden Compra'), False, URL('compra','formulario_orden_compras'),[]),
             
@@ -43,7 +43,7 @@ response.menu = [
         (T('Reporte'), False, URL('stock', 'reporte_stock'), []),
         (T('ABM Producto'), False, URL('stock', 'abm_producto'), []),
         (T('Deposito nuevo'), False, URL('stock', 'alta_deposito'), []),
-        (T('Emision de remito'), False, URL('stock', 'emision_remito'), []),
+        (T('Generacion de remito'), False, URL('stock','entradas_pendientes'),[]),
         (T('Recepcion de remito'), False, URL('stock', 'resepcion_remito'), []),
         ]),
     (T('Pagos'), False, URL('pagos', 'index'), [

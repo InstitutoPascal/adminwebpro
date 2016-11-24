@@ -193,8 +193,3 @@ def compra_guardada():
                 compra=reg_producto, 
                 proveedor=reg_proveedor, 
                 items=reg_detalle_compra)
-
-
-def listado_de_compra():
-    rs=db((db.compra.id_proveedor==db.proveedor.id_proveedor)).select()
-    return locals()

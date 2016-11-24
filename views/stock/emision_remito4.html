@@ -7,8 +7,8 @@
         </div>
         <div class="col-xs-6 text-right">
             <h1>Remito</h1>
-            <h1><small>N° 0001</small></h1>
-            <h1><small>Fecha:</small></h1>
+            <h1><small>N° {{=id_remito}}</small></h1>
+            <h1><small>Fecha: {{=fecha}}</small></h1>
         </div>
     </div>
     <div class="form-group">
@@ -24,12 +24,12 @@
             <div class="col-xs-5">
             <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>Para : <a href="#"></a></h4></div>
-            <div class="panel-body">DOMICILIO: </div>
-            <div class="panel-body">LOCALIDAD: </div>
-            <div class="panel-body">TELEFONO: </div>
-            <div class="panel-body">CUIT o DNI: </div>
-            <div class="panel-body">COND. I.V.A: </div>
+                <h4>Para : {{=detalle_proveedor.proveedor.razon_social}} <a href="#"></a></h4></div>
+            <div class="panel-body">DOMICILIO: {{=detalle_proveedor.proveedor.domicilio}}</div>
+            <div class="panel-body">LOCALIDAD: {{=detalle_proveedor.proveedor.localidad}}</div>
+            <div class="panel-body">TELEFONO: {{=detalle_proveedor.proveedor.telefono}}</div>
+            <div class="panel-body">CUIT o DNI: {{=detalle_proveedor.proveedor.cuit}}</div>
+            <div class="panel-body">COND. I.V.A: {{=detalle_proveedor.proveedor.condicion_iva}}</div>
             </div>
         </div>
         </div>
@@ -37,17 +37,23 @@
 <div class="form-group">
 <div class="row">
 <div class="col-xs-12">
+    
 <table class="table table-bordered">
     <thead>
         <tr>
             <th><h4>Codigo</h4></th>
             <th><h4>Detalle</h4></th>
             <th><h4>Cantidad</h4></th>
-            
-            
         </tr>
-    </thead>
+         </thead>
     <tbody>
+            {{ for i in detalle_producto: }}       
+                <tr>
+                   <td>{{=i["stock"]["id_producto"]}}</td> 
+                    <td>{{=i["detalle_producto"]}}</td> 
+                   <td>{{=i["cantidad"]}}</td>
+                </tr>
+          {{pass}} 
           
         </tbody>
 </table>
