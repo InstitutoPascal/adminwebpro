@@ -17,17 +17,17 @@ Suba e instale una aplicación empaquetada
 """
 db.define_table("cliente",
     Field("id_cliente","id"),
-    Field("condicion_frente_al_iva","string"),
-    Field("nombre_de_fantasia","string"),
-    Field("razon_social","string"),
-    Field("cuit","string"),
-    Field("dni","string"),
-    Field("tipo_factura","string"),
-    Field("direccion","string"),
-    Field("numero","string"),
+    Field("condicion_frente_al_iva",label="Condición frente al IVA"),
+    Field("nombre_de_fantasia",label="Nombre de Fantasía"),
+    Field("razon_social",label="Razón Social"),
+    Field("cuit",label="C.U.I.T"),
+    Field("dni",label="D.N.I."),
+    Field("tipo_factura",label="Tipo de Factura"),
+    Field("direccion",label="Dirección"),
+    Field("numero",label="Número"),
     Field("localidad","string"),
-    Field("telefono","string"),
-    Field("email","string"),
+    Field("telefono",label="Teléfono"),
+    Field("email",label="E-Mail"),
     format='%(nombre_de_fantasia)s %(razon_social)s ( %(id_cliente)s )',
 )
 #################Validaciones de Cliente##################
@@ -42,6 +42,7 @@ db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 db.cliente.direccion.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 db.cliente.numero.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 db.cliente.localidad.requires=IS_NOT_EMPTY(error_message='Complete el campo')
+db.cliente.razon_social.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 
 
 db.define_table("proveedor",
