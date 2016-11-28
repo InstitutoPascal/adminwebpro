@@ -33,6 +33,7 @@ db.define_table("cliente",
 #################Validaciones de Cliente##################
 
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"],error_message='Seleccione una opción' )
+db.cliente.tipo_factura.requires=IS_IN_SET(["A","B"],error_message='Seleccione una opción' )
 db.cliente.cuit.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
 			IS_NOT_IN_DB(db,"cliente.cuit",error_message='CUIT ya existe')]
 db.cliente.dni.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
