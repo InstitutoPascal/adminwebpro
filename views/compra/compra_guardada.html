@@ -1,6 +1,5 @@
 {{extend 'layout.html'}}
 <h1>VISTA FACTURA COMPRA GUARDADA</h1>
-
 <form class="form-horizontal">
     <div class="form-group">
         <div class="col-xs-12 text-center">
@@ -39,32 +38,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-xs-12">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th><h4><center><B>ID</B></h4></th>
-                            <th><h4><center><B>PRODUCTO</B></h4></th>
-                            <th><h4><center><B>CANTIDAD</B></h4></th>
-                            <th><h4><center><B>PRECIO UNITARIO</B></h4></th>
-                            <th><h4><center><B>SUB-TOTAL</B></h4></th>
-                            <th><h4><center><B>IVA</B></h4></th>
-                            <th><h4><center><B>TOTAL</B></h4></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{for item in items:}}
-                        <tr>
-                            <td>{{=item.detalle_compra.id_producto}}</td>
-                            <td>{{=item.producto.detalle_producto}}</td>
-                            <td class="text-center">{{=item.detalle_compra.cantidad}}</td>
-                            <td class="text-right">{{=item.detalle_compra.precio}}</td>
-                            <td class="text-right">{{= item.detalle_compra.cantidad*item.detalle_compra.precio}}</td>
-                            <td class="text-right">{{= item.detalle_compra.cantidad*item.detalle_compra.precio*0.105}}</td>
-                            <td class="text-right">{{= item.detalle_compra.cantidad*item.detalle_compra.precio*1.105}}</td>
-                        </tr>
-                        {{pass}}
-                    </tbody>
-                </table>
+                {{=table}}
             </div>
         </div>
         <div class="row">
@@ -72,19 +46,16 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><h4><center><B>TOTALES</B></h4></th>
                             <th><h4><center><B>TOTAL NETO</B></h4></th>
                             <th><h4><center><B>TOTAL IVA</B></h4></th>
                             <th><h4><center><B>TOTAL BRUTO</B></h4></th>
                         </tr>
-                        
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-center">$</td>
-                            <td class="text-right">$...</td>
-                            <td class="text-right">$...</td>
-                            <td class="text-right">$...</td>
+                            <td class="text-right">$ {{=neto}}</td>
+                            <td class="text-right">$ {{=ivas}}</td>
+                            <td class="text-right">$ {{=bruto}}</td>
                         </tr>
                     </tbody>
                 </table>
