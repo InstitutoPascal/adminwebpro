@@ -17,17 +17,17 @@ Suba e instale una aplicación empaquetada
 """
 db.define_table("cliente",
     Field("id_cliente","id"),
-    Field("condicion_frente_al_iva",label="Condición frente al IVA"),
-    Field("nombre_de_fantasia",label="Nombre de Fantasía"),
-    Field("razon_social",label="Razón Social"),
-    Field("cuit",label="C.U.I.T"),
-    Field("dni",label="D.N.I."),
+    Field("condicion_frente_al_iva","string",label="Condición frente al IVA"),
+    Field("nombre_de_fantasia","string",label="Nombre de Fantasía"),
+    Field("razon_social","string",label="Razón Social"),
+    Field("cuit",'integer',label="C.U.I.T"),
+    Field("dni",'integer',label="D.N.I."),
     Field("tipo_factura",label="Tipo de Factura"),
-    Field("direccion",label="Dirección"),
-    Field("numero",label="Número"),
-    Field("localidad","string"),
-    Field("telefono",label="Teléfono"),
-    Field("email",label="E-Mail"),
+    Field("direccion","string",label="Dirección"),
+    Field("numero",'integer',label="Número"),
+    Field("localidad","string","string"),
+    Field("telefono",'integer',label="Teléfono"),
+    Field("email","string",label="E-Mail"),
     format='%(nombre_de_fantasia)s %(razon_social)s ( %(id_cliente)s )',
 )
 #################Validaciones de Cliente##################
@@ -35,7 +35,7 @@ db.define_table("cliente",
 db.cliente.condicion_frente_al_iva.requires=IS_IN_SET(["Responsable Inscripto","Consumidor Final"],error_message='Seleccione una opción' )
 db.cliente.tipo_factura.requires=IS_IN_SET(["A","B"],error_message='Seleccione una opción' )
 db.cliente.cuit.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
-			IS_NOT_IN_DB(db,"cliente.cuit",error_message='CUIT ya existe')]
+			IS_NOT_IN_DB(db,"cliente.cuit",error_message='CUIT ya existe'), IS_CUIT()]
 db.cliente.dni.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
 			IS_NOT_IN_DB(db,"cliente.dni",error_message='DNI ya existe')]
 db.cliente.telefono.requires=IS_NOT_EMPTY(error_message='Complete el campo')
