@@ -63,7 +63,8 @@ db.define_table("proveedor",
     )
 db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"],error_message='Seleccione una opción' )
 db.proveedor.cuit.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
-			IS_NOT_IN_DB(db,"proveedor.cuit",error_message='CUIT ya existe')]
+			IS_NOT_IN_DB(db,"proveedor.cuit",error_message='CUIT ya existe'), 
+			IS_CUIT()]
 db.proveedor.ingreso_bruto.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
 						IS_NOT_IN_DB(db,"proveedor.ingreso_bruto",error_message='Ingresos Brutos ya existe')]
 db.proveedor.razon_social.requires=[IS_NOT_EMPTY(error_message='Complete el campo'),
