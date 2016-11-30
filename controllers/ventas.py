@@ -10,6 +10,8 @@ def abm_clientes():
 
 @auth.requires_login()
 def abm_ventas():
+    import time
+    fecha_hoy= time.strftime("%x")
     #return dict(message="abm_ventas")
     # definir los campos a obtener desde la base de datos:
     campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social, #db.ventas.numero_factura
@@ -24,7 +26,7 @@ def abm_ventas():
     else:
         mensaje = "Seleccione un cliente"
         ##primer_cliente = lista_clientes[0]
-    return dict(message=mensaje, lista_clientes=lista_clientes)
+    return dict(message=mensaje, lista_clientes=lista_clientes, hoy=fecha_hoy)
 
 
 @auth.requires_login()
@@ -60,7 +62,8 @@ def detalle_ventas():
     return dict(id_cliente=session["id_cliente"], fecha=session["fecha"], 
                 nro_cbte=session["nro_comprobante"], 
                 reg_cliente=reg_cliente, lista_productos=lista_productos,
-                items_venta=session["items_venta"])
+                items_venta=session["items_venta"],
+                )
 
 @auth.requires_login()
 def reporte_ventas():
