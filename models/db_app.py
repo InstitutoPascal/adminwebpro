@@ -43,22 +43,22 @@ db.cliente.numero.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 db.cliente.localidad.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 db.cliente.razon_social.requires=IS_NOT_EMPTY(error_message='Complete el campo')
 
-
+#################TABLA PROVEEDOR##################
 db.define_table("proveedor",
       Field("id_proveedor", "id"),
-      Field("razon_social", 'string'),
-      Field("ingreso_bruto", 'string'),
-      Field("condicion_iva", 'string'),
-      Field("cuit", 'string'),
-      Field("domicilio", 'string'),
-      Field("localidad", 'string'),
-      Field("codigo_postal", 'integer'),
-      Field("provincia", 'string'),
-      Field("pais", 'string'),
-      Field("telefono", 'string'),
-      Field("celular", 'string'),
-      Field("email_proveedor", 'string'),
-      Field("pagina_web", 'string'),
+      Field("razon_social", 'string',label="Razón Social"),
+      Field("ingreso_bruto", 'string',label="Ingresos Brutos"),
+      Field("condicion_iva", 'string',label="Condición Frente al IVA"),
+      Field("cuit", 'string',label="C.U.I.T"),
+      Field("domicilio", 'string',label="Domicilio"),
+      Field("localidad", 'string',label="Localidad"),
+      Field("codigo_postal", 'integer',label="Código Postal"),
+      Field("provincia", 'string',label="Provincia"),
+      Field("pais", 'string',label="País"),
+      Field("telefono", 'string',label="Teléfono"),
+      Field("celular", 'string',label="Celular"),
+      Field("email_proveedor", 'string',label="Email"),
+      Field("pagina_web", 'string',label="Página Web"),
       format='%(razon_social)s %(id_proveedor)s )',
     )
 db.proveedor.condicion_iva.requires=IS_IN_SET(["Responsable Inscripto","Monotributista"],error_message='Seleccione una opción' )
