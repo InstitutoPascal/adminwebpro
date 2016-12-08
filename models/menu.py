@@ -47,7 +47,7 @@ response.menu = [
     (T('Pagos'), False, URL('pagos', 'index'), [
         (T('ABM Bancos'), False, URL('pagos', 'alta_bancos'), []),
         (T('ABM Cuentabancaria'), False, URL('pagos', 'alta_cuenta_bancaria'), []),
-        (T('Generar Orden de Pago'), False, URL('pagos', 'generar_orden_pagos'), []),
+        (T('Generar Orden de Pago'), False, URL('pagos', 'buscar_proveedor'), []),
         (T('Generar Reporte'), False, URL('pagos', 'generar_reporte'), []),
         ]),
     (T('Ventas'), False, URL('ventas', 'index'), [

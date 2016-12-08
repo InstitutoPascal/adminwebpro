@@ -34,11 +34,11 @@ def alta_cheques():
 @auth.requires_login()
 def buscar_proveedor():
     buscar = "Buscar proveedor"
+    proveedor = None
     if request.vars["buscar_proveedor"]:
         nombre = request.vars["nombre_proveedor"]
         proveedor = db.proveedor((db.proveedor.razon_social == nombre))
-        redirect(URL('pagos', 'ver_factura_proveedor', vars=dict(proveedor=proveedor)))
-    return {'buscar':buscar}
+    return {'buscar':buscar, 'proveedor':proveedor}
 
 @auth.requires_login()
 def generar_orden_pagos():
