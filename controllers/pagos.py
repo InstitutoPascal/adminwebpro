@@ -30,6 +30,16 @@ def alta_cheques():
     else :
         return {"grilla":"Alta Cheques", 'form':form}
 
+
+@auth.requires_login()
+def buscar_proveedor():
+    buscar = "Buscar proveedor"
+    if request.vars["buscar_proveedor"]:
+        nombre = request.vars["nombre_proveedor"]
+        proveedor = db.proveedor((db.proveedor.razon_social == nombre))
+        redirect(URL('pagos', 'ver_factura_proveedor', vars=dict(proveedor=proveedor)))
+    return {'buscar':buscar}
+
 @auth.requires_login()
 def generar_orden_pagos():
     form = SQLFORM(db.pago, submit_button="Guardar")
