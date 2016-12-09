@@ -1,0 +1,14 @@
+{{extend 'layout.html'}}
+<table class="table table-hover">
+    <caption>Facturas a pagar</caption>
+    <thead>
+        <tr>
+            <th>Numero de Factura</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{for factura in facturas:}}
+        <tr> <td><a href="{{=URL(c="pagos",f="generar_orden_pago")}}">{{=factura.numero_factura}}</a></td></tr>
+        {{pass}}
+    </tbody>
+</table>

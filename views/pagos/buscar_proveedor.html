@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>{{=proveedor.razon_social}}</td></tr>
+            <tr><td><a href="{{=URL(c="pagos",f="factura_proveedor",vars={"id":proveedor.id_proveedor})}}">{{=proveedor.razon_social}}</a></td></tr>
 
         </tbody>
     </table>

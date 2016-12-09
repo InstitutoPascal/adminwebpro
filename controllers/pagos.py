@@ -30,6 +30,12 @@ def alta_cheques():
     else :
         return {"grilla":"Alta Cheques", 'form':form}
 
+@auth.requires_login()
+def factura_proveedor():
+    proveedor_id = request.vars["id"]
+    facturas = db((db.compra.id_proveedor == proveedor_id)).select()
+    return {"facturas":facturas}
+
 
 @auth.requires_login()
 def buscar_proveedor():
