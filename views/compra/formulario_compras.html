@@ -6,10 +6,10 @@
         <div class="form-group">
             <label for="razon_social" class="col-sm-2 control-label">Proveedor</label>
             <div class="col-sm-3">
-               <select class="form-control" id="campo_proveedor" name="id_proveedor">
-                  {{for registro_proveedor in lista_proveedores:}}
-                  <option value="{{=registro_proveedor.id_proveedor}}">{{=registro_proveedor.razon_social}}</option>
-                  {{pass}}
+               <select class="form-control" id="campo_proveedor" name="id_proveedor"><!--se define el combo -->
+                  {{for registro_proveedor in lista_proveedores:}}<!--se recorre la lista de proveedores  para mostrar las opciones del combo -->
+                  <option value="{{=registro_proveedor.id_proveedor}}">{{=registro_proveedor.razon_social}}</option><!--el codigo id_proveedor y va a mostrar razón social correspondiente a ese id en pantalla -->
+                  {{pass}}<!--cierra el for -->
                 </select>
             </div>
             <div class="form-group">
@@ -42,7 +42,7 @@
         <div class="form-group">
             <label for="fecha_factura" class="col-sm-2 control-label">Fecha Factura</label>
             <div class="col-sm-3">
-                <input type="date" value="{{=fecha}}" class="form-control" id="fecha_factura" name="fecha_factura" placeholder="">
+                <input type="date" value={{=fecha}} class="form-control" id="fecha_factura" name="fecha_factura" placeholder="">
             </div>
         </div>
         <center>

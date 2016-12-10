@@ -17,9 +17,10 @@ def orden_compras():
 
 
 def informe_subdiarioa():
-       # presentar formulario para criterios de busqueda
+    #criterio de búsqueda
     desde = date.today()
     hasta = date.today()
+    
     
     if request.vars['desde']:
         desde = datetime.strptime(request.vars['desde'], '%Y-%m-%d').date()
@@ -79,17 +80,21 @@ def listado_proveedor():
     return locals()
 
 def formulario_compras():
-    from datetime import datetime
-    fecha=datetime.now()
-    # ejecutar la consulta:
-    lista_proveedores = db().select(db.proveedor.id_proveedor, db.proveedor.razon_social)
-    # revisar si la consulta devolvio registros:
-    if not lista_proveedores:
-        mensaje = "No ha cargado clientes"
+    
+    from datetime import datetime #importa la liberia datetime
+    
+    fecha=datetime.now()# a la variable fecha se le asigna la 
+    
+    lista_proveedores = db().select(db.proveedor.id_proveedor, db.proveedor.razon_social)# Se le asigna la consulta de la tabla proveedor a la variable lista_proveedor
+
+   
+    if not lista_proveedores: # revisar si la consulta lista-proveedor devolvió o no registros:
+
+        response.flash = "No ha cargado Proveedores"
     else:
-        mensaje = "Seleccione un cliente"
-        ##primer_cliente = lista_clientes[0]
-    return locals()
+        response.flash = "Seleccione un Proveedores"
+        
+    return locals()# me devuelve todas la variables dentro de la función formulario_compras.
 
 
 def detalle_compras():
