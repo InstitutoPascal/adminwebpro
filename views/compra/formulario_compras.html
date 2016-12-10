@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label for="numero_factura" class="col-sm-2 control-label">N°: Factura</label>
                 <div class="col-sm-3">
-                    <input type="integer" class="form-control" id="numero_factura" name="numero_factura" placeholder="000000000000">
+                    <input pattern = "[0-9.]+" type="text" class="form-control" id="numero_factura" name="numero_factura" placeholder="000000000000" required><!--required me valida que eñ campo no quede vacio-->
                 </div>
             </div>
         </div>
@@ -23,7 +23,6 @@
             <label for="tipo_factura" class="col-sm-2 control-label">Tipo de Factura</label>
             <div class="col-sm-3">
                 <select class="form-control" id="factura" name="tipo_factura">
-                    <option select value="0">Tipo de Factura</option>
                     <option>Factura A</option>
                     <option>Factura B</option>
                 </select>
@@ -32,7 +31,6 @@
                 <label for="forma_pago" class="col-sm-2 control-label">Forma de Pago</label>
                 <div class="col-sm-3">
                     <select class="form-control" id="pago" name="forma_pago">
-                        <option select value="0">Forma de Pago</option>
                         <option>Efectivo</option>
                         <option>Cheques</option>
                     </select>
