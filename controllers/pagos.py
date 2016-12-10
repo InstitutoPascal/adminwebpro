@@ -48,12 +48,15 @@ def buscar_proveedor():
 
 @auth.requires_login()
 def generar_orden_pagos():
-    form = SQLFORM(db.pago, submit_button="Guardar")
-    if form.accepts(request.vars, session):
-        response.flash = "Datos Guardados"
-        redirect(URL('pagos', 'alta_cheques'))
+    compra_id = request.vars["id"]
+    factura_compra = db.compra((db.compra.id_compra == compra_id))
+    detalle_compra = db.detalle_compra((db.detalle_compra.id_compra == compra_id))
+    pagos = db((db.pago.id_pagos)).select().last()
+    if pagos == None:
+        num_orden_pago = 1
     else :
-        return {"grilla":"Generar Orden de Pagos", 'form':form}
+        num_orden_pago = int(pagos.num_orden_pago) + 1
+    return {'num_orden_pago':num_orden_pago, "factura_compra":factura_compra, "detalle_compra":detalle_compra}
 
 @auth.requires_login()
 def generar_reporte():

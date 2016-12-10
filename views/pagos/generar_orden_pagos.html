@@ -1,5 +1,39 @@
 {{extend 'layout.html'}}
-<h1>{{=grilla}}</h1>
+<h1>Generar orden de pago</h1>
 <form class="form-horizontal" action="{{=URL(c="pagos", f="generar_orden_pagos")}}" method="POST">
-  {{=form}}
+  <div class="form-group ">
+    <label for="num_orden_pago" class="col-sm-2 control-label">Numero de orden de pago</label>
+    <div class="col-sm-2">
+      <input type="input" class="form-control" id="num_orden_pago" name="num_orden_pago" placeholder="" value="{{=num_orden_pago}}" readonly="readonly">
+    </div>
+  </div>
+    <div class="form-group ">
+    <label for="fecha" class="col-sm-2 control-label">Fecha</label>
+    <div class="col-sm-2">
+      <input type="date" class="form-control" id="fecha" name="fecha" placeholder="">
+    </div>
+  </div>
+    <div class="form-group ">
+    <label for="fecha" class="col-sm-2 control-label">Importe</label>
+    <div class="col-sm-2">
+      <input type="input" class="form-control" id="importe" name="importe" placeholder="" value="{{=int(detalle_compra.precio) * int(detalle_compra.cantidad)}}" readonly="readonly">
+    </div>
+  </div>
+    <div class="form-group ">
+    <label for="fecha" class="col-sm-2 control-label">ID de Compra</label>
+    <div class="col-sm-2">
+      <input type="input" class="form-control" id="id_compras" name="id_compras" placeholder="" value="{{=factura_compra.id_compra}}" readonly="readonly">
+    </div>
+  </div>
+    <div class="form-group ">
+    <label for="fecha" class="col-sm-2 control-label">Nombre de Proveedor</label>
+    <div class="col-sm-2">
+      <input type="input" class="form-control" id="id_proveedor" name="id_proveedor" placeholder="" value="{{=factura_compra.id_proveedor.razon_social}}" readonly="readonly">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" class="btn btn-default" value="Guardar" name="reporte_nombre">
+    </div>
+  </div>
 </form>

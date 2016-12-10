@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         {{for factura in facturas:}}
-        <tr> <td><a href="{{=URL(c="pagos",f="generar_orden_pago")}}">{{=factura.numero_factura}}</a></td></tr>
+        <tr> <td><a href="{{=URL(c="pagos",f="generar_orden_pagos", vars={"id":factura.id_proveedor})}}">{{=factura.numero_factura}}</a></td></tr>
         {{pass}}
     </tbody>
 </table>
