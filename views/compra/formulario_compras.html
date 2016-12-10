@@ -10,7 +10,7 @@
                   {{for registro_proveedor in lista_proveedores:}}<!--se recorre la lista de proveedores  para mostrar las opciones del combo -->
                   <option value="{{=registro_proveedor.id_proveedor}}">{{=registro_proveedor.razon_social}}</option><!--el codigo id_proveedor y va a mostrar razón social correspondiente a ese id en pantalla -->
                   {{pass}}<!--cierra el for -->
-                </select>
+               </select>
             </div>
             <div class="form-group">
                 <label for="numero_factura" class="col-sm-2 control-label">N°: Factura</label>
@@ -40,12 +40,14 @@
         <div class="form-group">
             <label for="fecha_factura" class="col-sm-2 control-label">Fecha Factura</label>
             <div class="col-sm-3">
-                <input type="date" value={{=fecha}} class="form-control" id="fecha_factura" name="fecha_factura" placeholder="">
+                <input type="date" value={{=fecha}} class="form-control" id="fecha_factura" name="fecha_factura" placeholder=""><!--se le asigna fecha como valor traido del controlador (variable que contiene datetime.now)-->
             </div>
         </div>
         <center>
             <input type="submit" class="btn btn-default" value="DETALLE COMPRA" name="boton_enviar"></a>
-            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
+
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras")}}">Cancelar</a>
+
         </center>
         <br>
 	    <center>
