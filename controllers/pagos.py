@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # try something like
+import datetime
 def index(): 
     return dict(message="hello from ordenpagos.py")
 
@@ -56,7 +57,17 @@ def generar_orden_pagos():
         num_orden_pago = 1
     else :
         num_orden_pago = int(pagos.num_orden_pago) + 1
-    return {'num_orden_pago':num_orden_pago, "factura_compra":factura_compra, "detalle_compra":detalle_compra}
+    x = datetime.datetime.now()
+    session["orden_de_pago"] = []
+    datos_orden_pago = {}
+    datos_orden_pago["num_orden_pago"] = num_orden_pago
+    datos_orden_pago["fecha"] = "%s/%s/%s" % (x.day, x.month, x.year)
+    datos_orden_pago["importe"] = int(detalle_compra.precio) * int(detalle_compra.cantidad)
+    datos_orden_pago["numero_de_factura"] = factura_compra.numero_factura
+    datos_orden_pago["proveedor"] = factura_compra.id_proveedor.razon_social
+    datos_orden_pago["proveedor_id"] = factura_compra.id_proveedor
+    session["orden_de_pago"].append(datos_orden_pago)
+    return {"orden_de_pago":session["orden_de_pago"]}
 
 @auth.requires_login()
 def generar_reporte():
