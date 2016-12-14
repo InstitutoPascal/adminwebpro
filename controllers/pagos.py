@@ -24,12 +24,23 @@ def alta_cuenta_bancaria():
 
 @auth.requires_login()
 def alta_cheques():
-    form = SQLFORM(db.cheque, submit_button="Guardar")
-    if form.accepts(request.vars, session):
-        response.flash = "Datos Guardados"
-        return {"grilla":"Alta Cheques", 'form':form}
+    if request.vars["siguiente"]:
+        redirect(URL('pagos', 'confirmar'))
+    cheque = db((db.cheque.id_cheques)).select().last()
+    cta_bancaria = db((db.cuenta_bancaria)).select()
+    if cheque == None:
+        num_cheque = 1
     else :
-        return {"grilla":"Alta Cheques", 'form':form}
+        num_cheque = int(cheque.num_cheque) + 1
+    importe = session["orden_de_pago"][0]["importe"]
+    x = datetime.datetime.now()
+    session["alta_cheque"] = []
+    datos_cheque = {}
+    datos_cheque["num_cheque"] = num_cheque
+    datos_cheque["emision"] = "%s/%s/%s" % (x.day, x.month, x.year)
+    datos_cheque["importe"] = importe
+    session["alta_cheque"].append(datos_cheque)
+    return {'alta_cheques':session["alta_cheque"], "cta_bancaria":cta_bancaria}
 
 @auth.requires_login()
 def factura_proveedor():
@@ -49,8 +60,8 @@ def buscar_proveedor():
 
 @auth.requires_login()
 def generar_orden_pagos():
-    if request.vars["cheque"]:
-        redirect(URL('pagos', 'alta_cheque'))
+    if request.vars["ingresar_cheque"]:
+        redirect(URL('pagos', 'alta_cheques'))
     compra_id = request.vars["id"]
     factura_compra = db.compra((db.compra.id_compra == compra_id))
     detalle_compra = db.detalle_compra((db.detalle_compra.id_compra == compra_id))

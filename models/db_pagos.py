@@ -20,7 +20,7 @@ db.define_table("cheque",
     Field("emision","date"),
     Field("vencimiento","date"),
     Field("importe","integer"),
-    Field("id_cuenta_bancaria",db.cuenta_bancaria, label="Numero de Cuenta Bancaria"),
+    Field("id_cuenta_bancaria",db.cuenta_bancaria),
 )
 
 db.define_table("pago",
