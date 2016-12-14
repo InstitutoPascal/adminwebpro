@@ -49,6 +49,8 @@ def buscar_proveedor():
 
 @auth.requires_login()
 def generar_orden_pagos():
+    if request.vars["cheque"]:
+        redirect(URL('pagos', 'alta_cheque'))
     compra_id = request.vars["id"]
     factura_compra = db.compra((db.compra.id_compra == compra_id))
     detalle_compra = db.detalle_compra((db.detalle_compra.id_compra == compra_id))
