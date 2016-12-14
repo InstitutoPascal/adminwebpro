@@ -43,5 +43,4 @@ db.cheque.id_cuenta_bancaria.requires = IS_IN_DB(db, "cuenta_bancaria.id_cuenta_
 db.cheque.num_cheque.requires=IS_NOT_IN_DB(db, "cheque.num_cheque")
 db.cheque.emision.requires=IS_DATE('%Y-%m-%d')
 db.cheque.vencimiento.requires=IS_DATE('%Y-%m-%d')
-db.cheque.id_pagos.requires = IS_IN_DB(db, "pago.id_pagos", "-- %(num_orden_pago)s ..")
 db.pago.id_compras.requires = IS_IN_DB(db, "compra.id_compra", "-- %(numero_factura)s ..")
