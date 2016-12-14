@@ -25,7 +25,9 @@ def alta_cuenta_bancaria():
 @auth.requires_login()
 def alta_cheques():
     if request.vars["siguiente"]:
-        redirect(URL('pagos', 'confirmar'))
+        session["alta_cheque"][0]["vencimiento"] = request.vars["vencimiento"]
+        session["alta_cheque"][0]["cuenta_bancaria"] = request.vars["cuenta_bancaria"]
+        redirect(URL('pagos', 'confirmar_orden_pago'))
     cheque = db((db.cheque.id_cheques)).select().last()
     cta_bancaria = db((db.cuenta_bancaria)).select()
     if cheque == None:
@@ -77,10 +79,37 @@ def generar_orden_pagos():
     datos_orden_pago["fecha"] = "%s/%s/%s" % (x.day, x.month, x.year)
     datos_orden_pago["importe"] = int(detalle_compra.precio) * int(detalle_compra.cantidad)
     datos_orden_pago["numero_de_factura"] = factura_compra.numero_factura
+    datos_orden_pago["id_compra"] = factura_compra.id_compra
     datos_orden_pago["proveedor"] = factura_compra.id_proveedor.razon_social
     datos_orden_pago["proveedor_id"] = factura_compra.id_proveedor
     session["orden_de_pago"].append(datos_orden_pago)
     return {"orden_de_pago":session["orden_de_pago"]}
+
+@auth.requires_login()
+def confirmar_orden_pago():
+    for datos in session["orden_de_pago"]:
+        datos_pagos = datos
+    for datos in session["alta_cheque"]:
+        datos_cheque = datos
+    #datos de la orden de pago
+    num_orden_pago = datos_pagos["num_orden_pago"]
+    fecha = datos_pagos["fecha"]
+    importe = datos_pagos["importe"]
+    numero_de_factura = datos_pagos["numero_de_factura"]
+    id_compra = datos_pagos["id_compra"]
+    proveedor_id = datos_pagos["proveedor_id"]
+    #datos del cheque
+    num_cheque = datos_cheque["num_cheque"]
+    emision = datos_cheque["emision"]
+    importe = datos_cheque["importe"]
+    vencimiento = datos_cheque["vencimiento"]
+    cuenta_bancaria = datos_cheque["cuenta_bancaria"]
+    #insertar datos cheques
+    db.cheque.insert(num_cheque=num_cheque, emision=emision, vencimiento=vencimiento, importe=importe, id_cuenta_bancaria=cuenta_bancaria)
+    #insertar datos de orden de pago
+    cheque_pago=db.cheque((db.cheque.num_cheque==num_cheque))
+    db.pago.insert(num_orden_pago=num_orden_pago, fecha=fecha, importe=importe, id_compras=id_compra, id_proveedor=proveedor_id, id_cheque=cheque_pago.id_cheques)
+    return {"confirmacion":"Datos guardados"}
 
 @auth.requires_login()
 def generar_reporte():
