@@ -30,7 +30,7 @@ db.define_table("pago",
     Field("importe","string"),
     Field("id_compras",db.compra, label="Numero Factura de Compra"),
     Field("id_proveedor", db.proveedor, label="Nombre de Proveedor"),
-    Field("id_cheque", db.cheque, Label="Numero de Cheque")
+    Field("id_cheque", db.cheque, label="Numero de Cheque")
 )
 
 db.pago.num_orden_pago.requires=IS_NOT_IN_DB(db, "pago.num_orden_pago")
