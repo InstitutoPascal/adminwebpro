@@ -33,6 +33,12 @@ db.define_table("pago",
     Field("id_cheque", db.cheque, label="Numero de Cheque")
 )
 
+db.define_table("pagado",
+    Field("id_pagado", "id"),
+    Field("id_pagos", db.pago),
+    Field("id_compras", db.compra)
+)
+
 db.pago.num_orden_pago.requires=IS_NOT_IN_DB(db, "pago.num_orden_pago")
 db.pago.fecha.requires=IS_DATE('%Y-%m-%d')
 db.banco.nombre_banco.requires = IS_NOT_EMPTY()
