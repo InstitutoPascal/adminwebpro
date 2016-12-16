@@ -3,12 +3,15 @@
     <caption>Facturas a pagar</caption>
     <thead>
         <tr>
-            <th>Numero de Factura</th>
+            <th>Numero de Factura</th> <th>Fecha de Factura</th>
         </tr>
     </thead>
     <tbody>
         {{for factura in facturas:}}
-        <tr> <td><a href="{{=URL(c="pagos",f="generar_orden_pagos", vars={"id":factura.numero_factura})}}">{{=factura.numero_factura}}</a></td></tr>
+        <tr>
+           <td><a href="{{=URL(c="pagos",f="generar_orden_pagos", vars={"id":factura.numero_factura})}}">{{=factura.numero_factura}}</a></td>
+           <td>{{=factura.fecha_factura}}</td>
+        </tr>
         {{pass}}
     </tbody>
 </table>
