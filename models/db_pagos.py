@@ -35,6 +35,7 @@ db.define_table("pago",
 
 db.define_table("pagado",
     Field("id_pagado", "id"),
+    Field("factura_pagada", "boolean"),
     Field("id_pagos", db.pago),
     Field("id_compras", db.compra)
 )

@@ -65,6 +65,8 @@ def generar_orden_pagos():
     if request.vars["ingresar_cheque"]:
         redirect(URL('pagos', 'alta_cheques'))
     compra_id = request.vars["id"]
+    if db.pagado((db.pagado.id_compras == compra_id)):
+        return{"pagado":"La factura seleccionada ya esta pagada"}
     factura_compra = db.compra((db.compra.id_compra == compra_id))
     detalle_compra = db.detalle_compra((db.detalle_compra.id_compra == compra_id))
     pagos = db((db.pago.id_pagos)).select().last()
@@ -83,7 +85,7 @@ def generar_orden_pagos():
     datos_orden_pago["proveedor"] = factura_compra.id_proveedor.razon_social
     datos_orden_pago["proveedor_id"] = factura_compra.id_proveedor
     session["orden_de_pago"].append(datos_orden_pago)
-    return {"orden_de_pago":session["orden_de_pago"]}
+    return {"orden_de_pago":session["orden_de_pago"], "pagado":None}
 
 @auth.requires_login()
 def confirmar_orden_pago():
@@ -108,7 +110,9 @@ def confirmar_orden_pago():
     db.cheque.insert(num_cheque=num_cheque, emision=emision, vencimiento=vencimiento, importe=importe, id_cuenta_bancaria=cuenta_bancaria)
     #insertar datos de orden de pago
     cheque_pago=db.cheque((db.cheque.num_cheque==num_cheque))
-    db.pago.insert(num_orden_pago=num_orden_pago, fecha=fecha, importe=importe, id_compras=id_compra, id_proveedor=proveedor_id, id_cheque=cheque_pago.id_cheques)
+    orden_pago_guardar = db.pago.insert(num_orden_pago=num_orden_pago, fecha=fecha, importe=importe, id_compras=id_compra, id_proveedor=proveedor_id, id_cheque=cheque_pago.id_cheques)
+    #acentar pago de factura
+    db.pagado.insert(factura_pagada=True, id_pagos=orden_pago_guardar.id_pagos, id_compras=orden_pago_guardar.id_compras)
     return {"confirmacion":"Datos guardados"}
 
 @auth.requires_login()

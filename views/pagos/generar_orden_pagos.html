@@ -1,4 +1,7 @@
 {{extend 'layout.html'}}
+{{if pagado:}}
+        {{=pagado}}
+{{else:}}
 <h1>Generar orden de pago</h1>
 <form class="form-horizontal" action="{{=URL(c="pagos", f="generar_orden_pagos")}}" method="POST">
   {{for dato in orden_de_pago:}}
@@ -39,3 +42,4 @@
   </div>
   {{pass}}
 </form>
+{{pass}}
