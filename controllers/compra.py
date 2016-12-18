@@ -93,6 +93,10 @@ def formulario_compras():
         response.flash = "No ha cargado Proveedores"
     else:
         response.flash = "Seleccione un Proveedores"
+
+    lista_numero_factura=db().select(db.compra.numero_factura)
+
+    print lista_numero_factura
         
     return locals()# me devuelve todas la variables dentro de la función formulario_compras.
 

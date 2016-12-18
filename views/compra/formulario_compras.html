@@ -1,5 +1,29 @@
 {{extend 'layout.html'}}
 <h1>Formulario de Compras</h1>
+<head>
+<script>
+
+function validar_numero_factura(numero_factura){
+
+alert ("pasó");
+
+alert (numero_factura);
+var i;
+
+alert (lista_numero_factura);
+	for (i =0;i<lista_numero_factura.length;i++){
+
+	alert (lista_numero_factura);
+	alert ("recorrer");
+
+	if(lista_numero_factura[i] == numero_factura){
+
+		alert("El valor " + numero + " ya existe en la base de datos");
+	}
+	}
+}
+</script>
+</head>
 <body>
     <br>
     <form class="form-horizontal"  action="{{=URL(c="compra", f="detalle_compras")}}" enctype="multipart/form-data" method="POST">
@@ -15,7 +39,7 @@
             <div class="form-group">
                 <label for="numero_factura" class="col-sm-2 control-label">N°: Factura</label>
                 <div class="col-sm-3">
-                    <input pattern = "[0-9.]+" type="text" class="form-control" id="numero_factura" name="numero_factura" placeholder="000000000000" required><!--required me valida que eñ campo no quede vacio-->
+                    <input pattern = "[0-9.]+" type="text" class="form-control" id="numero_factura" name="numero_factura" placeholder="000000000000" onChange="validar_numero_factura(this.value);" required><!--required me valida que eñ campo no quede vacio-->
                 </div>
             </div>
         </div>
