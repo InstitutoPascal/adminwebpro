@@ -52,13 +52,13 @@ def informe_subdiarioa():
         table = None
     return locals()
 
-def informe_subdiariob():
+"""def informe_subdiariob():
        # presentar formulario para criterios de busqueda
     print request.post_vars
     if request.post_vars["enviar"]:
         print request.vars["fecha_desde"]
         print request.vars["fecha_hasta"]
-    return dict(message="Informe Subdiariob")
+    return dict(message="Informe Subdiariob")"""
 
 def listado_proveedor():
     razon_social = request.post_vars["razon_social"]

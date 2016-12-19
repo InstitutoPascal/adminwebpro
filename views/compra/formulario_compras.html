@@ -5,17 +5,12 @@
 
 function validar_numero_factura(numero_factura){
 
-alert ("pasó");
 
-alert (numero_factura);
 var i;
 
-alert (lista_numero_factura);
 	for (i =0;i<lista_numero_factura.length;i++){
 
-	alert (lista_numero_factura);
-	alert ("recorrer");
-
+	
 	if(lista_numero_factura[i] == numero_factura){
 
 		alert("El valor " + numero + " ya existe en la base de datos");
@@ -56,7 +51,7 @@ alert (lista_numero_factura);
                 <div class="col-sm-3">
                     <select class="form-control" id="pago" name="forma_pago">
                         <option>Efectivo</option>
-                        <option>Cheques</option>
+                        <option>Cheque</option>
                     </select>
                 </div>
 	       </div>

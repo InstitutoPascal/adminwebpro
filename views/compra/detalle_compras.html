@@ -57,14 +57,14 @@
                                 <td align="center">{{=item["precio_producto"] * item["cantidad"] * 0.105}}</td>
                                 <td align="center">{{=item["precio_producto"] * item["cantidad"]  * 1.105}}</td>
                                 <td>
-                                    <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"indice": i,"accion":"eliminar_item"})}}">ELIMINAR</a>
+                                    <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"indice": i,"accion":"eliminar_item"})}}">Eliminar</a>
                                 </td>
                         </tr>
                             {{pass}}
                     </tbody>
             </table>
-            <div>
-                <input type="submit" value="GUARDAR" name="modificar" class="btn btn-default" role="button">
+           <!-- <div>
+                <input type="submit" value="GUARDAR" name="modificar" class="btn btn-default" role="button">-->
             </div>
             <br>
         </div>
@@ -96,8 +96,8 @@
     <div>
         <center>
             <input type="submit" name="confirmar" value="CONFIRMAR" class="btn btn-default">
-            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"id":1,"nombre":"mark"})}}">CANCELAR</a>
-            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">ATRAS</a>
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
+            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">Atrás</a>
         </center>
     </div>
 </form>
