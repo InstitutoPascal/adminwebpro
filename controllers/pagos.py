@@ -106,11 +106,11 @@ def confirmar_orden_pago():
     importe = datos_cheque["importe"]
     vencimiento = datos_cheque["vencimiento"]
     cuenta_bancaria = datos_cheque["cuenta_bancaria"]
-    #insertar datos cheques
-    db.cheque.insert(num_cheque=num_cheque, emision=emision, vencimiento=vencimiento, importe=importe, id_cuenta_bancaria=cuenta_bancaria)
     #insertar datos de orden de pago
-    cheque_pago=db.cheque((db.cheque.num_cheque==num_cheque))
-    orden_pago_guardar = db.pago.insert(num_orden_pago=num_orden_pago, fecha=fecha, importe=importe, id_compras=id_compra, id_proveedor=proveedor_id, id_cheque=cheque_pago.id_cheques)
+    orden_pago_guardar = db.pago.insert(num_orden_pago=num_orden_pago, fecha=fecha, importe=importe, id_compras=id_compra, id_proveedor=proveedor_id)
+    orden_pago=db.pago((db.pago.num_orden_pago==num_orden_pago))
+    #insertar datos cheques
+    db.cheque.insert(num_cheque=num_cheque, emision=emision, vencimiento=vencimiento, importe=importe, id_cuenta_bancaria=cuenta_bancaria, id_pagos=orden_pago.id_pagos)
     #acentar pago de factura
     db.pagado.insert(factura_pagada=True, id_pagos=orden_pago_guardar.id_pagos, id_compras=orden_pago_guardar.id_compras)
     return {"confirmacion":"Datos guardados"}

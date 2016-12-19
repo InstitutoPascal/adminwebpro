@@ -14,15 +14,6 @@ db.define_table("cuenta_bancaria",
     Field("id_banco",db.banco),
 )
 
-db.define_table("cheque",
-    Field("id_cheques","id"),
-    Field("num_cheque","integer"),
-    Field("emision","date"),
-    Field("vencimiento","date"),
-    Field("importe","integer"),
-    Field("id_cuenta_bancaria",db.cuenta_bancaria),
-)
-
 db.define_table("pago",
     Field("id_pagos","id"),
     Field("num_orden_pago","string"),
@@ -30,7 +21,16 @@ db.define_table("pago",
     Field("importe","string"),
     Field("id_compras",db.compra, label="Numero Factura de Compra"),
     Field("id_proveedor", db.proveedor, label="Nombre de Proveedor"),
-    Field("id_cheque", db.cheque, label="Numero de Cheque")
+)
+
+db.define_table("cheque",
+    Field("id_cheques","id"),
+    Field("num_cheque","integer"),
+    Field("emision","date"),
+    Field("vencimiento","date"),
+    Field("importe","integer"),
+    Field("id_cuenta_bancaria",db.cuenta_bancaria),
+    Field("id_pagos", db.pago)
 )
 
 db.define_table("pagado",
