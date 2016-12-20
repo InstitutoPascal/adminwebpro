@@ -10,14 +10,14 @@ def abm_clientes():
 
 @auth.requires_login()
 def abm_ventas():
+    #importamos libreria para el formato de la fecha
     import time
+    #genera la fecha actual
     fecha_hoy= time.strftime("%x")
-    #return dict(message="abm_ventas")
     # definir los campos a obtener desde la base de datos:
-    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social, #db.ventas.numero_factura
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social
     # definir la condición que deben cumplir los registros:
     criterio = db.cliente.id_cliente>0
-    ##criterio &= db.cliente.condicion_frente_al_iva=="Responsable Inscripto"
     # ejecutar la consulta:
     lista_clientes = db(criterio).select(*campos)
     # revisar si la consulta devolvio registros:
@@ -25,8 +25,8 @@ def abm_ventas():
         mensaje = "No ha cargado clientes"
     else:
         mensaje = "Seleccione un cliente"
-        ##primer_cliente = lista_clientes[0]
-    return dict(message=mensaje, lista_clientes=lista_clientes, hoy=fecha_hoy)
+    #redirije los valores al HTML
+    return dict(message=mensaje, lista_clientes=lista_clientes, hoy=fecha_hoy,)
 
 
 @auth.requires_login()
@@ -36,11 +36,11 @@ def detalle_ventas():
         # obtengo los valores completados en el formulario
         id_cliente = request.vars["id_cliente"]
         fecha = request.vars["fecha"]
-        nro_comprobante = request.vars["numero_comprobante"]
+        numero_factura = request.vars["numero_factura"]
         # guardo los datos elegidos en la sesión
         session["id_cliente"] = id_cliente
         session["fecha"] = fecha
-        session["nro_comprobante"] = nro_comprobante
+        session["numero_factura"] = numero_factura
         session["items_venta"] = []
     if request.vars["agregar_item"]:
         # obtengo los valores del formulario
@@ -59,15 +59,41 @@ def detalle_ventas():
     reg_cliente = registros[0]
     lista_productos = db(db.producto.id_producto>0).select()
     # le pasamos las variables a la vista para armar el html
-    return dict(id_cliente=session["id_cliente"], fecha=session["fecha"], 
-                nro_cbte=session["nro_comprobante"], 
+    return dict(id_cliente=session["id_cliente"], fecha=session["fecha"],
+                nro_cbte=session["numero_factura"],
                 reg_cliente=reg_cliente, lista_productos=lista_productos,
                 items_venta=session["items_venta"],
                 )
 
-@auth.requires_login()
-def reporte_ventas():
-    return dict(message="reporte_ventas")
+def confirmar():
+    reg_cliente = db(db.cliente.id_cliente==session["id_cliente"]).select().first()
+    total = 0
+    for item in session["items_venta"]:
+        total += (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00)
+    return dict (mensaje= "Finalizar venta",
+                 id_cliente=session["id_cliente"],
+                 fecha=session["fecha"],
+                 nro_cbte=session["numero_factura"],
+                 reg_cliente=reg_cliente, total=total)
+
+def guardado():
+    # Agregar los registros a la base de datos:
+    # encabezado:
+    nuevo_id_venta = db.ventas.insert(
+         id_cliente=session["id_cliente"],
+         numero_factura=session["numero_factura"],
+         fecha=session["fecha"],
+         )
+     # detalle (productos)
+    for item in session["items_venta"]:
+         db.detalle_ventas.insert(
+            id_venta=nuevo_id_venta,
+             id_producto=item["id_producto"],
+             cantidad=item["cantidad"]
+             )
+    return dict (mensaje= "Se guardo con exito el comprobante id=%s" % nuevo_id_venta,
+                 id_venta=nuevo_id_venta)
+    return dict (mensaje= "Se guardo con exito el comprobante")
 
 def vista_previa():
     #return dict(message="vista_previa")
@@ -85,12 +111,10 @@ def vista_previa():
 
                 items_venta=session["items_venta"])
 
-def borrar_item():
-    # eliminar algo
-    # request.vars tiene un diccionario con todos los parametros de la URL (luego del ?)
-    pos_a_borrar = int(request.vars["pos"])
-    session["items_venta"].pop(pos_a_borrar)
-    redirect(URL(f="detalle_ventas"))
+
+@auth.requires_login()
+def reporte_ventas():
+    return dict(message="reporte_ventas")
 
 def lista_ventas():
     # obtenemos los criterios de busqueda y generamos el reporte
@@ -98,41 +122,13 @@ def lista_ventas():
     hasta = request.vars["fecha_hasta"]
     return dict(titulo="Listando Desde: %s Hasta: %s" % (desde, hasta))
 
-def guardado():
-    # Agregar los registros a la base de datos:
-    # encabezado:
-    nuevo_id_venta = db.ventas.insert(
-         id_cliente=session["id_cliente"],
-         numero_factura=session["nro_comprobante"],
-         fecha=session["fecha"],
-         )
-     # detalle (productos)
-    for item in session["items_venta"]:
-         db.detalle_ventas.insert(
-            id_venta=nuevo_id_venta,
-             id_producto=item["id_producto"],
-             cantidad=item["cantidad"]
-             )
-    return dict (mensaje= "Se guardo con exito el comprobante id=%s" % nuevo_id_venta,
-                 id_venta=nuevo_id_venta)
-    return dict (mensaje= "Se guardo con exito el comprobante")
-
-def confirmar():
-    reg_cliente = db(db.cliente.id_cliente==session["id_cliente"]).select().first()
-    total = 0
-    for item in session["items_venta"]:
-        total += (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00)
-    return dict (mensaje= "Finalizar venta", 
-                 id_cliente=session["id_cliente"], 
-                 fecha=session["fecha"], 
-                 nro_cbte=session["nro_comprobante"], 
-                 reg_cliente=reg_cliente, total=total)
-
-def agregar_descuento():
-    return dict (mensaje= "Seleccione un Descuento a la Venta ")
-
 def reporte_por_cliente():
-    return dict(message="Reporde de las ventas segun Cliente")
+    campos = db.cliente.id_cliente, db.cliente.nombre_de_fantasia, db.cliente.razon_social
+    # definir la condición que deben cumplir los registros:
+    criterio = db.cliente.id_cliente>0
+    # ejecutar la consulta:
+    lista_clientes = db(criterio).select(*campos)
+    return dict(lista_clientes=lista_clientes)
 
 def lista_ventas_por_cliente():
     # obtenemos los criterios de busqueda y generamos el reporte

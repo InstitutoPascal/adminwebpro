@@ -42,7 +42,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th><h4>Codigo de Articulo</h4></th>
+            <th><h4>Código de Artículo</h4></th>
             <th><h4>Detalle</h4></th>
             <th><h4>Cantidad</h4></th>
             <th><h4>Precio Unitario</h4></th>
@@ -69,13 +69,12 @@
 </div>
 <div class="form-group">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-5">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th><h5><B> SUB-TOTAL</B></h5></th>
-                        <th><h5>Impuesto IVA "(10.5%)" </h5></th>
-                        <th><h5>Impuesto IVA "(21%)" </h5></th>
+                        <th><h5>Impuesto IVA </h5></th>
                         <th><h5><B>TOTAL</B></h5></th>
                     </tr>
                 </thead>
@@ -83,7 +82,6 @@
                     <tr>
                         <td class=" text-right "><B>${{=subtotal}}</B></td>
                         <td class=" text-right ">${{=subtotal * item["alicuota_iva"]/100.00}}</td>
-                        <td class=" text-right ">$0</td>
                         {{total= subtotal + subtotal * item["alicuota_iva"]/100.00}}
                         <td class=" text-right "><B>${{=total}}</B></td>
                     </tr>
@@ -92,10 +90,5 @@
                 </table>
             </div>
         </div>
-            <div class="col-xs-4">
-               <h2>
-                   <IMG SRC="http://www.equipospro.com.ar/como_pagar/codigo_barras_pago_facil_archivos/codigo_barras.gif" WIDTH=400 HEIGHT=100 /> 
-               </h2>
-            </div>
 </div>
 </form>

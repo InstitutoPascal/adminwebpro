@@ -1,6 +1,5 @@
 {{extend 'layout.html'}}
-<h1>REGISTRAR FACTURA</h1>
-
+<h1>REGISTRAR VENTA</h1>
 
 <form class="form-horizontal" action="{{=URL(c="ventas", f="detalle_ventas")}}" enctype="multipart/form-data" method="POST">
 <div class="form-group">
@@ -14,7 +13,7 @@
             </div>
             <label for="campo_numero_comprobante" class="col-sm-2 control-label">N° DE COMPROBANTE</label>
             <div class="col-sm-2">
-                <input type="number" class="form-control" name="numero_comprobante" id="campo_numero_comprobante">
+                <input pattern= "[0-9.]+" type="text" class="form-control" name="numero_factura" id="campo_numero_comprobante" required>
             </div>
     </div>
     <div class="form-group">
@@ -22,9 +21,9 @@
             <div class="col-sm-2">
                 <input class="form-control" name="fecha" value="{{=hoy}}">
             </div>
-            <label for="campo_tipo" class="col-sm-2 control-label">TIPO DE PAGO</label>
+            <label for="tipo_de_pago" class="col-sm-2 control-label">TIPO DE PAGO</label>
             <div class="col-sm-2">
-               <select class="form-control" name="forma_pago" id="campo_tipo">
+               <select class="form-control" name="tipo_de_pago" id="pago">
                   <option>Efectivo</option>
                   <option>Credito</option>
                 </select>

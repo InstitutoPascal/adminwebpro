@@ -55,7 +55,7 @@
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
                 <td align="center">{{=item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00}}</td>
                 {{subtotal = subtotal + (item["precio_venta"] * item["cantidad"] + item["precio_venta"] * item["cantidad"] *item["alicuota_iva"]/100.00) }}
-                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"pos":i})}}">Eliminar</a><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="detalle_ventas",vars={"id":1})}}">Modificar</a></td>
+                <td><a class="btn btn-default" role="button" href="{{=URL(c="ventas",f="borrar_item",vars={"pos":i})}}">Eliminar</a></td>
             </tr>
             {{pass}}
         </tbody>

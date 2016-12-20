@@ -1,5 +1,5 @@
 {{extend 'layout.html'}}
-<h1>REPORTE DE VENTAS</h1>
+<h1>REPORTE DE VENTAS POR CLIENTE</h1>
 
 <form class="form-horizontal" action="{{=URL(c="ventas", f="lista_ventas_por_cliente")}}" enctype="multipart/form-data" method="POST">
     <div class="form-group">
@@ -15,22 +15,14 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="cant" class="col-sm-2 control-label">TIPO CLIENTE</label>
-        <div class="col-sm-3">
-                <select class="form-control" id="cant">
-                  <option>Consumidor Final</option>
-                  <option>Responzable Inscripto</option>
-                </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="cant" class="col-sm-2 control-label">CLIENTE</label>
-        <div class="col-sm-3">
-                <select class="form-control" id="cant">
-                  <option>ZIA- Ivan Zavala</option>
-                  <option>ProductosMB - Martin Benitez</option>
-                </select>
-        </div>
+        <label for="campo_cliente" class="col-sm-2 control-label">CLIENTE</label>
+            <div class="col-sm-3">
+               <select class="form-control" id="campo_cliente" name="id_cliente">
+                  {{for reg_cliente in lista_clientes:}}
+                  <option value="{{=reg_cliente.id_cliente}}">{{=reg_cliente.nombre_de_fantasia}} - {{=reg_cliente.razon_social}}</option>
+                  {{pass}}
+               </select>
+            </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
