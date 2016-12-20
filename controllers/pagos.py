@@ -113,7 +113,8 @@ def confirmar_orden_pago():
     db.cheque.insert(num_cheque=num_cheque, emision=emision, vencimiento=vencimiento, importe=importe, id_cuenta_bancaria=cuenta_bancaria, id_pagos=orden_pago.id_pagos)
     #acentar pago de factura
     db.pagado.insert(factura_pagada=True, id_pagos=orden_pago_guardar.id_pagos, id_compras=orden_pago_guardar.id_compras)
-    return {"confirmacion":"Datos guardados"}
+    id_pagos = orden_pago.id_pagos
+    redirect(URL('pagos', 'ver_orden_pago', vars=dict(id=id_pagos)))
 
 @auth.requires_login()
 def generar_reporte():
