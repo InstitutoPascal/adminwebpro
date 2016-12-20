@@ -3,15 +3,15 @@
 <head>
 <script>
 
-function validar_numero_factura(numero_factura){
+function validar_numero_factura(compra.numero_factura){
 
 
-var i;
+	var i;
 
-	for (i =0;i<lista_numero_factura.length;i++){
-
-	
-	if(lista_numero_factura[i] == numero_factura){
+	for (i =0;i<lista_numero_factura.length;i++)
+		alert "pasa el for"
+	if(lista_numero_factura[i] == compra.numero_factura){
+		alert "pasa el if"
 
 		alert("El valor " + numero + " ya existe en la base de datos");
 	}
@@ -57,7 +57,7 @@ var i;
 	       </div>
 	   </div>
         <div class="form-group">
-            <label for="fecha_factura" class="col-sm-2 control-label">Fecha Factura</label>
+            <label for="fecha_factura" class="col-sm-2 control-label">Fecha de Factura</label>
             <div class="col-sm-3">
                 <input type="date" value={{=fecha}} class="form-control" id="fecha_factura" name="fecha_factura" placeholder=""><!--se le asigna fecha como valor traido del controlador (variable que contiene datetime.now)-->
             </div>
