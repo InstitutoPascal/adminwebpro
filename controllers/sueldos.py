@@ -26,17 +26,15 @@ def abm_horas():
 def legajos():
     import os
     form = SQLFORM.factory(Field('nro_legajo',requires=IS_NOT_EMPTY(error_message='Ingrese el número de legajo')),
-                           Field('fecha_egreso','date',requires=IS_NOT_EMPTY(error_message='Ingrese la fecha')),
+                           Field('fecha_egreso','date'),
                            Field('cuil',requires=IS_NOT_EMPTY(error_message= 'Ingrese el cuil')),
-                                                                      
                            Field('dni',requires=IS_NOT_EMPTY(error_message='Ingrese el dni')),
-                           
                            Field('corresponde_hs_extra',requires=IS_IN_SET({1:'si',2:'no'},error_message='Ingrese una opción',zero='Seleccionar...')),
                            Field('nombres',requires=IS_NOT_EMPTY(error_message='Ingrese el nombre')),
                            Field('apellido',requires=IS_NOT_EMPTY(error_message='Ingrese el apellido')),
                            Field('fecha_nacimiento','date'),
                            Field('lugar_nacimiento','string'),
-                           Field('estado_civil','string'),
+                           Field('estado_civil', requires=IS_IN_SET(['Soltero','Casado','Viudo'])),
                            Field('edad','string'),
                            Field('categoria','string'),
                            Field('domicilio_calle','string'),
@@ -53,23 +51,23 @@ def legajos():
             session["imagen"] = image
         except:
             session['imagen'] = None
-        session["nro_legajo"] = request.vars['nro_legajo']
-        session["fecha_egreso"] = request.vars['fecha_egreso']
-        session["cuil"] = request.vars['cuil']
-        session["dni"] = request.vars['dni']
-        session["horas_extras"] = request.vars['corresponde_hs_extra']
-        session["nombre"] = request.vars['nombres']
-        session["apellido"] = request.vars['apellido']
-        session["fecha_nacimiento"] = request.vars['fecha_nacimiento']
-        session["lugar_nacimiento"] = request.vars['lugar_nacimiento']
-        session["estado_civil"] = request.vars['estado_civil']
-        session["edad"] = request.vars['edad']
-        session["categoria"] = request.vars['categoria']
-        session["domicilio"] = request.vars['domicilio_calle']
-        session["num_domicilio"] = request.vars['numero_calle']
-        session["piso"] = request.vars['piso']
-        session["depto"] = request.vars['depto']
-        redirect(URL(c='sueldos',f='legajos2'))
+            session["nro_legajo"] = request.vars['nro_legajo']
+            session["fecha_egreso"] = request.vars['fecha_egreso']
+            session["cuil"] = request.vars['cuil']
+            session["dni"] = request.vars['dni']
+            session["horas_extras"] = request.vars['corresponde_hs_extra']
+            session["nombre"] = request.vars['nombres']
+            session["apellido"] = request.vars['apellido']
+            session["fecha_nacimiento"] = request.vars['fecha_nacimiento']
+            session["lugar_nacimiento"] = request.vars['lugar_nacimiento']
+            session["estado_civil"] = request.vars['estado_civil']
+            session["edad"] = request.vars['edad']
+            session["categoria"] = request.vars['categoria']
+            session["domicilio"] = request.vars['domicilio_calle']
+            session["num_domicilio"] = request.vars['numero_calle']
+            session["piso"] = request.vars['piso']
+            session["depto"] = request.vars['depto']
+            redirect(URL(c='sueldos',f='legajos2'))
     
     grid = SQLFORM.grid(db.legajos)
     return locals()
@@ -187,7 +185,7 @@ def horas():
     return locals()
 
 
-def familhs_extiar():
+def familiar():
     grid = SQLFORM.grid(db.familiares)
     return {"grilla": grid}
 
@@ -264,13 +262,10 @@ def reportes_familiares():
         criterio &=  db.familiares.estudia == "Si"
         subtitulo = "Familiares que estudian"
     if familiar_distdom:
-        criterio = db.familiares.num_legajo == db.legajos.num_legajo
-        criterio &=  db.familiares.domicilio_calle != db.legajos.dom_calle
-        criterio |=  db.familiares.domicilio_numero != db.legajos.dom_numero
+        criterio &=  ((db.familiares.domicilio_calle != db.legajos.dom_calle) |  (db.familiares.domicilio_numero != db.legajos.dom_numero))
         subtitulo = "Familiares con distinto domicilio"
     registros = db(criterio).select(*campos)
     return dict(lista_familiares=registros,titulo="Listando %s" % subtitulo)
-
 
 def reportes_familiares2():
     return dict()
