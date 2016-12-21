@@ -7,7 +7,7 @@
     </thead> 
         <tbody>
             {{for i, reg_empleado in enumerate(lista_horas):}}
-            <tr> <th scope="row">{{=i}}</th> <td>{{=reg_empleado.horas.num_legajo}}</td> <td>{{=reg_empleado.legajos.nombre}} {{=reg_empleado.legajos.apellido}}</td> <td>{{=reg_empleado.horas.hs_trab}}</td> </tr>
+            <tr> <th scope="row">{{=i+1}}</th> <td>{{=reg_empleado.horas.num_legajo}}</td> <td>{{=reg_empleado.legajos.nombre}} {{=reg_empleado.legajos.apellido}}</td> <td>{{=reg_empleado.horas.hs_trab}}</td> </tr>
         </tr> 
            {{pass}}  
        </tbody> 
