@@ -201,6 +201,9 @@ def reportes_empleados():
     dt_str2 = fecha_hasta
     dt_obj2 = datetime.strptime(dt_str2, '%Y-%m-%d')
     fecha_hasta = dt_obj2
+    fecha_actual = datetime.now()
+    #dt_objactual3 = datetime.strptime(fecha_actual, '%Y-%m-%d')
+    #fecha_actual = dt_objactual3 
     ordenar = request.vars["ordenar"]
     
     campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.legajos.fecha_ingreso
@@ -213,7 +216,7 @@ def reportes_empleados():
         orden = db.legajos.num_legajo
 
     registros = db(criterio).select(*campos, orderby=orden)
-    return dict(lista_empleados=registros,fecha_desde=fecha_desde,fecha_hasta=fecha_hasta,titulo="Listando desde fecha %s hasta fecha %s" % (fecha_desde.date(), fecha_hasta.date()))
+    return dict(lista_empleados=registros,fecha_desde=fecha_desde,fecha_hasta=fecha_hasta,fecha_actual=fecha_actual,titulo="Listando desde fecha %s hasta fecha %s. La fecha actual es:  %s" % (fecha_desde.date(), fecha_hasta.date(), fecha_actual.date()))
 
 # obtenemos los criterios de busqueda y generamos el reporte
 # desde = request.vars["fecha_desde"]
