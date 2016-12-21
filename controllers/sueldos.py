@@ -247,6 +247,16 @@ def reportes_familiares():
     familiar_distdom = request.vars["familiar_distdom"]
     campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.familiares.domicilio_numero, db.legajos.dom_calle, db.legajos.dom_numero,  
     criterio = db.familiares.num_legajo == db.legajos.num_legajo
+    #dt_str = db.familiares.fe_nac
+    #dt_obj = datetime.strptime(dt_str, '%Y-%m-%d')
+    #fecha ingresada = db.familiares.fe_nac
+    fecha_ingresada = '09/04/2009'
+    # Separo el formato de fecha para convertirlo en yyyy/mm/dd
+    d = fecha_ingresada.split('/')
+    fecha_a_calcular = datetime.strptime(d[2] + d[1] + d[0],'%Y%m%d').date()
+    calcdate = datetime.now().date() - fecha_a_calcular
+    fecharesultado2 = calcdate.days / 365
+    #print fecharesultado2
     if familia_menor21:
         criterio &=  db.familiares.edad < 21
         subtitulo = "Familiares menores de 21 años"
@@ -257,7 +267,7 @@ def reportes_familiares():
         criterio &=  ((db.familiares.domicilio_calle != db.legajos.dom_calle) |  (db.familiares.domicilio_numero != db.legajos.dom_numero))
         subtitulo = "Familiares con distinto domicilio"
     registros = db(criterio).select(*campos)
-    return dict(lista_familiares=registros,titulo="Listando %s" % subtitulo)
+    return dict(lista_familiares=registros,fecharesultado2=fecharesultado2, titulo="Listando %s, con edad ej: %s" % (subtitulo, fecharesultado2))
 
 def reportes_familiares2():
     return dict()
