@@ -139,24 +139,24 @@ def legajos3():
             depto = session['depto'],
             obra_social = session["obrasocial"], 
             codigo_postal = session["codigopostal"] ,
-             localidad = session["localidad"] ,
+            localidad = session["localidad"] ,
             email = session["email"] ,
-           fecha_ingreso = session["fechaingreso"], 
-             telefono = session["telefono"] ,
-           celular = session["celular"] ,
-               estudia = session["estudia"] ,
+            fecha_ingreso = session["fechaingreso"], 
+            telefono = session["telefono"] ,
+            celular = session["celular"] ,
+            estudia = session["estudia"] ,
             constancia_de_cuil = session["constancia_cuil"], 
             alta_temprana = session["alta_temprana"],
-              fotocopia_dni = session["fotodni"] ,
+            fotocopia_dni = session["fotodni"] ,
             libreta_familia = session["libreta"] ,
-                   partida_nacimiento_hijos = session["partida"] ,
-               fotocopia_dni_hijos= request.vars["fotocopia_dni_hijos"],
-                fotocopia_dni_conyuge=  request.vars["fotocopia_dni_conyuge"],
-                   constancia_cuil_hijos =       request.vars["constancia_cuil_hijos"],
-                 constancia_cuil_conyuge =   request.vars["constancia_cuil_conyuge"],
-                    constancia_Alumno_Regular_Hijo = request.vars["constancia_Alumno_Regular_Hijo"],
-              constancia_Alumno_Regular_empleado =     request.vars["constancia_Alumno_Regular_empleado"],
-                   curriculum_empleado = request.vars["curriculum_empleado"],
+            partida_nacimiento_hijos = session["partida"] ,
+            fotocopia_dni_hijos= request.vars["fotocopia_dni_hijos"],
+            fotocopia_dni_conyuge= request.vars["fotocopia_dni_conyuge"],
+            constancia_cuil_hijos = request.vars["constancia_cuil_hijos"],
+            constancia_cuil_conyuge = request.vars["constancia_cuil_conyuge"],
+            constancia_Alumno_Regular_Hijo = request.vars["constancia_Alumno_Regular_Hijo"],
+            constancia_Alumno_Regular_empleado = request.vars["constancia_Alumno_Regular_empleado"],
+            curriculum_empleado = request.vars["curriculum_empleado"],
         )
         #EN el insert faltan agregar los datos que estan en este form  
 
@@ -179,7 +179,6 @@ def horas():
             hs_trab = request.vars["hs_trab"],
             hs_ext = request.vars["hs_ext"]
             )
-    
     return locals()
 
 
@@ -228,14 +227,16 @@ def reportes_horas():
     mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
     campos = db.horas.num_legajo, db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
-    criterio = db.horas.num_legajo == Legajo
-    criterio &= db.horas.mes_trabajado == mes
+    criterio = ((db.horas.num_legajo == Legajo) & (db.horas.num_legajo == db.legajos.num_legajo) & (db.horas.mes_trabajado == mes))
+    #criterio = db.horas.num_legajo == Legajo
+    #criterio & = db.horas.num_legajo == db.legajos.num_legajo
+    #criterio &= db.horas.mes_trabajado == mes
     if ordenar:
         orden = db.legajos.apellido, db.legajos.nombre,db.horas.hs_trab, db.horas.mes_trabajado
     else:
         orden = db.legajos.num_legajo
         registros = db(criterio).select(*campos, orderby=orden)
-    return dict(lista_horas=registros, mes=mes, titulo="Listando desde Mes %s" % (mes))
+    return dict(lista_horas=registros, mes=mes, Legajo=Legajo, titulo="Listando desde Mes %s , para el Legajo %s" % (mes, Legajo))
 
 def reportes_horas2():
     return dict()
