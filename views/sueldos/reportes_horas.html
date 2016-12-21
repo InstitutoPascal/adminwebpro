@@ -1,16 +1,16 @@
 {{extend 'layout.html'}}
 <h1>Reporte Horas</h1>
-<table class="table"> 
+<table class="table">
     <caption>{{=titulo}}</caption>
-    <thead> 
+    <thead>
         <tr> <th>#</th> <th>Nro Legajo</th> <th>Apellido y Nombre</th> <th>Horas Trabajadas</th> </tr> 
-    </thead> 
+    </thead>
         <tbody>
             {{for i, reg_empleado in enumerate(lista_horas):}}
             <tr> <th scope="row">{{=i+1}}</th> <td>{{=reg_empleado.horas.num_legajo}}</td> <td>{{=reg_empleado.legajos.nombre}} {{=reg_empleado.legajos.apellido}}</td> <td>{{=reg_empleado.horas.hs_trab}}</td> </tr>
-        </tr> 
-           {{pass}}  
-       </tbody> 
+        </tr>
+           {{pass}}
+       </tbody>
 </table>
 <form class="form-horizontal" action="{{=URL(c="sueldos", f="reportes_horas2")}}" enctype="multipart/form-data" method="POST">
       <button type="submit" class="btn btn-default">Regresar a Criterio de búsqueda</button>

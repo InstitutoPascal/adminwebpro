@@ -106,9 +106,7 @@ def legajos2():
         session["lib_pre"] = request.vars["lib_pre"]
         session["partida"] = request.vars["partida"]
         session["part"] = request.vars["part_pre"]
-        
         redirect(URL(c='sueldos',f='legajos3'))
-    
     return locals()
 
 def legajos3():
