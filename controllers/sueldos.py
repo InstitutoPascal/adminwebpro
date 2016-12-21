@@ -205,16 +205,13 @@ def reportes_empleados():
     #dt_objactual3 = datetime.strptime(fecha_actual, '%Y-%m-%d')
     #fecha_actual = dt_objactual3 
     ordenar = request.vars["ordenar"]
-    
     campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.legajos.fecha_ingreso
     criterio = db.legajos.fecha_ingreso >= fecha_desde
     criterio &= db.legajos.fecha_ingreso <= fecha_hasta
-    
     if ordenar:
         orden = db.legajos.apellido, db.legajos.nombre, 
     else:
         orden = db.legajos.num_legajo
-
     registros = db(criterio).select(*campos, orderby=orden)
     return dict(lista_empleados=registros,fecha_desde=fecha_desde,fecha_hasta=fecha_hasta,fecha_actual=fecha_actual,titulo="Listando desde fecha %s hasta fecha %s. La fecha actual es:  %s" % (fecha_desde.date(), fecha_hasta.date(), fecha_actual.date()))
 
@@ -230,20 +227,15 @@ def reportes_horas():
     Legajo = request.vars["Legajo"]
     mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
-    
-    campos = db.horas.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
-    criterio = db.horas.num_legajo >= Legajo
+    campos = db.horas.num_legajo, db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
+    criterio = db.horas.num_legajo == Legajo
     criterio &= db.horas.mes_trabajado == mes
-    
     if ordenar:
-        orden = db.legajos.apellido, db.legajos.nombre,db.horas.hs_trab, db.horas.mes_trabajado, 
+        orden = db.legajos.apellido, db.legajos.nombre,db.horas.hs_trab, db.horas.mes_trabajado
     else:
         orden = db.legajos.num_legajo
-
-    registros = db(criterio).select(*campos, orderby=orden)
+        registros = db(criterio).select(*campos, orderby=orden)
     return dict(lista_horas=registros, mes=mes, titulo="Listando desde Mes %s" % (mes))
-
-    return dict()
 
 def reportes_horas2():
     return dict()
@@ -252,10 +244,8 @@ def reportes_familiares():
     familia_menor21 = request.vars["familia_menor21"]
     familia_estudian = request.vars["familia_estudian"]
     familiar_distdom = request.vars["familiar_distdom"]
-    
-    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.legajos.dom_calle, db.familiares.domicilio_numero 
+    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.familiares.domicilio_numero, db.legajos.dom_calle, db.legajos.dom_numero,  
     criterio = db.familiares.num_legajo == db.legajos.num_legajo
-    
     if familia_menor21:
         criterio &=  db.familiares.edad < 21
         subtitulo = "Familiares menores de 21 años"
