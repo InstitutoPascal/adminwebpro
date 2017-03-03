@@ -1,30 +1,30 @@
 {{extend 'layout.html'}}
 <h1>Detalle de Compras</h1>
 <div class="form-group">
-    
 	<thead>
 		<div class="form-group">
         	<div class="col-sm-12">
                   <table class="table table-hover">
-                <tr>
-		    <th> N° Factura: {{ =numero_factura}} </th>  
-		    <th>Fecha: {{ =fecha_factura}}  </th>
-		    <th>Proveedor: {{ =registro_proveedor.razon_social}}  </th>  
-		    <th>CUIT: {{ =registro_proveedor.cuit}} </th>  
-		    <th>Tipo Factura: {{ =session.tipo_factura}}  </th>  
-		    <th>Forma Pago: {{ =session.forma_pago}}</th>
-		</tr>
-		</table>
-	 </thead>	
-	
-        
+                    <tr>
+                        <th> N° Factura: {{ =numero_factura}} </th>  
+                        <th>Fecha: {{ =fecha_factura}}  </th>
+                        <th>Proveedor: {{ =registro_proveedor.razon_social}}  </th>  
+                        <th>CUIT: {{ =registro_proveedor.cuit}} </th>  
+                        <th>Tipo Factura: {{ =session.tipo_factura}}  </th>  
+                        <th>Forma Pago: {{ =session.forma_pago}}</th>
+                    </tr>
+                  </table>
+            </div>
+        </div>
+    </thead>
 </div>
+
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         {{=producto_temporal}}
     </div>
 </div>
-<form method="POST" action="{{=URL(c="compra", f="detalle_compras")}}">
+<form method="POST" action="{{=URL(c='compra', f='detalle_compras')}}">
     <div class="form-group">
         <div class="col-sm-12">
             <table class="table table-hover">
@@ -57,14 +57,14 @@
                                 <td align="center">{{=item["precio_producto"] * item["cantidad"] * 0.105}}</td>
                                 <td align="center">{{=item["precio_producto"] * item["cantidad"]  * 1.105}}</td>
                                 <td>
-                                    <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"indice": i,"accion":"eliminar_item"})}}">Eliminar</a>
+                                    <a class="btn btn-default" role="button" href="{{=URL(c='compra',f='detalle_compras',vars={'indice': i,'accion':'eliminar_item'})}}">Eliminar</a>
                                 </td>
                         </tr>
                             {{pass}}
                     </tbody>
             </table>
-           <!-- <div>
-                <input type="submit" value="GUARDAR" name="modificar" class="btn btn-default" role="button">-->
+            <div>
+                <input type="submit" value="GUARDAR" name="modificar" class="btn btn-default" role="button">
             </div>
             <br>
         </div>
@@ -96,8 +96,8 @@
     <div>
         <center>
             <input type="submit" name="confirmar" value="CONFIRMAR" class="btn btn-default">
-            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="detalle_compras",vars={"id":1,"nombre":"mark"})}}">Cancelar</a>
-            <a class="btn btn-default" role="button" href="{{=URL(c="compra",f="formulario_compras",vars={"id":1,"nombre":"mark"})}}">Atrás</a>
+            <a class="btn btn-default" role="button" href="{{=URL(c='default',f='index')}}">Cancelar</a>
+            <a class="btn btn-default" role="button" href="{{=URL(c='compra',f='formulario_compras')}}">Atrás</a>
         </center>
     </div>
 </form>

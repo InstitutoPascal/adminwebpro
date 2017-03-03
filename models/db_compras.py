@@ -8,7 +8,8 @@ db.define_table("compra",
       Field("forma_pago", 'string',label="Forma de Pago"),
           )
 db.compra.tipo_factura.requires=IS_IN_SET(["Factua A","Factura B"])
-db.compra.numero_factura.requires=IS_NOT_EMPTY(),IS_NOT_IN_DB(db,"compra.numero_factura",error_message='El número de facrura ya existe')
+db.compra.numero_factura.requires=[IS_NOT_EMPTY(),
+                                   IS_NOT_IN_DB(db,"compra.numero_factura",error_message='El número de facrura ya existe')]
 db.compra.fecha_factura.requires=IS_NOT_EMPTY()
 
 db.define_table("detalle_compra",
