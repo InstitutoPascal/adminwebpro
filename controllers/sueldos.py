@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
-
 def index():
     return dict(message="Index en sueldos.py")
 
@@ -20,10 +18,14 @@ def abm_familiares():
 
 
 @auth.requires_login()
+
 def abm_horas():
     grid = SQLFORM.grid(db.horas)
     return {"grilla": grid}
+
+
 def legajos():
+    # definir los campos a obtener desde la base de datos:
     import os
     form = SQLFORM.factory(Field('nro_legajo',requires=IS_NOT_EMPTY(error_message='Ingrese el número de legajo')),
                            Field('fecha_egreso','date'),
@@ -68,7 +70,7 @@ def legajos():
             session["piso"] = request.vars['piso']
             session["depto"] = request.vars['depto']
             redirect(URL(c='sueldos',f='legajos2'))
-    
+
     grid = SQLFORM.grid(db.legajos)
     return locals()
 
@@ -137,15 +139,15 @@ def legajos3():
             dom_numero= session["num_domicilio"],
             piso = session["piso"],
             depto = session['depto'],
-            obra_social = session["obrasocial"], 
+            obra_social = session["obrasocial"],
             codigo_postal = session["codigopostal"] ,
             localidad = session["localidad"] ,
             email = session["email"] ,
-            fecha_ingreso = session["fechaingreso"], 
+            fecha_ingreso = session["fechaingreso"],
             telefono = session["telefono"] ,
             celular = session["celular"] ,
             estudia = session["estudia"] ,
-            constancia_de_cuil = session["constancia_cuil"], 
+            constancia_de_cuil = session["constancia_cuil"],
             alta_temprana = session["alta_temprana"],
             fotocopia_dni = session["fotodni"] ,
             libreta_familia = session["libreta"] ,
@@ -158,7 +160,7 @@ def legajos3():
             constancia_Alumno_Regular_empleado = request.vars["constancia_Alumno_Regular_empleado"],
             curriculum_empleado = request.vars["curriculum_empleado"],
         )
-        #EN el insert faltan agregar los datos que estan en este form  
+        #EN el insert faltan agregar los datos que estan en este form
 
     return locals()
 
@@ -202,13 +204,13 @@ def reportes_empleados():
     fecha_hasta = dt_obj2
     fecha_actual = datetime.now()
     #dt_objactual3 = datetime.strptime(fecha_actual, '%Y-%m-%d')
-    #fecha_actual = dt_objactual3 
+    #fecha_actual = dt_objactual3
     ordenar = request.vars["ordenar"]
     campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.legajos.fecha_ingreso
     criterio = db.legajos.fecha_ingreso >= fecha_desde
     criterio &= db.legajos.fecha_ingreso <= fecha_hasta
     if ordenar:
-        orden = db.legajos.apellido, db.legajos.nombre, 
+        orden = db.legajos.apellido, db.legajos.nombre,
     else:
         orden = db.legajos.num_legajo
     registros = db(criterio).select(*campos, orderby=orden)
@@ -245,7 +247,7 @@ def reportes_familiares():
     familia_menor21 = request.vars["familia_menor21"]
     familia_estudian = request.vars["familia_estudian"]
     familiar_distdom = request.vars["familiar_distdom"]
-    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.familiares.domicilio_numero, db.legajos.dom_calle, db.legajos.dom_numero,  
+    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.familiares.domicilio_numero, db.legajos.dom_calle, db.legajos.dom_numero,
     criterio = db.familiares.num_legajo == db.legajos.num_legajo
     #dt_str = db.familiares.fe_nac
     #dt_obj = datetime.strptime(dt_str, '%Y-%m-%d')
