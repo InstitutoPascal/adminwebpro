@@ -6,27 +6,27 @@
           <div class="form-group">
             <label for="campo_nrolegajo" class="col-sm-2 control-label">Nro Legajo</label>
             <div class="col-sm-1">
-                <input type="integer" class="form-control" id="campo_nrolegajo" placeholder="0001">
+                {{=form.custom.widget.num_legajo}}
             </div>
           </div>
      <div class="form-group">
             <label for="campo_nombre" class="col-sm-2 control-label">Nombres</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="campo_nombre" placeholder="José Osvaldo">
+                {{=form.custom.widget.nombre}}
             </div>
            <label for="campo_apellido" class="col-sm-2 control-label">Apellidos</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="campo_apellido" placeholder="Ortiz">
+                {{=form.custom.widget.apellido}}
             </div>
      </div>
      <div class="form-group">
             <label for="campo_cuil" class="col-sm-2 control-label">Cuil</label>
             <div class="col-sm-2">
-                <input type="string" class="form-control" id="campo_cuil" placeholder="20235554442">
+                {{=form.custom.widget.cuil}}
             </div>
             <label for="campo_dni" class="col-sm-2 control-label">Dni</label>
             <div class="col-sm-2">
-                <input type="string" class="form-control" id="campo_dni" placeholder="23555444">
+                {{=form.custom.widget.dni}}
             </div>
            <label for="campo_paretezco" class="col-sm-2 control-label">Parentezco</label>
             <div class="col-sm-2">
@@ -40,25 +40,21 @@
      <div class="form-group">
             <label for="campo_fenac1" class="col-sm-2 control-label">Fecha Nacimiento</label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" id="campo_fenac1" placeholder="01/01/1980">
+                {{=form.custom.widget.fe_nac}}
             </div>
             <label for="campo_lugnac" class="col-sm-2 control-label">Lugar </label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="campo_lugnac" placeholder="Buenos Aires">
+                {{=form.custom.widget.lu_nac}}
             </div>
           </div>
      <div class="form-group">
             <label for="campo_fenac1" class="col-sm-2 control-label">Estado Civil</label>
             <div class="col-sm-3">
-                <select class="form-control">
-                          <option>Casado</option>
-                          <option>Soltero</option>
-                          <option>Viudo</option>
-               </select>
+               {{=form.custom.widget.est_civ}}
             </div>
             <label for="campo_lugnac" class="col-sm-2 control-label">Edad </label>
             <div class="col-sm-3">
-                <input type="integer" class="form-control" id="campo_lugnac" placeholder="18">
+                <input type="integer" class="form-control" name="lugar_nac" placeholder="18">
             </div>
           </div>
 

@@ -1,58 +1,59 @@
 {{extend 'layout.html'}}
 <h1>Registrar Familiar</h1>
 
-<form class="form-horizontal" action="{{=URL(c="sueldos", f="familiar")}}" enctype="multipart/form-data" method="POST">
+<form class="form-horizontal" action="{{=URL(c="sueldos", f="familiar2")}}" enctype="multipart/form-data" method="POST">
 
   <div class="form-group">
             <label for="campo_obra-social" class="col-sm-2 control-label">Obra Social</label>
             <div class="col-sm-1">
-                <input type="text" class="form-control" id="campo_nrolegajo" placeholder="OSDE">
+                {{=form.custom.widget.obra_social}}
             </div>
           </div>
      <div class="form-group">
             <label for="campo_cuil" class="col-sm-2 control-label">Domicilio Calle</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="campo_cuil" placeholder="Puerto Argentino">
+                {{=form.custom.widget.domicilio_calle}}
             </div>
             <label for="campo_dni" class="col-sm-1 control-label">Nro</label>
             <div class="col-sm-1">
-                <input type="integer" class="form-control" id="campo_dni" placeholder="12341">
+               {{=form.custom.widget.domicilio_numero}}
             </div>
            <label for="campo_cextra" class="col-sm-1 control-label">Piso</label>
             <div class="col-sm-1">
-                <input type="integer" class="form-control" id="campo_piso" placeholder="1">
+                {{=form.custom.widget.domicilio_piso}}
             
           </div>
            <label for="campo_cextra" class="col-sm-1 control-label">Depto</label>
             <div class="col-sm-1">
-                <input type="string" class="form-control" id="campo_piso" placeholder="1c">
-            
+                 {{=form.custom.widget.domicilio_depto}}
          </div>
+            
+           
            <label for="campo_cextra" class="col-sm-1 control-label">Codigo Postal</label>
             <div class="col-sm-1">
-                <input type="string" class="form-control" id="campo_piso" placeholder="1759">
+                {{=form.custom.widget.codigo_postal}}
             </div>
      </div>
     
      <div class="form-group">
             <label for="campo_fenac1" class="col-sm-2 control-label">Localidad</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="campo_fenac1" placeholder="Gonzalez Catan">
+                 {{=form.custom.widget.localidad}}
             </div>
             <label for="campo_lugnac" class="col-sm-2 control-label">Email </label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="campo_lugnac" placeholder="leo@ejemplo.com">
+                 {{=form.custom.widget.email}}
             </div>
           </div>
     
     <div class="form-group">
             <label for="campo_fenac1" class="col-sm-2 control-label">Telefono</label>
             <div class="col-sm-3">
-                <input type="string" class="form-control" id="campo_fenac1" placeholder="Area-434343">
+                 {{=form.custom.widget.telefono}}
             </div>
             <label for="campo_lugnac" class="col-sm-2 control-label">Celular </label>
             <div class="col-sm-3">
-                <input type="string" class="form-control" id="campo_lugnac" placeholder="1132555555">
+                 {{=form.custom.widget.celular}}
             </div>
           </div>
     
@@ -77,4 +78,5 @@
 </div>
     <center>
     <button class="btn btn-default" type="submit">Guardar</button>
+         {{=form.custom.widget.submit}}
     </center>

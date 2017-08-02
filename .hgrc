@@ -1,14 +1,17 @@
+
+
 [ui]
 # name and email (local to this repository, optional), e.g.
 username = Leonel Daruich <leodaruich2@gmail.com>
 [extensions]
 hgext.bookmarks =
-hggit = 
+hggit =
 extdiff =
 
 [auth]
 git.prefix = *
-git.username = Leonel
-git.password = 062b708383d5fcaa5d92b8124c3bdae346bed77e
+git.username = Daruich
+git.password = 6a7a2165ce0cb9537d9e279f73d9fe2f5c7922e5
 [extdiff]
 cmd.meld =
+

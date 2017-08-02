@@ -176,8 +176,7 @@ def vista_previa():
 def edad(fecha_nacimiento):
         from datetime import datetime
         return int((datetime.now().date() - fecha_nacimiento).days / 365.25)
-def mostrar(self):
-    self.mostrar.edad_num
+
     
 def horas():
     import os
@@ -199,13 +198,72 @@ def horas():
 
 
 def familiar():
-    grid = SQLFORM.grid(db.familiares)
-    return {"grilla": grid}
-
+    
+    import os
+    
+    form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
+    Field("cuil",requires= [IS_NOT_IN_DB(db,"familiares.cuil"),
+                           IS_NOT_EMPTY(error_message= "campo obligatorio")]),
+    Field("dni",requires= IS_NOT_IN_DB(db,"familiares.dni" )), 
+    Field("nombre", requires= IS_NOT_EMPTY(error_message="no puede estar vacio")),
+    Field("apellido", "string"),
+    Field("fe_nac","date"),
+    Field("lu_nac","string"),
+    Field("est_civ","string"),
+)
+    if form.process().accepted:
+        session["num_legajo"] = request.vars["num_legajo"]
+        session["cuil"] = request.vars["cuil"]
+        session["dni"] = request.vars["dni"]
+        session["nombre"] = request.vars["nombre"]
+        session["apellido"] = request.vars["apelido"]
+        session["fe_nac"] = request.vars["fe_nac"]
+        session["lu_nac"] = request.vars["lu_nac"]
+        session["est_civ"] = request.vars["est_civ"]
+        redirect(URL(c='sueldos',f='familiares2'))
+    return locals()
 
 def familiar2():
-    grid = SQLFORM.grid(db.familiares)
-    return {"grilla": grid}
+    
+    #FORM.grid(db.familiares)
+    form = SQLFORM.factory(Field("obra_social","string"),
+    Field("domicilio_calle","string"),
+    Field("domicilio_numero","integer"),
+    Field("domicilio_piso","integer"),
+    Field("domicilio_depto","string"),
+    Field("codigo_postal","integer"),
+    Field("localidad","string"),
+    Field("email","string"),
+    Field("telefono","integer"),
+    Field("celular","integer"),
+    Field("estudia","string",requires=IS_IN_SET(["si","no"],zero='Seleccionar...',error_message='Indique una opción')),
+    Field("parentezco","string",requires=IS_IN_SET(["hijo","Familiar","conyuge"],zero='Seleccionar...',error_message='Indique una opción')),
+)
+    if form.process().accepted:
+        id_familiar = db.familiares.insert(
+        num_legajo=request.vars["num_legajo"],
+        cuil = request.vars["cuil"],
+       dni = request.vars["dni"],
+       nombre = request.vars["nombre"],
+        apellido= request.vars["apelido"],
+        fe_nac= request.vars["fe_nac"],
+        lu_nac= request.vars["lu_nac"],
+       est_civ = request.vars["est_civ"],
+       domicilio_calle = request.vars["domicilio_calle"],
+       domicilio_numero = request.vars["domicilio_numero"],
+       domicilio_piso = request.vars["domicilio_piso"],
+        domicilio_depto = request.vars["domicilio_depto"],
+        obra_social= request.vars["obra_social"],
+        localidad= request.vars["localidad"],
+       codigo_postal = request.vars["codigo_postal"],
+         email = request.vars["email"],
+        telefono = request.vars["telefono"],
+        celular = request.vars["celular"],
+         estudia = request.vars["estudia"],
+         parentezco = request.vars["parentezco"],
+            )
+        
+    return {"form": form}
 
 def reportes_empleados():
     fecha_desde = request.vars["fecha_desde"]
@@ -274,7 +332,7 @@ def reportes_familiares():
         where += " and familiares.domicilio_calle <> legajos.dom_calle "
     #registros = db(criterio).select(*campos)
     registros = db.executesql("SELECT cast (EXTRACT(YEAR FROM age(current_date,familiares.fe_nac)) as integer) as edad, familiares.id as familiar_id ,familiares.num_legajo, familiares.nombre,familiares.apellido, familiares.estudia,familiares.domicilio_calle,familiares.domicilio_numero, legajos.dom_calle,legajos.dom_numero from familiares join legajos on familiares.num_legajo = legajos.num_legajo where 1=1  "+where,as_dict=True )
-    print registros
+
     return dict(lista_familiares=registros,titulo="Listando %s" % (subtitulo))
 
 def reportes_familiares2():
