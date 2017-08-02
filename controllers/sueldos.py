@@ -176,6 +176,9 @@ def vista_previa():
 def edad(fecha_nacimiento):
         from datetime import datetime
         return int((datetime.now().date() - fecha_nacimiento).days / 365.25)
+def mostrar(self):
+    self.mostrar.edad_num
+    
 def horas():
     import os
     form = SQLFORM.factory( Field("num_legajo",requires = IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
