@@ -5,8 +5,8 @@
     <thead> 
         <tr> <th>#</th> <th>Nro Legajo Titular</th> <th>Nombre y Apellido</th> <th>Estudia</th> <th>Edad</th> <th>Domicilio</th></tr> 
     </thead> 
-        <tbody> {{for i, reg_familiar in enumerate(lista_familiares):}}
-            <tr> <th scope="row">{{=i+1}}</th> <td>{{=reg_familiar.familiares.num_legajo}}</td> <td>{{=reg_familiar.familiares.nombre}} {{=reg_familiar.familiares.apellido}}</td> <td>{{=reg_familiar.familiares.estudia}}</td> <td>{{=reg_familiar.familiares.edad}}</td> <td>{{=reg_familiar.familiares.domicilio_calle}} {{=reg_familiar.familiares.domicilio_numero}}</td>
+        <tbody> {{for f in lista_familiares:}}
+            <tr> <td>{{=f["familiar_id"]}}</td></td> <td>{{=f["num_legajo"]}}</td> <td>{{=f["nombre"]}} {{=f["apellido"]}}</td> <td>{{=f["estudia"]}}</td> <td>{{=f["edad"]}} años</td> <td>{{=f["domicilio_calle"]}} {{=f["domicilio_numero"]}}</td>
                 {{pass}}
        </tbody> 
 </table>

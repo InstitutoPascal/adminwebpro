@@ -37,7 +37,6 @@ def legajos():
                            Field('fecha_nacimiento','date'),
                            Field('lugar_nacimiento','string'),
                            Field('estado_civil', requires=IS_IN_SET(['Soltero','Casado','Viudo'])),
-                           Field('edad','string'),
                            Field('categoria','string'),
                            Field('domicilio_calle','string'),
                            Field('numero_calle','string'),
@@ -53,24 +52,23 @@ def legajos():
             session["imagen"] = image
         except:
             session['imagen'] = None
-            session["nro_legajo"] = request.vars['nro_legajo']
-            session["fecha_egreso"] = request.vars['fecha_egreso']
-            session["cuil"] = request.vars['cuil']
-            session["dni"] = request.vars['dni']
-            session["horas_extras"] = request.vars['corresponde_hs_extra']
-            session["nombre"] = request.vars['nombres']
-            session["apellido"] = request.vars['apellido']
-            session["fecha_nacimiento"] = request.vars['fecha_nacimiento']
-            session["lugar_nacimiento"] = request.vars['lugar_nacimiento']
-            session["estado_civil"] = request.vars['estado_civil']
-            session["edad"] = request.vars['edad']
-            session["categoria"] = request.vars['categoria']
-            session["domicilio"] = request.vars['domicilio_calle']
-            session["num_domicilio"] = request.vars['numero_calle']
-            session["piso"] = request.vars['piso']
-            session["depto"] = request.vars['depto']
-            redirect(URL(c='sueldos',f='legajos2'))
-
+        session["nro_legajo"] = request.vars['nro_legajo']
+        session["fecha_egreso"] = request.vars['fecha_egreso']
+        session["cuil"] = request.vars['cuil']
+        session["dni"] = request.vars['dni']
+        session["horas_extras"] = request.vars['corresponde_hs_extra']
+        session["nombre"] = request.vars['nombres']
+        session["apellido"] = request.vars['apellido']
+        session["fecha_nacimiento"] = request.vars['fecha_nacimiento']
+        session["lugar_nacimiento"] = request.vars['lugar_nacimiento']
+        session["estado_civil"] = request.vars['estado_civil']
+        session["categoria"] = request.vars['categoria']
+        session["domicilio"] = request.vars['domicilio_calle']
+        session["num_domicilio"] = request.vars['numero_calle']
+        session["piso"] = request.vars['piso']
+        session["depto"] = request.vars['depto']
+        redirect(URL(c='sueldos',f='legajos2'))
+    
     grid = SQLFORM.grid(db.legajos)
     return locals()
 
@@ -109,6 +107,7 @@ def legajos2():
         session["partida"] = request.vars["partida"]
         session["part"] = request.vars["part_pre"]
         redirect(URL(c='sueldos',f='legajos3'))
+        
     return locals()
 
 def legajos3():
@@ -121,7 +120,7 @@ def legajos3():
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                           )
     if form.process().accepted:
-         id = db.legajos.insert(
+         legajo_id = db.legajos.insert(
             image = session["imagen"],
             num_legajo = session["nro_legajo"],
             fecha_egreso = session["fecha_egreso"],
@@ -133,7 +132,6 @@ def legajos3():
             fe_nac = session["fecha_nacimiento"] ,
             lu_nac = session["lugar_nacimiento"],
             est_civ = session["estado_civil"],
-            edad = session["edad"],
             categoria = session["categoria"],
             dom_calle = session["domicilio"],
             dom_numero= session["num_domicilio"],
@@ -160,11 +158,24 @@ def legajos3():
             constancia_Alumno_Regular_empleado = request.vars["constancia_Alumno_Regular_empleado"],
             curriculum_empleado = request.vars["curriculum_empleado"],
         )
-        #EN el insert faltan agregar los datos que estan en este form
-
+         redirect(URL(c='sueldos',f='vista_previa',args =legajo_id))
+        #EN el insert faltan agregar los datos que estan en este for
     return locals()
 
-
+def vista_previa():
+    legajo_id = request.args(0)
+    edad_num = None
+    fecha_parse = None
+    recordset = db(db.legajos.id == legajo_id ).select().first()
+    print recordset
+    if recordset:
+        if recordset.fe_nac is not None:
+            edad_num = edad(recordset.fe_nac)
+            fecha_parse = recordset.fe_nac.strftime("%d/%m/%Y")
+    return locals()
+def edad(fecha_nacimiento):
+        from datetime import datetime
+        return int((datetime.now().date() - fecha_nacimiento).days / 365.25)
 def horas():
     import os
     form = SQLFORM.factory( Field("num_legajo",requires = IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
@@ -247,29 +258,21 @@ def reportes_familiares():
     familia_menor21 = request.vars["familia_menor21"]
     familia_estudian = request.vars["familia_estudian"]
     familiar_distdom = request.vars["familiar_distdom"]
-    campos = db.familiares.num_legajo, db.familiares.nombre, db.familiares.apellido, db.familiares.estudia, db.familiares.edad, db.familiares.domicilio_calle, db.familiares.domicilio_numero, db.legajos.dom_calle, db.legajos.dom_numero,
-    criterio = db.familiares.num_legajo == db.legajos.num_legajo
-    #dt_str = db.familiares.fe_nac
-    #dt_obj = datetime.strptime(dt_str, '%Y-%m-%d')
-    #fecha ingresada = db.familiares.fe_nac
-    fecha_ingresada = '09/04/2009'
-    # Separo el formato de fecha para convertirlo en yyyy/mm/dd
-    d = fecha_ingresada.split('/')
-    fecha_a_calcular = datetime.strptime(d[2] + d[1] + d[0],'%Y%m%d').date()
-    calcdate = datetime.now().date() - fecha_a_calcular
-    fecharesultado2 = calcdate.days / 365
-    #print fecharesultado2
+   
+    where = ""
     if familia_menor21:
-        criterio &=  db.familiares.edad < 21
         subtitulo = "Familiares menores de 21 años"
+        where += " and  EXTRACT(YEAR FROM age(current_date,familiares.fe_nac)) < 18"
     if familia_estudian:
-        criterio &=  db.familiares.estudia == "Si"
         subtitulo = "Familiares que estudian"
+        where += " and familiares.estudia = 'SI' "
     if familiar_distdom:
-        criterio &=  ((db.familiares.domicilio_calle != db.legajos.dom_calle) |  (db.familiares.domicilio_numero != db.legajos.dom_numero))
         subtitulo = "Familiares con distinto domicilio"
-    registros = db(criterio).select(*campos)
-    return dict(lista_familiares=registros,fecharesultado2=fecharesultado2, titulo="Listando %s, con edad ej: %s" % (subtitulo, fecharesultado2))
+        where += " and familiares.domicilio_calle <> legajos.dom_calle "
+    #registros = db(criterio).select(*campos)
+    registros = db.executesql("SELECT cast (EXTRACT(YEAR FROM age(current_date,familiares.fe_nac)) as integer) as edad, familiares.id as familiar_id ,familiares.num_legajo, familiares.nombre,familiares.apellido, familiares.estudia,familiares.domicilio_calle,familiares.domicilio_numero, legajos.dom_calle,legajos.dom_numero from familiares join legajos on familiares.num_legajo = legajos.num_legajo where 1=1  "+where,as_dict=True )
+    print registros
+    return dict(lista_familiares=registros,titulo="Listando %s" % (subtitulo))
 
 def reportes_familiares2():
     return dict()

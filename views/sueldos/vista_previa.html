@@ -1,0 +1,49 @@
+{{extend 'layout.html'}}
+<h1>Los campos los traes asi </h1>
+{{=recordset.num_legajo}}
+{{=recordset.apellido}}
+{{=recordset.nombre}}
+{{=recordset.cuil}}
+{{=recordset.fe_nac}}
+{{=recordset.lu_nac}}
+{{=recordset.est_civ}}
+{{=recordset.dom_numero}}
+{{=recordset.fotocopia_dni_hijos}}
+{{=recordset.fotocopia_dni_conyuge}}
+{{=recordset.constancia_cuil_hijos}}
+{{=recordset.constancia_cuil_conyuge}}
+{{=recordset.constancia_Alumno_Regular_Hijo}}
+{{=recordset.constancia_Alumno_Regular_empleado}}
+{{=recordset.curriculum_empleado}}
+{{=recordset.image}}
+
+{{=recordset.dom_calle}}
+{{=recordset.piso}}
+{{=recordset.depto}}
+
+{{=recordset.codigo_postal}}
+{{=recordset.localidad}}
+{{=recordset.email}}
+{{=recordset.fecha_ingreso}}
+{{=recordset.telefono}}
+{{=recordset.localidad}}
+{{=recordset.celular}}
+{{=recordset.estudia}}
+{{=recordset.horas_extras}}
+{{=recordset.categoria}}
+{{=recordset.obra_social}}
+{{=recordset.fecha_egreso}}
+{{=recordset.alta_temprana}}
+{{=recordset.fotocopia_dni}}
+{{=recordset.constancia_de_cuil}}
+{{=recordset.libreta_familia}}
+{{=recordset.partida_nacimiento_hijos}}
+
+
+{{ if fecha_parse is not None: }}
+    {{=fecha_parse}}
+{{pass}}
+{{ if edad_num is not None: }} 
+    <br>
+    {{=fecha_parse}} ({{=edad_num}} años)
+{{ pass}}

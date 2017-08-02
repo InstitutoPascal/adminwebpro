@@ -1,19 +1,14 @@
-# example user config (see "hg help config" for more info)
 [ui]
-# name and email, e.g.
-# username = leonel <leodaruich2@gmail.com>
-#username =leo2323
+# name and email (local to this repository, optional), e.g.
+username = Leonel Daruich <leodaruich2@gmail.com>
 [extensions]
-
 hgext.bookmarks =
-
-hggit =
+hggit = 
+extdiff =
 
 [auth]
-
 git.prefix = *
-
-git.username = leonel
-
-git.password = e166d2755e4fda4c8ed0a9622d7847fe9630f0d8
-
+git.username = Leonel
+git.password = 062b708383d5fcaa5d92b8124c3bdae346bed77e
+[extdiff]
+cmd.meld =
