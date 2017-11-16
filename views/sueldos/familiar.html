@@ -1,68 +1,58 @@
 {{extend 'layout.html'}}
 <h1>Registrar Familiar</h1>
-<form class="form-horizontal" action="{{=URL(c="sueldos", f="familiar2")}}" enctype="multipart/form-data" method="POST">
-<form class="form-horizontal">
+{{=form.custom.begin}}
 
-          <div class="form-group">
+
+          <div class="form-group row">
             <label for="campo_nrolegajo" class="col-sm-2 control-label">Nro Legajo</label>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 {{=form.custom.widget.num_legajo}}
             </div>
-          </div>
-     <div class="form-group">
-            <label for="campo_nombre" class="col-sm-2 control-label">Nombres</label>
-            <div class="col-sm-3">
-                {{=form.custom.widget.nombre}}
-            </div>
-           <label for="campo_apellido" class="col-sm-2 control-label">Apellidos</label>
-            <div class="col-sm-2">
-                {{=form.custom.widget.apellido}}
-            </div>
-     </div>
-     <div class="form-group">
-            <label for="campo_cuil" class="col-sm-2 control-label">Cuil</label>
-            <div class="col-sm-2">
-                {{=form.custom.widget.cuil}}
-            </div>
-            <label for="campo_dni" class="col-sm-2 control-label">Dni</label>
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Dni</label>
             <div class="col-sm-2">
                 {{=form.custom.widget.dni}}
             </div>
-           <label for="campo_paretezco" class="col-sm-2 control-label">Parentezco</label>
+          </div>
+ <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Cuil</label>
             <div class="col-sm-2">
-                <select class="form-control">
-                          <option>Hijo</option>
-                          <option>Conyuge</option>
-                          <option>Padre a Cargo</option>
-               </select>
+                {{=form.custom.widget.cuil}}
+            </div>
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Nombre</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.nombre}}
             </div>
           </div>
-     <div class="form-group">
-            <label for="campo_fenac1" class="col-sm-2 control-label">Fecha Nacimiento</label>
-            <div class="col-sm-3">
+ <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Apellido</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.apellido}}
+            </div>
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Nacimiento</label>
+            <div class="col-sm-2">
                 {{=form.custom.widget.fe_nac}}
             </div>
-            <label for="campo_lugnac" class="col-sm-2 control-label">Lugar </label>
-            <div class="col-sm-3">
+          </div>
+ <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Lugar Nacimiento</label>
+            <div class="col-sm-2">
                 {{=form.custom.widget.lu_nac}}
             </div>
-          </div>
-     <div class="form-group">
-            <label for="campo_fenac1" class="col-sm-2 control-label">Estado Civil</label>
-            <div class="col-sm-3">
-               {{=form.custom.widget.est_civ}}
-            </div>
-            <label for="campo_lugnac" class="col-sm-2 control-label">Edad </label>
-            <div class="col-sm-3">
-                <input type="integer" class="form-control" name="lugar_nac" placeholder="18">
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Estado Civil</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.est_civ}}
             </div>
           </div>
-
-   <div class="form-group">
-     <div class="col-sm-offset-1 col-sm-11">
-</table>
-<form class="form-horizontal" action="{{=URL(c="sueldos", f="familiar2")}}" enctype="multipart/form-data" method="POST">
-      <button type="submit" class="btn btn-default">Siguiente</button>
-       
-  </div>
+ <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Domicilio Calle</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.domicilio_calle}}
+            </div>
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Domicilio Numero</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.domicilio_numero}}
+            </div>
+          </div>
+      {{=form.custom.submit}}
 </div>
+{{=form.custom.end}}

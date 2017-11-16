@@ -1,100 +1,38 @@
 {{extend 'layout.html'}}
 <h1>Formulario Horas</h1>
+{{=form.custom.begin}}
 
-<form class="form-horizontal">
-
-          <div class="form-group">
-             <label for="campo_cliente" class="col-sm-2 control-label">Nro de Legajo</label>
-            <div class="col-sm-1">
-                <input type="integer" class="form-control" id="campo_cliente" placeholder="00001">
-            </div>
-             <label for="campo_fecha" class="col-sm-3 control-label">Mes</label>
-            <div class="col-sm-3">
-                 <select class="form-control">
-                          <option>Enero</option>
-                          <option>Febrero</option>
-                          <option>marzo</option>
-                          <option>Abril</option>
-                          <option>Mayo</option>
-                          <option>Junio</option>
-                          <option>Julio</option>
-                          <option>Agosto</option>
-                          <option>Septiembre</option>
-                          <option>Octubre</option>
-                          <option>Noviembre</option>
-                          <option>Diciembre</option>
-               </select>
+          <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Nro Legajo</label>
+            <div class="col-sm-2">
+                {{=form.custom.widget.nro_legajo}}
             </div>
           </div>
-           <div class="form-group">
-             <label for="campo_fecha" class="col-sm-2 control-label">Nro Semana</label>
+           <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Mes</label>
             <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="1">
-             </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Trabajadas</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="40">
-            </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Extras</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="4">
+                {{=form.custom.widget.mes_trab}}
             </div>
           </div>
-         <div class="form-group">
-              <label for="campo_fecha" class="col-sm-2 control-label">Nro Semana</label>
+            <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Semana</label>
             <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="2">
+                {{=form.custom.widget.semana}}
             </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Trabajadas</label>
+          </div>
+            <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Horas trabajadas</label>
             <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="40">
+                {{=form.custom.widget.horas_trab}}
             </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Extras</label>
+          </div>
+            <div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Horas extras</label>
             <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="4">
+                {{=form.custom.widget.horas_extras}}
             </div>
-         </div>
-    <div class="form-group">
-              <label for="campo_fecha" class="col-sm-2 control-label">Nro Semana</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="3">
-            </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Trabajadas</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="40">
-            </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Extras</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="4">
-            </div>
-         </div>
-    <div class="form-group">
-              <label for="campo_fecha" class="col-sm-2 control-label">Nro Semana</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="4">
-            </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Trabajadas</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="40">
-            </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Extras</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="4">
-            </div>
-         </div>
-    <div class="form-group">
-              <label for="campo_fecha" class="col-sm-2 control-label">Nro Semana</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="5">
-            </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Trabajadas</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="40">
-            </div>
-            <label for="campo_fecha" class="col-sm-2 control-label">Horas Extras</label>
-            <div class="col-sm-2">
-                <input type="integer" class="form-control" id="campo_fecha" placeholder="4">
-            </div>
-         </div>
-           <button class="btn btn-default" type="submit">Guardar</button>
-</form>
+          </div>
+           {{=form.custom.submit}}
+ </div>
+
+{{=form.custom.end}}

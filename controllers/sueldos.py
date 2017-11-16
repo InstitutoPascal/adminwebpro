@@ -180,90 +180,91 @@ def edad(fecha_nacimiento):
     
 def horas():
     import os
-    form = SQLFORM.factory( Field("num_legajo",requires = IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
-    Field("mes_trabajado",requires = IS_IN_SET(["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],zero='Mes',error_message='Indique una opción')),
-    Field("semana",requires = IS_IN_SET(["1","2","3","4","5"])),
-    Field("hs_trab",requires = IS_NOT_EMPTY(error_message = "rellene el campo")),
-    Field("hs_ext",requires = IS_NOT_EMPTY(error_message = "rellene el campo")),
+    form = SQLFORM.factory(Field('nro_legajo',requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
+                           Field('mes_trab',requires=IS_IN_SET({1:'Enero',2:'Febrero',3:'Marzo',4:'Abril',5:'Mayo',6:'Junio',7:'Julio',8:'Agosto',9:'Septiembre',10:'Octubre',11:'Noviembre',12:'Diciembre'},error_message='Ingrese una opción',zero='Seleccionar...')),
+                           Field('semana',requires=IS_IN_SET({1:'1',2:'2',3:'3',4:'4',5:'5'},error_message='Ingrese una opción',zero='Seleccionar...')),
+                           Field('horas_trab','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
+                           Field('horas_extras','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
      )
     if form.process().accepted:
-        id = db.horas.insert(
-            num_legajo = request.vars["num_legajo"],
-            mes_trabajado = request.vars["mes_trabajado"],
+        horas_id = db.horas.insert(
+            num_legajo = request.vars["nro_legajo"],
+            mes_trabajado = request.vars["mes_trab"],
             semana = request.vars["semana"],
-            hs_trab = request.vars["hs_trab"],
-            hs_ext = request.vars["hs_ext"]
+            hs_trab = request.vars["horas_trab"],
+            hs_ext = request.vars["horas_extras"]
             )
     return locals()
 
 
 def familiar():
-    
     import os
-    
     form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
-    Field("cuil",requires= [IS_NOT_IN_DB(db,"familiares.cuil"),
-                           IS_NOT_EMPTY(error_message= "campo obligatorio")]),
-    Field("dni",requires= IS_NOT_IN_DB(db,"familiares.dni" )), 
-    Field("nombre", requires= IS_NOT_EMPTY(error_message="no puede estar vacio")),
-    Field("apellido", "string"),
+    Field("cuil",requires= IS_NOT_IN_DB(db,"familiares.cuil")),
+    Field("dni", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("nombre",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("apellido", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("fe_nac","date"),
-    Field("lu_nac","string"),
-    Field("est_civ","string"),
-)
+    Field("lu_nac",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("est_civ",requires=IS_IN_SET(['soltero','casado','viudo','otro'],zero='Seleccione...',error_message='Indique una opción')),
+    Field("domicilio_calle",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("domicilio_numero","integer",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    submit_button='Siguiente'
+        )
     if form.process().accepted:
+        #la sesion no hace falta que se llame como el vars
         session["num_legajo"] = request.vars["num_legajo"]
         session["cuil"] = request.vars["cuil"]
         session["dni"] = request.vars["dni"]
         session["nombre"] = request.vars["nombre"]
-        session["apellido"] = request.vars["apelido"]
+        session["apellido"] = request.vars["apellido"]
         session["fe_nac"] = request.vars["fe_nac"]
         session["lu_nac"] = request.vars["lu_nac"]
         session["est_civ"] = request.vars["est_civ"]
-        redirect(URL(c='sueldos',f='familiares2'))
+        session["domicilio_calle"] = request.vars["domicilio_calle"]
+        session["domicilio_numero"] = request.vars["domicilio_numero"]
+        redirect(URL(c='sueldos',f='familiar2'))
     return locals()
-
-def familiar2():
     
-    #FORM.grid(db.familiares)
-    form = SQLFORM.factory(Field("obra_social","string"),
-    Field("domicilio_calle","string"),
-    Field("domicilio_numero","integer"),
-    Field("domicilio_piso","integer"),
+    
+def familiar2():
+    import os
+    form = SQLFORM.factory(
+    Field("domicilio_piso","string"),
     Field("domicilio_depto","string"),
-    Field("codigo_postal","integer"),
-    Field("localidad","string"),
+    Field("codigo_postal",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("localidad",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("email","string"),
-    Field("telefono","integer"),
+    Field("telefono",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("celular","integer"),
-    Field("estudia","string",requires=IS_IN_SET(["si","no"],zero='Seleccionar...',error_message='Indique una opción')),
-    Field("parentezco","string",requires=IS_IN_SET(["hijo","Familiar","conyuge"],zero='Seleccionar...',error_message='Indique una opción')),
-)
+    Field("estudia",requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
+    Field("parentezco",requires=IS_IN_SET(['Conyuge','Hijo','Espos@','Otro'],zero='Seleccione...',error_message='Indique una opción')),
+        )
     if form.process().accepted:
-        id_familiar = db.familiares.insert(
-        num_legajo=request.vars["num_legajo"],
-        cuil = request.vars["cuil"],
-       dni = request.vars["dni"],
-       nombre = request.vars["nombre"],
-        apellido= request.vars["apelido"],
-        fe_nac= request.vars["fe_nac"],
-        lu_nac= request.vars["lu_nac"],
-       est_civ = request.vars["est_civ"],
-       domicilio_calle = request.vars["domicilio_calle"],
-       domicilio_numero = request.vars["domicilio_numero"],
-       domicilio_piso = request.vars["domicilio_piso"],
-        domicilio_depto = request.vars["domicilio_depto"],
-        obra_social= request.vars["obra_social"],
-        localidad= request.vars["localidad"],
-       codigo_postal = request.vars["codigo_postal"],
-         email = request.vars["email"],
-        telefono = request.vars["telefono"],
-        celular = request.vars["celular"],
-         estudia = request.vars["estudia"],
-         parentezco = request.vars["parentezco"],
-            )
-        
-    return {"form": form}
+         familiar_id = db.familiares.insert(
+                num_legajo = session["num_legajo"],
+                cuil = session ["cuil"],
+                dni = session ["dni"],
+                nombre = session ["nombre"],
+                apellido = session ["apellido"],
+                fe_nac = session ["fe_nac"],
+                lu_nac = session ["lu_nac"],
+                est_civ = session ["est_civ"],
+                domicilio_calle = session ["domicilio_calle"],
+                domicilio_numero = session ["domicilio_numero"],
+                domicilio_depto = request.vars["domicilio_depto"],
+                codigo_postal = request.vars["codigo_postal"],
+                localidad = request.vars["localidad"],
+                email = request.vars["email"],
+                telefono = request.vars["telefono"],
+                celular = request.vars["celular"],
+                estudia = request.vars["estudia"],
+                parentezco = request.vars["parentezco"],
+                )
+    return locals()
+    
+    
+
 
 def reportes_empleados():
     fecha_desde = request.vars["fecha_desde"]
