@@ -1,5 +1,3 @@
-
-
 [ui]
 # name and email (local to this repository, optional), e.g.
 username = Leonel Daruich <leodaruich2@gmail.com>
@@ -11,7 +9,7 @@ extdiff =
 [auth]
 git.prefix = *
 git.username = Daruich
-git.password = 6a7a2165ce0cb9537d9e279f73d9fe2f5c7922e5
+git.password = e39013a985f55cd1dfebca6e64203f876adc39b0
 [extdiff]
 cmd.meld =
 
