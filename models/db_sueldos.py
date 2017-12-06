@@ -38,25 +38,23 @@ db.define_table("legajos",
     Field ("image","upload"),
 )
 
-db.legajos.num_legajo.requires = [IS_NOT_IN_DB(db,"legajos.num_legajo"),
+db.legajos.num_legajo.requires = [IS_NOT_IN_DB(db, db.legajos.num_legajo),
                                  IS_NOT_EMPTY(error_message= "campo obligatorio")]
 db.legajos.est_civ.requires= IS_IN_SET(["Soltero","Casado","Divorciado","Viudo"])
 db.legajos.estudia.requires= IS_IN_SET(["si","no"])
-db.legajos.cuil.requires=[IS_NOT_IN_DB(db, "legajos.cuil"),
+db.legajos.cuil.requires=[IS_NOT_IN_DB(db,db.legajos.cuil),
                           IS_NOT_EMPTY(error_message= "campo obligatorio")]
 db.legajos.horas_extras.requires= IS_IN_SET(["Si","No"])
 db.legajos.telefono.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
 db.legajos.fecha_ingreso.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
 db.legajos.dni.requires=[IS_INT_IN_RANGE(5000000,100000000),
                          IS_NOT_EMPTY(error_message= "campo obligatorio"),
-                         IS_NOT_IN_DB(db, "legajos.dni")]
+                         IS_NOT_IN_DB(db, db.legajos.dni)]
 db.legajos.nombre.lenght=20
 db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires = IS_DATE(format=T('%d-%m-%Y'),
                    error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
-#db.legajos.fecha_ingreso.requires=IS_DATE('%Y-%M-%D')
 db.legajos.fe_nac.requires = IS_DATE('%d-%m-%a')
-#db.legajos.fe_nac.requires = DATE_FORMAT('%D-%M-%Y'),
 db.legajos.constancia_de_cuil.requires= IS_IN_SET(["Si","No"])
 db.legajos.fotocopia_dni.requires= IS_IN_SET(["Si","No"])
 db.legajos.alta_temprana.requires= IS_IN_SET(["Si","No"])

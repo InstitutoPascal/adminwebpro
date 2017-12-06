@@ -237,7 +237,7 @@ def familiar2():
     form = SQLFORM.factory(
     Field("domicilio_piso","string"),
     Field("domicilio_depto","string"),
-    Field("codigo_postal",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("codigo_postal","integer",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("localidad",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("email","string"),
     Field("telefono",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
