@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import time
 def index():
     return dict(message="Index en sueldos.py")
 
@@ -27,31 +27,33 @@ def abm_horas():
 def legajos():
     # definir los campos a obtener desde la base de datos:
     import os
-    form = SQLFORM.factory(Field('nro_legajo',requires=IS_NOT_EMPTY(error_message='Ingrese el número de legajo')),
-                           Field('fecha_egreso','date'),
-                           Field('cuil',requires=IS_NOT_EMPTY(error_message= 'Ingrese el cuil')),
-                           Field('dni',requires=IS_NOT_EMPTY(error_message='Ingrese el dni')),
-                           Field('corresponde_hs_extra',requires=IS_IN_SET({1:'si',2:'no'},error_message='Ingrese una opción',zero='Seleccionar...')),
-                           Field('nombres',requires=IS_NOT_EMPTY(error_message='Ingrese el nombre')),
-                           Field('apellido',requires=IS_NOT_EMPTY(error_message='Ingrese el apellido')),
-                           Field('fecha_nacimiento','date'),
-                           Field('lugar_nacimiento','string'),
-                           Field('estado_civil', requires=IS_IN_SET(['Soltero','Casado','Viudo'])),
-                           Field('categoria','string'),
-                           Field('domicilio_calle','string'),
-                           Field('numero_calle','string'),
-                           Field('piso','string'),
-                           Field('depto','string'),
-                           Field('imagen','upload',uploadfolder=os.path.join(request.folder,'uploads')),
-                           submit_button='Siguiente'
-                          )
-
+    form = SQLFORM.factory(
+        Field('nro_legajo','primary key',requires=[IS_NOT_EMPTY(error_message='Ingrese el número de legajo'),
+                                                  IS_NOT_IN_DB(db,db.legajos.num_legajo)]),
+         Field('fecha_egreso','date'),
+         Field('cuil','integer',requires=[IS_NOT_EMPTY(error_message= 'Ingrese el cuil'),
+                                IS_NOT_IN_DB(db, db.legajos.cuil)]),
+         Field('dni','integer',requires=[IS_NOT_EMPTY(error_message='Ingrese el dni'),
+                                        IS_NOT_IN_DB(db,db.legajos.dni)]),
+         Field('corresponde_hs_extra',requires=IS_IN_SET({1:'si',2:'no'},error_message='Ingrese una opción',zero='Seleccionar...')),
+         Field('nombres',requires=IS_NOT_EMPTY(error_message='Ingrese el nombre')),
+         Field('apellido',requires=IS_NOT_EMPTY(error_message='Ingrese el apellido')),
+         Field('fecha_nacimiento','date'),
+         Field('lugar_nacimiento','string'),
+         Field('estado_civil', requires=IS_IN_SET(['Soltero','Casado','Viudo'])),
+         Field('categoria','string'),
+         Field('domicilio_calle','string'),
+         Field('numero_calle','integer'),
+         Field('piso','string'),
+         Field('imagen','upload',uploadfolder=os.path.join(request.folder,'uploads')),
+         Field('depto','string'),
+         submit_button="siguiente"
+        )
     if form.process().accepted:
         try:
             image = db.legajos.image.store(request.vars["imagen"].file, request.vars["imagen"].filename)
-            session["imagen"] = image
         except:
-            session['imagen'] = None
+             image = None
         session["nro_legajo"] = request.vars['nro_legajo']
         session["fecha_egreso"] = request.vars['fecha_egreso']
         session["cuil"] = request.vars['cuil']
@@ -73,10 +75,10 @@ def legajos():
     return locals()
 
 def legajos2():
-    form = SQLFORM.factory(Field('obra_social'),
-                           Field('codigo_postal'),
-                           Field('localidad'),
-                           Field('email'),
+    form = SQLFORM.factory(Field('obra_social',"string"),
+                           Field('codigo_postal',"integer"),
+                           Field('localidad',"string"),
+                           Field('email',"string"),
                            Field('fecha_ingreso','date'),
                            Field('telefono',label='Teléfono'),
                            Field('telefono_celular',label='Teléfono Celular'),
@@ -107,7 +109,6 @@ def legajos2():
         session["partida"] = request.vars["partida"]
         session["part"] = request.vars["part_pre"]
         redirect(URL(c='sueldos',f='legajos3'))
-        
     return locals()
 
 def legajos3():
@@ -119,9 +120,9 @@ def legajos3():
                            Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                           )
+    #ACA ARRIBA HAY QUE PEGAR LO QUE QUE CORTASTE HOY
     if form.process().accepted:
-         legajo_id = db.legajos.insert(
-            image = session["imagen"],
+        legajo_id = db.legajos.insert(
             num_legajo = session["nro_legajo"],
             fecha_egreso = session["fecha_egreso"],
             cuil = session["cuil"],
@@ -158,7 +159,7 @@ def legajos3():
             constancia_Alumno_Regular_empleado = request.vars["constancia_Alumno_Regular_empleado"],
             curriculum_empleado = request.vars["curriculum_empleado"],
         )
-         redirect(URL(c='sueldos',f='vista_previa',args =legajo_id))
+        redirect(URL(c='sueldos',f='vista_previa',args =legajo_id))
         #EN el insert faltan agregar los datos que estan en este for
     return locals()
 
@@ -167,7 +168,7 @@ def vista_previa():
     edad_num = None
     fecha_parse = None
     recordset = db(db.legajos.id == legajo_id ).select().first()
-    print recordset
+    path = str(recordset.image).replace("legajos.image","no_table.imagen")
     if recordset:
         if recordset.fe_nac is not None:
             edad_num = edad(recordset.fe_nac)
@@ -200,8 +201,12 @@ def horas():
 def familiar():
     import os
     form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
-    Field("cuil",requires= IS_NOT_IN_DB(db,"familiares.cuil")),
-    Field("dni", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("cuil",requires= [IS_NOT_IN_DB(db,"familiares.cuil"),
+                           IS_NOT_DB(db, db.familiares.cuil),
+                           IS_NOT_DB(db, db.legajos.cuil)]),
+    Field("dni", requires = [IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio"),
+                            IS_NOT_IN_DB(db,familiares.dni),
+                            IS_NOT_IN_DB(db,legajos.dni) ]),
     Field("nombre",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("apellido", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("fe_nac","date"),
@@ -236,7 +241,7 @@ def familiar2():
     Field("localidad",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("email","string"),
     Field("telefono",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
-    Field("celular","integer"),
+    Field("celular","string"),
     Field("estudia",requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
     Field("parentezco",requires=IS_IN_SET(['Conyuge','Hijo','Espos@','Otro'],zero='Seleccione...',error_message='Indique una opción')),
         )
@@ -301,7 +306,7 @@ def reportes_horas():
     Legajo = request.vars["Legajo"]
     mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
-    campos = db.horas.num_legajo, db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
+    campos =  db.horas.num_legajo, db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
     criterio = ((db.horas.num_legajo == Legajo) & (db.horas.num_legajo == db.legajos.num_legajo) & (db.horas.mes_trabajado == mes))
     #criterio = db.horas.num_legajo == Legajo
     #criterio & = db.horas.num_legajo == db.legajos.num_legajo

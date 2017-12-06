@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-
 db.define_table("legajos",
-    Field("num_legajo","integer"),
-    Field("cuil","string"),
-    Field("dni","string",),
+    Field("num_legajo",'string'),
+    Field("cuil",'string'),
+    Field("dni",'string'),
     Field("nombre", "string"),
     Field("apellido", "string"),
     Field("fe_nac","date"),
@@ -56,12 +55,14 @@ db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires = IS_DATE(format=T('%d-%m-%Y'),
                    error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
 #db.legajos.fecha_ingreso.requires=IS_DATE('%Y-%M-%D')
-
+db.legajos.fe_nac.requires = IS_DATE('%d-%m-%a')
+#db.legajos.fe_nac.requires = DATE_FORMAT('%D-%M-%Y'),
 db.legajos.constancia_de_cuil.requires= IS_IN_SET(["Si","No"])
 db.legajos.fotocopia_dni.requires= IS_IN_SET(["Si","No"])
 db.legajos.alta_temprana.requires= IS_IN_SET(["Si","No"])
 db.legajos.libreta_familia.requires= IS_IN_SET(["corresponde","no corresponde"])
 db.legajos.partida_nacimiento_hijos.requires= IS_IN_SET(["corresponde","no corresponde"])
+db.legajos.fotocopia_dni_conyuge.requires= IS_IN_SET(["corresponde","no corresponde"])
 db.legajos.fotocopia_dni_hijos.requires= IS_IN_SET(["corresponde","no corresponde"])
 db.legajos.libreta_familia.requires= IS_IN_SET(["corresponde","no corresponde"])
 db.legajos.constancia_cuil_hijos.requires= IS_IN_SET(["corresponde","no corresponde"])
@@ -109,12 +110,10 @@ db.familiares.nombre.lenght=20
 db.familiares.apellido.lenght=25
 db.familiares.fe_nac.requires = IS_DATE(format=T('%d-%m-%Y'),
                   error_message='Debe cumplir el siguiente formato YYYY-MM-DD!')
-db.legajos.fe_nac.requires = IS_DATE(format=T('%d-%m-%Y'),
-                  error_message='Debe cumplir el siguiente formato YYYY-MM-DD!')
 db.familiares.num_legajo.requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")
 
 db.define_table("horas",
-    Field("num_legajo","integer"),
+    Field("num_legajo","string"),
     Field("mes_trabajado","string"),
     Field("semana","integer"),
     Field("hs_trab","float"),
