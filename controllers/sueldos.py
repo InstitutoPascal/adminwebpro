@@ -284,13 +284,14 @@ def reportes_empleados():
     #dt_objactual3 = datetime.strptime(fecha_actual, '%Y-%m-%d')
     #fecha_actual = dt_objactual3
     ordenar = request.vars["ordenar"]
-    campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.legajos.fecha_ingreso
+    campos = db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.legajos.fecha_ingreso, db.legajos.fe_nac
     criterio = db.legajos.fecha_ingreso >= fecha_desde
     criterio &= db.legajos.fecha_ingreso <= fecha_hasta
     if ordenar:
         orden = db.legajos.apellido, db.legajos.nombre,
     else:
         orden = db.legajos.num_legajo
+        orden = db.legajos.fe_nac
     registros = db(criterio).select(*campos, orderby=orden)
     return dict(lista_empleados=registros,fecha_desde=fecha_desde,fecha_hasta=fecha_hasta,fecha_actual=fecha_actual,titulo="Listando desde fecha %s hasta fecha %s. La fecha actual es:  %s" % (fecha_desde.date(), fecha_hasta.date(), fecha_actual.date()))
 

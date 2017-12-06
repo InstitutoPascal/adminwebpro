@@ -3,11 +3,11 @@
 <table class="table"> 
     <caption>{{=titulo}}</caption>
     <thead> 
-        <tr> <th>#</th> <th>Nro Legajo</th> <th>Apellido y Nombre</th> <th>FE Ingreso</th> </tr> 
+        <tr> <th>#</th> <th>Nro Legajo</th> <th>Apellido y Nombre</th> <th>FE Ingreso</th> <th>Fecha Nacimiento</th></tr> 
     </thead> 
         <tbody> 
             {{for i, reg_empleado in enumerate(lista_empleados):}}
-            <tr> <th scope="row">{{=i+1}}</th> <td>{{=reg_empleado.num_legajo}}</td> <td>{{=reg_empleado.nombre}} {{=reg_empleado.apellido}}</td> <td>{{=reg_empleado.fecha_ingreso}}</td> </tr>  
+            <tr> <th scope="row">{{=i+1}}</th> <td>{{=reg_empleado.num_legajo}}</td> <td>{{=reg_empleado.nombre}} {{=reg_empleado.apellido}}</td> <td>{{=reg_empleado.fecha_ingreso}}</td><td>{{=reg_empleado.fe_nac }}</td> </tr>  
             {{pass}}
        </tbody> 
 </table>
