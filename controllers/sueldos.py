@@ -70,7 +70,7 @@ def legajos():
         session["piso"] = request.vars['piso']
         session["depto"] = request.vars['depto']
         redirect(URL(c='sueldos',f='legajos2'))
-    
+
     grid = SQLFORM.grid(db.legajos)
     return locals()
 
@@ -120,7 +120,6 @@ def legajos3():
                            Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                           )
-    #ACA ARRIBA HAY QUE PEGAR LO QUE QUE CORTASTE HOY
     if form.process().accepted:
         legajo_id = db.legajos.insert(
             num_legajo = session["nro_legajo"],
@@ -174,39 +173,51 @@ def vista_previa():
             edad_num = edad(recordset.fe_nac)
             fecha_parse = recordset.fe_nac.strftime("%d/%m/%Y")
     return locals()
+
+def vista_previa_horas():
+    hora_id = request.args(0)
+    recordset = db(db.horas.id == hora_id ).select().first()
+    return locals()
+
+def vista_previa_familiar():
+    familiar_id = request.args(0)
+    edad_num = None
+    fecha_parse = None
+    recordset = db(db.familiares.id == familiar_id ).select().first()
+    if recordset:
+        if recordset.fe_nac is not None:
+            edad_num = edad(recordset.fe_nac)
+            fecha_parse = recordset.fe_nac.strftime("%d/%m/%Y")
+    return locals()
 def edad(fecha_nacimiento):
         from datetime import datetime
         return int((datetime.now().date() - fecha_nacimiento).days / 365.25)
 
-    
+
 def horas():
     import os
-    form = SQLFORM.factory(Field('nro_legajo',requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
-                           Field('mes_trab',requires=IS_IN_SET({1:'Enero',2:'Febrero',3:'Marzo',4:'Abril',5:'Mayo',6:'Junio',7:'Julio',8:'Agosto',9:'Septiembre',10:'Octubre',11:'Noviembre',12:'Diciembre'},error_message='Ingrese una opción',zero='Seleccionar...')),
+    form = SQLFORM.factory(Field('nro_legajo',requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),                        Field('mes_trab',requires=IS_IN_SET(['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'])),
                            Field('semana',requires=IS_IN_SET({1:'1',2:'2',3:'3',4:'4',5:'5'},error_message='Ingrese una opción',zero='Seleccionar...')),
                            Field('horas_trab','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
                            Field('horas_extras','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
      )
     if form.process().accepted:
-        horas_id = db.horas.insert(
+        hora_id = db.horas.insert(
             num_legajo = request.vars["nro_legajo"],
             mes_trabajado = request.vars["mes_trab"],
             semana = request.vars["semana"],
             hs_trab = request.vars["horas_trab"],
             hs_ext = request.vars["horas_extras"]
             )
+        redirect(URL(c='sueldos',f='vista_previa_horas',args =hora_id))
     return locals()
 
 
 def familiar():
     import os
     form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
-    Field("cuil",requires= [IS_NOT_IN_DB(db,"familiares.cuil"),
-                           IS_NOT_DB(db, db.familiares.cuil),
-                           IS_NOT_DB(db, db.legajos.cuil)]),
-    Field("dni", requires = [IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio"),
-                            IS_NOT_IN_DB(db,familiares.dni),
-                            IS_NOT_IN_DB(db,legajos.dni) ]),
+    Field("cuil",requires= IS_NOT_IN_DB(db,"familiares.cuil")),
+    Field("dni", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("nombre",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("apellido", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("fe_nac","date"),
@@ -229,46 +240,47 @@ def familiar():
         session["domicilio_calle"] = request.vars["domicilio_calle"]
         session["domicilio_numero"] = request.vars["domicilio_numero"]
         redirect(URL(c='sueldos',f='familiar2'))
+        
     return locals()
     
     
 def familiar2():
-    import os
     form = SQLFORM.factory(
     Field("domicilio_piso","string"),
     Field("domicilio_depto","string"),
-    Field("codigo_postal","integer",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("codigo_postal",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("localidad",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("email","string"),
     Field("telefono",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
-    Field("celular","string"),
+    Field("celular","integer"),
     Field("estudia",requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
-    Field("parentezco",requires=IS_IN_SET(['Conyuge','Hijo','Espos@','Otro'],zero='Seleccione...',error_message='Indique una opción')),
+    Field("parentezco",requires=IS_IN_SET(['Conyuge','Hijo','Familiar'],zero='Seleccione...',error_message='Indique una opción')),
         )
     if form.process().accepted:
-         familiar_id = db.familiares.insert(
-                num_legajo = session["num_legajo"],
-                cuil = session ["cuil"],
-                dni = session ["dni"],
-                nombre = session ["nombre"],
-                apellido = session ["apellido"],
-                fe_nac = session ["fe_nac"],
-                lu_nac = session ["lu_nac"],
-                est_civ = session ["est_civ"],
-                domicilio_calle = session ["domicilio_calle"],
-                domicilio_numero = session ["domicilio_numero"],
-                domicilio_depto = request.vars["domicilio_depto"],
-                codigo_postal = request.vars["codigo_postal"],
-                localidad = request.vars["localidad"],
-                email = request.vars["email"],
-                telefono = request.vars["telefono"],
-                celular = request.vars["celular"],
-                estudia = request.vars["estudia"],
-                parentezco = request.vars["parentezco"],
-                )
+        familiar_id = db.familiares.insert(
+            num_legajo = session["num_legajo"],
+            cuil = session["cuil"],
+            dni = session["dni"],
+            nombre = session["nombre"],
+            apellido = session["apellido"],
+            fe_nac = session["fe_nac"],
+            lu_nac = session["lu_nac"],
+            est_civ = session["est_civ"],
+            domicilio_calle = session["domicilio_calle"],
+            domicilio_numero = session["domicilio_numero"],
+            domicilio_piso = request.vars["domicilio_piso"],
+            domicilio_depto = request.vars["domicilio_depto"],
+            codigo_postal = request.vars["codigo_postal"],
+            localidad = request.vars["localidad"],
+            email = request.vars["email"],
+            telefono = request.vars["telefono"],
+            celular = request.vars["celular"],
+            estudia  = request.vars["estudia"],
+            parentezco =  request.vars["parentezco"],
+            )
+        redirect(URL(c='sueldos',f='vista_previa_familiar',args =familiar_id))
     return locals()
-    
-    
+
 
 
 def reportes_empleados():
@@ -340,6 +352,10 @@ def reportes_familiares():
     #registros = db(criterio).select(*campos)
     registros = db.executesql("SELECT cast (EXTRACT(YEAR FROM age(current_date,familiares.fe_nac)) as integer) as edad, familiares.id as familiar_id ,familiares.num_legajo, familiares.nombre,familiares.apellido, familiares.estudia,familiares.domicilio_calle,familiares.domicilio_numero, legajos.dom_calle,legajos.dom_numero from familiares join legajos on familiares.num_legajo = legajos.num_legajo where 1=1  "+where,as_dict=True )
 
+    return dict(lista_familiares=registros,titulo="Listando %s" % (subtitulo))
+
+def reportes_familiares2():
+    return dict()
     return dict(lista_familiares=registros,titulo="Listando %s" % (subtitulo))
 
 def reportes_familiares2():

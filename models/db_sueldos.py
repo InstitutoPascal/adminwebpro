@@ -106,17 +106,17 @@ db.familiares.dni.requires=[IS_INT_IN_RANGE(5000000,100000000),
                          IS_NOT_IN_DB(db, "familiares.dni")]
 db.familiares.nombre.lenght=20
 db.familiares.apellido.lenght=25
-db.familiares.fe_nac.requires = IS_DATE(format=T('%d-%m-%Y'),
-                  error_message='Debe cumplir el siguiente formato YYYY-MM-DD!')
+#db.familiares.fe_nac.requires = IS_DATE(format=T('%d-%m-%Y'),
+ #                 error_message='Debe cumplir el siguiente formato YYYY-MM-DD!')
 db.familiares.num_legajo.requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")
 
 db.define_table("horas",
     Field("num_legajo","string"),
-    Field("mes_trabajado","string"),
+    Field("mes_trabajado",requires=IS_IN_SET(['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'])),
     Field("semana","integer"),
     Field("hs_trab","float"),
     Field("hs_ext","float"),
                )
 db.horas.num_legajo.requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")
-db.horas.mes_trabajado.requires = IS_IN_SET(["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"])
+#db.horas.mes_trabajado.
 db.horas.semana.requires = IS_IN_SET(["1","2","3","4","5"])

@@ -41,16 +41,7 @@ def user():
 
 
 @cache.action()
-def download():
-    """
-    allows downloading of uploaded files
-    http://..../[app]/default/download/[filename]
-    """
-    return response.download(request, db)
-def nt_download():
-    if not str(request.args(0)).startwith('no_table.'):
-        raise HTTP(404)
-    return response.stream(open(os.path.join(request.folder,'uploads',request.args(0))))
+
 def call():
     """
     exposes services. for example:
