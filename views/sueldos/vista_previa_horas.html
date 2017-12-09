@@ -1,0 +1,30 @@
+{{extend 'layout.html'}}
+<h1>VISTA PREVIA HORAS POR LEGAJO</h1>
+
+<div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-1 control-label">Nro Legajo</label>
+            <div class="col-sm-1">
+                {{=recordset.num_legajo}}
+               
+            </div>
+            <label for="campo_fechaegr" class="col-sm-1 control-label">Mes Trabajado</label>
+            <div class="col-sm-1">
+                {{=recordset.mes_trabajado}}
+                
+            </div>
+     <label for="campo_fechaegr" class="col-sm-1 control-label">Semana</label>
+            <div class="col-sm-1">
+                {{=recordset.semana}}
+                
+            </div>
+     <label for="campo_fechaegr" class="col-sm-1 control-label">Horas Trabajadas</label>
+            <div class="col-sm-1">
+                {{=recordset.hs_trab}}
+                
+            </div>
+     <label for="campo_fechaegr" class="col-sm-1 control-label">Horas Extras</label>
+            <div class="col-sm-1">
+                {{=recordset.hs_ext}}
+                
+            </div>
+</div>

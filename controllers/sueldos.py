@@ -251,7 +251,7 @@ def familiar2():
     Field("codigo_postal",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("localidad",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("email","string"),
-    Field("telefono",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("telefono","integer"),
     Field("celular","integer"),
     Field("estudia",requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
     Field("parentezco",requires=IS_IN_SET(['Conyuge','Hijo','Familiar'],zero='Seleccione...',error_message='Indique una opción')),
@@ -276,7 +276,7 @@ def familiar2():
             telefono = request.vars["telefono"],
             celular = request.vars["celular"],
             estudia  = request.vars["estudia"],
-            parentezco =  request.vars["parentezco"],
+            parentezco =  request.vars["parentezco"]
             )
         redirect(URL(c='sueldos',f='vista_previa_familiar',args =familiar_id))
     return locals()
@@ -338,7 +338,7 @@ def reportes_familiares():
     familia_menor21 = request.vars["familia_menor21"]
     familia_estudian = request.vars["familia_estudian"]
     familiar_distdom = request.vars["familiar_distdom"]
-   
+    
     where = ""
     if familia_menor21:
         subtitulo = "Familiares menores de 21 años"
@@ -346,6 +346,7 @@ def reportes_familiares():
     if familia_estudian:
         subtitulo = "Familiares que estudian"
         where += " and familiares.estudia = 'SI' "
+  
     if familiar_distdom:
         subtitulo = "Familiares con distinto domicilio"
         where += " and familiares.domicilio_calle <> legajos.dom_calle "
@@ -354,9 +355,11 @@ def reportes_familiares():
 
     return dict(lista_familiares=registros,titulo="Listando %s" % (subtitulo))
 
+    
+    
 def reportes_familiares2():
     return dict()
-    return dict(lista_familiares=registros,titulo="Listando %s" % (subtitulo))
+    #return dict(lista_familiares=registros,titulo="Listando %s" % (subtitulo))
 
 def reportes_familiares2():
     return dict()
