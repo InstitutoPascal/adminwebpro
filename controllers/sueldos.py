@@ -255,8 +255,8 @@ def horas():
 def familiar():
     import os
     form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
-    Field("cuil",requires= IS_NOT_IN_DB(db,"familiares.cuil")),
-    Field("dni", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("cuil","integer",requires= IS_NOT_IN_DB(db,"familiares.cuil")),
+    Field("dni","integer", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("nombre",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("apellido", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("fe_nac","date"),
@@ -296,7 +296,7 @@ def familiar2():
     Field("telefono","integer"),
     Field("celular","integer"),
     Field("estudia",requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
-    Field("parentezco",requires=IS_IN_SET(['Conyuge','Hijo','Familiar'],zero='Seleccione...',error_message='Indique una opción')),
+    Field("parentezco","string",requires=IS_IN_SET(['Conyuge','Hijo','Familiar'],zero='Seleccione...',error_message='Indique una opción')),
         )
     if form.process().accepted:
         familiar_id = db.familiares.insert(
@@ -311,6 +311,7 @@ def familiar2():
             domicilio_calle = session["domicilio_calle"],
             domicilio_numero = session["domicilio_numero"],
             domicilio_piso = request.vars["domicilio_piso"],
+            parentezco =  request.vars["parentezco"],
             domicilio_depto = request.vars["domicilio_depto"],
             codigo_postal = request.vars["codigo_postal"],
             localidad = request.vars["localidad"],
@@ -318,7 +319,7 @@ def familiar2():
             telefono = request.vars["telefono"],
             celular = request.vars["celular"],
             estudia  = request.vars["estudia"],
-            parentezco =  request.vars["parentezco"],
+            
 
             )
         redirect(URL(c='sueldos',f='vista_previa_familiar',args =familiar_id))

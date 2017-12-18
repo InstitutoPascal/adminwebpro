@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 db.define_table("legajos",
-    Field("num_legajo",'string'),
+    Field("num_legajo",'integer'),
     Field("cuil",'string'),
     Field("dni",'string'),
     Field("nombre", "string"),
@@ -89,8 +89,8 @@ db.define_table("familiares",
     Field("codigo_postal","integer"),
     Field("localidad","string"),
     Field("email","string"),
-    Field("telefono","integer"),
-    Field("celular","integer"),
+    Field("telefono","string"),
+    Field("celular","string"),
     Field("estudia","string"),
     Field("parentezco","string"),
     )
