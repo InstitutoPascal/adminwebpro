@@ -19,6 +19,8 @@ def index():
     """
     response.flash = "C.V. Technical Service"
     return dict(message=T('Bienvenido a su Sistema Contable'))
+def download():
+    return response.download(request, db)
 
 
 def user():

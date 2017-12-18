@@ -54,7 +54,7 @@ db.legajos.nombre.lenght=20
 db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires = IS_DATE(format=T('%d-%m-%Y'),
                    error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
-db.legajos.fe_nac.requires = IS_DATE('%d-%m-%a')
+#db.legajos.fe_nac.requires = IS_DATE('%d-%m-%a')
 db.legajos.constancia_de_cuil.requires= IS_IN_SET(["Si","No"])
 db.legajos.fotocopia_dni.requires= IS_IN_SET(["Si","No"])
 db.legajos.alta_temprana.requires= IS_IN_SET(["Si","No"])

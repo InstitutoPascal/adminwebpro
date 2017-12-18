@@ -3,6 +3,20 @@ import time
 def index():
     return dict(message="Index en sueldos.py")
 
+@auth.requires_login()
+def mostrar_formulario():
+    registro = db.legajos(request.args(0))
+    form = SQLFORM(db.legajos, registro, deletable=True,
+                  upload=URL('download'))
+    if form.process().accepted:
+        response.flash = 'formulario aceptado'
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    return dict(form=form)
+
+def download():
+    return response.download(request, db)
+
 
 @auth.requires_login()
 
@@ -30,6 +44,7 @@ def legajos():
     form = SQLFORM.factory(
         Field('nro_legajo','primary key',requires=[IS_NOT_EMPTY(error_message='Ingrese el número de legajo'),
                                                   IS_NOT_IN_DB(db,db.legajos.num_legajo)]),
+         Field('imagen','upload',uploadfolder=os.path.join(request.folder,'uploads')),
          Field('fecha_egreso','date'),
          Field('cuil','integer',requires=[IS_NOT_EMPTY(error_message= 'Ingrese el cuil'),
                                 IS_NOT_IN_DB(db, db.legajos.cuil)]),
@@ -45,15 +60,11 @@ def legajos():
          Field('domicilio_calle','string'),
          Field('numero_calle','integer'),
          Field('piso','string'),
-         Field('imagen','upload',uploadfolder=os.path.join(request.folder,'uploads')),
          Field('depto','string'),
          submit_button="siguiente"
         )
     if form.process().accepted:
-        try:
-            image = db.legajos.image.store(request.vars["imagen"].file, request.vars["imagen"].filename)
-        except:
-             image = None
+        
         session["nro_legajo"] = request.vars['nro_legajo']
         session["fecha_egreso"] = request.vars['fecha_egreso']
         session["cuil"] = request.vars['cuil']
@@ -70,6 +81,10 @@ def legajos():
         session["piso"] = request.vars['piso']
         session["depto"] = request.vars['depto']
         redirect(URL(c='sueldos',f='legajos2'))
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    else:
+        response.flash = 'por favor complete el formulario'
 
     grid = SQLFORM.grid(db.legajos)
     return locals()
@@ -109,6 +124,10 @@ def legajos2():
         session["partida"] = request.vars["partida"]
         session["part"] = request.vars["part_pre"]
         redirect(URL(c='sueldos',f='legajos3'))
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    else:
+        response.flash = 'por favor complete el formulario'
     return locals()
 
 def legajos3():
@@ -118,9 +137,20 @@ def legajos3():
                            Field("constancia_cuil_conyuge","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                            Field("constancia_Alumno_Regular_Hijo","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                            Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                          
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
+                           Field("image","upload"),table_name='legajos'
                           )
     if form.process().accepted:
+        
+        imagen_upload = None
+        
+        try:
+            imagen_upload = form.vars.image 
+        except Exception as e:
+            print e,"error"
+            #si tengo razon web2py tiene un bug
+        
         legajo_id = db.legajos.insert(
             num_legajo = session["nro_legajo"],
             fecha_egreso = session["fecha_egreso"],
@@ -149,6 +179,7 @@ def legajos3():
             alta_temprana = session["alta_temprana"],
             fotocopia_dni = session["fotodni"] ,
             libreta_familia = session["libreta"] ,
+            image = imagen_upload,
             partida_nacimiento_hijos = session["partida"] ,
             fotocopia_dni_hijos= request.vars["fotocopia_dni_hijos"],
             fotocopia_dni_conyuge= request.vars["fotocopia_dni_conyuge"],
@@ -160,6 +191,10 @@ def legajos3():
         )
         redirect(URL(c='sueldos',f='vista_previa',args =legajo_id))
         #EN el insert faltan agregar los datos que estan en este for
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    else:
+        response.flash = 'por favor complete el formulario'
     return locals()
 
 def vista_previa():
@@ -167,7 +202,7 @@ def vista_previa():
     edad_num = None
     fecha_parse = None
     recordset = db(db.legajos.id == legajo_id ).select().first()
-    path = str(recordset.image).replace("legajos.image","no_table.imagen")
+    
     if recordset:
         if recordset.fe_nac is not None:
             edad_num = edad(recordset.fe_nac)
@@ -210,6 +245,10 @@ def horas():
             hs_ext = request.vars["horas_extras"]
             )
         redirect(URL(c='sueldos',f='vista_previa_horas',args =hora_id))
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    else:
+        response.flash = 'por favor complete el formulario'
     return locals()
 
 
@@ -240,7 +279,10 @@ def familiar():
         session["domicilio_calle"] = request.vars["domicilio_calle"]
         session["domicilio_numero"] = request.vars["domicilio_numero"]
         redirect(URL(c='sueldos',f='familiar2'))
-        
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    else:
+        response.flash = 'por favor complete el formulario'
     return locals()
     
     
@@ -276,9 +318,14 @@ def familiar2():
             telefono = request.vars["telefono"],
             celular = request.vars["celular"],
             estudia  = request.vars["estudia"],
-            parentezco =  request.vars["parentezco"]
+            parentezco =  request.vars["parentezco"],
+
             )
         redirect(URL(c='sueldos',f='vista_previa_familiar',args =familiar_id))
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    else:
+        response.flash = 'por favor complete el formulario'
     return locals()
 
 
