@@ -14,6 +14,18 @@ def mostrar_formulario():
         response.flash = 'el formulario tiene errores'
     return dict(form=form)
 
+def mostrar_imagen():
+    registro = db.legajos(request.args(0))
+    form = SQLFORM(db.horas, registro, deletable=True,
+                  upload=URL('download'))
+    if form.process().accepted:
+        response.flash = 'formulario aceptado'
+    elif form.errors:
+        response.flash = 'el formulario tiene errores'
+    return dict(form=form)
+
+
+
 def download():
     return response.download(request, db)
 
@@ -44,7 +56,6 @@ def legajos():
     form = SQLFORM.factory(
         Field('nro_legajo','primary key',requires=[IS_NOT_EMPTY(error_message='Ingrese el número de legajo'),
                                                   IS_NOT_IN_DB(db,db.legajos.num_legajo)]),
-         Field('imagen','upload',uploadfolder=os.path.join(request.folder,'uploads')),
          Field('fecha_egreso','date'),
          Field('cuil','integer',requires=[IS_NOT_EMPTY(error_message= 'Ingrese el cuil'),
                                 IS_NOT_IN_DB(db, db.legajos.cuil)]),
@@ -55,10 +66,10 @@ def legajos():
          Field('apellido',requires=IS_NOT_EMPTY(error_message='Ingrese el apellido')),
          Field('fecha_nacimiento','date'),
          Field('lugar_nacimiento','string'),
-         Field('estado_civil', requires=IS_IN_SET(['Soltero','Casado','Viudo'])),
+         Field('estado_civil', requires=IS_IN_SET(['Soltero','Casado','Viudo'],zero='Seleccione...',error_message='el campo no puede estar vacio')),
          Field('categoria','string'),
-         Field('domicilio_calle','string'),
-         Field('numero_calle','integer'),
+         Field('domicilio_calle','string',requires=IS_NOT_EMPTY(error_message= 'Ingrese el domicilio')),
+         Field('numero_calle','integer',requires=IS_NOT_EMPTY(error_message= 'Ingrese la altura ')),
          Field('piso','string'),
          Field('depto','string'),
          submit_button="siguiente"
@@ -93,18 +104,18 @@ def legajos2():
     form = SQLFORM.factory(Field('obra_social',"string"),
                            Field('codigo_postal',"integer"),
                            Field('localidad',"string"),
-                           Field('email',"string"),
-                           Field('fecha_ingreso','date'),
-                           Field('telefono',label='Teléfono'),
-                           Field('telefono_celular',label='Teléfono Celular'),
-                           Field('estudia',label='Estudia?',requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
+                           Field('email',"string",requires = IS_EMAIL(error_message='¡El mail no es válido!')),
+                           Field('fecha_ingreso','date',requires=IS_NOT_EMPTY(error_message='ingrese fecha de ingreso')),
+                                                       
+                           Field('telefono',"string",requires=IS_NOT_EMPTY(error_message='Ingrese el telefono de contacto')),
+                           Field('telefono_celular',"string"),
+                           Field('estudia',label='Estudia?',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
                            Field('cons_cuil',label='Constancia de cuil',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
                            Field('alt_tem',label='Alta temprana',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
                            Field('foto_dni',label='Fotocopia de DNI',requires=IS_IN_SET(['si','no'],zero='Seleccionar...',error_message='Indique una opción')),
                            Field('libreta',requires=IS_IN_SET(['corresponde','no corresponde'],zero='Seleccionar...',error_message='Indique una opción')),
                            Field('lib_pre','boolean'),
                            Field('partida',requires=IS_IN_SET(['corresponde','no corresponde'],zero='Seleccionar...',error_message='Indique una opción')),
-                           Field('part_pre','boolean'),
                           )
     if form.process().accepted:
         #la sesion no hace falta que se llame como el vars
@@ -139,7 +150,7 @@ def legajos3():
                            Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                           
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
-                           Field("image","upload"),table_name='legajos'
+                           Field("image","upload",requires=IS_NOT_EMPTY(error_message='El campo no puede estar vacio')),table_name='legajos'
                           )
     if form.process().accepted:
         
@@ -231,11 +242,14 @@ def edad(fecha_nacimiento):
 
 def horas():
     import os
-    form = SQLFORM.factory(Field('nro_legajo',requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),                        Field('mes_trab',requires=IS_IN_SET(['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'])),
+    form = SQLFORM.factory(Field('nro_legajo',requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s",zero='seleccionar...',error_message='seleccione numero de legajo')), 
+                               Field('mes_trab',requires=IS_IN_SET(['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],zero='seleccionar...',error_message='seleccione una opcion')),
                            Field('semana',requires=IS_IN_SET({1:'1',2:'2',3:'3',4:'4',5:'5'},error_message='Ingrese una opción',zero='Seleccionar...')),
                            Field('horas_trab','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
                            Field('horas_extras','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
+                           
      )
+    
     if form.process().accepted:
         hora_id = db.horas.insert(
             num_legajo = request.vars["nro_legajo"],
@@ -254,13 +268,16 @@ def horas():
 
 def familiar():
     import os
-    form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")),
-    Field("cuil","integer",requires= IS_NOT_IN_DB(db,"familiares.cuil")),
-    Field("dni","integer", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
-    Field("nombre",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s",error_message='el campo no puede estar vacio')),
+                                                         
+                                 
+    Field("cuil","integer",requires= IS_NOT_IN_DB(db, db.familiares.cuil,error_message='el campo no pede estar vavcio')),
+    Field("dni","integer", requires = [IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio"),
+                                       IS_NOT_IN_DB(db, db.familiares.dni,error_message='el dni ya esta en la base de datos')]),
+    Field("nombre",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio"),),
     Field("apellido", requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("fe_nac","date"),
-    Field("lu_nac",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
+    Field("lu_nac","string"),
     Field("est_civ",requires=IS_IN_SET(['soltero','casado','viudo','otro'],zero='Seleccione...',error_message='Indique una opción')),
     Field("domicilio_calle",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
     Field("domicilio_numero","integer",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
@@ -291,9 +308,9 @@ def familiar2():
     Field("domicilio_piso","string"),
     Field("domicilio_depto","string"),
     Field("codigo_postal",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
-    Field("localidad",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio")),
-    Field("email","string"),
-    Field("telefono","integer"),
+    Field("localidad","string"),
+    Field("email","string",requires = IS_EMAIL(error_message='¡El mail no es válido!')),
+        Field("telefono","integer",requires=IS_NOT_EMPTY(error_message='ingrese telefono de contacto')),
     Field("celular","integer"),
     Field("estudia",requires=IS_IN_SET(['si','no'],zero='Seleccione...',error_message='Indique una opción')),
     Field("parentezco","string",requires=IS_IN_SET(['Conyuge','Hijo','Familiar'],zero='Seleccione...',error_message='Indique una opción')),
@@ -367,8 +384,9 @@ def reportes_horas():
     Legajo = request.vars["Legajo"]
     mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
-    campos =  db.horas.num_legajo, db.legajos.num_legajo, db.legajos.nombre, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
-    criterio = ((db.horas.num_legajo == Legajo) & (db.horas.num_legajo == db.legajos.num_legajo) & (db.horas.mes_trabajado == mes))
+    campos = db.horas.num_legajo,db.legajos.nombre, db.legajos.num_legajo, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
+    criterio = ((db.horas.num_legajo == Legajo) & (db.horas.num_legajo == db.legajos.num_legajo) & (db.horas.mes_trabajado == mes)
+               )
     #criterio = db.horas.num_legajo == Legajo
     #criterio & = db.horas.num_legajo == db.legajos.num_legajo
     #criterio &= db.horas.mes_trabajado == mes
@@ -377,7 +395,7 @@ def reportes_horas():
     else:
         orden = db.legajos.num_legajo
         registros = db(criterio).select(*campos, orderby=orden)
-    return dict(lista_horas=registros, mes=mes, Legajo=Legajo, titulo="Listando desde Mes %s , para el Legajo %s" % (mes, Legajo))
+    return dict(lista_horas=registros, mes=mes,Legajo=Legajo, titulo="Listando desde Mes %s , para el Legajo %s" % (mes, Legajo))
 
 def reportes_horas2():
     return dict()

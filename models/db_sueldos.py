@@ -54,7 +54,8 @@ db.legajos.nombre.lenght=20
 db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires = IS_DATE(format=T('%d-%m-%Y'),
                    error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
-#db.legajos.fe_nac.requires = IS_DATE('%d-%m-%a')
+db.legajos.fe_nac.requires= IS_DATE(format=T('%d-%m-%Y'),
+                   error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
 db.legajos.constancia_de_cuil.requires= IS_IN_SET(["Si","No"])
 db.legajos.fotocopia_dni.requires= IS_IN_SET(["Si","No"])
 db.legajos.alta_temprana.requires= IS_IN_SET(["Si","No"])
@@ -106,12 +107,13 @@ db.familiares.dni.requires=[IS_INT_IN_RANGE(5000000,100000000),
                          IS_NOT_IN_DB(db, "familiares.dni")]
 db.familiares.nombre.lenght=20
 db.familiares.apellido.lenght=25
-#db.familiares.fe_nac.requires = IS_DATE(format=T('%d-%m-%Y'),
- #                 error_message='Debe cumplir el siguiente formato YYYY-MM-DD!')
-db.familiares.num_legajo.requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s")
+db.familiares.fe_nac.requires = IS_DATE(format=T('%d-%m-%Y'),
+                  error_message='Debe cumplir el siguiente formato YYYY-MM-DD!')
+db.familiares.num_legajo.requires= [IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s"),
+                                    IS_NOT_EMPTY(error_message='campo vacio')]
 
 db.define_table("horas",
-    Field("num_legajo","string"),
+      Field("num_legajo","string"),
     Field("mes_trabajado",requires=IS_IN_SET(['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'])),
     Field("semana","integer"),
     Field("hs_trab","float"),

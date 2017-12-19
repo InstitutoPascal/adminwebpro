@@ -1,168 +1,327 @@
 {{extend 'layout.html'}}
-<h1>vista previa </h1>
+
+<center> <h1>VISTA PREVIA LEGAJO </h1> </center>
 
 <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-1 control-label">Nro Legajo</label>
+ <label for="campo_fechaegr" class="col-sm-1 control-label">Imagen</label>
             <div class="col-sm-1">
-                {{=recordset.num_legajo}}
-               
+                    <img src="{{=URL(c='default', f='download', args=recordset.image)}}",iframe(src, width=150, height=150)>
+                
             </div>
-            <label for="campo_fechaegr" class="col-sm-1 control-label">apellido</label>
+    </div>
+
+
+
+
+
+<div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Nro Legajo</label>
+            <div class="col-sm-6">
+                {{=recordset.num_legajo}}
+            </div>
+    </div>
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Apellido</label>
             <div class="col-sm-1">
                 {{=recordset.apellido}}
                 
             </div>
-     <label for="campo_fechaegr" class="col-sm-1 control-label">Nombre</label>
+    </div>
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Nombre</label>
             <div class="col-sm-1">
                 {{=recordset.nombre}}
                 
             </div>
-     <label for="campo_fechaegr" class="col-sm-1 control-label">cuil</label>
-            <div class="col-sm-1">
-                {{=recordset.cuil}}
-                
-            </div>
-     <label for="campo_fechaegr" class="col-sm-1 control-label">Fecha nacimiento</label>
-            <div class="col-sm-1">
-                {{=recordset.fe_nac}}
-                
-            </div>
-</div>
+    </div>
+
 <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-1 control-label">Lugar Nacimiento</label>
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Cuil</label>
+            <div class="col-sm-3">
+                {{=recordset.cuil}}
+              
+                
+ </div>
+    </div>
+   <div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Nro documento</label>
+            <div class="col-sm-3">
+                {{=recordset.dni}}
+           
+    </div>
+</div>
+
+ <div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Nacimiento</label>
+            <div class="col-sm-3">
+                {{=recordset.fe_nac}}
+           
+    </div>
+</div>
+
+ <div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Lugar Nacimiento</label>
             <div class="col-sm-1">
-               {{=recordset.lu_nac}}
-            </div>
-                <label for="campo_fechaegr" class="col-sm-1 control-label">Estado Civil</label>
+                {{=recordset.lu_nac}}
+              
+    </div>
+</div>
+
+ <div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Estado Civil</label>
             <div class="col-sm-1">
                 {{=recordset.est_civ}}
-                
-            </div>
-                    <label for="campo_fechaegr" class="col-sm-1 control-label">Domicilio Numero</label>
+         
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Domicilio Calle</label>
+            <div class="col-sm-2">
+                {{=recordset.dom_calle}}
+
+
+    </div>
+</div>
+
+
+<div class="form-group row">
+     <label for="campo_fechaegr" class="col-sm-2 control-label">Domicilio Numero</label>
             <div class="col-sm-1">
                 {{=recordset.dom_numero}}
-                
-            </div>
-                   <label for="campo_fechaegr" class="col-sm-1 control-label">Domicilio Calle</label>
-            <div class="col-sm-1">
-                {{=recordset.dom_calle}}
-                
-            </div> 
-                    <label for="campo_fechaegr" class="col-sm-1 control-label">Piso</label>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Piso</label>
             <div class="col-sm-1">
                 {{=recordset.piso}}
                 
-            </div>
-          </div>
+    </div>
+</div>
+
+
 <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-1 control-label">Depto</label>
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Departamento</label>
             <div class="col-sm-1">
-               {{=recordset.depto}}
-            </div>
-            <label for="campo_fechaegr" class="col-sm-1 control-label">Codigo Postal</label>
+                {{=recordset.depto}}
+                
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Localidad</label>
+            <div class="col-sm-2">
+                {{=recordset.localidad}}
+                
+    </div>
+</div>
+
+
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Codigo Postal</label>
             <div class="col-sm-1">
                 {{=recordset.codigo_postal}}
-            </div>
-                 <label for="campo_fechaegr" class="col-sm-1 control-label">Email</label>
+                
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Correo Electronico</label>
             <div class="col-sm-1">
                 {{=recordset.email}}
-            </div>
-                     <label for="campo_fechaegr" class="col-sm-1 control-label">Localidad</label>
-            <div class="col-sm-1">
-                {{=recordset.localidad}}
-            </div>
-                     <label for="campo_fechaegr" class="col-sm-1 control-label">Fecha Ingreso</label>
-            <div class="col-sm-1">
-                {{=recordset.fecha_ingreso}}
-            </div>
-          </div>
+                
+    </div>
+</div>
+
+
 <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-1 control-label">Telefono</label>
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Telefono</label>
             <div class="col-sm-1">
-             {{=recordset.telefono}}
-            </div>
-            <label for="campo_fechaegr" class="col-sm-1 control-label">Celular</label>
+                {{=recordset.telefono}}
+                
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Celular</label>
             <div class="col-sm-1">
                 {{=recordset.celular}}
-            </div>
-                 <label for="campo_fechaegr" class="col-sm-1 control-label">Estudia</label>
+                
+    </div>
+</div>
+
+
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Ingreso</label>
+            <div class="col-sm-1">
+                {{=recordset.fecha_ingreso}}
+                
+    </div>
+</div>
+
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Estudia</label>
             <div class="col-sm-1">
                 {{=recordset.estudia}}
-            </div>
-                 <label for="campo_fechaegr" class="col-sm-1 control-label">Horas Extras</label>
+                
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Horas Extras</label>
             <div class="col-sm-1">
                 {{=recordset.horas_extras}}
-            </div>
-                   <label for="campo_fechaegr" class="col-sm-1 control-label">Categoria</label>
-            <div class="col-sm-1">
+                
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Categoria</label>
+            <div class="col-sm-2">
                 {{=recordset.categoria}}
-            </div>
-          </div>
- <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-1 control-label">Obra Social</label>
+                
+    </div>
+</div>
+
+
+<div class="form-group row">
+   <label for="campo_fechaegr" class="col-sm-2 control-label">Obra Social</label>
             <div class="col-sm-1">
-               {{=recordset.obra_social}}
-            </div>
-            <label for="campo_fechaegr" class="col-sm-1 control-label">Fecha Egreso</label>
+                {{=recordset.obra_social}}
+                
+    </div>
+</div>
+
+
+
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Fecha Egreso</label>
             <div class="col-sm-1">
-                  {{=recordset.fecha_egreso}}
-            </div>
-                  <label for="campo_fechaegr" class="col-sm-1 control-label">Alta Temprana</label>
+                {{=recordset.fecha_egreso}}
+                
+    </div>
+</div>
+
+
+<div class="form-group row">
+     <label for="campo_fechaegr" class="col-sm-2 control-label">Alta Temprana</label>
             <div class="col-sm-1">
-                  {{=recordset.alta_temprana}}
-            </div>
-                  <label for="campo_fechaegr" class="col-sm-1 control-label">Fotocopia Dni</label>
+                {{=recordset.alta_temprana}}
+                
+    </div>
+</div>
+
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Fotocopia Dni</label>
             <div class="col-sm-1">
-                  {{=recordset.fotocopia_dni}}
-            </div>
-                  <label for="campo_fechaegr" class="col-sm-1 control-label">Constancia Cuil</label>
+                {{=recordset.fotocopia_dni}}
+                
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Constancia Cuil</label>
             <div class="col-sm-1">
-                  {{=recordset.constancia_de_cuil}}
-            </div>
-          </div>
- <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-1 control-label">Fotocopia Dni Hijos</label>
-            <div class="col-sm-1">
+                {{=recordset.constancia_de_cuil}}
+    
+                
+    </div>
+</div>
+
+<div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Fotocopia Dni Hijos</label>
+            <div class="col-sm-2">
                   {{=recordset.fotocopia_dni_hijos}}
             </div>
-            <label for="campo_fechaegr" class="col-sm-1 control-label">Fotocopia Dni Conyuge</label>
-            <div class="col-sm-1">
+</div>
+
+<div class="form-group row">
+<label for="campo_fechaegr" class="col-sm-2 control-label">Fotocopia Dni Conyuge</label>
+            <div class="col-sm-2">
                  {{=recordset.fotocopia_dni_conyuge}}
-            </div>
-                   <label for="campo_fechaegr" class="col-sm-1 control-label">Constancia Cuil Hijos</label>
-            <div class="col-sm-1">
+                </div>
+    </div>
+
+
+
+<div class="form-group row">
+                   <label for="campo_fechaegr" class="col-sm-2 control-label">Constancia Cuil Hijos</label>
+            <div class="col-sm-2">
                  {{=recordset.constancia_cuil_hijos}}
             </div>
-                      <label for="campo_fechaegr" class="col-sm-1 control-label">Constancia Cuil Conyuge</label>
-            <div class="col-sm-1">
+</div>
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Constancia Cuil Conyuge</label>
+            <div class="col-sm-2">
                 {{=recordset.constancia_cuil_conyuge}}
-                
+
             </div>
-                  <label for="campo_fechaegr" class="col-sm-1 control-label">Alumno Regular Hijo</label>
-            <div class="col-sm-1">
+</div>
+
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Alumno Regular Hijo</label>
+            <div class="col-sm-2">
                  {{=recordset.constancia_Alumno_Regular_Hijo}}
             </div>
-          </div>
+ </div>
 
- <div class="form-group row">
-            <label for="campo_nrolegajo" class="col-sm-1 control-label">Alumno Regular Empleado</label>
-            <div class="col-sm-1">
+
+<div class="form-group row">
+    <label for="campo_fechaegr" class="col-sm-2 control-label">Alumno Regular Hijo</label>
+            <div class="col-sm-2">
+                 {{=recordset.constancia_Alumno_Regular_Hijo}}
+            </div>
+ </div>
+
+
+<div class="form-group row">
+            <label for="campo_nrolegajo" class="col-sm-2 control-label">Alumno Regular Empleado</label>
+            <div class="col-sm-2">
                 {{=recordset.constancia_Alumno_Regular_empleado}}
             </div>
-            <label for="campo_fechaegr" class="col-sm-1 control-label">Curriculum Empleado</label>
-            <div class="col-sm-1">
+    </div>
+
+
+
+<div class="form-group row">
+            <label for="campo_fechaegr" class="col-sm-2 control-label">Curriculum Empleado</label>
+            <div class="col-sm-2">
                 {{=recordset.curriculum_empleado}}
             </div>
-                 <label for="campo_fechaegr" class="col-sm-1 control-label">Imagen</label>
-            <div class="col-sm-1">
-                    <img src="{{=URL(c='default', f='download', args=recordset.image)}}" >
-            </div>
-                 <label for="campo_fechaegr" class="col-sm-1 control-label">Libreta Familia</label>
-            <div class="col-sm-1">
+</div>
+
+
+<div class="form-group row">
+                 <label for="campo_fechaegr" class="col-sm-2 control-label">Libreta Familia</label>
+            <div class="col-sm-2">
                 {{=recordset.libreta_familia}}
             </div>
-             <label for="campo_fechaegr" class="col-sm-1 control-label">Partida Nacimiento Hijos</label>
-            <div class="col-sm-1">
+    </div>
+
+
+<div class="form-group row">
+             <label for="campo_fechaegr" class="col-sm-2 control-label">Partida Nacimiento Hijos</label>
+            <div class="col-sm-2">
                       {{=recordset.partida_nacimiento_hijos}}
             </div>
           </div>
