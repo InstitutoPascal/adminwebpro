@@ -18,7 +18,7 @@ db.define_table("legajos",
     Field("fecha_ingreso","date",default=request.now.date),
     Field("celular","string"),
     Field("telefono","string"),
-    Field("estudia","string"),
+    Field("estudia","string",requires= IS_IN_SET(["si","no"],zero='seleccione..',error_message='seleccione una opcion')),
     Field("horas_extras","integer"),
     Field("obra_social","string"),
     Field("categoria","string"),
@@ -38,10 +38,11 @@ db.define_table("legajos",
     Field ("image","upload",requires = IS_UPLOAD_FILENAME(extension='jpg',error_message='ingresar archivo con extension jpg')),
 )
 
-db.legajos.num_legajo.requires = IS_NOT_IN_DB(db, db.legajos.num_legajo),
-db.legajos.estudia.requires= IS_IN_SET(["si","no"]),
+db.legajos.num_legajo.requires = IS_NOT_IN_DB(db,db.legajos.num_legajo,error_message='el legajo no puede repetirse'),
+db.legajos.num_legajo.requires=IS_NOT_EMPTY(error_message='Ingrese el número de legajo'),
+#db.legajos.estudia.requires= IS_IN_SET(["si","no"],zero='seleccione..',error_message='seleccione una opcion'),
 db.legajos.cuil.requires=IS_NOT_IN_DB(db,db.legajos.cuil,error_message='el campo no puede estar vacio'),
-db.legajos.horas_extras.requires= IS_IN_SET(["Si","No"])
+db.legajos.horas_extras.requires= IS_IN_SET(["Si","No"],zero='seleccione...',error_message='Indique una opcion')
 db.legajos.telefono.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
 db.legajos.fecha_ingreso.requires=IS_NOT_EMPTY(error_message= "campo obligatorio")
 db.legajos.dni.requires=[IS_INT_IN_RANGE(5000000,100000000,error_message= "ingrese un rango entre 5.000.000 y 100.000.000"),
@@ -50,6 +51,8 @@ db.legajos.dni.requires=[IS_INT_IN_RANGE(5000000,100000000,error_message= "ingre
 db.legajos.nombre.lenght=20
 db.legajos.apellido.lenght=25
 db.legajos.fecha_ingreso.requires = IS_DATE(format=T('%d-%m-%Y'),
+                   error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
+db.legajos.fecha_egreso.requires = IS_DATE(format=T('%d-%m-%Y'),
                    error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
 db.legajos.fe_nac.requires= IS_DATE(format=T('%d-%m-%Y'),
                    error_message='Debe cumplir con el siguiente formato DIA-MES-AÑO!')
@@ -104,7 +107,7 @@ db.familiares.dni.requires=[IS_INT_IN_RANGE(5000000,100000000,error_message= "in
                          IS_NOT_IN_DB(db, db.familiares.dni,error_message='el dni no puede repetirse')]
 db.familiares.nombre.lenght=20
 db.familiares.apellido.lenght=25
-db.familiares.fe_nac.requires = IS_DATE(format=T('%Y-%M-%D'),
+db.familiares.fe_nac.requires = IS_DATE(format=T('%d-%m-%Y'),
                   error_message='Debe cumplir el siguiente formato Y-M-D!')
 db.familiares.num_legajo.requires=IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s",zero='seleccione...',error_message='seleccione una opcion')
 

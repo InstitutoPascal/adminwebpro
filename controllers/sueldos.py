@@ -55,7 +55,7 @@ def legajos():
     import os
     form = SQLFORM.factory(
         Field('nro_legajo','primary key',requires=[IS_NOT_EMPTY(error_message='Ingrese el número de legajo'),
-                                                  IS_NOT_IN_DB(db,db.legajos.num_legajo)]),
+                                                  IS_NOT_IN_DB(db,db.legajos.num_legajo,error_message='el legajo no puede repetirse')]),
          Field('fecha_egreso','date'),
          Field('cuil','integer',requires=[IS_NOT_EMPTY(error_message= 'Ingrese el cuil'),
                                 IS_NOT_IN_DB(db, db.legajos.cuil)]),
@@ -150,8 +150,10 @@ def legajos3():
                            Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                           
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
-                           Field("image","upload",requires = IS_UPLOAD_FILENAME(extension='jpg',error_message='ingresar archivo con extension jpg')),table_name='legajos'
+                           Field("image","upload",requires=IS_UPLOAD_FILENAME(extension='jpg')),table_name='legajos',
+                           submit_button='Guardar'
                           )
+        
     if form.process().accepted:
         
         imagen_upload = None
@@ -384,7 +386,7 @@ def reportes_horas():
     Legajo = request.vars["Legajo"]
     mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
-    campos = db.horas.num_legajo,db.legajos.nombre, db.legajos.num_legajo, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
+    campos = db.horas.num_legajo (db,db.legajos.num_legajo,"%(num_legajo)s"),db.legajos.nombre, db.legajos.num_legajo, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
     criterio = ((db.horas.num_legajo == Legajo) & (db.horas.num_legajo == db.legajos.num_legajo) & (db.horas.mes_trabajado == mes)
                )
     #criterio = db.horas.num_legajo == Legajo
@@ -408,10 +410,10 @@ def reportes_familiares():
     where = ""
     if familia_menor21:
         subtitulo = "Familiares menores de 21 años"
-        where += " and  EXTRACT(YEAR FROM age(current_date,familiares.fe_nac)) < 18"
+        where += " and  EXTRACT(YEAR FROM age(current_date,familiares.fe_nac)) < 21"
     if familia_estudian:
         subtitulo = "Familiares que estudian"
-        where += " and familiares.estudia = 'si' "
+        where += " and familiares.estudia = 'Si' "
     if familiar_distdom:
         subtitulo = "Familiares con distinto domicilio"
         where += " and familiares.domicilio_calle <> legajos.dom_calle "
