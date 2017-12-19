@@ -411,7 +411,7 @@ def reportes_familiares():
         where += " and  EXTRACT(YEAR FROM age(current_date,familiares.fe_nac)) < 18"
     if familia_estudian:
         subtitulo = "Familiares que estudian"
-        where += " and familiares.estudia = 'SI' "
+        where += " and familiares.estudia = 'si' "
     if familiar_distdom:
         subtitulo = "Familiares con distinto domicilio"
         where += " and familiares.domicilio_calle <> legajos.dom_calle "
