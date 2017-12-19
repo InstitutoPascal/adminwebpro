@@ -150,7 +150,7 @@ def legajos3():
                            Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                           
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
-                           Field("image","upload",requires=IS_NOT_EMPTY(error_message='El campo no puede estar vacio')),table_name='legajos'
+                           Field("image","upload",requires = IS_UPLOAD_FILENAME(extension='jpg',error_message='ingresar archivo con extension jpg')),table_name='legajos'
                           )
     if form.process().accepted:
         
