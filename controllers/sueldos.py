@@ -58,9 +58,9 @@ def legajos():
                                                   IS_NOT_IN_DB(db,db.legajos.num_legajo,error_message='el legajo no puede repetirse')]),
          Field('fecha_egreso','date'),
          Field('cuil','integer',requires=[IS_NOT_EMPTY(error_message= 'Ingrese el cuil'),
-                                IS_NOT_IN_DB(db, db.legajos.cuil)]),
+                                         IS_NOT_IN_DB(db, db.legajos.cuil,error_message='el cuil no puede repetirse')]),
          Field('dni','integer',requires=[IS_NOT_EMPTY(error_message='Ingrese el dni'),
-                                        IS_NOT_IN_DB(db,db.legajos.dni)]),
+                                        IS_NOT_IN_DB(db,db.legajos.dni,error_message='el dni no puede repetirse')]),
          Field('corresponde_hs_extra',requires=IS_IN_SET({1:'si',2:'no'},error_message='Ingrese una opción',zero='Seleccionar...')),
          Field('nombres',requires=IS_NOT_EMPTY(error_message='Ingrese el nombre')),
          Field('apellido',requires=IS_NOT_EMPTY(error_message='Ingrese el apellido')),
@@ -150,7 +150,7 @@ def legajos3():
                            Field("constancia_Alumno_Regular_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
                           
                            Field("curriculum_empleado","string",requires=IS_IN_SET(["corresponde","no corresponde"],zero='Seleccionar...',error_message='Indique una opción')),
-                           Field("image","upload",requires=IS_UPLOAD_FILENAME(extension='jpg')),table_name='legajos',
+                           Field("image","upload",requires=IS_UPLOAD_FILENAME(extension='jpg',error_message='ingrese formato de imagen jpg')),table_name='legajos',
                            submit_button='Guardar'
                           )
         
@@ -248,7 +248,7 @@ def horas():
                                Field('mes_trab',requires=IS_IN_SET(['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],zero='seleccionar...',error_message='seleccione una opcion')),
                            Field('semana',requires=IS_IN_SET({1:'1',2:'2',3:'3',4:'4',5:'5'},error_message='Ingrese una opción',zero='Seleccionar...')),
                            Field('horas_trab','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
-                           Field('horas_extras','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas')),
+                           Field('horas_extras','integer',requires=IS_NOT_EMPTY(error_message= 'ingrese cantidad de horas extras')),
                            
      )
     
@@ -271,9 +271,10 @@ def horas():
 def familiar():
     import os
     form = SQLFORM.factory(Field("num_legajo",requires= IS_IN_DB(db,db.legajos.num_legajo,"%(num_legajo)s",error_message='el campo no puede estar vacio')),
-                                                         
+                                                        
                                  
-    Field("cuil","integer",requires= IS_NOT_IN_DB(db, db.familiares.cuil,error_message='el campo no pede estar vavcio')),
+    Field("cuil","integer",requires= [IS_NOT_EMPTY(error_message='el campo no puede estar vacio'),
+                                      IS_NOT_IN_DB(db, db.familiares.cuil,error_message='el cuil ya existe en la base de datos')]),
     Field("dni","integer", requires = [IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio"),
                                        IS_NOT_IN_DB(db, db.familiares.dni,error_message='el dni ya esta en la base de datos')]),
     Field("nombre",requires = IS_NOT_EMPTY(error_message= "campo obligatorio no puede estar vacio"),),
@@ -386,7 +387,7 @@ def reportes_horas():
     Legajo = request.vars["Legajo"]
     mes = request.vars["mes"]
     ordenar = request.vars["ordenar"]
-    campos = db.horas.num_legajo (db,db.legajos.num_legajo,"%(num_legajo)s"),db.legajos.nombre, db.legajos.num_legajo, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
+    campos = db.horas.num_legajo,db.legajos.nombre, db.legajos.num_legajo, db.legajos.apellido, db.horas.hs_trab, db.horas.mes_trabajado
     criterio = ((db.horas.num_legajo == Legajo) & (db.horas.num_legajo == db.legajos.num_legajo) & (db.horas.mes_trabajado == mes)
                )
     #criterio = db.horas.num_legajo == Legajo
