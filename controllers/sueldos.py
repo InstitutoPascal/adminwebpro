@@ -412,7 +412,6 @@ def reportes_familiares():
     if familia_estudian:
         subtitulo = "Familiares que estudian"
         where += " and familiares.estudia = 'SI' "
-  
     if familiar_distdom:
         subtitulo = "Familiares con distinto domicilio"
         where += " and familiares.domicilio_calle <> legajos.dom_calle "
